@@ -35,3 +35,10 @@ A Promise factory to get a single page from the list of all photos.
 ```
 GET /photos
 ```
+##### Parameter
+| Param | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **page** | *number* | Page number to retrieve | yes | 1
+| **per_page** | *number* | Number of items per page | yes | 10
+| **order_by** | *string* | How to sort the photos.(```Valid values: latest, oldest, popular```) | yes | latest
+
