@@ -35,7 +35,7 @@ A Promise factory to get a single page from the list of all photos.
 ```
 GET /photos
 ```
-##### Parameter
+##### Parameters
 | Param | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **page** | *number* | Page number to retrieve | yes | 1
@@ -45,3 +45,9 @@ GET /photos
 ```js
 UnspalshApi.listPhotos(1, 10, 'latest');
 ```
+
+### Acknowledgements
+Thanks, and Kudos to team [Unsplash](https://unsplash.com/) for creating a wonderful platform for sharing 
+beautiful high quality free images and photos.
+
+Made with :heart: at [Nylnda](https://www.nylnda.com/) by [Sandeep Vattapparambil](https://github.com/SandeepVattapparambil).
