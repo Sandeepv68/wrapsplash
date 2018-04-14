@@ -36,7 +36,7 @@ A Promise factory to get a single page from the list of all photos.
 GET /photos
 ```
 ##### Parameters
-| Param | Type | Description | Optional | Default |
+| Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **page** | *number* | Page number to retrieve | yes | 1
 | **per_page** | *number* | Number of items per page | yes | 10
