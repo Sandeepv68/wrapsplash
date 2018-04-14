@@ -1,5 +1,6 @@
 # WrapSplash v1.0.0 
 ![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg?style=plastic)
+![PyPI - Status](https://img.shields.io/pypi/status/Django.svg?style=plastic)
 
 WrapSplash is a simple API wrapper for the most popular [Unsplash](https://unsplash.com/) platform. 
 Unsplash provides beautiful high quality free images and photos that you can download and use for any project.  Without any attribution.
