@@ -42,3 +42,6 @@ GET /photos
 | **per_page** | *number* | Number of items per page | yes | 10
 | **order_by** | *string* | How to sort the photos.(```Valid values: latest, oldest, popular```) | yes | latest
 
+```js
+UnspalshApi.listPhotos(1, 10, 'latest');
+```
