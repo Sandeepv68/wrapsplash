@@ -25,5 +25,9 @@
   "homepage": "https://github.com/SandeepVattapparambil/wrapsplash#readme",
   "dependencies": {
     "node-fetch": "^2.1.2"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {}
 }
