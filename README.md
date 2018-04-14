@@ -19,7 +19,7 @@ const Unsplash = require('wrapsplash');
 let UnspalshApi = new UnsplashApi('<YOUR API-KEY>');
 
 //List photos - Get a single page from the list of all photos.
-UnspalshApi.listPhotos(1, 10)
+UnspalshApi.listPhotos(1, 10, 'latest')
     .then(function (result) {
         console.log(result);
     }).
