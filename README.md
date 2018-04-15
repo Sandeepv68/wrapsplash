@@ -1,4 +1,4 @@
-# WrapSplash v1.0.2 
+# WrapSplash v1.0.3 
 ![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg?style=plastic)
 ![PyPI - Status](https://img.shields.io/pypi/status/Django.svg?style=plastic)
 
@@ -18,8 +18,8 @@ npm install --save wrapsplash
 //In your NodeJS app
 
 //Require npm module
-const Unsplash = require('wrapsplash');
-let UnspalshApi = new UnsplashApi('<YOUR API-KEY>');
+const WrapSplash = require('wrapsplash');
+let UnspalshApi = new WrapSplash('<YOUR UNSPALSH API-KEY>');
 
 //List photos - Get a single page from the list of all photos.
 UnspalshApi.listPhotos(1, 10, 'latest')
