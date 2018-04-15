@@ -2,7 +2,7 @@ const UnsplashApi = require('../index');
 
 let unsplash = new UnsplashApi('<api-key>');
 
-unsplash.listPhotos(1, 10)
+unsplash.search('cars', 1, 10,'' ,'landscape')
     .then(function (result) {
         console.log(result);
     }).
