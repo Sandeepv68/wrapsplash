@@ -49,6 +49,7 @@ GET /users/:username
 ```js
 UnsplashApi.getPublicProfile('<username>', 600, 600);
 ```
+
 #### Get User's Portfolio Link
 A Promise factory to retrieve a single user’s portfolio link.
 ```
@@ -60,7 +61,7 @@ GET /users/:username/portfolio
 | **username** | *string* | The username of the particular user | no | 
 
 ```js
-UnsplashApi.getUserPortfolio('<username>')
+UnsplashApi.getUserPortfolio('<username>');
 ```
 
 #### List Photos

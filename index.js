@@ -15,8 +15,12 @@ let LOCATION = 'https://api.unsplash.com/';
 
 //define api signatures
 let SCHEMA = {
-    USER_PUBLIC_PROFILE: 'users/',
-    USER_PORTFOLIO: 'users/:username/portfolio',
+    USERS_PUBLIC_PROFILE: 'users/',
+    USERS_PORTFOLIO: 'users/:username/portfolio',
+    USERS_PHOTOS: '/users/:username/photos',
+    USERS_LIKED_PHOTOS: '',
+    USERS_COLLECTIONS: '',
+    USERS_STATISTICS: '',
 
     LIST_PHOTOS: 'photos',
 
@@ -57,7 +61,7 @@ Array.prototype.contains = function (item) {
  */
 UnsplashApi.prototype.getPublicProfile = function (username, width, height) {
     let self = this;
-    let url = LOCATION + SCHEMA.USER_PUBLIC_PROFILE + username +
+    let url = LOCATION + SCHEMA.USERS_PUBLIC_PROFILE + username +
         '?w=' + (width && !isNaN(width) ? +width : '') +
         '&h=' + (height && !isNaN(height) ? +height : '');
     return fetch(url, {
@@ -75,10 +79,48 @@ UnsplashApi.prototype.getPublicProfile = function (username, width, height) {
  */
 UnsplashApi.prototype.getUserPortfolio = function (username) {
     let self = this;
-    if(!username || username === '' || username == undefined){
+    if (!username || username === '' || username == undefined) {
         throw new Error("Parameter : username is required and cannot be empty!");
     }
-    let url = LOCATION + SCHEMA.USER_PORTFOLIO.replace(/:username/gi, username);
+    let url = LOCATION + SCHEMA.USERS_PORTFOLIO.replace(/:username/gi, username);
+    return fetch(url, {
+        headers: self.headers
+    }).then(function (res) {
+        return res.json();
+    }).catch(function (err) {
+        return Promise.reject(err);
+    });
+}
+
+/**
+ * Promise factory to get a list of photos uploaded by a particular user.
+ * @param {*} username - The username of the user to fetch the portfolio (required).
+ * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
+ * @param {Number} per_page -The number of items per page (Optional, defaults to 10).
+ * @param {Booelan} stats - Show the stats for each user’s photo (Optional; default: false).
+ * @param {String} resolution - The frequency of the stats (Optional; default: 'days').
+ * @param {Number} quantity - The amount of for each stat (Optional; default: 30).
+ * @param {String} order_by - The sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest)
+ */
+UnsplashApi.prototype.getUserPhotos = function (username, page, per_page, stats, resolution, quantity, order_by) {
+    let self = this;
+    if (!username || username === '' || username == undefined) {
+        throw new Error("Parameter : username is required and cannot be empty!");
+    }
+    let availableOrders = ['latest', 'oldest', 'popular'];
+    if (order_by !== undefined && !availableOrders.contains(order_by)) {
+        throw new Error("Parameter : order_by has an unsupported value!");
+    }
+    if (stats !== undefined && typeof(stats) !== 'boolean') {
+        throw new Error("Parameter : stats is a boolean or optional!");
+    }
+    let url = LOCATION + SCHEMA.USERS_PHOTOS.replace(/:username/gi, username) +
+        "?page=" + (page && !isNaN(page) ? +page : 1) +
+        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10) +
+        "&order_by=" + (order_by ? order_by : 'latest') +
+        "&stats=" + (stats ? stats : 'false') +
+        "&resolution=" + (resolution ? encodeURIComponent(resolution) : 'days') +
+        "&quantity=" + (quantity ? quantity : 30);
     return fetch(url, {
         headers: self.headers
     }).then(function (res) {
@@ -103,7 +145,7 @@ UnsplashApi.prototype.listPhotos = function (page, per_page, order_by) {
     let url = LOCATION + SCHEMA.LIST_PHOTOS +
         "?page=" + (page && !isNaN(page) ? +page : 1) +
         "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10) +
-        "&order_by=" + order_by;
+        "&order_by=" + (order_by ? order_by : 'latest');
     return fetch(url, {
         headers: self.headers
     }).then(function (res) {
