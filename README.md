@@ -1,4 +1,4 @@
-# WrapSplash v1.0.3 
+# WrapSplash v1.0.4 
 ![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg?style=plastic)
 ![PyPI - Status](https://img.shields.io/pypi/status/Django.svg?style=plastic)
 
@@ -19,10 +19,10 @@ npm install --save wrapsplash
 
 //Require npm module
 const WrapSplash = require('wrapsplash');
-let UnspalshApi = new WrapSplash('<YOUR UNSPALSH API-KEY>');
+let UnsplashApi = new WrapSplash('<YOUR UNSPALSH API-KEY>');
 
 //List photos - Get a single page from the list of all photos.
-UnspalshApi.listPhotos(1, 10, 'latest')
+UnsplashApi.listPhotos(1, 10, 'latest')
     .then(function (result) {
         console.log(result);
     }).
@@ -44,10 +44,10 @@ GET /users/:username
 | **username** | *string* | The username of the particular user | no | 
 | **w** | *number* | Width of the profile picture in pixels | yes | 
 | **h** | *number* | Height of the profile picture in pixels | yes | 
-> **Note:** When optional **height** & **width** are specified the profile image will be included in the "profile_image" object as "custom".
+> **Note:**  When optional **height** & **width** are specified the profile image will be included in the "profile_image" object as "custom".
 
 ```js
-UnspalshApi.getPublicProfile('<username>', 600, 600);
+UnsplashApi.getPublicProfile('<username>', 600, 600);
 ```
 
 #### List Photos
@@ -63,7 +63,7 @@ GET /photos
 | **order_by** | *string* | How to sort the photos.(```Valid values: latest, oldest, popular```) | yes | latest
 
 ```js
-UnspalshApi.listPhotos(1, 10, 'latest');
+UnsplashApi.listPhotos(1, 10, 'latest');
 ```
 
 #### Search Photos
@@ -81,7 +81,7 @@ GET /search/photos
 | **orientation** | *string* | Filter search results by photo orientation. (```Valid values are landscape, portrait, and squarish.```) | yes | landscape
 
 ```js
-UnspalshApi.search('cars', 1, 10, '', 'landscape');
+UnsplashApi.search('cars', 1, 10, '', 'landscape');
 ```
 
 
