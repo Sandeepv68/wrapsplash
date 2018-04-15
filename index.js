@@ -7,7 +7,7 @@
  * license: MIT
  */
 
- //dependency
+//dependency
 let fetch = require('node-fetch');
 
 //set API url

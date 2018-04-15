@@ -63,6 +63,10 @@ GET /search/photos
 | **collections** | *number* | Collection ID(‘s) to narrow search. If multiple, comma-separated. | yes | ```empty```
 | **orientation** | *string* | Filter search results by photo orientation. (```Valid values are landscape, portrait, and squarish.```) | yes | landscape
 
+```js
+UnspalshApi.search('cars', 1, 10, '', 'landscape');
+```
+
 
 ### Acknowledgements
 Thanks, and Kudos to team [Unsplash](https://unsplash.com/) for creating a wonderful platform for sharing 
