@@ -16,7 +16,10 @@ let LOCATION = 'https://api.unsplash.com/';
 //define api signatures
 let SCHEMA = {
     USER_PUBLIC_PROFILE: 'users/',
+    USER_PORTFOLIO: 'users/:username/portfolio',
+
     LIST_PHOTOS: 'photos',
+
     SEARCH_PHOTOS: 'search/photos'
 };
 
@@ -57,6 +60,25 @@ UnsplashApi.prototype.getPublicProfile = function (username, width, height) {
     let url = LOCATION + SCHEMA.USER_PUBLIC_PROFILE + username +
         '?w=' + (width && !isNaN(width) ? +width : '') +
         '&h=' + (height && !isNaN(height) ? +height : '');
+    return fetch(url, {
+        headers: self.headers
+    }).then(function (res) {
+        return res.json();
+    }).catch(function (err) {
+        return Promise.reject(err);
+    });
+}
+
+/**
+ * Promise factory to retrieve a single user’s portfolio link.
+ * @param {*} username - The username of the user to fetch the portfolio (required).
+ */
+UnsplashApi.prototype.getUserPortfolio = function (username) {
+    let self = this;
+    if(!username || username === '' || username == undefined){
+        throw new Error("Parameter : username is required and cannot be empty!");
+    }
+    let url = LOCATION + SCHEMA.USER_PORTFOLIO.replace(/:username/gi, username);
     return fetch(url, {
         headers: self.headers
     }).then(function (res) {
