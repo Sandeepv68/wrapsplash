@@ -21,7 +21,7 @@ let SCHEMA = {
 
 /**
  * Unsplash api wrapper bootstrap - exposing the promise factories to access the Unsplash API endpoints.
- * @param {String} apiKey - The API key generated from Unsplash developer account.
+ * @param {String} apiKey - The API key generated from Unsplash developer account. (required)
  */
 let UnsplashApi = function (apiKey) {
     if (apiKey) {
@@ -36,6 +36,10 @@ let UnsplashApi = function (apiKey) {
     }
 };
 
+/**
+ * Helper function to check whether an item belongs to an Array.
+ * @param {*} item - The item to be checked
+ */
 Array.prototype.contains = function (item) {
     return this.indexOf(item) > -1;
 };
