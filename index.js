@@ -48,7 +48,7 @@ Array.prototype.contains = function (item) {
  * Promise factory to access the list Photos endpoint of the Unsplash API
  * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
  * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
- * @param {String} order_by - TH sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest)
+ * @param {String} order_by - The sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest)
  */
 UnsplashApi.prototype.listPhotos = function (page, per_page, order_by) {
     let self = this;
