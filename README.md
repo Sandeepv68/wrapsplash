@@ -54,7 +54,7 @@ A Promise factory to retrieve a single user’s portfolio link.
 ```
 GET /users/:username/portfolio
 ```
-##### Pparameters
+##### Parameters
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **username** | *string* | The username of the particular user | no | 
