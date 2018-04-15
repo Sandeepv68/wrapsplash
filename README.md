@@ -1,4 +1,4 @@
-# WrapSplash v1.0.0 
+# WrapSplash v1.0.1 
 ![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg?style=plastic)
 ![PyPI - Status](https://img.shields.io/pypi/status/Django.svg?style=plastic)
 
