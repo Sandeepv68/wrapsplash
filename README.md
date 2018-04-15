@@ -111,7 +111,7 @@ GET /search/photos
 | **query** | *string* | The search query | no | 
 | **page** | *number* | Page number to retrieve | yes | 1
 | **per_page** | *number* | Number of items per page | yes | 10
-| **collections** | *number* | Collection ID(‘s) to narrow search. If multiple, comma-separated. | yes | ```empty```
+| **collections** | *number* | Collection ID(‘s) to narrow search. If multiple, comma-separated. | yes | 
 | **orientation** | *string* | Filter search results by photo orientation. (```Valid values are landscape, portrait, and squarish.```) | yes | landscape
 
 ```js
