@@ -1,12 +1,28 @@
+/**
+ * Wrapsplash API wrapper for Unspalsh API
+ * written by: Sandeep Vattapparambil
+ * email: sandeepv68@gmail.com
+ * website: www.sandeepv.in
+ * github: github.com/SandeepVattapparambil
+ * license: MIT
+ */
+
+ //dependency
 let fetch = require('node-fetch');
 
+//set API url
 let LOCATION = 'https://api.unsplash.com/';
 
+//define api signatures
 let SCHEMA = {
     LIST_PHOTOS: 'photos',
     SEARCH_PHOTOS: 'search/photos'
 };
 
+/**
+ * Unsplash api wrapper bootstrap - exposing the promise factories to access the Unsplash API endpoints.
+ * @param {String} apiKey - The API key generated from Unsplash developer account.
+ */
 let UnsplashApi = function (apiKey) {
     if (apiKey) {
         let self = this;
