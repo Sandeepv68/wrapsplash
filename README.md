@@ -33,6 +33,23 @@ catch(function (e) {
 
 ### API
 
+#### Get User's Public Profile
+A Promise factory to retrieve public details on a given user.
+```
+GET /users/:username
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **username** | *string* | The username of the particular user | no | 
+| **w** | *number* | Width of the profile picture in pixels | yes | 
+| **h** | *number* | Height of the profile picture in pixels | yes | 
+> **Note:** When optional **height** & **width** are specified the profile image will be included in the "profile_image" object as "custom".
+
+```js
+UnspalshApi.getPublicProfile('<username>', 600, 600);
+```
+
 #### List Photos
 A Promise factory to get a single page from the list of all photos.
 ```
