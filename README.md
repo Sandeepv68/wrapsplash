@@ -64,6 +64,26 @@ GET /users/:username/portfolio
 UnsplashApi.getUserPortfolio('<username>');
 ```
 
+#### Get User's Photos
+A Promise factory to get a list of photos uploaded by a particular user.
+```
+GET /users/:username/photos
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **username** | *string* | The username of the particular user | no | 
+| **page** | *number* | Page number to retrieve | yes | 1
+| **per_page** | *number* | Number of items per page | yes | 10
+| **stats** | *boolean* | Show the stats for each user’s photo | yes | false
+| **resolution** | *string* | The frequency of the stats | yes | days
+| **quantity** | *number* | The amount of for each stat | yes | 30
+| **order_by** | *string* | How to sort the photos.(```Valid values: latest, oldest, popular```) | yes | latest
+
+```js
+UnsplashApi.getUserPhotos('<username>', 1, 10, false, 'days', 30, 'latest');
+```
+
 #### List Photos
 A Promise factory to get a single page from the list of all photos.
 ```
