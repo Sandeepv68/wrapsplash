@@ -1,4 +1,4 @@
-# WrapSplash v1.0.1 
+# WrapSplash v1.0.2 
 ![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg?style=plastic)
 ![PyPI - Status](https://img.shields.io/pypi/status/Django.svg?style=plastic)
 
@@ -48,6 +48,21 @@ GET /photos
 ```js
 UnspalshApi.listPhotos(1, 10, 'latest');
 ```
+
+#### Search Photos
+A Promise factory to get a single page of photo results for a particular query.
+```
+GET /search/photos
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **query** | *string* | The search query | no | 
+| **page** | *number* | Page number to retrieve | yes | 1
+| **per_page** | *number* | Number of items per page | yes | 10
+| **collections** | *number* | Collection ID(‘s) to narrow search. If multiple, comma-separated. | yes | ```empty```
+| **orientation** | *string* | Filter search results by photo orientation. (```Valid values are landscape, portrait, and squarish.```) | yes | landscape
+
 
 ### Acknowledgements
 Thanks, and Kudos to team [Unsplash](https://unsplash.com/) for creating a wonderful platform for sharing 

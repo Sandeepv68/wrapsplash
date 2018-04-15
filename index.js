@@ -1,5 +1,5 @@
 /**
- * Wrapsplash API wrapper for Unspalsh API
+ * Wrapsplash API wrapper v1.0.2 for Unspalsh API
  * written by: Sandeep Vattapparambil
  * email: sandeepv68@gmail.com
  * website: www.sandeepv.in
@@ -44,6 +44,12 @@ Array.prototype.contains = function (item) {
     return this.indexOf(item) > -1;
 };
 
+/**
+ * Promise factory to access the list Photos endpoint of the Unsplash API
+ * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
+ * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
+ * @param {String} order_by - TH sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest)
+ */
 UnsplashApi.prototype.listPhotos = function (page, per_page, order_by) {
     let self = this;
     let availableOrders = ['latest', 'oldest', 'popular'];
@@ -63,6 +69,14 @@ UnsplashApi.prototype.listPhotos = function (page, per_page, order_by) {
     });
 };
 
+/**
+ * Promise factory to access the Search Photos endpoint of the Unsplash API
+ * @param {String} query - The search query (required).
+ * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
+ * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
+ * @param {Number} collections - The collection ID(‘s) to narrow the search. If multiple, comma-separated (Optional).
+ * @param {String} orientation - Filter search results by photo orientation (Optional, Valid values are landscape, portrait, and squarish, defaults to: landscape)
+ */
 UnsplashApi.prototype.search = function (query, page, per_page, collections, orientation) {
     let self = this;
     let availableOrientations = ['landscape', 'portrait', 'squarish'];
