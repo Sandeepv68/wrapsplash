@@ -1,4 +1,4 @@
-# WrapSplash v1.0.4 
+# WrapSplash v1.0.5 
 ![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg?style=plastic)
 ![PyPI - Status](https://img.shields.io/pypi/status/Django.svg?style=plastic)
 
@@ -19,7 +19,7 @@ npm install --save wrapsplash
 
 //Require npm module
 const WrapSplash = require('wrapsplash');
-let UnsplashApi = new WrapSplash('<YOUR UNSPALSH API-KEY>');
+let UnsplashApi = new WrapSplash('<YOUR UNSPLASH API-KEY>');
 
 //List photos - Get a single page from the list of all photos.
 UnsplashApi.listPhotos(1, 10, 'latest')
