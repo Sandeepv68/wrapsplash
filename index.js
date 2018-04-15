@@ -15,6 +15,7 @@ let LOCATION = 'https://api.unsplash.com/';
 
 //define api signatures
 let SCHEMA = {
+    USER_PUBLIC_PROFILE: 'users/',
     LIST_PHOTOS: 'photos',
     SEARCH_PHOTOS: 'search/photos'
 };
@@ -43,6 +44,27 @@ let UnsplashApi = function (apiKey) {
 Array.prototype.contains = function (item) {
     return this.indexOf(item) > -1;
 };
+
+/**
+ * Promise factory to retrieve public details on a given user.
+ * @param {*} username - The username of the particular user (required). 
+ * @param {Number} width - The width of the profile image to be fetched (Optional).
+ * @param {Number} height - The height of the profile image to be fetched (Optional).
+ *                          Will be included in the "profile_image" object as "custom". 
+ */
+UnsplashApi.prototype.getPublicProfile = function (username, width, height) {
+    let self = this;
+    let url = LOCATION + SCHEMA.USER_PUBLIC_PROFILE + username +
+        '?w=' + (width && !isNaN(width) ? +width : '') +
+        '&h=' + (height && !isNaN(height) ? +height : '');
+    return fetch(url, {
+        headers: self.headers
+    }).then(function (res) {
+        return res.json();
+    }).catch(function (err) {
+        return Promise.reject(err);
+    });
+}
 
 /**
  * Promise factory to access the list Photos endpoint of the Unsplash API
