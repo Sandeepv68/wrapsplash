@@ -18,7 +18,7 @@ cd /your app root
 npm install --save wrapsplash
 ```
 
-## Usage
+### Sample usage
 ```js
 //In your NodeJS app
 
