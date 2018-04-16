@@ -24,9 +24,10 @@ let UnsplashApi = new WrapSplash('<YOUR UNSPLASH API-KEY>');
 //List photos - Get a single page from the list of all photos.
 UnsplashApi.listPhotos(1, 10, 'latest')
     .then(function (result) {
+        //do something with your data here
         console.log(result);
     }).catch(function (e) {
-    console.err(e);
+        console.err(e);
     });
 ```
 
