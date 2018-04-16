@@ -7,8 +7,7 @@ Unsplash provides beautiful high quality free images and photos that you can dow
 
 Before using the Unsplash API, you need to **register as a developer** and **read the API Guidelines.**
 
-## Quick read
-Every application must abide by the [API Guidelines](https://unsplash.com/documentation). Specifically, remember to hotlink images and trigger a download when appropriate.
+> **Note:**  Every application must abide by the [API Guidelines](https://unsplash.com/documentation). Specifically, remember to hotlink images and trigger a download when appropriate.
 
 ## Installation
 
@@ -36,7 +35,10 @@ UnsplashApi.listPhotos(1, 10, 'latest')
     });
 ```
 
-### API
+### Changelog
+
+
+### API Documentation
 
 #### Get User's Public Profile
 A Promise factory to retrieve public details on a given user.
