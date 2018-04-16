@@ -37,8 +37,8 @@ UnsplashApi.listPhotos(1, 10, 'latest')
 
 ### Changelog
 #### v1.0.7
-##### added support for new API endpoint
- - Get a list of photos liked by a user - ```GET /users/:username/likes```.
+ - Added support for new API endpoint
+ -- Get a list of photos liked by a user - ```GET /users/:username/likes```.
  - Minor refactorings.
 
 
