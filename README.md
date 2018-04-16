@@ -1,5 +1,6 @@
 # WrapSplash v1.0.7 
 ![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg?style=plastic)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
 ![PyPI - Status](https://img.shields.io/pypi/status/Django.svg?style=plastic)
 
 WrapSplash is a simple API wrapper for the most popular [Unsplash](https://unsplash.com/) platform. 
