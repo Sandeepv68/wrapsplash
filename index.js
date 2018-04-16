@@ -7,18 +7,18 @@
  * license: MIT
  */
 
-//dependency
+//Dependency
 let fetch = require('node-fetch');
 
-//set API url
+//Set API url
 let LOCATION = 'https://api.unsplash.com/';
 
-//define api signatures
+//Define api signatures [WIP]
 let SCHEMA = {
     USERS_PUBLIC_PROFILE: 'users/',
     USERS_PORTFOLIO: 'users/:username/portfolio',
     USERS_PHOTOS: '/users/:username/photos',
-    USERS_LIKED_PHOTOS: '',
+    USERS_LIKED_PHOTOS: '/users/:username/likes',
     USERS_COLLECTIONS: '',
     USERS_STATISTICS: '',
 
@@ -43,6 +43,11 @@ let UnsplashApi = function (apiKey) {
         throw new Error("API Key missing");
     }
 };
+
+//Set available order_by options
+let availableOrders = ['latest', 'oldest', 'popular'];
+//Sset available orientation options
+let availableOrientations = ['landscape', 'portrait', 'squarish'];
 
 /**
  * Helper function to check whether an item belongs to an Array.
@@ -107,11 +112,10 @@ UnsplashApi.prototype.getUserPhotos = function (username, page, per_page, stats,
     if (!username || username === '' || username == undefined) {
         throw new Error("Parameter : username is required and cannot be empty!");
     }
-    let availableOrders = ['latest', 'oldest', 'popular'];
     if (order_by !== undefined && !availableOrders.contains(order_by)) {
         throw new Error("Parameter : order_by has an unsupported value!");
     }
-    if (stats !== undefined && typeof(stats) !== 'boolean') {
+    if (stats !== undefined && typeof (stats) !== 'boolean') {
         throw new Error("Parameter : stats is a boolean or optional!");
     }
     let url = LOCATION + SCHEMA.USERS_PHOTOS.replace(/:username/gi, username) +
@@ -138,7 +142,6 @@ UnsplashApi.prototype.getUserPhotos = function (username, page, per_page, stats,
  */
 UnsplashApi.prototype.listPhotos = function (page, per_page, order_by) {
     let self = this;
-    let availableOrders = ['latest', 'oldest', 'popular'];
     if (order_by !== undefined && !availableOrders.contains(order_by)) {
         throw new Error("Parameter : order_by has an unsupported value!");
     }
@@ -165,7 +168,6 @@ UnsplashApi.prototype.listPhotos = function (page, per_page, order_by) {
  */
 UnsplashApi.prototype.search = function (query, page, per_page, collections, orientation) {
     let self = this;
-    let availableOrientations = ['landscape', 'portrait', 'squarish'];
     if (!availableOrientations.contains(orientation) && orientation !== undefined) {
         throw new Error("Parameter : orientation has an unsupported value!")
     }

@@ -25,10 +25,9 @@ let UnsplashApi = new WrapSplash('<YOUR UNSPLASH API-KEY>');
 UnsplashApi.listPhotos(1, 10, 'latest')
     .then(function (result) {
         console.log(result);
-    }).
-catch(function (e) {
+    }).catch(function (e) {
     console.err(e);
-});
+    });
 ```
 
 ### API
