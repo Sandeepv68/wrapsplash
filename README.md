@@ -1,4 +1,4 @@
-# WrapSplash v1.0.6 
+# WrapSplash v1.0.7 
 ![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg?style=plastic)
 ![PyPI - Status](https://img.shields.io/pypi/status/Django.svg?style=plastic)
 
@@ -36,6 +36,9 @@ UnsplashApi.listPhotos(1, 10, 'latest')
 ```
 
 ### Changelog
+#### v1.0.7
+##### added support for new API endpoint
+ - GET /users/:username/likes
 
 
 ### API Documentation
@@ -89,6 +92,24 @@ GET /users/:username/photos
 
 ```js
 UnsplashApi.getUserPhotos('<username>', 1, 10, false, 'days', 30, 'latest');
+```
+
+
+#### Get User Liked Photos
+A Promise factory to get a list of photos liked by a user.
+```
+GET /users/:username/likes
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **username** | *string* | The username of the particular user | no | 
+| **page** | *number* | Page number to retrieve | yes | 1
+| **per_page** | *number* | Number of items per page | yes | 10
+| **order_by** | *string* | How to sort the photos.(```Valid values: latest, oldest, popular```) | yes | latest
+
+```js
+UnsplashApi.getUserLikedPhotos('<username>', 1, 10, 'latest');
 ```
 
 #### List Photos
