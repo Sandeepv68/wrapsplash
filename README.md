@@ -1,4 +1,4 @@
-# WrapSplash v1.0.7 
+# WrapSplash v1.0.8 
 ![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg?style=plastic)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
 ![PyPI - Status](https://img.shields.io/pypi/status/Django.svg?style=plastic)
@@ -40,7 +40,7 @@ UnsplashApi.listPhotos(1, 10, 'latest')
 #### v1.0.8
 - Added support for new API endpoint
   - Get a list of collections created by the user - ``` GET /users/:username/collections```.
-  - 
+  - Get a user's account statistics - ``` GET /users/:username/statistics ```.
 - Major refactorings.
 
 #### v1.0.7
@@ -134,6 +134,23 @@ GET /users/:username/collections
 
 ```js
 UnsplashApi.getUserCollections('<username>', 1, 10);
+```
+
+#### Get User's Statistics
+A Promise factory to get a user's account statistics.
+```
+GET /users/:username/statistics
+```
+
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **username** | *string* | The username of the particular user | no | 
+| **resolution** | *string* | The frequency of the stats | yes | days
+| **quantity** | *number* | The amount of for each stat | yes | 30
+
+```js
+UnsplashApi.getUserStatistics('<username>', 'days', 30);
 ```
 
 #### List Photos

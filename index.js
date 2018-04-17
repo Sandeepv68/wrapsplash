@@ -1,5 +1,5 @@
 /**
- * Wrapsplash API wrapper v1.0.7 for Unspalsh API
+ * Wrapsplash API wrapper v1.0.8 for Unspalsh API
  * written by: Sandeep Vattapparambil
  * email: sandeepv68@gmail.com
  * website: www.sandeepv.in
@@ -20,7 +20,7 @@ let SCHEMA = {
     USERS_PHOTOS: 'users/:username/photos',
     USERS_LIKED_PHOTOS: 'users/:username/likes',
     USERS_COLLECTIONS: 'users/:username/collections',
-    USERS_STATISTICS: '',
+    USERS_STATISTICS: 'users/:username/statistics',
 
     LIST_PHOTOS: 'photos',
 
@@ -168,6 +168,24 @@ UnsplashApi.prototype.getUserCollections = function (username, page, per_page) {
     let url = LOCATION + SCHEMA.USERS_COLLECTIONS.replace(/:username/gi, username) +
         "?page=" + (page && !isNaN(page) ? +page : 1) +
         "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
+    return fetchUrl(self, url);
+}
+
+/**
+ * Pomise factory to retrieve the consolidated number of downloads, views and likes of all user’s photos, 
+ * as well as the historical breakdown and average of these stats in a specific timeframe.
+ * @param {*} username - The username of the user to fetch the portfolio (required).
+ * @param {String} resolution - The frequency of the stats (Optional; default: 'days').
+ * @param {Number} quantity - The amount of for each stat (Optional; default: 30).
+ */
+UnsplashApi.prototype.getUserStatistics = function (username, resolution, quantity) {
+    let self = this;
+    if (!username || username === '' || username == undefined) {
+        throw new Error("Parameter : username is required and cannot be empty!");
+    }
+    let url = LOCATION + SCHEMA.USERS_STATISTICS.replace(/:username/gi, username) +
+        "?resolution=" + (resolution ? encodeURIComponent(resolution) : 'days') +
+        "&quantity=" + (quantity ? quantity : 30);
     return fetchUrl(self, url);
 }
 
