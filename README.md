@@ -37,6 +37,12 @@ UnsplashApi.listPhotos(1, 10, 'latest')
 ```
 
 ### Changelog
+#### v1.0.8
+- Added support for new API endpoint
+  - Get a list of collections created by the user - ``` GET /users/:username/collections```.
+  - 
+- Major refactorings.
+
 #### v1.0.7
  - Added support for new API endpoint
    - Get a list of photos liked by a user - ```GET /users/:username/likes```.
@@ -112,6 +118,22 @@ GET /users/:username/likes
 
 ```js
 UnsplashApi.getUserLikedPhotos('<username>', 1, 10, 'latest');
+```
+
+#### Get User's Collections
+A Promise factory to get a list of collections created by the user.
+```
+GET /users/:username/collections
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **username** | *string* | The username of the particular user | no | 
+| **page** | *number* | Page number to retrieve | yes | 1
+| **per_page** | *number* | Number of items per page | yes | 10
+
+```js
+UnsplashApi.getUserCollections('<username>', 1, 10);
 ```
 
 #### List Photos
