@@ -2,7 +2,6 @@
 ![license](https://img.shields.io/github/license/mashape/apistatus.svg)
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 ![Hackage-Deps](https://img.shields.io/hackage-deps/v/lens.svg)
-(https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
 ![Status](https://img.shields.io/badge/status-stable-green.svg)
 
 WrapSplash is a simple API wrapper for the most popular [Unsplash](https://unsplash.com/) platform. 
