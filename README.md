@@ -38,6 +38,7 @@ UnsplashApi.listPhotos(1, 10, 'latest')
 
 ### Changelog
 #### v1.0.8
+- Now supports full Users APIs.
 - Added support for new API endpoint
   - Get a list of collections created by the user - ``` GET /users/:username/collections```.
   - Get a user's account statistics - ``` GET /users/:username/statistics ```.
