@@ -35,6 +35,8 @@ UnsplashApi.listPhotos(1, 10, 'latest')
         console.err(e);
     });
 ```
+### Dependency
+This library depends on [fetch](https://github.com/github/fetch) to make requests to the [Unsplash API](https://unsplash.com/documentation). For environments that don't support fetch, you'll need to provide a **polyfill**.
 
 ### Changelog
 #### v1.0.8
