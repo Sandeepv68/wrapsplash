@@ -239,6 +239,8 @@ GET /photos/random
 | **orientation** | *String* | Filter search results by photo orientation. (```Valid values are landscape, portrait, and squarish```) | yes | landscape
 | **count** | *Number* | The number of photos to return. (```max: 30```) | yes | 1
 
+> **Note:** You can’t use the collections and query parameters in the same request.
+> When supplying a **count** parameter - and only then - the response will be an array of photos,   even if the value of **count** is 1.
 ```js
 UnsplashApi.getARandomPhoto();
 ```

@@ -8,10 +8,11 @@
  */
 
 //Dependency
-let fetch = require('node-fetch');
+const fetch = require('node-fetch');
+const crypto = require('crypto');
 
 //Set API url
-let LOCATION = 'https://api.unsplash.com/';
+const LOCATION = 'https://api.unsplash.com/';
 
 //Define api signatures [WIP]
 let SCHEMA = {
@@ -45,9 +46,11 @@ let UnsplashApi = function (apiKey) {
     if (apiKey) {
         let self = this;
         self.apiKey = apiKey;
+        let hash = crypto.createHmac('sha256', apiKey).digest('hex');;
         self.headers = {
             'Content-type': 'application/json',
-            'Authorization': 'Client-ID ' + self.apiKey
+            'Authorization': 'Client-ID ' + self.apiKey,
+            'X-WrapSplash-Header': hash
         };
     } else {
         throw new Error("API Key missing");
@@ -266,6 +269,8 @@ UnsplashApi.prototype.getAPhoto = function (id, width, height, rect) {
  * @param {Number} height - The Image height in pixels.
  * @param {String} orientation - Filter search results by photo orientation. Valid values are landscape, portrait, and squarish.
  * @param {Number} count - The number of photos to return. (Default: 1; max: 30).
+ * Note: You can’t use the collections and query parameters in the same request
+ *       When supplying a count parameter - and only then - the response will be an array of photos, even if the value of count is 1
  */
 UnsplashApi.prototype.getARandomPhoto = function (collections, featured, username, query, width, height, orientation, count) {
     let self = this;
