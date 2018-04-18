@@ -231,13 +231,13 @@ GET /photos/random
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- | 
 | **collection** | *String* | The public collection ID(‘s) to filter selection. If multiple, comma-separated | yes |
-| **featured** | *Boolean* | Limit selection to featured photos | yes |
+| **featured** | *Boolean* | Limit selection to featured photos | yes | false
 | **username** | *String* | Limit selection to a single user | yes |
 | **query** | *String* | Limit selection to photos matching a search term | yes |
 | **width** | *Number* | The Image width in pixels | yes |
 | **height** | *Number* | The Image height in pixels | yes |
-| **orientation** | *String* | Filter search results by photo orientation. (```Valid values are landscape, portrait, and squarish```) | yes |
-| **count** | *Number* | The number of photos to return. (```max: 30```) | yes |
+| **orientation** | *String* | Filter search results by photo orientation. (```Valid values are landscape, portrait, and squarish```) | yes | landscape
+| **count** | *Number* | The number of photos to return. (```max: 30```) | yes | 1
 
 ```js
 UnsplashApi.getARandomPhoto();
