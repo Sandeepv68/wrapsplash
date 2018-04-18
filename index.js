@@ -223,7 +223,7 @@ UnsplashApi.prototype.listPhotos = function (page, per_page, order_by) {
  * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
  * @param {String} order_by - The sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest)
  */
-UnsplashApi.prototype.listCuratedPhotos = function (page, per_page, order_by){
+UnsplashApi.prototype.listCuratedPhotos = function (page, per_page, order_by) {
     let self = this;
     if (order_by !== undefined && !availableOrders.contains(order_by)) {
         throw new Error("Parameter : order_by has an unsupported value!");
@@ -232,6 +232,25 @@ UnsplashApi.prototype.listCuratedPhotos = function (page, per_page, order_by){
         "?page=" + (page && !isNaN(page) ? +page : 1) +
         "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10) +
         "&order_by=" + (order_by ? order_by : 'latest');
+    return fetchUrl(self, url);
+}
+
+/**
+ * Promise factory to retrieve a single photo.
+ * @param {String} id - The photo’s ID (required).
+ * @param {Number} width - Image width in pixels (optional).
+ * @param {Number} height - Image height in pixels (optionl).
+ * @param {String} rect - 4 comma-separated integers representing x, y, width, height of the cropped rectangle (optional).
+ */
+UnsplashApi.prototype.getAPhoto = function (id, width, height, rect) {
+    let self = this;
+    if (!id || id === undefined || id.length === 0) {
+        throw new Error("Parameter : id is required!");
+    }
+    let url = LOCATION + SCHEMA.GET_A_PHOTO.replace(/:id/gi, id) +
+        '?w=' + (width && !isNaN(width) ? +width : '') +
+        '&h=' + (height && !isNaN(height) ? +height : '') +
+        '&rect=' + (rect && rect.typeof === 'string' ? +encodeURIComponent(rect) : '');
     return fetchUrl(self, url);
 }
 
@@ -260,7 +279,6 @@ UnsplashApi.prototype.search = function (query, page, per_page, collections, ori
     return fetchUrl(self, url);
 };
 
-
 /**
  * Promise factory to get a single page of collection results for a query.
  * @param {String} query - The search query (required).
@@ -285,7 +303,7 @@ UnsplashApi.prototype.searchCollections = function (query, page, per_page) {
  * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
  * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
  */
-UnsplashApi.prototype.searchUsers = function(query, page, per_page){
+UnsplashApi.prototype.searchUsers = function (query, page, per_page) {
     let self = this;
     if (query === undefined) {
         throw new Error("Parameter : query is missing!");

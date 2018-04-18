@@ -40,6 +40,9 @@ UnsplashApi.listPhotos(1, 10, 'latest')
 This library depends on [fetch](https://github.com/github/fetch) to make requests to the [Unsplash API](https://unsplash.com/documentation). For environments that don't support fetch, you'll need to provide a **polyfill**.
 
 ### Changelog
+#### v1.0.10
+- Documentation patch
+
 #### v1.0.9
 - Now supports full Search APIs.
 - Added support for new API endpoints
@@ -187,6 +190,7 @@ A Promise factory to get a single page from the list of the curated photos.
 ```
 GET /photos/curated
 ```
+##### Parameters
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **page** | *number* | Page number to retrieve | yes | 1
@@ -195,6 +199,24 @@ GET /photos/curated
 
 ```js
 UnsplashApi.listCuratedPhotos(1, 10, 'latest');
+```
+#### Get a Photo by Id
+A Promise factory to retrieve a single photo.
+```
+GET /photos/:id
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **id** | *string* | The photo’s ID | no | 
+| **w** | *number* | Image width in pixels | yes | 
+| **h** | *number* | Image height in pixels | yes | 
+| **rect** | *string* |4 comma-separated integers representing x, y, width, height of the cropped rectangle | yes | 
+> **Note:** Supplying the optional **width** or **height** parameters will result
+in the custom photo URL being added to the urls object:
+
+```js
+UnsplashApi.getAPhoto('rndjGfyInvs', 500, 500, 'x, y, width, height');
 ```
 
 #### Search APIs
