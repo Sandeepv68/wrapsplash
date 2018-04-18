@@ -227,6 +227,7 @@ GET /photos/random
 ```
 ##### Parameters
 > **Note:** All parameters are optional, and can be combined to narrow the pool of photos from which a random one will be chosen.
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- | yes |
 | **collection** | *String* | The public collection ID(‘s) to filter selection. If multiple, comma-separated | yes |
