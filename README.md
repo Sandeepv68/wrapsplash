@@ -1,4 +1,4 @@
-# WrapSplash v1.0.8 
+# WrapSplash v1.0.9 
 ![license](https://img.shields.io/github/license/mashape/apistatus.svg)
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 ![Hackage-Deps](https://img.shields.io/hackage-deps/v/lens.svg)
@@ -40,6 +40,13 @@ UnsplashApi.listPhotos(1, 10, 'latest')
 This library depends on [fetch](https://github.com/github/fetch) to make requests to the [Unsplash API](https://unsplash.com/documentation). For environments that don't support fetch, you'll need to provide a **polyfill**.
 
 ### Changelog
+#### v1.0.9
+- Now supports full Search APIs.
+- Added support for new API endpoint
+  - Get a single page of photo results for a query - ``` GET /search/photos```
+  - Get a single page of collection results for a query - ``` GET /search/collections```
+  - Get a single page of user results for a query - ``` GET /search/users```
+
 #### v1.0.8
 - Now supports full Users APIs.
 - Added support for new API endpoint
@@ -189,6 +196,38 @@ GET /search/photos
 
 ```js
 UnsplashApi.search('cars', 1, 10, '', 'landscape');
+```
+
+### Search Collections
+A Promise factory to get a single page of collection results for a query.
+```
+GET /search/collections
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **query** | *string* | The search query | no | 
+| **page** | *number* | Page number to retrieve | yes | 1
+| **per_page** | *number* | Number of items per page | yes | 10
+
+```js
+UnsplashApi.searchCollections('cars', 1, 10);
+```
+
+### Search Users
+A Promise factory to get a single page of user results for a query.
+```
+GET /search/users
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **query** | *string* | The search query | no | 
+| **page** | *number* | Page number to retrieve | yes | 1
+| **per_page** | *number* | Number of items per page | yes | 10
+
+```js
+UnsplashApi.searchUsers('<search-keyword>', 1, 10);
 ```
 
 
