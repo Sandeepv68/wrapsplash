@@ -1,5 +1,5 @@
 /**
- * Wrapsplash API wrapper v1.0.9 for Unspalsh API
+ * Wrapsplash API wrapper v1.0.10 for Unspalsh API
  * written by: Sandeep Vattapparambil
  * email: sandeepv68@gmail.com
  * website: www.sandeepv.in

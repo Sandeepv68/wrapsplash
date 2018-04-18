@@ -1,4 +1,4 @@
-# WrapSplash v1.0.9 
+# WrapSplash v1.0.10 
 ![license](https://img.shields.io/github/license/mashape/apistatus.svg)
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 ![Hackage-Deps](https://img.shields.io/hackage-deps/v/lens.svg)
