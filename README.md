@@ -200,6 +200,7 @@ GET /photos/curated
 ```js
 UnsplashApi.listCuratedPhotos(1, 10, 'latest');
 ```
+
 #### Get a Photo by Id
 A Promise factory to retrieve a single photo.
 ```
@@ -216,7 +217,29 @@ GET /photos/:id
 in the custom photo URL being added to the urls object:
 
 ```js
-UnsplashApi.getAPhoto('rndjGfyInvs', 500, 500, 'x, y, width, height');
+UnsplashApi.getAPhoto('<id of the photo>', 500, 500, 'x, y, width, height');
+```
+
+#### Get a random photo
+A Promise factory to retrieve a single random photo, given optional filters.
+```
+GET /photos/random
+```
+##### Parameters
+> **Note:** All parameters are optional, and can be combined to narrow the pool of photos from which a random one will be chosen.
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- | yes |
+| **collection** | *String* | The public collection ID(‘s) to filter selection. If multiple, comma-separated | yes |
+| **featured** | *Boolean* | Limit selection to featured photos | yes |
+| **username** | *String* | Limit selection to a single user | yes |
+| **query** | *String* | Limit selection to photos matching a search term | yes |
+| **width** | *Number* | The Image width in pixels | yes |
+| **height** | *Number* | The Image height in pixels | yes |
+| **orientation** | *String* | Filter search results by photo orientation. (```Valid values are landscape, portrait, and squarish```) | yes |
+| **count** | *Number* | The number of photos to return. (```max: 30```) | yes |
+
+```js
+UnsplashApi.getARandomPhoto();
 ```
 
 #### Search APIs

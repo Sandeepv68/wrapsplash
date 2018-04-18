@@ -255,6 +255,36 @@ UnsplashApi.prototype.getAPhoto = function (id, width, height, rect) {
 }
 
 /**
+ * Promise factory to retrieve a single random photo, given optional filters.
+ * All parameters are optional, and can be combined to narrow the pool of 
+ * photos from which a random one will be chosen.
+ * @param {String} collections - The public collection ID(‘s) to filter selection. If multiple, comma-separated
+ * @param {Boolean} featured - Limit selection to featured photos.
+ * @param {String} username - Limit selection to a single user.
+ * @param {String} query - Limit selection to photos matching a search term.
+ * @param {Number} width - The Image width in pixels.
+ * @param {Number} height - The Image height in pixels.
+ * @param {String} orientation - Filter search results by photo orientation. Valid values are landscape, portrait, and squarish.
+ * @param {Number} count - The number of photos to return. (Default: 1; max: 30).
+ */
+UnsplashApi.prototype.getARandomPhoto = function (collections, featured, username, query, width, height, orientation, count) {
+    let self = this;
+    if (!availableOrientations.contains(orientation) && orientation !== undefined) {
+        throw new Error("Parameter : orientation has an unsupported value!")
+    }
+    let url = LOCATION + SCHEMA.GET_A_RANDOM_PHOTO +
+        '?collections=' + (collections && !isNaN(collections) ? +encodeURIComponent(collections) : '') +
+        '&featured=' + (featured ? featured : false) +
+        '&username=' + (username ? username : '') +
+        '&query=' + (query ? encodeURIComponent(query) : '') +
+        '&width=' + (width ? width : '') +
+        '&height=' + (height ? height : '') +
+        '&orientation=' + (orientation ? orientation : 'landscape') +
+        '&count=' + (count ? count : 1);
+    return fetchUrl(self, url);
+}
+
+/**
  * Promise factory to access the Search Photos endpoint of the Unsplash API
  * @param {String} query - The search query (required).
  * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
