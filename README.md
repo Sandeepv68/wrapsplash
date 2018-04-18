@@ -42,14 +42,14 @@ This library depends on [fetch](https://github.com/github/fetch) to make request
 ### Changelog
 #### v1.0.9
 - Now supports full Search APIs.
-- Added support for new API endpoint
+- Added support for new API endpoints
   - Get a single page of photo results for a query - ``` GET /search/photos```
   - Get a single page of collection results for a query - ``` GET /search/collections```
   - Get a single page of user results for a query - ``` GET /search/users```
 
 #### v1.0.8
 - Now supports full Users APIs.
-- Added support for new API endpoint
+- Added support for new API endpoints
   - Get a list of collections created by the user - ``` GET /users/:username/collections```.
   - Get a user's account statistics - ``` GET /users/:username/statistics ```.
 - Major refactorings.
