@@ -1,5 +1,5 @@
 /**
- * Wrapsplash API wrapper v1.0.8 for Unspalsh API
+ * Wrapsplash API wrapper v1.0.9 for Unspalsh API
  * written by: Sandeep Vattapparambil
  * email: sandeepv68@gmail.com
  * website: www.sandeepv.in
@@ -24,7 +24,9 @@ let SCHEMA = {
 
     LIST_PHOTOS: 'photos',
 
-    SEARCH_PHOTOS: 'search/photos'
+    SEARCH_PHOTOS: 'search/photos',
+    SEARCH_COLLECTIONS: 'search/collections',
+    SEARCH_USERS: 'search/users'
 };
 
 /**
@@ -231,4 +233,41 @@ UnsplashApi.prototype.search = function (query, page, per_page, collections, ori
         "&orientation=" + (orientation ? encodeURIComponent(orientation) : '');
     return fetchUrl(self, url);
 };
+
+
+/**
+ * Promise factory to get a single page of collection results for a query.
+ * @param {String} query - The search query (required).
+ * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
+ * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
+ */
+UnsplashApi.prototype.searchCollections = function (query, page, per_page) {
+    let self = this;
+    if (query === undefined) {
+        throw new Error("Parameter : query is missing!");
+    }
+    let url = LOCATION + SCHEMA.SEARCH_COLLECTIONS +
+        "?query=" + (query ? encodeURIComponent(query) : '') +
+        "&page=" + (page && !isNaN(page) ? +page : 1) +
+        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
+    return fetchUrl(self, url);
+}
+
+/**
+ * Promise factory to get a single page of user results for a query.
+ * @param {String} query - The search query (required).
+ * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
+ * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
+ */
+UnsplashApi.prototype.searchUsers = function(query, page, per_page){
+    let self = this;
+    if (query === undefined) {
+        throw new Error("Parameter : query is missing!");
+    }
+    let url = LOCATION + SCHEMA.SEARCH_USERS +
+        "?query=" + (query ? encodeURIComponent(query) : '') +
+        "&page=" + (page && !isNaN(page) ? +page : 1) +
+        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
+    return fetchUrl(self, url);
+}
 module.exports = UnsplashApi;
