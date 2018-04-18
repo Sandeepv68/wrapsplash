@@ -216,7 +216,7 @@ GET /search/photos
 UnsplashApi.search('cars', 1, 10, '', 'landscape');
 ```
 
-####S Search Collections
+#### Search Collections
 A Promise factory to get a single page of collection results for a query.
 ```
 GET /search/collections
