@@ -23,6 +23,14 @@ let SCHEMA = {
     USERS_STATISTICS: 'users/:username/statistics',
 
     LIST_PHOTOS: 'photos',
+    LIST_CURATED_PHOTOS: 'photos/curated',
+    GET_A_PHOTO: 'photos/:id',
+    GET_A_RANDOM_PHOTO: 'photos/random',
+    GET_A_PHOTO_STATISTICS: 'photos/:id/statistics',
+    GET_A_PHOTO_DOWNLOAD_LINK: 'photos/:id/download',
+    UPDATE_A_PHOTO: 'photos/:id',
+    LIKE_A_PHOTO: 'photos/:id/like',
+    UNLIKE_A_PHOTO: 'photos/:id/like',
 
     SEARCH_PHOTOS: 'search/photos',
     SEARCH_COLLECTIONS: 'search/collections',
@@ -208,6 +216,24 @@ UnsplashApi.prototype.listPhotos = function (page, per_page, order_by) {
         "&order_by=" + (order_by ? order_by : 'latest');
     return fetchUrl(self, url);
 };
+
+/**
+ * Promise factory to get a single page from the list of the curated photos.
+ * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
+ * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
+ * @param {String} order_by - The sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest)
+ */
+UnsplashApi.prototype.listCuratedPhotos = function (page, per_page, order_by){
+    let self = this;
+    if (order_by !== undefined && !availableOrders.contains(order_by)) {
+        throw new Error("Parameter : order_by has an unsupported value!");
+    }
+    let url = LOCATION + SCHEMA.LIST_CURATED_PHOTOS +
+        "?page=" + (page && !isNaN(page) ? +page : 1) +
+        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10) +
+        "&order_by=" + (order_by ? order_by : 'latest');
+    return fetchUrl(self, url);
+}
 
 /**
  * Promise factory to access the Search Photos endpoint of the Unsplash API

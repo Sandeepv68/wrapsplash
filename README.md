@@ -165,6 +165,7 @@ GET /users/:username/statistics
 UnsplashApi.getUserStatistics('<username>', 'days', 30);
 ```
 
+#### Photos APIs
 #### List Photos
 A Promise factory to get a single page from the list of all photos.
 ```
@@ -179,6 +180,21 @@ GET /photos
 
 ```js
 UnsplashApi.listPhotos(1, 10, 'latest');
+```
+
+#### List Curated Photos
+A Promise factory to get a single page from the list of the curated photos.
+```
+GET /photos/curated
+```
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **page** | *number* | Page number to retrieve | yes | 1
+| **per_page** | *number* | Number of items per page | yes | 10
+| **order_by** | *string* | How to sort the photos.(```Valid values: latest, oldest, popular```) | yes | latest
+
+```js
+UnsplashApi.listCuratedPhotos(1, 10, 'latest');
 ```
 
 #### Search APIs
