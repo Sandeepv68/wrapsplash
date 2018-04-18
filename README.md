@@ -62,6 +62,7 @@ This library depends on [fetch](https://github.com/github/fetch) to make request
 
 ### API Documentation
 
+#### Users APIs
 #### Get User's Public Profile
 A Promise factory to retrieve public details on a given user.
 ```
@@ -180,6 +181,7 @@ GET /photos
 UnsplashApi.listPhotos(1, 10, 'latest');
 ```
 
+#### Search APIs
 #### Search Photos
 A Promise factory to get a single page of photo results for a particular query.
 ```
@@ -198,7 +200,7 @@ GET /search/photos
 UnsplashApi.search('cars', 1, 10, '', 'landscape');
 ```
 
-### Search Collections
+####S Search Collections
 A Promise factory to get a single page of collection results for a query.
 ```
 GET /search/collections
@@ -214,7 +216,7 @@ GET /search/collections
 UnsplashApi.searchCollections('cars', 1, 10);
 ```
 
-### Search Users
+#### Search Users
 A Promise factory to get a single page of user results for a query.
 ```
 GET /search/users
