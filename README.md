@@ -209,8 +209,8 @@ GET /photos/:id
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **id** | *string* | The photo’s ID | no | 
-| **w** | *number* | Image width in pixels | yes | 
-| **h** | *number* | Image height in pixels | yes | 
+| **width** | *number* | Image width in pixels | yes | 
+| **height** | *number* | Image height in pixels | yes | 
 | **rect** | *string* |4 comma-separated integers representing x, y, width, height of the cropped rectangle | yes | 
 > **Note:** Supplying the optional **width** or **height** parameters will result
 in the custom photo URL being added to the urls object:
