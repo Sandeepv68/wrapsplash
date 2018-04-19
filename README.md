@@ -245,6 +245,22 @@ GET /photos/random
 UnsplashApi.getARandomPhoto();
 ```
 
+#### Get A Photo's Statistics
+A Promise factory to retrieve total number of downloads, views and likes of a single photo, as well as the historical breakdown of these stats in a specific timeframe (default is 30 days).
+```
+GET /photos/:id/statistics
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- | 
+| **id** | *string* | The photo’s ID | no | 
+| **resolution** | *string* | The frequency of the stats | yes | days
+| **quantity** | *number* | The amount of for each stat | yes | 30
+> **Note:** Currently, the only resolution param supported is “days”. The quantity param can be any number between 1 and 30.
+```js
+UnsplashApi.getPhotoStatistics('<photo-id>', 'days', 10);
+```
+
 #### Search APIs
 #### Search Photos
 A Promise factory to get a single page of photo results for a particular query.

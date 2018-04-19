@@ -346,6 +346,24 @@ UnsplashApi.prototype.getPhotoStatistics = function (id, resolution, quantity) {
 }
 
 /**
+ * Promise factory to retrieve a single photo’s download link. Preferably hit this endpoint 
+ * if a photo is downloaded in your application for use (example: to be displayed on a blog article, 
+ * to be shared on social media, to be remixed, etc.).
+ * @function getPhotoLink
+ * @memberof UnsplashApi
+ * @param {String} id - The photo’s ID (required).
+ * @returns {Object} - The JSON data object.
+ */
+UnsplashApi.prototype.getPhotoLink = function (id) {
+    let self = this;
+    if (!id || id === undefined || id.length === 0) {
+        throw new Error("Parameter : id is required!");
+    }
+    let url = LOCATION + SCHEMA.GET_A_PHOTO_DOWNLOAD_LINK.replace(/:id/gi, id);
+    return fetchUrl(self, url);
+}
+
+/**
  * Promise factory to access the Search Photos endpoint of the Unsplash API.
  * @function search
  * @memberof UnsplashApi
