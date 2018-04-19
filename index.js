@@ -40,6 +40,7 @@ let SCHEMA = {
 
 /**
  * Unsplash api wrapper bootstrap - exposing the promise factories to access the Unsplash API endpoints.
+ * @namespace UnsplashApi
  * @param {String} apiKey - The API key generated from Unsplash developer account (required).
  */
 let UnsplashApi = function (apiKey) {
@@ -64,7 +65,9 @@ let availableOrientations = ['landscape', 'portrait', 'squarish'];
 
 /**
  * Helper function to check whether an item belongs to an Array.
+ * @function contains
  * @param {*} item - The item to be checked (required).
+ * @returns {Number} - An integer representing the presence or absence of an item.
  */
 Array.prototype.contains = function (item) {
     return this.indexOf(item) > -1;
@@ -72,8 +75,10 @@ Array.prototype.contains = function (item) {
 
 /**
  * Heler function to fetch a given url
+ * @function fetchUrl
  * @param {Object} self - The 'this' object holding the context of the 'UnsplashApi' object (required).
  * @param {Sting} url - The url to be fetched (required).
+ * @returns {Object} - The JSON data object.
  */
 let fetchUrl = function (self, url) {
     let iSelf = self;
@@ -88,10 +93,13 @@ let fetchUrl = function (self, url) {
 
 /**
  * Promise factory to retrieve public details on a given user.
+ * @function getPublicProfile
+ * @memberof UnsplashApi
  * @param {*} username - The username of the particular user (required). 
  * @param {Number} width - The width of the profile image to be fetched (Optional).
  * @param {Number} height - The height of the profile image to be fetched (Optional).
  *                          Will be included in the "profile_image" object as "custom". 
+ * @returns {Object} - The JSON data object. 
  */
 UnsplashApi.prototype.getPublicProfile = function (username, width, height) {
     let self = this;
@@ -103,7 +111,10 @@ UnsplashApi.prototype.getPublicProfile = function (username, width, height) {
 
 /**
  * Promise factory to retrieve a single user’s portfolio link.
+ * @function getUserPortfolio
+ * @memberof UnsplashApi
  * @param {*} username - The username of the user to fetch the portfolio (required).
+ * @returns {Object} - The JSON data object. 
  */
 UnsplashApi.prototype.getUserPortfolio = function (username) {
     let self = this;
@@ -116,13 +127,16 @@ UnsplashApi.prototype.getUserPortfolio = function (username) {
 
 /**
  * Promise factory to get a list of photos uploaded by a particular user.
+ * @function getUserPhotos
+ * @memberof UnsplashApi
  * @param {*} username - The username of the user to fetch the portfolio (required).
  * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
  * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
  * @param {Booelan} stats - Show the stats for each user’s photo (Optional; default: false).
  * @param {String} resolution - The frequency of the stats (Optional; default: 'days').
  * @param {Number} quantity - The amount of for each stat (Optional; default: 30).
- * @param {String} order_by - The sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest)
+ * @param {String} order_by - The sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest).
+ * @returns {Object} - The JSON data object. 
  */
 UnsplashApi.prototype.getUserPhotos = function (username, page, per_page, stats, resolution, quantity, order_by) {
     let self = this;
@@ -147,10 +161,13 @@ UnsplashApi.prototype.getUserPhotos = function (username, page, per_page, stats,
 
 /**
  * Promise factory to get a list of photos liked by a user.
+ * @function getUserLikedPhotos
+ * @memberof UnsplashApi
  * @param {*} username - The username of the user to fetch the portfolio (required).
  * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
  * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
- * @param {String} order_by - The sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest)
+ * @param {String} order_by - The sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest).
+ * @returns {Object} - The JSON data object. 
  */
 UnsplashApi.prototype.getUserLikedPhotos = function (username, page, per_page, order_by) {
     let self = this;
@@ -169,9 +186,12 @@ UnsplashApi.prototype.getUserLikedPhotos = function (username, page, per_page, o
 
 /**
  * Promise factory to get a list of collections created by the user.
+ * @function getUserCollections
+ * @memberof UnsplashApi
  * @param {*} username - The username of the user to fetch the portfolio (required).
  * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
  * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
+ * @returns {Object} - The JSON data object. 
  */
 UnsplashApi.prototype.getUserCollections = function (username, page, per_page) {
     let self = this;
@@ -187,9 +207,12 @@ UnsplashApi.prototype.getUserCollections = function (username, page, per_page) {
 /**
  * Pomise factory to retrieve the consolidated number of downloads, views and likes of all user’s photos, 
  * as well as the historical breakdown and average of these stats in a specific timeframe.
+ * @function getUserStatistics
+ * @memberof UnsplashApi
  * @param {*} username - The username of the user to fetch the portfolio (required).
  * @param {String} resolution - The frequency of the stats (Optional; default: 'days').
  * @param {Number} quantity - The amount of for each stat (Optional; default: 30).
+ * @returns {Object} - The JSON data object. 
  */
 UnsplashApi.prototype.getUserStatistics = function (username, resolution, quantity) {
     let self = this;
@@ -203,10 +226,13 @@ UnsplashApi.prototype.getUserStatistics = function (username, resolution, quanti
 }
 
 /**
- * Promise factory to access the list Photos endpoint of the Unsplash API
+ * Promise factory to access the list Photos endpoint of the Unsplash API.
+ * @function listPhotos
+ * @memberof UnsplashApi
  * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
  * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
- * @param {String} order_by - The sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest)
+ * @param {String} order_by - The sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest).
+ * @returns {Object} - The JSON data object. 
  */
 UnsplashApi.prototype.listPhotos = function (page, per_page, order_by) {
     let self = this;
@@ -222,9 +248,12 @@ UnsplashApi.prototype.listPhotos = function (page, per_page, order_by) {
 
 /**
  * Promise factory to get a single page from the list of the curated photos.
+ * @function listCuratedPhotos
+ * @memberof UnsplashApi
  * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
  * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
- * @param {String} order_by - The sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest)
+ * @param {String} order_by - The sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest).
+ * @returns {Object} - The JSON data object. 
  */
 UnsplashApi.prototype.listCuratedPhotos = function (page, per_page, order_by) {
     let self = this;
@@ -240,10 +269,13 @@ UnsplashApi.prototype.listCuratedPhotos = function (page, per_page, order_by) {
 
 /**
  * Promise factory to retrieve a single photo.
+ * @function getAPhoto
+ * @memberof UnsplashApi
  * @param {String} id - The photo’s ID (required).
  * @param {Number} width - Image width in pixels (optional).
  * @param {Number} height - Image height in pixels (optionl).
  * @param {String} rect - 4 comma-separated integers representing x, y, width, height of the cropped rectangle (optional).
+ * @returns {Object} - The JSON data object. 
  */
 UnsplashApi.prototype.getAPhoto = function (id, width, height, rect) {
     let self = this;
@@ -261,6 +293,8 @@ UnsplashApi.prototype.getAPhoto = function (id, width, height, rect) {
  * Promise factory to retrieve a single random photo, given optional filters.
  * All parameters are optional, and can be combined to narrow the pool of 
  * photos from which a random one will be chosen.
+ * @function getARandomPhoto
+ * @memberof UnsplashApi
  * @param {String} collections - The public collection ID(‘s) to filter selection. If multiple, comma-separated
  * @param {Boolean} featured - Limit selection to featured photos.
  * @param {String} username - Limit selection to a single user.
@@ -269,6 +303,7 @@ UnsplashApi.prototype.getAPhoto = function (id, width, height, rect) {
  * @param {Number} height - The Image height in pixels.
  * @param {String} orientation - Filter search results by photo orientation. Valid values are landscape, portrait, and squarish.
  * @param {Number} count - The number of photos to return. (Default: 1; max: 30).
+ * @returns {Object} - The JSON data object.
  * Note: You can’t use the collections and query parameters in the same request
  *       When supplying a count parameter - and only then - the response will be an array of photos, even if the value of count is 1
  */
@@ -290,12 +325,15 @@ UnsplashApi.prototype.getARandomPhoto = function (collections, featured, usernam
 }
 
 /**
- * Promise factory to access the Search Photos endpoint of the Unsplash API
+ * Promise factory to access the Search Photos endpoint of the Unsplash API.
+ * @function search
+ * @memberof UnsplashApi
  * @param {String} query - The search query (required).
  * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
  * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
  * @param {Number} collections - The collection ID(‘s) to narrow the search. If multiple, comma-separated (Optional).
- * @param {String} orientation - Filter search results by photo orientation (Optional, Valid values are landscape, portrait, and squarish, defaults to: landscape)
+ * @param {String} orientation - Filter search results by photo orientation (Optional, Valid values are landscape, portrait, and squarish, defaults to: landscape).
+ * @returns {Object} - The JSON data object.
  */
 UnsplashApi.prototype.search = function (query, page, per_page, collections, orientation) {
     let self = this;
@@ -316,9 +354,12 @@ UnsplashApi.prototype.search = function (query, page, per_page, collections, ori
 
 /**
  * Promise factory to get a single page of collection results for a query.
+ * @function searchCollections
+ * @memberof UnsplashApi
  * @param {String} query - The search query (required).
  * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
  * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
+ * @returns {Object} - The JSON data object.
  */
 UnsplashApi.prototype.searchCollections = function (query, page, per_page) {
     let self = this;
@@ -334,9 +375,12 @@ UnsplashApi.prototype.searchCollections = function (query, page, per_page) {
 
 /**
  * Promise factory to get a single page of user results for a query.
+ * @function searchUsers
+ * @memberof UnsplashApi
  * @param {String} query - The search query (required).
  * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
  * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
+ * @returns {Object} - The JSON data object.
  */
 UnsplashApi.prototype.searchUsers = function (query, page, per_page) {
     let self = this;
