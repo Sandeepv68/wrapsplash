@@ -261,6 +261,21 @@ GET /photos/:id/statistics
 UnsplashApi.getPhotoStatistics('<photo-id>', 'days', 10);
 ```
 
+#### Get a Photo's Download Link
+A Promise factory to retrieve a single photo’s download link. Preferably hit this endpoint if a photo is downloaded in your application for use (example: to be displayed on a blog article, to be shared on social media, to be remixed, etc).
+```
+GET /photos/:id/download
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- | 
+| **id** | *string* | The photo’s ID | no | 
+> **Note:** This is different than the concept of a view, which is tracked automatically when you hotlinking an image.
+```js
+UnsplashApi.getPhotoLink('<photo-id>');
+```
+
+
 #### Search APIs
 #### Search Photos
 A Promise factory to get a single page of photo results for a particular query.

@@ -353,6 +353,7 @@ UnsplashApi.prototype.getPhotoStatistics = function (id, resolution, quantity) {
  * @memberof UnsplashApi
  * @param {String} id - The photo’s ID (required).
  * @returns {Object} - The JSON data object.
+ * Note: This is different than the concept of a view, which is tracked automatically when you hotlinking an image.
  */
 UnsplashApi.prototype.getPhotoLink = function (id) {
     let self = this;
