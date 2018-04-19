@@ -270,7 +270,7 @@ GET /photos/:id/download
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- | 
 | **id** | *string* | The photo’s ID | no | 
-> **Note:** This is different than the concept of a view, which is tracked automatically when you hotlinking an image.
+> **Note:** This is different than the concept of a view, which is tracked automatically when you hotlink an image.
 ```js
 UnsplashApi.getPhotoLink('<photo-id>');
 ```

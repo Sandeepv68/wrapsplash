@@ -364,6 +364,18 @@ UnsplashApi.prototype.getPhotoLink = function (id) {
     return fetchUrl(self, url);
 }
 
+// UnsplashApi.prototype.updatePhoto = function (id, location, exif){
+//     //'d4OylJ4porM'
+//     let self = this;
+//     if (!id || id === undefined || id.length === 0) {
+//         throw new Error("Parameter : id is required!");
+//     }
+//     location = Object.assign({}, location) || {};
+//     exif = Object.assign({}, exif) || {};
+//     let url = LOCATION + SCHEMA.UPDATE_A_PHOTO.replace(/:id/, id) +
+//     '?'
+// }
+
 /**
  * Promise factory to access the Search Photos endpoint of the Unsplash API.
  * @function search
