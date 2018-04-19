@@ -25,7 +25,13 @@ npm install --save wrapsplash
 
 //Require npm module
 const WrapSplash = require('wrapsplash');
-let UnsplashApi = new WrapSplash('<YOUR UNSPLASH API-KEY>');
+let UnsplashApi = new WrapSplash({
+    access_key: '<api-key>',
+    secret_key: '<secret-key>',
+    redirect_uri: '<callback-url>',
+    code: '<authorization-code>',
+    bearer_token: '<bearer-token>'
+});
 
 //List photos - Get a single page from the list of all photos.
 UnsplashApi.listPhotos(1, 10, 'latest')
