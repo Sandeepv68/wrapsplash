@@ -420,6 +420,16 @@ UnsplashApi.prototype.getPhotoLink = function (id) {
     return fetchUrl(self, url);
 }
 
+/**
+ * Promise factory to update a photo on behalf of the logged-in user. 
+ * This requires the write_photos scope.
+ * @function updatePhoto
+ * @memberof UnsplashApi
+ * @param {String} id - The photo’s ID (required).
+ * @param {Object} location - The location object holding location data (Optional).
+ * @param {Object} exif - The exif object holding exif data (Optional).
+ * @returns {Object} - The updated photo data object.
+ */
 UnsplashApi.prototype.updatePhoto = function (id, location, exif) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
@@ -427,19 +437,19 @@ UnsplashApi.prototype.updatePhoto = function (id, location, exif) {
     }
     location = Object.assign({}, location) || {};
     exif = Object.assign({}, exif) || {};
-    let url = LOCATION + SCHEMA.UPDATE_A_PHOTO.replace(/:id/, id) +
-        '?location[latitude]=' + (location.latitude ? encodeURIComponent(location.latitude) : '') +
-        '&location[longitude]=' + (location.longitude ? encodeURIComponent(location.longitude) : '') +
-        '&location[name]=' + (location.name ? encodeURIComponent(location.name) : '') +
-        '&location[city]=' + (location.city ? encodeURIComponent(location.city) : '') +
-        '&location[country]=' + (location.country ? encodeURIComponent(location.country) : '') +
-        '&location[confidential]=' + (location.confidential ? encodeURIComponent(location.confidential) : '') +
-        '&exif[make]=' + (exif.make ? encodeURIComponent(exif.make) : '') +
-        '&exif[model]=' + (exif.model ? encodeURIComponent(exif.model) : '') +
-        '&exif[exposure_time]=' + (exif.exposure_time ? encodeURIComponent(exif.exposure_time) : '') +
-        '&exif[aperture_value]=' + (exif.aperture_value ? encodeURIComponent(exif.aperture_value) : '') +
-        '&exif[focal_length]=' + (exif.focal_length ? encodeURIComponent(exif.focal_length) : '') +
-        '&exif[iso_speed_ratings]=' + (exif.iso_speed_ratings ? encodeURIComponent(exif.iso_speed_ratings) : '');
+    let url = LOCATION + SCHEMA.UPDATE_A_PHOTO.replace(/:id/, id) + '?' +
+        (location.latitude ? '&location[latitude]=' + encodeURIComponent(location.latitude) : '') +
+        (location.longitude ? '&location[longitude]=' + encodeURIComponent(location.longitude) : '') +
+        (location.name ? '&location[name]=' + encodeURIComponent(location.name) : '') +
+        (location.city ? '&location[city]=' + encodeURIComponent(location.city) : '') +
+        (location.country ? '&location[country]=' + encodeURIComponent(location.country) : '') +
+        (location.confidential ? '&location[confidential]=' + encodeURIComponent(location.confidential) : '') +
+        (exif.make ? '&exif[make]=' + encodeURIComponent(exif.make) : '') +
+        (exif.model ? '&exif[model]=' + encodeURIComponent(exif.model) : '') +
+        (exif.exposure_time ? '&exif[exposure_time]=' + encodeURIComponent(exif.exposure_time) : '') +
+        (exif.aperture_value ? '&exif[aperture_value]=' + encodeURIComponent(exif.aperture_value) : '') +
+        (exif.focal_length ? '&exif[focal_length]=' + encodeURIComponent(exif.focal_length) : '') +
+        (exif.iso_speed_ratings ? '&exif[iso_speed_ratings]=' + encodeURIComponent(exif.iso_speed_ratings) : '');
     return postUrl(self, url);
 }
 

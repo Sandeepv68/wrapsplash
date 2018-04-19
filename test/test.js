@@ -8,10 +8,13 @@ let unsplash = new UnsplashApi({
     bearer_token: '7e988f5161bd81e6057ff6b0a07b9fcaea6c4ddf77f3bab51760ffbc2ef9c86d'
 });
 
-unsplash.updatePhoto('XY7O2gp-m_Q', {country:'US'}, {make: 'sony'})
+unsplash.updatePhoto('XY7O2gp-m_Q', {
+        country: 'INDIA'
+    }, {
+        make: 'Redmi Note 3'
+    })
     .then(function (result) {
         console.log(result);
-    }).
-catch(function (err) {
-    console.log(err);
-});
+    }).catch(function (err) {
+        console.log(err);
+    });
