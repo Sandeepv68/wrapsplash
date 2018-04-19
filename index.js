@@ -13,6 +13,8 @@ const crypto = require('crypto');
 
 //Set API url
 const LOCATION = 'https://api.unsplash.com/';
+//Bearer Token url
+const BEARER_TOKEN_URL = 'https://unsplash.com/oauth/token';
 
 //Define api signatures [WIP]
 let SCHEMA = {
@@ -41,20 +43,37 @@ let SCHEMA = {
 /**
  * Unsplash api wrapper bootstrap - exposing the promise factories to access the Unsplash API endpoints.
  * @namespace UnsplashApi
- * @param {String} apiKey - The API key generated from Unsplash developer account (required).
+ * @param {Object} options - The options object containing Unsplash developer account details (required).
  */
-let UnsplashApi = function (apiKey) {
-    if (apiKey) {
+let UnsplashApi = function (options) {
+    if (options) {
         let self = this;
-        self.apiKey = apiKey;
-        let hash = crypto.createHmac('sha256', apiKey).digest('hex');;
+        options = Object.assign({}, options);
+        self.access_key = (options.access_key ? options.access_key : (function () {
+            throw new Error('Access Key missing!')
+        }()));
+        self.secret_key = (options.secret_key ? options.secret_key : (function () {
+            throw new Error('Secret Key missing!')
+        }()));
+        self.redirect_uri = (options.redirect_uri ? options.redirect_uri : (function () {
+            throw new Error('Redirect URI missing!')
+        }()));
+        self.code = (options.code ? options.code : (function () {
+            throw new Error('Authorization Code missing!')
+        }()));
+        self.grant_type = "authorization_code";
+        let hash = crypto.createHmac('sha256', self.access_key).digest('hex');
+        if (options.bearer_token) {
+            self.bearer_token = options.bearer_token;
+        }
         self.headers = {
             'Content-type': 'application/json',
-            'Authorization': 'Client-ID ' + self.apiKey,
+            'Authorization': (self.bearer_token ? 'Bearer ' + self.bearer_token : 'Client-ID ' + self.access_token),
             'X-WrapSplash-Header': hash
-        };
+        }
+        console.log(self.headers);
     } else {
-        throw new Error("API Key missing");
+        throw new Error("Initilisation parameters missing!");
     }
 };
 
@@ -77,7 +96,7 @@ Array.prototype.contains = function (item) {
  * Heler function to fetch a given url
  * @function fetchUrl
  * @param {Object} self - The 'this' object holding the context of the 'UnsplashApi' object (required).
- * @param {Sting} url - The url to be fetched (required).
+ * @param {String} url - The url to be fetched (required).
  * @returns {Object} - The JSON data object.
  */
 let fetchUrl = function (self, url) {
@@ -89,6 +108,43 @@ let fetchUrl = function (self, url) {
     }).catch(function (err) {
         return Promise.reject(err);
     });
+}
+
+/**
+ * Helper function to POST data to a given url and return the response
+ * @function postUrl
+ * @param {String} url - The url to which the data has to be POSTed (required).
+ * @returns {Object} - The JSON data object.
+ */
+let postUrl = function (self, url) {
+    let iSelf = self || '';
+    return fetch(url, {
+        method: 'PUT',
+        headers: (iSelf.headers ? iSelf.headers : '')
+    }).then(function (res) {
+        return res.json();
+    }).catch(function (err) {
+        return Promise.reject(err);
+    });
+}
+
+/**
+ * Promise factory to generate a Bearer Token for write_access to private data.
+ * The Unsplash API uses OAuth2 to authenticate and authorize Unsplash users. 
+ * Unsplash’s OAuth2 paths live at https://unsplash.com/oauth/.
+ * @function generateBearerToken
+ * @memberof UnsplashApi
+ * @returns {Object} - The user's Access Token JSON data object.
+ */
+UnsplashApi.prototype.generateBearerToken = function () {
+    let self = this;
+    let url = BEARER_TOKEN_URL +
+        "?client_id=" + (self.access_key) +
+        "&client_secret=" + (self.secret_key) +
+        "&redirect_uri=" + (self.redirect_uri) +
+        "&code=" + (self.code) +
+        "&grant_type=" + (self.grant_type);
+    return postUrl(self, url);
 }
 
 /**
@@ -364,17 +420,38 @@ UnsplashApi.prototype.getPhotoLink = function (id) {
     return fetchUrl(self, url);
 }
 
-// UnsplashApi.prototype.updatePhoto = function (id, location, exif){
-//     //'d4OylJ4porM'
-//     let self = this;
-//     if (!id || id === undefined || id.length === 0) {
-//         throw new Error("Parameter : id is required!");
-//     }
-//     location = Object.assign({}, location) || {};
-//     exif = Object.assign({}, exif) || {};
-//     let url = LOCATION + SCHEMA.UPDATE_A_PHOTO.replace(/:id/, id) +
-//     '?'
-// }
+/**
+ * Promise factory to update a photo on behalf of the logged-in user. 
+ * This requires the write_photos scope.
+ * @function updatePhoto
+ * @memberof UnsplashApi
+ * @param {String} id - The photo’s ID (required).
+ * @param {Object} location - The location object holding location data (Optional).
+ * @param {Object} exif - The exif object holding exif data (Optional).
+ * @returns {Object} - The updated photo data object.
+ */
+UnsplashApi.prototype.updatePhoto = function (id, location, exif) {
+    let self = this;
+    if (!id || id === undefined || id.length === 0) {
+        throw new Error("Parameter : id is required!");
+    }
+    location = Object.assign({}, location) || {};
+    exif = Object.assign({}, exif) || {};
+    let url = LOCATION + SCHEMA.UPDATE_A_PHOTO.replace(/:id/, id) + '?' +
+        (location.latitude ? '&location[latitude]=' + encodeURIComponent(location.latitude) : '') +
+        (location.longitude ? '&location[longitude]=' + encodeURIComponent(location.longitude) : '') +
+        (location.name ? '&location[name]=' + encodeURIComponent(location.name) : '') +
+        (location.city ? '&location[city]=' + encodeURIComponent(location.city) : '') +
+        (location.country ? '&location[country]=' + encodeURIComponent(location.country) : '') +
+        (location.confidential ? '&location[confidential]=' + encodeURIComponent(location.confidential) : '') +
+        (exif.make ? '&exif[make]=' + encodeURIComponent(exif.make) : '') +
+        (exif.model ? '&exif[model]=' + encodeURIComponent(exif.model) : '') +
+        (exif.exposure_time ? '&exif[exposure_time]=' + encodeURIComponent(exif.exposure_time) : '') +
+        (exif.aperture_value ? '&exif[aperture_value]=' + encodeURIComponent(exif.aperture_value) : '') +
+        (exif.focal_length ? '&exif[focal_length]=' + encodeURIComponent(exif.focal_length) : '') +
+        (exif.iso_speed_ratings ? '&exif[iso_speed_ratings]=' + encodeURIComponent(exif.iso_speed_ratings) : '');
+    return postUrl(self, url);
+}
 
 /**
  * Promise factory to access the Search Photos endpoint of the Unsplash API.
