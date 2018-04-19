@@ -325,6 +325,27 @@ UnsplashApi.prototype.getARandomPhoto = function (collections, featured, usernam
 }
 
 /**
+ * Promise factory to retrieve total number of downloads, views and likes of a single photo, 
+ * as well as the historical breakdown of these stats in a specific timeframe (default is 30 days).
+ * @function getPhotoStatistics
+ * @memberof UnsplashApi
+ * @param {String} id - The photo’s ID (required).
+ * @param {String} resolution - The frequency of the stats (Optional; default: 'days').
+ * @param {Number} quantity - The amount of for each stat (Optional; default: 30).
+ * @returns {Object} - The JSON data object.
+ */
+UnsplashApi.prototype.getPhotoStatistics = function (id, resolution, quantity) {
+    let self = this;
+    if (!id || id === undefined || id.length === 0) {
+        throw new Error("Parameter : id is required!");
+    }
+    let url = LOCATION + SCHEMA.GET_A_PHOTO_STATISTICS.replace(/:id/gi, id) +
+        "?resolution=" + (resolution ? encodeURIComponent(resolution) : 'days') +
+        "&quantity=" + (quantity ? quantity : 30);
+    return fetchUrl(self, url);
+}
+
+/**
  * Promise factory to access the Search Photos endpoint of the Unsplash API.
  * @function search
  * @memberof UnsplashApi
