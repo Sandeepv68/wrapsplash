@@ -220,7 +220,7 @@ in the custom photo URL being added to the urls object:
 UnsplashApi.getAPhoto('<id of the photo>', 500, 500, 'x, y, width, height');
 ```
 
-#### Get a random photo
+#### Get a Random Photo
 A Promise factory to retrieve a single random photo, given optional filters.
 ```
 GET /photos/random
@@ -245,7 +245,7 @@ GET /photos/random
 UnsplashApi.getARandomPhoto();
 ```
 
-#### Get A Photo's Statistics
+#### Get a Photo's Statistics
 A Promise factory to retrieve total number of downloads, views and likes of a single photo, as well as the historical breakdown of these stats in a specific timeframe (default is 30 days).
 ```
 GET /photos/:id/statistics
