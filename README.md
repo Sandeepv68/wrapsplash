@@ -80,7 +80,7 @@ UnsplashApi.getPhotoLink('<photo-id>')
         console.err(e);
     });
 ```
-### Response
+#### Response
 ```sh
 200 OK
 ```
