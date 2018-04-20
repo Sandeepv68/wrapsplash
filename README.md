@@ -99,7 +99,21 @@ For example:
   "errors": ["Username is missing", "Password cannot be blank"]
 }
 ```
-#### Users APIs
+
+### Authorization
+#### Public Actions
+Many actions can be performed without requiring authentication from a specific user. For example, downloading a photo does not require a user to log in.
+To authenticate requests in this way, pass your application’s access key via the HTTP ```Authorization``` header:
+```sh
+Authorization: Client-ID YOUR_ACCESS_KEY
+```
+You can also pass this value using a ```client_id``` query parameter:
+```sh
+https://api.unsplash.com/photos/?client_id=YOUR_ACCESS_KEY
+```
+If only your access key is sent, attempting to perform non-public actions that require user authorization will result in a ```401 Unauthorized response```.
+
+### Users APIs
 #### Get User's Public Profile
 A Promise factory to retrieve public details on a given user.
 ```
