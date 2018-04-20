@@ -371,7 +371,24 @@ PUT /photos/:id
 | **id** | *string* | The photo’s ID | no | 
 | **location** | *object* | The location object holding location data | yes | 
 | **exif** | *object* | The exif object holding exif data | yes
-> **Note:** **Exchangeable image file format** (officially Exif, according to JEIDA/JEITA/CIPA specifications) is a standard that specifies the formats for images, sound, and ancillary tags used by digital cameras (including smartphones), scanners and other systems handling image and sound files recorded by digital cameras. 
+> **Note:** **Exchangeable image file format** (officially Exif, according to JEIDA/JEITA/CIPA specifications) is a standard that specifies the formats for images, sound, and ancillary tags used by digital cameras (including smartphones), scanners and other systems handling image and sound files recorded by digital cameras. [Readmore](https://en.wikipedia.org/wiki/Exif)
+
+##### location & exif objects
+| object[key] | Description |
+| ----- | ----------- |
+| location[latitude] | The photo location’s latitude (Optional) | 
+| location[longitude] | The photo location’s longitude (Optional) |
+| location[name] | The photo location’s name (Optional) |
+| location[city] | The photo location’s city (Optional) |
+| location[country] | The photo location’s country (Optional) |
+| location[confidential] | The photo location’s confidentiality (Optional) | 
+| exif[make] | Camera’s brand (Optional) |
+| exif[model] | Camera’s model (Optional) |
+| exif[exposure_time] | Camera’s exposure time (Optional) |
+| exif[aperture_value] | Camera’s aperture value (Optional) |
+| exif[focal_length] | Camera’s focal length (Optional) |
+| exif[iso_speed_ratings] | Camera’s iso (Optional) |
+
 ```js
 UnsplashApi.updatePhoto('<photo-id>', {country: 'INDIA'}, {make: 'Redmi Note 3'});
 ```
