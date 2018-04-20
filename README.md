@@ -11,6 +11,12 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 
 > **Note:**  Every application must abide by the [API Guidelines](https://unsplash.com/documentation). Specifically, remember to hotlink images and trigger a download when appropriate.
 
+## Table of Contents
+<!--ts-->
+* [Installation](#installation)
+* [Sample Usage](#sample-usage)
+* [Dependency](#dependency)
+<!--te-->
 ## Installation
 
 Install the package from NPM
