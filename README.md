@@ -82,6 +82,9 @@ UnsplashApi.getPhotoLink('<photo-id>')
 ```
 ### Response
 ```sh
+200 OK
+```
+```sh
 {
   "url": "https://image.unsplash.com/example"
 }
