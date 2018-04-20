@@ -111,7 +111,7 @@ let fetchUrl = function (self, url) {
 }
 
 /**
- * Helper function to POST data to a given url and return the response
+ * Helper function to POST data to a given url and return the response.
  * @function postUrl
  * @param {String} url - The url to which the data has to be POSTed (required).
  * @returns {Object} - The JSON data object.
@@ -119,7 +119,43 @@ let fetchUrl = function (self, url) {
 let postUrl = function (self, url) {
     let iSelf = self || '';
     return fetch(url, {
+        method: 'POST',
+        headers: (iSelf.headers ? iSelf.headers : '')
+    }).then(function (res) {
+        return res.json();
+    }).catch(function (err) {
+        return Promise.reject(err);
+    });
+}
+
+/**
+ * Helper function to PUT data to a given url and return the response.
+ * @function postUrl
+ * @param {String} url - The url to which the data has to be PUT (required).
+ * @returns {Object} - The JSON data object.
+ */
+let putUrl = function (self, url) {
+    let iSelf = self || '';
+    return fetch(url, {
         method: 'PUT',
+        headers: (iSelf.headers ? iSelf.headers : '')
+    }).then(function (res) {
+        return res.json();
+    }).catch(function (err) {
+        return Promise.reject(err);
+    });
+}
+
+/**
+ * Helper function to DELETE data from a given url and return the response.
+ * @function postUrl
+ * @param {String} url - The url to which the data has to be DELETE (required).
+ * @returns {Object} - The JSON data object.
+ */
+let deleteUrl = function(self, url){
+    let iSelf = self || '';
+    return fetch(url, {
+        method: 'DELETE',
         headers: (iSelf.headers ? iSelf.headers : '')
     }).then(function (res) {
         return res.json();
@@ -349,6 +385,9 @@ UnsplashApi.prototype.getAPhoto = function (id, width, height, rect) {
  * Promise factory to retrieve a single random photo, given optional filters.
  * All parameters are optional, and can be combined to narrow the pool of 
  * photos from which a random one will be chosen.
+ * Note: You can’t use the collections and query parameters in the same request 
+ * When supplying a count parameter - and only then - the response will be an 
+ * array of photos, even if the value of count is 1.
  * @function getARandomPhoto
  * @memberof UnsplashApi
  * @param {String} collections - The public collection ID(‘s) to filter selection. If multiple, comma-separated
@@ -360,8 +399,6 @@ UnsplashApi.prototype.getAPhoto = function (id, width, height, rect) {
  * @param {String} orientation - Filter search results by photo orientation. Valid values are landscape, portrait, and squarish.
  * @param {Number} count - The number of photos to return. (Default: 1; max: 30).
  * @returns {Object} - The JSON data object.
- * Note: You can’t use the collections and query parameters in the same request
- *       When supplying a count parameter - and only then - the response will be an array of photos, even if the value of count is 1
  */
 UnsplashApi.prototype.getARandomPhoto = function (collections, featured, username, query, width, height, orientation, count) {
     let self = this;
@@ -404,12 +441,12 @@ UnsplashApi.prototype.getPhotoStatistics = function (id, resolution, quantity) {
 /**
  * Promise factory to retrieve a single photo’s download link. Preferably hit this endpoint 
  * if a photo is downloaded in your application for use (example: to be displayed on a blog article, 
- * to be shared on social media, to be remixed, etc.).
+ * to be shared on social media, to be remixed, etc).
+ * Note: This is different than the concept of a view, which is tracked automatically when you hotlinking an image.
  * @function getPhotoLink
  * @memberof UnsplashApi
  * @param {String} id - The photo’s ID (required).
  * @returns {Object} - The JSON data object.
- * Note: This is different than the concept of a view, which is tracked automatically when you hotlinking an image.
  */
 UnsplashApi.prototype.getPhotoLink = function (id) {
     let self = this;
@@ -450,7 +487,44 @@ UnsplashApi.prototype.updatePhoto = function (id, location, exif) {
         (exif.aperture_value ? '&exif[aperture_value]=' + encodeURIComponent(exif.aperture_value) : '') +
         (exif.focal_length ? '&exif[focal_length]=' + encodeURIComponent(exif.focal_length) : '') +
         (exif.iso_speed_ratings ? '&exif[iso_speed_ratings]=' + encodeURIComponent(exif.iso_speed_ratings) : '');
+    return putUrl(self, url);
+}
+
+/**
+ * Promise factory to like a photo on behalf of the logged-in user. 
+ * This requires the write_likes scope.
+ * Note: This action is idempotent; sending the POST request to a single photo 
+ * multiple times has no additional effect.
+ * @function likePhoto
+ * @memberof UnsplashApi
+ * @param {String} id - The photo’s ID (required).
+ * @returns {Object} - The updated photo data object.
+ */
+UnsplashApi.prototype.likePhoto = function (id){
+    let self=this;
+    if (!id || id === undefined || id.length === 0) {
+        throw new Error("Parameter : id is required!");
+    }
+    let url = LOCATION + SCHEMA.LIKE_A_PHOTO.replace(/:id/gi, id);
     return postUrl(self, url);
+}
+
+/**
+ * Promise factory to remove a user’s like of a photo.
+ * Note: This action is idempotent; sending the DELETE request 
+ * to a single photo multiple times has no additional effect.
+ * @function unlikePhoto
+ * @memberof UnsplashApi
+ * @param {String} id - The photo’s ID (required).
+ * @returns {Object} - The updated photo data object.
+ */
+UnsplashApi.prototype.unlikePhoto = function(id){
+    let self=this;
+    if (!id || id === undefined || id.length === 0) {
+        throw new Error("Parameter : id is required!");
+    }
+    let url = LOCATION + SCHEMA.UNLIKE_A_PHOTO.replace(/:id/gi, id);
+    return deleteUrl(self, url);
 }
 
 /**
