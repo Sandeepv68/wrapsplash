@@ -103,6 +103,16 @@ https://api.unsplash.com/photos/?client_id=YOUR_ACCESS_KEY
 ```
 If only your access key is sent, attempting to perform non-public actions that require user authorization will result in a ```401 Unauthorized response```.
 
+#### User Authentication
+The Unsplash API uses OAuth2 to authenticate and authorize Unsplash users. Unsplash’s OAuth2 paths live at ```https://unsplash.com/oauth/```.
+
+Before using wrapsplash: 
+- Developers are required to create a developer account from [Unsplash](https://unsplash.com/developers).
+- Create a new App from Your Apps page.
+- Get the ```Access Key```, ```Secret key```, ```Callback URLs```, and ```Authorization code```.
+- If you have a Bearer Token, then its super, or else you can generate it using **wrapsplash**.
+> **Note:** ```Authorization code``` can be obtained by clicking the ```Authorize``` link  next to ```Callback URLs```. Also ```Authorization code``` is a one-time use code, you have to generate it again, if the action fails!.
+
 ### Users APIs
 #### Get User's Public Profile
 A Promise factory to retrieve public details on a given user.
