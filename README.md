@@ -203,7 +203,6 @@ GET /users/:username/photos
 UnsplashApi.getUserPhotos('<username>', 1, 10, false, 'days', 30, 'latest');
 ```
 
-
 #### Get User Liked Photos
 A Promise factory to get a list of photos liked by a user.
 ```
@@ -254,7 +253,7 @@ GET /users/:username/statistics
 UnsplashApi.getUserStatistics('<username>', 'days', 30);
 ```
 
-#### Photos APIs
+### Photos APIs
 #### List Photos
 A Promise factory to get a single page from the list of all photos.
 ```
@@ -361,8 +360,23 @@ GET /photos/:id/download
 UnsplashApi.getPhotoLink('<photo-id>');
 ```
 
+#### Update a Photo
+A Promise factory to update a photo on behalf of the logged-in user. This requires the ```write_photos``` scope and ```bearer_token```.
+```
+PUT /photos/:id
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **id** | *string* | The photo’s ID | no | 
+| **location** | *object* | The location object holding location data | yes | 
+| **exif** | *object* | The exif object holding exif data | yes
+> **Note:** **Exchangeable image file format** (officially Exif, according to JEIDA/JEITA/CIPA specifications) is a standard that specifies the formats for images, sound, and ancillary tags used by digital cameras (including smartphones), scanners and other systems handling image and sound files recorded by digital cameras. 
+```js
+UnsplashApi.updatePhoto('<photo-id>', {country: 'INDIA'}, {make: 'Redmi Note 3'});
+```
 
-#### Search APIs
+### Search APIs
 #### Search Photos
 A Promise factory to get a single page of photo results for a particular query.
 ```
