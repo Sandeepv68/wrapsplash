@@ -35,8 +35,15 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
         * [Get User's Collections](#get-users-collections)
         * [Get User's Statistics](#get-users-statistics)
     * [Photos APIs](#photos-apis)
-        * []()
-
+        * [List Photos](#list-photos)
+        * [List Curated Photos](#list-curated-photos)
+        * [Get a Photo by Id](#get-a-photo-by-id)
+        * [Get a Random Photo](#get-a-random-photo)
+        * [Get a Photo's Statistics](#get-a-photos-statistics)
+        * [Get a Photo's Download Link](#get-a-photos-download-link)
+        * [Update a Photo](#update-a-photo)
+        * [Like a Photo](#like-a-photo)
+        * [Unlike a Photo](#unlike-a-photo)
 
 <!--te-->
 ## Installation
