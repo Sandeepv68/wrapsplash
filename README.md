@@ -54,7 +54,6 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 
 Install the package from NPM
 ```sh
-cd /your app root
 npm install --save wrapsplash
 ```
 
@@ -100,6 +99,7 @@ This library depends on [fetch](https://github.com/github/fetch) to make request
     - Update a photo on behalf of the logged-in user - ```PUT /photos/:id```.
     - Like a photo on behalf of the logged-in user - ```POST /photos/:id/like```.
     - Remove a user’s like of a photo - ```DELETE /photos/:id/like```.
+- Major refactorings.
 
 #### v1.0.10
 - Documentation patch.
