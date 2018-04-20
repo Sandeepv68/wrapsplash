@@ -187,8 +187,8 @@ UnsplashApi.prototype.generateBearerToken = function () {
 }
 
 /**
- * Promise factory to get the current User's profile
- * Note: To access a user’s private data, the user is required to 
+ * Promise factory to get the current User's profile.
+ * To access a user’s private data, the user is required to 
  * authorize the read_user scope. Without it, this request 
  * will return a 403 Forbidden response.
  * Without a Bearer token (i.e. using a Client-ID token) this request 
@@ -201,6 +201,35 @@ UnsplashApi.prototype.getCurrentUserProfile = function () {
     let self = this;
     let url = LOCATION + SCHEMA.CURRENT_USER_PROFILE;
     return fetchUrl(self, url);
+}
+
+/**
+ * Promise factory to update the current User's profile.
+ * This action requires the write_user scope. Without it, it will return a 403 Forbidden response.
+ * @function updateCurrentUserProfile
+ * @memberof UnsplashApi
+ * @param {String} username - The username of the current user (Optional).
+ * @param {String} first_name - The first name of the current user (Optional).
+ * @param {String} last_name - The last name of the current user (Optional).
+ * @param {String} email - The email id of the current user (Optional).
+ * @param {String} url - The Portfolio/personal URL of the current user (Optional).
+ * @param {String} location - The location of the current user (Optional).
+ * @param {String} bio - The About/bio of the current user (Optional).
+ * @param {String} instagram_username - The Instagram username of the current user (Optional).
+ * @returns {Object} - The JSON data Object.
+ */
+UnsplashApi.prototype.updateCurrentUserProfile = function (username, first_name, last_name, email, url, location, bio, instagram_username) {
+    let self = this;
+    let _url = LOCATION + SCHEMA.UPDATE_CURRENT_USER_PROFILE + '?' +
+        (username ? '?username=' + username : '') +
+        (first_name ? '&first_name=' + first_name : '') +
+        (last_name ? '&last_name=' + last_name : '') +
+        (email ? '&email=' + email : '') +
+        (url ? '&url=' + url : '') +
+        (location ? '&location=' + location : '') +
+        (bio ? '&bio=' + bio : '') +
+        (instagram_username ? '&instagram_username=' + instagram_username : '');
+    return putUrl(self, _url);
 }
 
 /**
@@ -405,7 +434,7 @@ UnsplashApi.prototype.getAPhoto = function (id, width, height, rect) {
  * Promise factory to retrieve a single random photo, given optional filters.
  * All parameters are optional, and can be combined to narrow the pool of 
  * photos from which a random one will be chosen.
- * Note: You can’t use the collections and query parameters in the same request 
+ * You can’t use the collections and query parameters in the same request 
  * When supplying a count parameter - and only then - the response will be an 
  * array of photos, even if the value of count is 1.
  * @function getARandomPhoto
@@ -462,7 +491,7 @@ UnsplashApi.prototype.getPhotoStatistics = function (id, resolution, quantity) {
  * Promise factory to retrieve a single photo’s download link. Preferably hit this endpoint 
  * if a photo is downloaded in your application for use (example: to be displayed on a blog article, 
  * to be shared on social media, to be remixed, etc).
- * Note: This is different than the concept of a view, which is tracked automatically when you hotlinking an image.
+ * This is different than the concept of a view, which is tracked automatically when you hotlinking an image.
  * @function getPhotoLink
  * @memberof UnsplashApi
  * @param {String} id - The photo’s ID (required).
@@ -513,7 +542,7 @@ UnsplashApi.prototype.updatePhoto = function (id, location, exif) {
 /**
  * Promise factory to like a photo on behalf of the logged-in user. 
  * This requires the write_likes scope.
- * Note: This action is idempotent; sending the POST request to a single photo 
+ * This action is idempotent; sending the POST request to a single photo 
  * multiple times has no additional effect.
  * @function likePhoto
  * @memberof UnsplashApi
@@ -531,7 +560,7 @@ UnsplashApi.prototype.likePhoto = function (id) {
 
 /**
  * Promise factory to remove a user’s like of a photo.
- * Note: This action is idempotent; sending the DELETE request 
+ * This action is idempotent; sending the DELETE request 
  * to a single photo multiple times has no additional effect.
  * @function unlikePhoto
  * @memberof UnsplashApi

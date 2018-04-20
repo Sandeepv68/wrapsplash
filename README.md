@@ -557,6 +557,27 @@ GET /me
 UnsplashApi.getCurrentUserProfile();
 ```
 
+#### Update User’s Profile
+A Promise factory to update the current User's profile. This action requires the write_user scope. Without it, it will return a 403 Forbidden response.
+```
+PUT /me
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| username | *String* | The username of the current user | yes |
+| first_name | *String* | The first name of the current user | yes |
+| last_name | *String* | The last name of the current user | yes |
+| email | *String* | The email id of the current user | yes |
+| url | *String* | The Portfolio/personal URL of the current user | yes |
+| location | *String* | The location of the current user | yes |
+| bio | *String* | The About/bio of the current user | yes |
+| instagram_username | *String* | The Instagram username of the current user | yes |
+> **Note:** This action requires the write_user scope. Without it, it will return a 403 Forbidden response.
+```js
+UnsplashApi.updateCurrentUserProfile('<username>', '<first_name>', '<last_name>', '<email>', '<url>', '<location>', '<bio>', '<instagram_username>');
+```
+
 
 ### Acknowledgements
 Thanks, and Kudos to team [Unsplash](https://unsplash.com/) for creating a wonderful platform for sharing 
