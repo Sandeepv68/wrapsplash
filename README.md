@@ -13,10 +13,21 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 
 ## Table of Contents
 <!--ts-->
-* [About](#wrapsplash-v1.0.10)
 * [Installation](#installation)
 * [Sample Usage](#sample-usage)
 * [Dependency](#dependency)
+* [Changelog](#changelog)
+* [API Documentation](#api-documentation)
+    * [Schema](#schema)
+        * [Location](#location)
+        * [Summary Objects](#summary-objects)
+        * [Error Messages](#error-messages)
+    * [Authorization](#authorization)
+        * [Public Actions](#public-actions)
+        * [User Authentication](#user-authentication)
+        * [Generate Bearer Token](#generate-bearer-token)
+    * [Users APIs](#users-apis)
+        * [Get User's Public Profile](#get-user's-public-profile)
 <!--te-->
 ## Installation
 
