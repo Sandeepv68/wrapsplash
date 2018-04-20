@@ -393,6 +393,21 @@ PUT /photos/:id
 UnsplashApi.updatePhoto('<photo-id>', {country: 'INDIA'}, {make: 'Redmi Note 3'});
 ```
 
+#### Like a Photo
+A Promise factory to like a photo on behalf of the logged-in user. This requires the ```write_likes``` scope.
+```
+POST /photos/:id/like
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **id** | *string* | The photo’s ID | no | 
+> **Note:**  This action is idempotent; sending the POST request to a single photo multiple times has no additional effect.
+```js
+UnsplashApi.likePhoto('<photo-id>');
+```
+
+
 ### Search APIs
 #### Search Photos
 A Promise factory to get a single page of photo results for a particular query.
