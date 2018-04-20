@@ -53,8 +53,8 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
         * [Search Photos](#search-photos)
         * [Search Collections](#search-collections)
         * [Search Users](#search-users)
-    * [Current User APIs]()
-        * [Get the user’s profile]()
+    * [Current User APIs](#current-user-apis)
+        * [Get the user’s profile](#get-users-profile)
 * [Acknowledgements](#acknowledgements)
 
 <!--te-->
@@ -551,6 +551,7 @@ A Promise factory to get the current User's profile. To access a user’s privat
 GET /me
 ```
 > **Note:** No Parameters are required.
+
 > **Note:**  Without a Bearer token (i.e. using a ```Client-ID token```) this request will return a ```401 Unauthorized``` response.
 ```js
 UnsplashApi.getCurrentUserProfile();
