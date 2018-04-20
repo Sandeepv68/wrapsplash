@@ -407,6 +407,19 @@ POST /photos/:id/like
 UnsplashApi.likePhoto('<photo-id>');
 ```
 
+#### Unlike a Photo
+A Promise factory to remove a user’s like of a photo. 
+```
+DELETE /photos/:id/like
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **id** | *string* | The photo’s ID | no | 
+> **Note:** This action is idempotent; sending the DELETE request to a single photo multiple times has no additional effect.
+```js
+UnsplashApi.unlikePhoto('<photo-id>');
+```
 
 ### Search APIs
 #### Search Photos
