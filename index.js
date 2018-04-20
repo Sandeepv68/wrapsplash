@@ -40,7 +40,10 @@ let SCHEMA = {
     SEARCH_USERS: 'search/users',
 
     CURRENT_USER_PROFILE: 'me',
-    UPDATE_CURRENT_USER_PROFILE: 'me'
+    UPDATE_CURRENT_USER_PROFILE: 'me',
+
+    STATS_TOTALS: 'stats/total',
+    STATS_MONTH: 'stats/month'
 };
 
 /**
@@ -643,6 +646,30 @@ UnsplashApi.prototype.searchUsers = function (query, page, per_page) {
         "?query=" + (query ? encodeURIComponent(query) : '') +
         "&page=" + (page && !isNaN(page) ? +page : 1) +
         "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
+    return fetchUrl(self, url);
+}
+
+/**
+ * Promise factory to get a list of counts for all of Unsplash.
+ * @function getStatsTotals
+ * @memberof UnsplashApi
+ * @returns {Object} - The JSON data object.
+ */
+UnsplashApi.prototype.getStatsTotals = function(){
+    let self = this;
+    let url = LOCATION + SCHEMA.STATS_TOTALS;
+    return fetchUrl(self, url);
+}
+
+/**
+ * Promise factory to get the overall Unsplash stats for the past 30 days.
+ * @function getStatsMonth
+ * @memberof UnsplashApi
+ * @returns {Object} - The JSON data object.
+ */
+UnsplashApi.prototype.getStatsMonth = function(){
+    let self = this;
+    let url = LOCATION + SCHEMA.STATS_MONTH;
     return fetchUrl(self, url);
 }
 module.exports = UnsplashApi;

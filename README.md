@@ -56,6 +56,9 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
     * [Current User APIs](#current-user-apis)
         * [Get the user’s profile](#get-users-profile)
         * [Update User’s Profile](#update-users-profile)
+    * [Stats APIs]()
+        * [Totals]()
+        * [Months]()
 * [Acknowledgements](#acknowledgements)
 
 <!--te-->
@@ -577,6 +580,64 @@ PUT /me
 > **Note:** This action requires the ```write_user scope```. Without it, it will return a ```403 Forbidden response```.
 ```js
 UnsplashApi.updateCurrentUserProfile('<username>', '<first_name>', '<last_name>', '<email>', '<url>', '<location>', '<bio>', '<instagram_username>');
+```
+
+### Stats APIs
+#### Stats Totals
+A Promise factory to get a list of counts for all of Unsplash.
+```
+GET /stats/total
+``` 
+```js
+UnsplashApi.getStatsTotals();
+```
+#### Response
+```sh
+200 OK
+```
+```sh
+{
+  total_stats = {
+    "photos" => 10000,
+    "downloads" => 2000,
+    "views" => 5000,
+    "likes" => 800,
+    "photographers" => 100,
+    "pixels" => 200000,
+    "downloads_per_second" => 10, // average number of downloads per second for the past 7 days
+    "views_per_second" => 20,  // average number of views per second for the past 7 days
+    "developers" => 20,
+    "applications" => 50,
+    "requests" => 8000
+  }
+}
+```
+#### Stats Month
+A Promise factory to get the overall Unsplash stats for the past 30 days.
+```
+GET /stats/month
+```
+```js
+UnsplashApi.getStatsMonth();
+```
+#### Response
+```sh
+200 OK
+```
+```sh
+{
+  month_stats = {
+    "downloads" => 20,
+    "views" => 200,
+    "likes" => 60,
+    "new_photos" => 10,
+    "new_photographers" => 5,
+    "new_pixels" => 2000,
+    "new_developers" => 8,
+    "new_applications" => 5,
+    "new_requests" => 100
+  }
+}
 ```
 
 
