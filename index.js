@@ -37,7 +37,10 @@ let SCHEMA = {
 
     SEARCH_PHOTOS: 'search/photos',
     SEARCH_COLLECTIONS: 'search/collections',
-    SEARCH_USERS: 'search/users'
+    SEARCH_USERS: 'search/users',
+
+    CURRENT_USER_PROFILE: 'me',
+    UPDATE_CURRENT_USER_PROFILE: 'me'
 };
 
 /**
@@ -152,7 +155,7 @@ let putUrl = function (self, url) {
  * @param {String} url - The url to which the data has to be DELETE (required).
  * @returns {Object} - The JSON data object.
  */
-let deleteUrl = function(self, url){
+let deleteUrl = function (self, url) {
     let iSelf = self || '';
     return fetch(url, {
         method: 'DELETE',
@@ -181,6 +184,23 @@ UnsplashApi.prototype.generateBearerToken = function () {
         "&code=" + (self.code) +
         "&grant_type=" + (self.grant_type);
     return postUrl(self, url);
+}
+
+/**
+ * Promise factory to get the current User's profile
+ * Note: To access a user’s private data, the user is required to 
+ * authorize the read_user scope. Without it, this request 
+ * will return a 403 Forbidden response.
+ * Without a Bearer token (i.e. using a Client-ID token) this request 
+ * will return a 401 Unauthorized response.
+ * @function getCurrentUserProfile
+ * @memberof UnsplashApi
+ * @returns {Object} - The JSON data Object.
+ */
+UnsplashApi.prototype.getCurrentUserProfile = function () {
+    let self = this;
+    let url = LOCATION + SCHEMA.CURRENT_USER_PROFILE;
+    return fetchUrl(self, url);
 }
 
 /**
@@ -500,8 +520,8 @@ UnsplashApi.prototype.updatePhoto = function (id, location, exif) {
  * @param {String} id - The photo’s ID (required).
  * @returns {Object} - The updated photo data object.
  */
-UnsplashApi.prototype.likePhoto = function (id){
-    let self=this;
+UnsplashApi.prototype.likePhoto = function (id) {
+    let self = this;
     if (!id || id === undefined || id.length === 0) {
         throw new Error("Parameter : id is required!");
     }
@@ -518,8 +538,8 @@ UnsplashApi.prototype.likePhoto = function (id){
  * @param {String} id - The photo’s ID (required).
  * @returns {Object} - The updated photo data object.
  */
-UnsplashApi.prototype.unlikePhoto = function(id){
-    let self=this;
+UnsplashApi.prototype.unlikePhoto = function (id) {
+    let self = this;
     if (!id || id === undefined || id.length === 0) {
         throw new Error("Parameter : id is required!");
     }

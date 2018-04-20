@@ -53,6 +53,9 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
         * [Search Photos](#search-photos)
         * [Search Collections](#search-collections)
         * [Search Users](#search-users)
+    * [Current User APIs]()
+        * [Get the user’s profile]()
+* [Acknowledgements](#acknowledgements)
 
 <!--te-->
 ## Installation
@@ -184,7 +187,7 @@ Before using wrapsplash:
 
 #### Generate Bearer Token 
 A Promise factory to generate a Bearer Token for ```write_access``` to private data.
-
+> **Note:** No Parameters are required.
 ```js
 const WrapSplash = require('wrapsplash');
 let UnsplashApi = new WrapSplash({
@@ -539,6 +542,18 @@ GET /search/users
 
 ```js
 UnsplashApi.searchUsers('<search-keyword>', 1, 10);
+```
+
+### Current User APIs
+#### Get User’s Profile
+A Promise factory to get the current User's profile. To access a user’s private data, the user is required to authorize the ```read_user``` scope. Without it, this request will return a ```403 Forbidden response```.
+```
+GET /me
+```
+> **Note:** No Parameters are required.
+> **Note:**  Without a Bearer token (i.e. using a ```Client-ID token```) this request will return a ```401 Unauthorized``` response.
+```js
+UnsplashApi.getCurrentUserProfile();
 ```
 
 
