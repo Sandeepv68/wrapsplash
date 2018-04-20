@@ -114,7 +114,7 @@ Before using wrapsplash:
 > **Note:** ```Authorization code``` can be obtained by clicking the ```Authorize``` link  next to ```Callback URLs```. Also ```Authorization code``` is a one-time use code, you have to generate it again, if the action fails!.
 
 #### Generate Bearer Token 
-A Promise factory to generate a Bearer Token for write_access to private data.
+A Promise factory to generate a Bearer Token for ```write_access``` to private data.
 
 ```js
 const WrapSplash = require('wrapsplash');
@@ -131,7 +131,7 @@ UnsplashApi.generateBearerToken()
         console.err(e);
     });
 ```
-If successful, the response body will be a JSON representation of your user’s access token:
+If successful, the response body will be a JSON representation of your user’s access token a.k.a bearer token:
 
 ```sh
 {
@@ -141,7 +141,16 @@ If successful, the response body will be a JSON representation of your user’s 
    "created_at": 1436544465
  }
 ```
-
+and once you have your ```bearer_token``` you can use it in your app like this:
+```js
+let UnsplashApi = new WrapSplash({
+    access_key: '<api-key>',
+    secret_key: '<secret-key>',
+    redirect_uri: '<callback-url>',
+    code: '<authorization-code>',
+    bearer_token: '<bearer-token>'
+});
+```
 ### Users APIs
 #### Get User's Public Profile
 A Promise factory to retrieve public details on a given user.
