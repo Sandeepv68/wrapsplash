@@ -1,4 +1,4 @@
-# WrapSplash v1.0.10 
+# WrapSplash v1.1.0 
 ![license](https://img.shields.io/github/license/mashape/apistatus.svg)
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 ![Hackage-Deps](https://img.shields.io/hackage-deps/v/lens.svg)
@@ -13,7 +13,7 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 
 ## Table of Contents
 <!--ts-->
-* [About](#wrapsplash-v1010)
+* [About](#wrapsplash-v110)
 * [Installation](#installation)
 * [Sample Usage](#sample-usage)
 * [Dependency](#dependency)
@@ -44,6 +44,10 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
         * [Update a Photo](#update-a-photo)
         * [Like a Photo](#like-a-photo)
         * [Unlike a Photo](#unlike-a-photo)
+    * [Search APIs](#search-apis)
+        * [Search Photos](#search-photos)
+        * [Search Collections](#search-collections)
+        * [Search Users](#search-users)
 
 <!--te-->
 ## Installation
@@ -81,25 +85,41 @@ UnsplashApi.listPhotos(1, 10, 'latest')
 This library depends on [fetch](https://github.com/github/fetch) to make requests to the [Unsplash API](https://unsplash.com/documentation). For environments that don't support fetch, you'll need to provide a **polyfill**.
 
 ### Changelog
+#### v1.1.0
+- Documentation updated.
+- Added support for Authorization.
+- Added support for Bearer Token.
+- Added support for private data Read Write Access.
+- Added support for full Photos APIs
+    - Get a single page from the list of all photos - ```GET /photos```.
+    - Get a single page from the list of the curated photos - ```GET /photos/curated```.
+    - Retrieve a single photo - ```GET /photos/:id```.
+    - Retrieve a single random photo, given optional filters - ```GET /photos/random```.
+    - Retrieve statistics of a photo in a specific timeframe - ```GET /photos/:id/statistics```.
+    - Retrieve a single photo’s download link - ```GET /photos/:id/download```.
+    - Update a photo on behalf of the logged-in user - ```PUT /photos/:id```.
+    - Like a photo on behalf of the logged-in user - ```POST /photos/:id/like```.
+    - Remove a user’s like of a photo - ```DELETE /photos/:id/like```.
+
 #### v1.0.10
-- Documentation patch
+- Documentation patch.
 
 #### v1.0.9
 - Now supports full Search APIs.
-- Added support for new API endpoints
-  - Get a single page of photo results for a query - ``` GET /search/photos```
-  - Get a single page of collection results for a query - ``` GET /search/collections```
-  - Get a single page of user results for a query - ``` GET /search/users```
+- Added support for new API endpoints.
+  - Get a single page of photo results for a query - ```GET /search/photos```.
+  - Get a single page of collection results for a query - ```GET /search/collections```.
+  - Get a single page of user results for a query - ```GET /search/users```.
 
 #### v1.0.8
 - Now supports full Users APIs.
-- Added support for new API endpoints
-  - Get a list of collections created by the user - ``` GET /users/:username/collections```.
-  - Get a user's account statistics - ``` GET /users/:username/statistics ```.
+- Added support for new API endpoints.
+  - Get a list of collections created by the user - ```GET /users/:username/collections```.
+  - Get a user's account statistics - ```GET /users/:username/statistics ```.
 - Major refactorings.
 
 #### v1.0.7
- - Added support for new API endpoint
+ - Added support for new API endpoint.
    - Get a list of photos liked by a user - ```GET /users/:username/likes```.
  - Minor refactorings.
 
