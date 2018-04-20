@@ -80,6 +80,7 @@ When retrieving a list of objects, an abbreviated or summary version of that obj
 
 #### HTTP Verbs
 The Unsplash API uses HTTP verbs appropriate to each action.
+
 | Verb | Description |
 | ---- | ----------- |
 | GET | Retrieving resources |
@@ -88,7 +89,8 @@ The Unsplash API uses HTTP verbs appropriate to each action.
 | DELETE | Deleting resources |
 
 #### Error messages
-If an error occurs, whether on the server or client side, the error message(s) will be returned in an ```errors``` array. For example:
+If an error occurs, whether on the server or client side, the error message(s) will be returned in an ```errors``` array. 
+For example:
 ```sh
 422 Unprocessable Entity
 ```
