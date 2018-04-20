@@ -13,6 +13,7 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 
 ## Table of Contents
 <!--ts-->
+* [About](#wrapsplash-v1010)
 * [Installation](#installation)
 * [Sample Usage](#sample-usage)
 * [Dependency](#dependency)
@@ -27,7 +28,16 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
         * [User Authentication](#user-authentication)
         * [Generate Bearer Token](#generate-bearer-token)
     * [Users APIs](#users-apis)
-        * [Get User's Public Profile](#get-user's-public-profile)
+        * [Get User's Public Profile](#get-users-public-profile)
+        * [Get User's Portfolio Link](#get-users-portfolio-link)
+        * [Get User's Photos](#get-users-photos)
+        * [Get User Liked Photos](#get-user-liked-photos)
+        * [Get User's Collections](#get-users-collections)
+        * [Get User's Statistics](#get-users-statistics)
+    * [Photos APIs](#photos-apis)
+        * []()
+
+
 <!--te-->
 ## Installation
 
