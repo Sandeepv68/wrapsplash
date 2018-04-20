@@ -55,6 +55,7 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
         * [Search Users](#search-users)
     * [Current User APIs](#current-user-apis)
         * [Get the user’s profile](#get-users-profile)
+        * [Update User’s Profile](#update-users-profile)
 * [Acknowledgements](#acknowledgements)
 
 <!--te-->
@@ -558,7 +559,7 @@ UnsplashApi.getCurrentUserProfile();
 ```
 
 #### Update User’s Profile
-A Promise factory to update the current User's profile. This action requires the write_user scope. Without it, it will return a 403 Forbidden response.
+A Promise factory to update the current User's profile. 
 ```
 PUT /me
 ```
@@ -573,7 +574,7 @@ PUT /me
 | location | *String* | The location of the current user | yes |
 | bio | *String* | The About/bio of the current user | yes |
 | instagram_username | *String* | The Instagram username of the current user | yes |
-> **Note:** This action requires the write_user scope. Without it, it will return a 403 Forbidden response.
+> **Note:** This action requires the ```write_user scope```. Without it, it will return a ```403 Forbidden response```.
 ```js
 UnsplashApi.updateCurrentUserProfile('<username>', '<first_name>', '<last_name>', '<email>', '<url>', '<location>', '<bio>', '<instagram_username>');
 ```
