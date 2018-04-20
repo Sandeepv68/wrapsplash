@@ -73,20 +73,10 @@ This library depends on [fetch](https://github.com/github/fetch) to make request
 
 ### Schema
 #### Location
-The API is available at ```https://api.unsplash.com/```. Responses are sent as JSON.
+The API we are using is ```https://api.unsplash.com/```. Responses are sent as JSON.
 
 #### Summary objects
 When retrieving a list of objects, an abbreviated or summary version of that object is returned - i.e., a subset of its attributes. To get a full detailed version of that object, fetch it individually.
-
-#### HTTP Verbs
-The Unsplash API uses HTTP verbs appropriate to each action.
-
-| Verb | Description |
-| ---- | ----------- |
-| GET | Retrieving resources |
-| POST | Creating resources |
-| PUT | Updating resources |
-| DELETE | Deleting resources |
 
 #### Error messages
 If an error occurs, whether on the server or client side, the error message(s) will be returned in an ```errors``` array. 
