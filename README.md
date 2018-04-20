@@ -56,9 +56,9 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
     * [Current User APIs](#current-user-apis)
         * [Get the user’s profile](#get-users-profile)
         * [Update User’s Profile](#update-users-profile)
-    * [Stats APIs]()
-        * [Totals]()
-        * [Months]()
+    * [Stats APIs](#stats-apis)
+        * [Totals](#stats-totals)
+        * [Months](#stats-month)
 * [Acknowledgements](#acknowledgements)
 
 <!--te-->
