@@ -11,7 +11,6 @@ let unsplash = new UnsplashApi({
 unsplash.getPhotoLink('<photo-id>')
     .then(function (result) {
         console.log(result);
-    }).
-catch(function (e) {
-    console.err(e);
-});
+    }).catch(function (e) {
+        console.err(e);
+    });

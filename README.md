@@ -72,13 +72,19 @@ let UnsplashApi = new WrapSplash({
 });
 
 //List photos - Get a single page from the list of all photos.
-UnsplashApi.listPhotos(1, 10, 'latest')
+UnsplashApi.getPhotoLink('<photo-id>')
     .then(function (result) {
-        //do something with your data here
+        //do something with the data
         console.log(result);
     }).catch(function (e) {
         console.err(e);
     });
+```
+### Response
+```sh
+{
+  "url": "https://image.unsplash.com/example"
+}
 ```
 ### Dependency
 This library depends on [fetch](https://github.com/github/fetch) to make requests to the [Unsplash API](https://unsplash.com/documentation). For environments that don't support fetch, you'll need to provide a **polyfill**.
