@@ -768,4 +768,44 @@ UnsplashApi.prototype.getCuratedCollection = function (id) {
     let url = LOCATION + SCHEMA.GET_CURATED_COLLECTION.replace(/:id/gi, id);
     return fetchUrl(self, url);
 }
+
+/**
+ * Promise factory to retrieve a collection’s photos.
+ * @function getCollectionPhotos
+ * @memberof UnsplashApi
+ * @param {String} id - The Collection ID (required).
+ * @param {Number} page - The page number of results to fetch (Optional, defaults to 1). 
+ * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
+ * @returns {Object} - The updated photo data object.
+ */
+UnsplashApi.prototype.getCollectionPhotos = function (id, page, per_page) {
+    let self = this;
+    if (!id || id === undefined || id.length === 0) {
+        throw new Error("Parameter : id is required!");
+    }
+    let url = LOCATION + SCHEMA.GET_COLLECTION_PHOTOS.replace(/:id/gi, id) +
+        "?page=" + (page && !isNaN(page) ? +page : 1) +
+        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
+    return fetchUrl(self, url);
+}
+
+/**
+ * Promise factory to retrieve a curated collection’s photos.
+ * @function getCuratedCollectionPhotos
+ * @memberof UnsplashApi
+ * @param {String} id - The Collection ID (required).
+ * @param {Number} page - The page number of results to fetch (Optional, defaults to 1). 
+ * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
+ * @returns {Object} - The updated photo data object.
+ */
+UnsplashApi.prototype.getCuratedCollectionPhotos = function(id, page, per_page){
+    let self = this;
+    if (!id || id === undefined || id.length === 0) {
+        throw new Error("Parameter : id is required!");
+    }
+    let url = LOCATION + SCHEMA.GET_CURATED_COLLECTION_PHOTOS.replace(/:id/gi, id) +
+        "?page=" + (page && !isNaN(page) ? +page : 1) +
+        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
+    return fetchUrl(self, url);
+}
 module.exports = UnsplashApi;

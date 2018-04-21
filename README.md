@@ -722,6 +722,36 @@ GET /collections/curated/:id
 UnsplashApi.getCuratedCollection('<curated-collection-id>');
 ```
 
+#### Get a Collection's Photos
+A Promise factory to retrieve a collection’s photos.
+```
+GET /collections/:id/photos
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **id** | *string* | The Collection ID  | no | 
+| **page** | *number* | Page number to retrieve | yes | 1
+| **per_page** | *number* | Number of items per page | yes | 10
+```js
+UnsplashApi.getCollectionPhotos('<collection-id>', 1, 10);
+```
+
+#### Get a Curated Collection's Photos
+A Promise factory to retrieve a curated collection’s photos.
+```
+GET /collections/curated/:id/photos
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **id** | *string* | The Collection ID  | no | 
+| **page** | *number* | Page number to retrieve | yes | 1
+| **per_page** | *number* | Number of items per page | yes | 10
+```js
+UnsplashApi.getCuratedCollectionPhotos('<curated-collection-id>', 1, 10);
+```
+
 
 ### Acknowledgements
 Thanks, and Kudos to team [Unsplash](https://unsplash.com/) for creating a wonderful platform for sharing 
