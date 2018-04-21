@@ -59,6 +59,8 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
     * [Stats APIs](#stats-apis)
         * [Totals](#stats-totals)
         * [Months](#stats-month)
+    * [Collections APIs]()
+        * []()
 * [Acknowledgements](#acknowledgements)
 
 <!--te-->
@@ -639,6 +641,30 @@ UnsplashApi.getStatsMonth();
   }
 }
 ```
+
+### Collections APIs
+#### Link Relations
+Collections have the following link relations:
+
+| rel | Description |
+| --- | ----------- |
+| ```self``` | API location of this collection |
+| ```html``` | HTML location of this collection |
+| ```photos``` | API location of this collection’s photos |
+| ```related``` | API location of this collection’s related collections (Non-curated collections only) |
+| ```download``` | Download location of this collection’s zip file (Curated collections only) |
+
+#### List Collections
+A Promise factory to get a single page from the list of all collections.
+```
+GET /collections
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **page** | *number* | Page number to retrieve | yes | 1
+| **per_page** | *number* | Number of items per page | yes | 10
+
 
 
 ### Acknowledgements

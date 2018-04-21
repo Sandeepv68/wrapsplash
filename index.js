@@ -43,7 +43,21 @@ let SCHEMA = {
     UPDATE_CURRENT_USER_PROFILE: 'me',
 
     STATS_TOTALS: 'stats/total',
-    STATS_MONTH: 'stats/month'
+    STATS_MONTH: 'stats/month',
+
+    LIST_COLLECTIONS: 'collections',
+    LIST_FEATURED_COLLECTIONS: 'collections/featured',
+    LIST_CURATED_COLLECTIONS: 'collections/curated',
+    GET_COLLECTION: 'collections/:id',
+    GET_CURATED_COLLECTION: 'collections/curated/:id',
+    GET_COLLECTION_PHOTOS: 'collections/:id/photos',
+    GET_CURATED_COLLECTION_PHOTOS: 'collections/curated/:id/photos',
+    LIST_RELATED_COLLECTION: 'collections/:id/related',
+    CREATE_NEW_COLLECTION: 'collections',
+    UPDATE_EXISTING_COLLECTION: 'collections/:id',
+    DELETE_COLLECTION: 'collections/:id',
+    ADD_PHOTO_TO_COLLECTION: 'collections/:collection_id/add',
+    REMOVE_PHOTO_FROM_COLLECTION: 'collections/:collection_id/remove'
 };
 
 /**
@@ -655,7 +669,7 @@ UnsplashApi.prototype.searchUsers = function (query, page, per_page) {
  * @memberof UnsplashApi
  * @returns {Object} - The JSON data object.
  */
-UnsplashApi.prototype.getStatsTotals = function(){
+UnsplashApi.prototype.getStatsTotals = function () {
     let self = this;
     let url = LOCATION + SCHEMA.STATS_TOTALS;
     return fetchUrl(self, url);
@@ -667,9 +681,25 @@ UnsplashApi.prototype.getStatsTotals = function(){
  * @memberof UnsplashApi
  * @returns {Object} - The JSON data object.
  */
-UnsplashApi.prototype.getStatsMonth = function(){
+UnsplashApi.prototype.getStatsMonth = function () {
     let self = this;
     let url = LOCATION + SCHEMA.STATS_MONTH;
+    return fetchUrl(self, url);
+}
+
+/**
+ * Promise factory to get a single page from the list of all collections.
+ * @function listCollections
+ * @memberof UnsplashApi
+ * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
+ * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
+ * @returns {Object} - The JSON data object.
+ */
+UnsplashApi.prototype.listCollections = function (page, per_page) {
+    let self = this;
+    let url = LOCATION + SCHEMA.LIST_COLLECTIONS +
+        "?page=" + (page && !isNaN(page) ? +page : 1) +
+        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
     return fetchUrl(self, url);
 }
 module.exports = UnsplashApi;
