@@ -774,10 +774,10 @@ POST /collections
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **title** | *string* | The title of the collection | no | 
-| **title** | *string* | The collection’s description | yes |
-| **title** | *string* | Whether to make this collection private | yes | false
+| **description** | *string* | The collection’s description | yes |
+| **private** | *string* | Whether to make this collection private | yes | false
 ```js
-UnsplashApi.createNewColection('<collection-name>', <description>, false);
+UnsplashApi.createNewColection('<collection-name>', '<description>', false);
 ```
 
 ### Acknowledgements
