@@ -704,7 +704,7 @@ GET /collections/:id
 ##### Parameters
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
-| **id** | *number | string* | The Collection ID  | no | 
+| **id** | *string* | The Collection ID  | no | 
 ```js
 UnsplashApi.getCollection('<collection-id>');
 ```
