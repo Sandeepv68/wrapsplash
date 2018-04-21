@@ -664,7 +664,37 @@ GET /collections
 | ----- | ---- | ----------- | -------- | ------- |
 | **page** | *number* | Page number to retrieve | yes | 1
 | **per_page** | *number* | Number of items per page | yes | 10
+```js
+UnsplashApi.listCollections();
+```
 
+#### List Featured Collections
+A Promise factory to get a single page from the list of featured collections.
+```
+GET /collections/featured
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **page** | *number* | Page number to retrieve | yes | 1
+| **per_page** | *number* | Number of items per page | yes | 10
+```js
+UnsplashApi.listFeaturedCollections();
+```
+
+#### List Curated Collections
+A Promise factory to get a single page from the list of curated collections.
+```
+GET /collections/curated
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **page** | *number* | Page number to retrieve | yes | 1
+| **per_page** | *number* | Number of items per page | yes | 10
+```js
+UnsplashApi.listCuratedCollections();
+```
 
 
 ### Acknowledgements

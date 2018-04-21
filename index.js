@@ -702,4 +702,37 @@ UnsplashApi.prototype.listCollections = function (page, per_page) {
         "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
     return fetchUrl(self, url);
 }
+
+/**
+ * Promise factory to get a single page from the list of featured collections.
+ * @function listFeaturedCollections
+ * @memberof UnsplashApi
+ * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
+ * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
+ * @returns {Object} - The JSON data object.
+ */
+UnsplashApi.prototype.listFeaturedCollections = function(page, per_page){
+    let self = this;
+    let url = LOCATION + SCHEMA.LIST_FEATURED_COLLECTIONS +
+        "?page=" + (page && !isNaN(page) ? +page : 1) +
+        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
+    return fetchUrl(self, url);
+}
+
+/**
+ * Promise factory to get a single page from the list of curated collections.
+ * @function listCuratedCollections
+ * @memberof UnsplashApi
+ * @param {Number} page - The page number of results to fetch (Optional, defaults to 1).
+ * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
+ * @returns {Object} - The JSON data object.
+ */
+UnsplashApi.prototype.listCuratedCollections = function (page, per_page){
+    let self = this;
+    let url = LOCATION + SCHEMA.LIST_CURATED_COLLECTIONS +
+        "?page=" + (page && !isNaN(page) ? +page : 1) +
+        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
+    return fetchUrl(self, url);
+}
+
 module.exports = UnsplashApi;
