@@ -150,7 +150,7 @@ let postUrl = function (self, url) {
 
 /**
  * Helper function to PUT data to a given url and return the response.
- * @function postUrl
+ * @function putUrl
  * @param {String} url - The url to which the data has to be PUT (required).
  * @returns {Object} - The JSON data object.
  */
@@ -168,7 +168,7 @@ let putUrl = function (self, url) {
 
 /**
  * Helper function to DELETE data from a given url and return the response.
- * @function postUrl
+ * @function deleteUrl
  * @param {String} url - The url to which the data has to be DELETE (required).
  * @returns {Object} - The JSON data object.
  */
@@ -178,6 +178,13 @@ let deleteUrl = function (self, url) {
         method: 'DELETE',
         headers: (iSelf.headers ? iSelf.headers : '')
     }).then(function (res) {
+        if (res.status == 204) {
+            let response = {
+                status: res.status,
+                statusText: res.statusText
+            }
+            return response;
+        }
         return res.json();
     }).catch(function (err) {
         return Promise.reject(err);
@@ -873,5 +880,22 @@ UnsplashApi.prototype.updateExistingCollection = function (id, title, descriptio
         (description ? '&description=' + encodeURIComponent(description) : '') +
         '&private=' + private;
     return putUrl(self, url);
+}
+
+/**
+ * Promise factory to delete a collection belonging to the logged-in user. 
+ * This requires the write_collections scope.
+ * @function deleteCollection
+ * @memberof UnsplashApi
+ * @param {String} id - The Collection ID (Required).
+ * @returns {Object} - The updated photo data object.
+ */
+UnsplashApi.prototype.deleteCollection = function (id) {
+    let self = this;
+    if (!id || id === undefined || id.length === 0) {
+        throw new Error("Parameter : id is required!");
+    }
+    let url = LOCATION + SCHEMA.DELETE_COLLECTION.replace(/:id/gi, id);
+    return deleteUrl(self, url);
 }
 module.exports = UnsplashApi;

@@ -796,6 +796,19 @@ PUT /collections/:id
 UnsplashApi.updateExistingCollection('<collection-id>','<collection-name>', '<description>', false);
 ```
 
+#### Delete a Collection 
+A Promise factory to delete a collection belonging to the logged-in user. This requires the ```write_collections``` scope.
+```
+DELETE /collections/:id
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **id** | *string* | The Collection ID  | no | 
+```js
+UnsplashApi.deleteCollection('<collection-id>');
+```
+
 
 ### Acknowledgements
 Thanks, and Kudos to team [Unsplash](https://unsplash.com/) for creating a wonderful platform for sharing 
