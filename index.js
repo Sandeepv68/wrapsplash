@@ -711,7 +711,7 @@ UnsplashApi.prototype.listCollections = function (page, per_page) {
  * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
  * @returns {Object} - The JSON data object.
  */
-UnsplashApi.prototype.listFeaturedCollections = function(page, per_page){
+UnsplashApi.prototype.listFeaturedCollections = function (page, per_page) {
     let self = this;
     let url = LOCATION + SCHEMA.LIST_FEATURED_COLLECTIONS +
         "?page=" + (page && !isNaN(page) ? +page : 1) +
@@ -727,7 +727,7 @@ UnsplashApi.prototype.listFeaturedCollections = function(page, per_page){
  * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
  * @returns {Object} - The JSON data object.
  */
-UnsplashApi.prototype.listCuratedCollections = function (page, per_page){
+UnsplashApi.prototype.listCuratedCollections = function (page, per_page) {
     let self = this;
     let url = LOCATION + SCHEMA.LIST_CURATED_COLLECTIONS +
         "?page=" + (page && !isNaN(page) ? +page : 1) +
@@ -743,7 +743,7 @@ UnsplashApi.prototype.listCuratedCollections = function (page, per_page){
  * @param {String} id - The Collection ID (required).
  * @returns {Object} - The updated photo data object.
  */
-UnsplashApi.prototype.getCollection = function(id){
+UnsplashApi.prototype.getCollection = function (id) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
         throw new Error("Parameter : id is required!");
@@ -760,7 +760,7 @@ UnsplashApi.prototype.getCollection = function(id){
  * @param {String} id - The Collection ID (required).
  * @returns {Object} - The updated photo data object.
  */
-UnsplashApi.prototype.getCuratedCollection = function(id){
+UnsplashApi.prototype.getCuratedCollection = function (id) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
         throw new Error("Parameter : id is required!");

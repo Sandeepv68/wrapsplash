@@ -1,10 +1,10 @@
-# WrapSplash v1.1.0 
+# WrapSplashJS v1.1.0 
 ![license](https://img.shields.io/github/license/mashape/apistatus.svg)
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 ![Hackage-Deps](https://img.shields.io/hackage-deps/v/lens.svg)
 ![Status](https://img.shields.io/badge/status-stable-green.svg)
 
-WrapSplash is a simple API wrapper for the most popular [Unsplash](https://unsplash.com/) platform. 
+WrapSplashJS is a simple API wrapper for the most popular [Unsplash](https://unsplash.com/) platform. 
 Unsplash provides beautiful high quality free images and photos that you can download and use for any project  without any attribution.
 
 Before using the Unsplash API, you need to **register as a developer** and **read the API Guidelines.**
@@ -13,7 +13,7 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 
 ## Table of Contents
 <!--ts-->
-* [About](#wrapsplash-v110)
+* [About](#wrapsplashjs-v110)
 * [Installation](#installation)
 * [Sample Usage](#sample-usage)
 * [Dependency](#dependency)
