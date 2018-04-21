@@ -809,6 +809,21 @@ DELETE /collections/:id
 UnsplashApi.deleteCollection('<collection-id>');
 ```
 
+#### Add a Photo to a Collection
+A Add a photo to one of the logged-in user’s collections. Requires the ```write_collections``` scope.
+```
+POST /collections/:collection_id/add
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **collection_id** | *string* | The Collection ID  | no | 
+| **photo_id** | *string* | The Photo ID  | no | 
+> **Note:**  If the photo is already in the collection, this acion has no effect.
+```js
+UnsplashApi.addPhotoToCollection('<collection-id>', '<photo-id>');
+```
+
 
 ### Acknowledgements
 Thanks, and Kudos to team [Unsplash](https://unsplash.com/) for creating a wonderful platform for sharing 
