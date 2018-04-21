@@ -780,6 +780,23 @@ POST /collections
 UnsplashApi.createNewColection('<collection-name>', '<description>', false);
 ```
 
+#### Update an Existing Ccollection
+A Promise factory to update an existing collection belonging to the logged-in user. This requires the ```write_collections``` scope.
+```
+PUT /collections/:id
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **id** | *string* | The collection id | no |
+| **title** | *string* | The title of the collection | yes | 
+| **description** | *string* | The collection’s description | yes |
+| **private** | *string* | Whether to make this collection private | yes | false
+```js
+UnsplashApi.updateExistingCollection('<collection-id>','<collection-name>', '<description>', false);
+```
+
+
 ### Acknowledgements
 Thanks, and Kudos to team [Unsplash](https://unsplash.com/) for creating a wonderful platform for sharing 
 beautiful high quality free images and photos.
