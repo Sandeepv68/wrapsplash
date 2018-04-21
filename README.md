@@ -696,6 +696,18 @@ GET /collections/curated
 UnsplashApi.listCuratedCollections();
 ```
 
+#### Get a Collection
+A Promise factory to retrieve a single collection. To view a user’s private collections, the ```read_collections``` scope is required.
+```
+GET /collections/:id
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **id** | *number | string* | The Collection ID  | no | 
+```js
+UnsplashApi.getCollection('<collection-id>');
+```
 
 ### Acknowledgements
 Thanks, and Kudos to team [Unsplash](https://unsplash.com/) for creating a wonderful platform for sharing 

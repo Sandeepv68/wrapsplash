@@ -7,9 +7,9 @@ let unsplash = new UnsplashApi({
     code: '<authorization-code>'
 });
 
-unsplash.getPhotoLink('<photo-id>')
+unsplash.getCollection('<collection-id>')
     .then(function (result) {
         console.log(result);
-    }).catch(function (e) {
-        console.err(e);
+    }).catch(function (err) {
+        console.log(err);
     });
