@@ -709,6 +709,20 @@ GET /collections/:id
 UnsplashApi.getCollection('<collection-id>');
 ```
 
+#### Get a Curated Collection
+A Promise factory to retrieve a single curated collection. To view a user’s private collections, the ```read_collections``` scope is required.
+```
+GET /collections/curated/:id
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **id** | *string* | The Collection ID  | no | 
+```js
+UnsplashApi.getCuratedCollection('<curated-collection-id>');
+```
+
+
 ### Acknowledgements
 Thanks, and Kudos to team [Unsplash](https://unsplash.com/) for creating a wonderful platform for sharing 
 beautiful high quality free images and photos.

@@ -751,4 +751,21 @@ UnsplashApi.prototype.getCollection = function(id){
     let url = LOCATION + SCHEMA.GET_COLLECTION.replace(/:id/gi, id);
     return fetchUrl(self, url);
 }
+
+/**
+ * Promise factory to retrieve a single curated collection. 
+ * To view a user’s private collections, the read_collections scope is required.
+ * @function getCuratedCollection
+ * @memberof UnsplashApi
+ * @param {String} id - The Collection ID (required).
+ * @returns {Object} - The updated photo data object.
+ */
+UnsplashApi.prototype.getCuratedCollection = function(id){
+    let self = this;
+    if (!id || id === undefined || id.length === 0) {
+        throw new Error("Parameter : id is required!");
+    }
+    let url = LOCATION + SCHEMA.GET_CURATED_COLLECTION.replace(/:id/gi, id);
+    return fetchUrl(self, url);
+}
 module.exports = UnsplashApi;
