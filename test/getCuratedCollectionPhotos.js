@@ -8,7 +8,7 @@ let unsplash = new UnsplashApi({
     bearer_token: '7e988f5161bd81e6057ff6b0a07b9fcaea6c4ddf77f3bab51760ffbc2ef9c86d'
 });
 
-unsplash.getCuratedCollectionPhotos('166')
+unsplash.getCuratedCollectionPhotos('<curated-collection-id>')
     .then(function (result) {
         console.log(result);
     }).catch(function (err) {

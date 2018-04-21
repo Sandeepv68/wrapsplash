@@ -752,6 +752,19 @@ GET /collections/curated/:id/photos
 UnsplashApi.getCuratedCollectionPhotos('<curated-collection-id>', 1, 10);
 ```
 
+#### List a Collection’s Related Collections
+A Promise factory to retrieve a list of collections related to this one.
+```
+GET /collections/:id/related
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **id** | *string* | The Collection ID  | no | 
+```js
+UnsplashApi.listRelatedCollections('<collection-id>');
+```
+
 
 ### Acknowledgements
 Thanks, and Kudos to team [Unsplash](https://unsplash.com/) for creating a wonderful platform for sharing 

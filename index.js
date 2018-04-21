@@ -798,7 +798,7 @@ UnsplashApi.prototype.getCollectionPhotos = function (id, page, per_page) {
  * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
  * @returns {Object} - The updated photo data object.
  */
-UnsplashApi.prototype.getCuratedCollectionPhotos = function(id, page, per_page){
+UnsplashApi.prototype.getCuratedCollectionPhotos = function (id, page, per_page) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
         throw new Error("Parameter : id is required!");
@@ -806,6 +806,22 @@ UnsplashApi.prototype.getCuratedCollectionPhotos = function(id, page, per_page){
     let url = LOCATION + SCHEMA.GET_CURATED_COLLECTION_PHOTOS.replace(/:id/gi, id) +
         "?page=" + (page && !isNaN(page) ? +page : 1) +
         "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
+    return fetchUrl(self, url);
+}
+
+/**
+ * Promise factory to retrieve a list of collections related to a particular one.
+ * @function listRelatedCollections
+ * @memberof UnsplashApi
+ * @param {String} id - The Collection ID (required).
+ * @returns {Object} - The updated photo data object.
+ */
+UnsplashApi.prototype.listRelatedCollections = function (id) {
+    let self = this;
+    if (!id || id === undefined || id.length === 0) {
+        throw new Error("Parameter : id is required!");
+    }
+    let url = LOCATION + SCHEMA.LIST_RELATED_COLLECTION.replace(/:id/gi, id);
     return fetchUrl(self, url);
 }
 module.exports = UnsplashApi;
