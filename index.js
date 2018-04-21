@@ -824,4 +824,27 @@ UnsplashApi.prototype.listRelatedCollections = function (id) {
     let url = LOCATION + SCHEMA.LIST_RELATED_COLLECTION.replace(/:id/gi, id);
     return fetchUrl(self, url);
 }
+
+/**
+ * Promise factory to create a new collection. 
+ * This requires the write_collections scope.
+ * @function createNewColection
+ * @memberof UnsplashApi
+ * @param {String} title - The title of the collection (Required).
+ * @param {String} description - The collection’s description (Optional).
+ * @param {Boolean} private - Whether to make this collection private (Optional; default false).
+ * @returns {Object} - The updated photo data object.
+ */
+UnsplashApi.prototype.createNewColection = function (title, description, private) {
+    let self = this;
+    if (!title || title === undefined || title.length === 0) {
+        throw new Error("Parameter : title is required!");
+    }
+    private = private || false;
+    let url = LOCATION + SCHEMA.CREATE_NEW_COLLECTION +
+        '?title=' + encodeURIComponent(title) +
+        (description ? '&description=' + encodeURIComponent(description) : '') +
+        '&private=' + private;
+    return postUrl(self, url);
+}
 module.exports = UnsplashApi;
