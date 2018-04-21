@@ -775,7 +775,7 @@ POST /collections
 | ----- | ---- | ----------- | -------- | ------- |
 | **title** | *string* | The title of the collection | no | 
 | **description** | *string* | The collection’s description | yes |
-| **private** | *string* | Whether to make this collection private | yes | false
+| **private** | *boolean* | Whether to make this collection private | yes | false
 ```js
 UnsplashApi.createNewColection('<collection-name>', '<description>', false);
 ```
@@ -791,7 +791,7 @@ PUT /collections/:id
 | **id** | *string* | The collection id | no |
 | **title** | *string* | The title of the collection | yes | 
 | **description** | *string* | The collection’s description | yes |
-| **private** | *string* | Whether to make this collection private | yes | false
+| **private** | *boolean* | Whether to make this collection private | yes | false
 ```js
 UnsplashApi.updateExistingCollection('<collection-id>','<collection-name>', '<description>', false);
 ```
