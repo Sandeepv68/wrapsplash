@@ -847,4 +847,31 @@ UnsplashApi.prototype.createNewColection = function (title, description, private
         '&private=' + private;
     return postUrl(self, url);
 }
+
+/**
+ * Promise factory to update an existing collection belonging to the logged-in user. 
+ * This requires the write_collections scope.
+ * @function updateExistingCollection
+ * @memberof UnsplashApi
+ * @param {String} id - The Collection ID (Required).
+ * @param {String} title - The title of the collection (Optional).
+ * @param {String} description - The collection’s description (Optional).
+ * @param {Boolean} private - Whether to make this collection private (Optional; default false).
+ * @returns {Object} - The updated photo data object.
+ */
+UnsplashApi.prototype.updateExistingCollection = function (id, title, description, private) {
+    let self = this;
+    if (!id || id === undefined || id.length === 0) {
+        throw new Error("Parameter : id is required!");
+    }
+    if (!title || title === undefined || title.length === 0) {
+        throw new Error("Parameter : title is required!");
+    }
+    private = private || false;
+    let url = LOCATION + SCHEMA.UPDATE_EXISTING_COLLECTION.replace(/:id/gi, id) +
+        '?title=' + encodeURIComponent(title) +
+        (description ? '&description=' + encodeURIComponent(description) : '') +
+        '&private=' + private;
+    return putUrl(self, url);
+}
 module.exports = UnsplashApi;
