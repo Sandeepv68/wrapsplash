@@ -765,6 +765,20 @@ GET /collections/:id/related
 UnsplashApi.listRelatedCollections('<collection-id>');
 ```
 
+#### Create a New Collection
+A Promise factory to create a new collection. This requires the ```write_collections``` scope.
+```
+POST /collections
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **title** | *string* | The title of the collection | no | 
+| **title** | *string* | The collection’s description | yes |
+| **title** | *string* | Whether to make this collection private | yes | false
+```js
+UnsplashApi.createNewColection('<collection-name>', <description>, false);
+```
 
 ### Acknowledgements
 Thanks, and Kudos to team [Unsplash](https://unsplash.com/) for creating a wonderful platform for sharing 
