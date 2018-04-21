@@ -921,4 +921,27 @@ UnsplashApi.prototype.addPhotoToCollection = function (collection_id, photo_id) 
         '?photo_id=' + photo_id;
     return postUrl(self, url);
 }
+
+/**
+ * Promise factory to remove a photo from one of the logged-in user’s collections. 
+ * Requires the write_collections scope.
+ * @function removePhotoFromCollection
+ * @memberof UnsplashApi
+ * @param {String} collection_id - The collection’s ID (Required).
+ * @param {String} photo_id - The photo’s ID (Required).
+ * @returns {Object} - The updated photo data object.
+ */
+UnsplashApi.prototype.removePhotoFromCollection = function (collection_id, photo_id) {
+    let self = this;
+    if (!collection_id || collection_id === undefined || collection_id.length === 0) {
+        throw new Error("Parameter : collection_id is required!");
+    }
+    if (!photo_id || photo_id === undefined || photo_id.length === 0) {
+        throw new Error("Parameter : photo_id is required!");
+    }
+    let url = LOCATION + SCHEMA.REMOVE_PHOTO_FROM_COLLECTION.replace(/:collection_id/gi, collection_id) +
+        '?photo_id=' + photo_id;
+    return deleteUrl(self, url);
+}
+
 module.exports = UnsplashApi;

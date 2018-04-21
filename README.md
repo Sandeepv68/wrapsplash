@@ -810,7 +810,7 @@ UnsplashApi.deleteCollection('<collection-id>');
 ```
 
 #### Add a Photo to a Collection
-A Add a photo to one of the logged-in user’s collections. Requires the ```write_collections``` scope.
+A Promise factory to add a photo to one of the logged-in user’s collections. Requires the ```write_collections``` scope.
 ```
 POST /collections/:collection_id/add
 ```
@@ -822,6 +822,20 @@ POST /collections/:collection_id/add
 > **Note:**  If the photo is already in the collection, this acion has no effect.
 ```js
 UnsplashApi.addPhotoToCollection('<collection-id>', '<photo-id>');
+```
+
+#### Remove a Photo from a Collection
+A Promise factory to remove a photo from one of the logged-in user’s collections. Requires the ```write_collections``` scope.
+```
+DELETE  /collections/:collection_id/remove
+```
+##### Parameters
+| Parameter | Type | Description | Optional | Default |
+| ----- | ---- | ----------- | -------- | ------- |
+| **collection_id** | *string* | The Collection ID  | no | 
+| **photo_id** | *string* | The Photo ID  | no | 
+```js
+UnsplashApi.removePhotoFromCollection('<collection-id>', '<photo-id>');
 ```
 
 
