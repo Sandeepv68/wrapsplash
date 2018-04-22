@@ -16,7 +16,7 @@ const LOCATION = 'https://api.unsplash.com/';
 //Bearer Token url
 const BEARER_TOKEN_URL = 'https://unsplash.com/oauth/token';
 
-//Define api signatures [WIP]
+//Define api signatures
 let SCHEMA = {
     USERS_PUBLIC_PROFILE: 'users/',
     USERS_PORTFOLIO: 'users/:username/portfolio',

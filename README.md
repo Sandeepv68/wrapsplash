@@ -1,3 +1,4 @@
+![wrapsplash-logo](logo.png)
 # WrapSplashJS v1.1.0 
 ![license](https://img.shields.io/github/license/mashape/apistatus.svg)
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
