@@ -1,5 +1,5 @@
 ![wrapsplash-logo](logo.png)
-# WrapSplashJS v1.1.0 
+# WrapSplashJS v2.0.0
 ![license](https://img.shields.io/github/license/mashape/apistatus.svg)
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 ![Hackage-Deps](https://img.shields.io/hackage-deps/v/lens.svg)
@@ -19,6 +19,7 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 * [Sample Usage](#sample-usage)
 * [Dependency](#dependency)
 * [Changelog](#changelog)
+    * [v2.0.0](#v200)
     * [v1.1.0](#v110)
     * [v1.0.10](#v1010)
     * [v1.0.9](#v109)
@@ -121,6 +122,30 @@ UnsplashApi.getPhotoLink('<photo-id>')
 This library depends on [fetch](https://github.com/github/fetch) to make requests to the [Unsplash API](https://unsplash.com/documentation). For environments that don't support fetch, you'll need to provide a **polyfill**.
 
 ### Changelog
+#### v2.0.0
+- Documentation updated.
+- Added support for Collections APIs.
+    - Get a single page from the list of all collections - ```GET /collections```.
+    - Get a single page from the list of featured collections - ```GET /collections/featured```.
+    - Get a single page from the list of curated collections - ```GET /collections/curated```.
+    - Retrieve a single collection - ```GET /collections/:id```.
+    - Retrieve a curated collection - ```GET /collections/curated/:id```.
+    - Retrieve a collection’s photos - ```GET /collections/:id/photos```.
+    - Retrieve a curated collection’s photos - ```GET /collections/curated/:id/photos```.
+    - Retrieve a list of collections - ```GET /collections/:id/related```.
+    - Create a new collection - ```POST /collections```.
+    - Update an existing collection belonging to the logged-in user - ```PUT /collections/:id```.
+    - Delete a collection belonging to the logged-in user - ```DELETE /collections/:id```.
+    - Add a photo to one of the logged-in user’s collections - ```POST /collections/:collection_id/add```.
+    - Remove a photo from one of the logged-in user’s collections - ```DELETE /collections/:collection_id/remove```.
+- Added support for Current User APIs
+    - Get the user’s profile - ```GET /me```.
+    - Update the current user’s profile - ```PUT /me```.
+- Added support for Stats APIs
+    - Get a list of counts for all of Unsplash - ```GET /stats/total```.
+    - Get the overall Unsplash stats for the past 30 days - ```GET /stats/month```.
+- Major refactorings.
+
 #### v1.1.0
 - Documentation updated.
 - Added support for Authorization.
