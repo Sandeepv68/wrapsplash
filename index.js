@@ -88,7 +88,7 @@ let UnsplashApi = function (options) {
         }
         self.headers = {
             'Content-type': 'application/json',
-            'Authorization': (self.bearer_token ? 'Bearer ' + self.bearer_token : 'Client-ID ' + self.access_token),
+            'Authorization': (self.bearer_token ? 'Bearer ' + self.bearer_token : 'Client-ID ' + self.access_key),
             'X-WrapSplash-Header': hash
         }
         console.log(self.headers);
