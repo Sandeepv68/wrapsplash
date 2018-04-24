@@ -19,6 +19,7 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 * [Sample Usage](#sample-usage)
 * [Dependency](#dependency)
 * [Changelog](#changelog)
+    * [v2.0.1](#v201)
     * [v2.0.0](#v200)
     * [v1.1.0](#v110)
     * [v1.0.10](#v1010)
@@ -122,6 +123,9 @@ UnsplashApi.getPhotoLink('<photo-id>')
 This library depends on [fetch](https://github.com/github/fetch) to make requests to the [Unsplash API](https://unsplash.com/documentation). For environments that don't support fetch, you'll need to provide a **polyfill**.
 
 ### Changelog
+#### v2.0.1
+- Minor bug fix.
+
 #### v2.0.0
 - Documentation updated.
 - Added support for Collections APIs.
