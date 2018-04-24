@@ -233,6 +233,7 @@ Before using wrapsplash:
 #### Generate Bearer Token 
 A Promise factory to generate a Bearer Token for ```write_access``` to private data.
 > **Note:** No Parameters are required.
+
 ```js
 const WrapSplash = require('wrapsplash');
 let UnsplashApi = new WrapSplash({
@@ -278,8 +279,8 @@ GET /users/:username
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **username** | *string* | The username of the particular user | no | 
-| **w** | *number* | Width of the profile picture in pixels | yes | 
-| **h** | *number* | Height of the profile picture in pixels | yes | 
+| **width** | *number* | Width of the profile picture in pixels | yes | 
+| **height** | *number* | Height of the profile picture in pixels | yes | 
 > **Note:**  When optional **height** & **width** are specified the profile image will be included in the "profile_image" object as "custom".
 
 ```js
@@ -443,6 +444,7 @@ GET /photos/random
 
 > **Note:** You can’t use the collections and query parameters in the same request.
 > When supplying a **count** parameter - and only then - the response will be an array of photos,   even if the value of **count** is 1.
+
 ```js
 UnsplashApi.getARandomPhoto();
 ```
@@ -459,6 +461,7 @@ GET /photos/:id/statistics
 | **resolution** | *string* | The frequency of the stats | yes | days
 | **quantity** | *number* | The amount of for each stat | yes | 30
 > **Note:** Currently, the only resolution param supported is “days”. The quantity param can be any number between 1 and 30.
+
 ```js
 UnsplashApi.getPhotoStatistics('<photo-id>', 'days', 10);
 ```
@@ -473,6 +476,7 @@ GET /photos/:id/download
 | ----- | ---- | ----------- | -------- | ------- | 
 | **id** | *string* | The photo’s ID | no | 
 > **Note:** This is different than the concept of a view, which is tracked automatically when you hotlink an image.
+
 ```js
 UnsplashApi.getPhotoLink('<photo-id>');
 ```
@@ -520,6 +524,7 @@ POST /photos/:id/like
 | ----- | ---- | ----------- | -------- | ------- |
 | **id** | *string* | The photo’s ID | no | 
 > **Note:**  This action is idempotent; sending the POST request to a single photo multiple times has no additional effect.
+
 ```js
 UnsplashApi.likePhoto('<photo-id>');
 ```
@@ -534,6 +539,7 @@ DELETE /photos/:id/like
 | ----- | ---- | ----------- | -------- | ------- |
 | **id** | *string* | The photo’s ID | no | 
 > **Note:** This action is idempotent; sending the DELETE request to a single photo multiple times has no additional effect.
+
 ```js
 UnsplashApi.unlikePhoto('<photo-id>');
 ```
@@ -598,6 +604,7 @@ GET /me
 > **Note:** No Parameters are required.
 
 > **Note:**  Without a Bearer token (i.e. using a ```Client-ID token```) this request will return a ```401 Unauthorized``` response.
+
 ```js
 UnsplashApi.getCurrentUserProfile();
 ```
@@ -619,6 +626,7 @@ PUT /me
 | bio | *String* | The About/bio of the current user | yes |
 | instagram_username | *String* | The Instagram username of the current user | yes |
 > **Note:** This action requires the ```write_user scope```. Without it, it will return a ```403 Forbidden response```.
+
 ```js
 UnsplashApi.updateCurrentUserProfile('<username>', '<first_name>', '<last_name>', '<email>', '<url>', '<location>', '<bio>', '<instagram_username>');
 ```
@@ -859,6 +867,7 @@ POST /collections/:collection_id/add
 | **collection_id** | *string* | The Collection ID  | no | 
 | **photo_id** | *string* | The Photo ID  | no | 
 > **Note:**  If the photo is already in the collection, this acion has no effect.
+
 ```js
 UnsplashApi.addPhotoToCollection('<collection-id>', '<photo-id>');
 ```
