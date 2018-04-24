@@ -1,5 +1,5 @@
 ![wrapsplash-logo](logo.png)
-# WrapSplashJS v2.0.0
+# WrapSplashJS v2.0.1
 ![license](https://img.shields.io/github/license/mashape/apistatus.svg)
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 ![Hackage-Deps](https://img.shields.io/hackage-deps/v/lens.svg)
@@ -14,7 +14,7 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 
 ## Table of Contents
 <!--ts-->
-* [About](#wrapsplashjs-v200)
+* [About](#wrapsplashjs-v201)
 * [Installation](#installation)
 * [Sample Usage](#sample-usage)
 * [Dependency](#dependency)
