@@ -70,18 +70,18 @@ let UnsplashApi = function (options) {
         let self = this;
         options = Object.assign({}, options);
         self.access_key = (options.access_key ? options.access_key : (function () {
-            throw new Error('Access Key missing!')
+            throw new Error('Access Key missing!');
         }()));
         self.secret_key = (options.secret_key ? options.secret_key : (function () {
-            throw new Error('Secret Key missing!')
+            throw new Error('Secret Key missing!');
         }()));
         self.redirect_uri = (options.redirect_uri ? options.redirect_uri : (function () {
-            throw new Error('Redirect URI missing!')
+            throw new Error('Redirect URI missing!');
         }()));
         self.code = (options.code ? options.code : (function () {
-            throw new Error('Authorization Code missing!')
+            throw new Error('Authorization Code missing!');
         }()));
-        self.grant_type = "authorization_code";
+        self.grant_type = 'authorization_code';
         let hash = crypto.createHmac('sha256', self.access_key).digest('hex');
         if (options.bearer_token) {
             self.bearer_token = options.bearer_token;
@@ -90,10 +90,10 @@ let UnsplashApi = function (options) {
             'Content-type': 'application/json',
             'Authorization': (self.bearer_token ? 'Bearer ' + self.bearer_token : 'Client-ID ' + self.access_key),
             'X-WrapSplash-Header': hash
-        }
+        };
         console.log(self.headers);
     } else {
-        throw new Error("Initilisation parameters missing!");
+        throw new Error('Initilisation parameters missing!');
     }
 };
 
@@ -128,7 +128,7 @@ let fetchUrl = function (self, url) {
     }).catch(function (err) {
         return Promise.reject(err);
     });
-}
+};
 
 /**
  * Helper function to POST data to a given url and return the response.
@@ -146,7 +146,7 @@ let postUrl = function (self, url) {
     }).catch(function (err) {
         return Promise.reject(err);
     });
-}
+};
 
 /**
  * Helper function to PUT data to a given url and return the response.
@@ -164,7 +164,7 @@ let putUrl = function (self, url) {
     }).catch(function (err) {
         return Promise.reject(err);
     });
-}
+};
 
 /**
  * Helper function to DELETE data from a given url and return the response.
@@ -178,18 +178,18 @@ let deleteUrl = function (self, url) {
         method: 'DELETE',
         headers: (iSelf.headers ? iSelf.headers : '')
     }).then(function (res) {
-        if (res.status == 204) {
+        if (res.status === 204) {
             let response = {
                 status: res.status,
                 statusText: res.statusText
-            }
+            };
             return response;
         }
         return res.json();
     }).catch(function (err) {
         return Promise.reject(err);
     });
-}
+};
 
 /**
  * Promise factory to generate a Bearer Token for write_access to private data.
@@ -202,13 +202,13 @@ let deleteUrl = function (self, url) {
 UnsplashApi.prototype.generateBearerToken = function () {
     let self = this;
     let url = BEARER_TOKEN_URL +
-        "?client_id=" + (self.access_key) +
-        "&client_secret=" + (self.secret_key) +
-        "&redirect_uri=" + (self.redirect_uri) +
-        "&code=" + (self.code) +
-        "&grant_type=" + (self.grant_type);
+        '?client_id=' + (self.access_key) +
+        '&client_secret=' + (self.secret_key) +
+        '&redirect_uri=' + (self.redirect_uri) +
+        '&code=' + (self.code) +
+        '&grant_type=' + (self.grant_type);
     return postUrl(self, url);
-}
+};
 
 /**
  * Promise factory to get the current User's profile.
@@ -225,7 +225,7 @@ UnsplashApi.prototype.getCurrentUserProfile = function () {
     let self = this;
     let url = LOCATION + SCHEMA.CURRENT_USER_PROFILE;
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to update the current User's profile.
@@ -254,7 +254,7 @@ UnsplashApi.prototype.updateCurrentUserProfile = function (username, first_name,
         (bio ? '&bio=' + bio : '') +
         (instagram_username ? '&instagram_username=' + instagram_username : '');
     return putUrl(self, _url);
-}
+};
 
 /**
  * Promise factory to retrieve public details on a given user.
@@ -263,7 +263,7 @@ UnsplashApi.prototype.updateCurrentUserProfile = function (username, first_name,
  * @param {*} username - The username of the particular user (required). 
  * @param {Number} width - The width of the profile image to be fetched (Optional).
  * @param {Number} height - The height of the profile image to be fetched (Optional).
- *                          Will be included in the "profile_image" object as "custom". 
+ *                          Will be included in the 'profile_image' object as 'custom'. 
  * @returns {Object} - The JSON data object. 
  */
 UnsplashApi.prototype.getPublicProfile = function (username, width, height) {
@@ -272,7 +272,7 @@ UnsplashApi.prototype.getPublicProfile = function (username, width, height) {
         '?w=' + (width && !isNaN(width) ? +width : '') +
         '&h=' + (height && !isNaN(height) ? +height : '');
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to retrieve a single user’s portfolio link.
@@ -283,12 +283,12 @@ UnsplashApi.prototype.getPublicProfile = function (username, width, height) {
  */
 UnsplashApi.prototype.getUserPortfolio = function (username) {
     let self = this;
-    if (!username || username === '' || username == undefined) {
-        throw new Error("Parameter : username is required and cannot be empty!");
+    if (!username || username === '' || username === undefined) {
+        throw new Error('Parameter : username is required and cannot be empty!');
     }
     let url = LOCATION + SCHEMA.USERS_PORTFOLIO.replace(/:username/gi, username);
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to get a list of photos uploaded by a particular user.
@@ -305,24 +305,24 @@ UnsplashApi.prototype.getUserPortfolio = function (username) {
  */
 UnsplashApi.prototype.getUserPhotos = function (username, page, per_page, stats, resolution, quantity, order_by) {
     let self = this;
-    if (!username || username === '' || username == undefined) {
-        throw new Error("Parameter : username is required and cannot be empty!");
+    if (!username || username === '' || username === undefined) {
+        throw new Error('Parameter : username is required and cannot be empty!');
     }
     if (order_by !== undefined && !availableOrders.contains(order_by)) {
-        throw new Error("Parameter : order_by has an unsupported value!");
+        throw new Error('Parameter : order_by has an unsupported value!');
     }
     if (stats !== undefined && typeof (stats) !== 'boolean') {
-        throw new Error("Parameter : stats is a boolean or optional!");
+        throw new Error('Parameter : stats is a boolean or optional!');
     }
     let url = LOCATION + SCHEMA.USERS_PHOTOS.replace(/:username/gi, username) +
-        "?page=" + (page && !isNaN(page) ? +page : 1) +
-        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10) +
-        "&order_by=" + (order_by ? order_by : 'latest') +
-        "&stats=" + (stats ? stats : 'false') +
-        "&resolution=" + (resolution ? encodeURIComponent(resolution) : 'days') +
-        "&quantity=" + (quantity ? quantity : 30);
+        '?page=' + (page && !isNaN(page) ? +page : 1) +
+        '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10) +
+        '&order_by=' + (order_by ? order_by : 'latest') +
+        '&stats=' + (stats ? stats : 'false') +
+        '&resolution=' + (resolution ? encodeURIComponent(resolution) : 'days') +
+        '&quantity=' + (quantity ? quantity : 30);
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to get a list of photos liked by a user.
@@ -336,18 +336,18 @@ UnsplashApi.prototype.getUserPhotos = function (username, page, per_page, stats,
  */
 UnsplashApi.prototype.getUserLikedPhotos = function (username, page, per_page, order_by) {
     let self = this;
-    if (!username || username === '' || username == undefined) {
-        throw new Error("Parameter : username is required and cannot be empty!");
+    if (!username || username === '' || username === undefined) {
+        throw new Error('Parameter : username is required and cannot be empty!');
     }
     if (order_by !== undefined && !availableOrders.contains(order_by)) {
-        throw new Error("Parameter : order_by has an unsupported value!");
+        throw new Error('Parameter : order_by has an unsupported value!');
     }
     let url = LOCATION + SCHEMA.USERS_LIKED_PHOTOS.replace(/:username/gi, username) +
-        "?page=" + (page && !isNaN(page) ? +page : 1) +
-        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10) +
-        "&order_by=" + (order_by ? order_by : 'latest');
+        '?page=' + (page && !isNaN(page) ? +page : 1) +
+        '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10) +
+        '&order_by=' + (order_by ? order_by : 'latest');
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to get a list of collections created by the user.
@@ -360,14 +360,14 @@ UnsplashApi.prototype.getUserLikedPhotos = function (username, page, per_page, o
  */
 UnsplashApi.prototype.getUserCollections = function (username, page, per_page) {
     let self = this;
-    if (!username || username === '' || username == undefined) {
-        throw new Error("Parameter : username is required and cannot be empty!");
+    if (!username || username === '' || username === undefined) {
+        throw new Error('Parameter : username is required and cannot be empty!');
     }
     let url = LOCATION + SCHEMA.USERS_COLLECTIONS.replace(/:username/gi, username) +
-        "?page=" + (page && !isNaN(page) ? +page : 1) +
-        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
+        '?page=' + (page && !isNaN(page) ? +page : 1) +
+        '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Pomise factory to retrieve the consolidated number of downloads, views and likes of all user’s photos, 
@@ -381,14 +381,14 @@ UnsplashApi.prototype.getUserCollections = function (username, page, per_page) {
  */
 UnsplashApi.prototype.getUserStatistics = function (username, resolution, quantity) {
     let self = this;
-    if (!username || username === '' || username == undefined) {
-        throw new Error("Parameter : username is required and cannot be empty!");
+    if (!username || username === '' || username === undefined) {
+        throw new Error('Parameter : username is required and cannot be empty!');
     }
     let url = LOCATION + SCHEMA.USERS_STATISTICS.replace(/:username/gi, username) +
-        "?resolution=" + (resolution ? encodeURIComponent(resolution) : 'days') +
-        "&quantity=" + (quantity ? quantity : 30);
+        '?resolution=' + (resolution ? encodeURIComponent(resolution) : 'days') +
+        '&quantity=' + (quantity ? quantity : 30);
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to access the list Photos endpoint of the Unsplash API.
@@ -402,12 +402,12 @@ UnsplashApi.prototype.getUserStatistics = function (username, resolution, quanti
 UnsplashApi.prototype.listPhotos = function (page, per_page, order_by) {
     let self = this;
     if (order_by !== undefined && !availableOrders.contains(order_by)) {
-        throw new Error("Parameter : order_by has an unsupported value!");
+        throw new Error('Parameter : order_by has an unsupported value!');
     }
     let url = LOCATION + SCHEMA.LIST_PHOTOS +
-        "?page=" + (page && !isNaN(page) ? +page : 1) +
-        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10) +
-        "&order_by=" + (order_by ? order_by : 'latest');
+        '?page=' + (page && !isNaN(page) ? +page : 1) +
+        '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10) +
+        '&order_by=' + (order_by ? order_by : 'latest');
     return fetchUrl(self, url);
 };
 
@@ -423,14 +423,14 @@ UnsplashApi.prototype.listPhotos = function (page, per_page, order_by) {
 UnsplashApi.prototype.listCuratedPhotos = function (page, per_page, order_by) {
     let self = this;
     if (order_by !== undefined && !availableOrders.contains(order_by)) {
-        throw new Error("Parameter : order_by has an unsupported value!");
+        throw new Error('Parameter : order_by has an unsupported value!');
     }
     let url = LOCATION + SCHEMA.LIST_CURATED_PHOTOS +
-        "?page=" + (page && !isNaN(page) ? +page : 1) +
-        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10) +
-        "&order_by=" + (order_by ? order_by : 'latest');
+        '?page=' + (page && !isNaN(page) ? +page : 1) +
+        '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10) +
+        '&order_by=' + (order_by ? order_by : 'latest');
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to retrieve a single photo.
@@ -445,14 +445,14 @@ UnsplashApi.prototype.listCuratedPhotos = function (page, per_page, order_by) {
 UnsplashApi.prototype.getAPhoto = function (id, width, height, rect) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
-        throw new Error("Parameter : id is required!");
+        throw new Error('Parameter : id is required!');
     }
     let url = LOCATION + SCHEMA.GET_A_PHOTO.replace(/:id/gi, id) +
         '?w=' + (width && !isNaN(width) ? +width : '') +
         '&h=' + (height && !isNaN(height) ? +height : '') +
         '&rect=' + (rect && rect.typeof === 'string' ? +encodeURIComponent(rect) : '');
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to retrieve a single random photo, given optional filters.
@@ -476,7 +476,7 @@ UnsplashApi.prototype.getAPhoto = function (id, width, height, rect) {
 UnsplashApi.prototype.getARandomPhoto = function (collections, featured, username, query, width, height, orientation, count) {
     let self = this;
     if (!availableOrientations.contains(orientation) && orientation !== undefined) {
-        throw new Error("Parameter : orientation has an unsupported value!")
+        throw new Error('Parameter : orientation has an unsupported value!');
     }
     let url = LOCATION + SCHEMA.GET_A_RANDOM_PHOTO +
         '?collections=' + (collections && !isNaN(collections) ? +encodeURIComponent(collections) : '') +
@@ -488,7 +488,7 @@ UnsplashApi.prototype.getARandomPhoto = function (collections, featured, usernam
         '&orientation=' + (orientation ? orientation : 'landscape') +
         '&count=' + (count ? count : 1);
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to retrieve total number of downloads, views and likes of a single photo, 
@@ -503,13 +503,13 @@ UnsplashApi.prototype.getARandomPhoto = function (collections, featured, usernam
 UnsplashApi.prototype.getPhotoStatistics = function (id, resolution, quantity) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
-        throw new Error("Parameter : id is required!");
+        throw new Error('Parameter : id is required!');
     }
     let url = LOCATION + SCHEMA.GET_A_PHOTO_STATISTICS.replace(/:id/gi, id) +
-        "?resolution=" + (resolution ? encodeURIComponent(resolution) : 'days') +
-        "&quantity=" + (quantity ? quantity : 30);
+        '?resolution=' + (resolution ? encodeURIComponent(resolution) : 'days') +
+        '&quantity=' + (quantity ? quantity : 30);
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to retrieve a single photo’s download link. Preferably hit this endpoint 
@@ -524,11 +524,11 @@ UnsplashApi.prototype.getPhotoStatistics = function (id, resolution, quantity) {
 UnsplashApi.prototype.getPhotoLink = function (id) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
-        throw new Error("Parameter : id is required!");
+        throw new Error('Parameter : id is required!');
     }
     let url = LOCATION + SCHEMA.GET_A_PHOTO_DOWNLOAD_LINK.replace(/:id/gi, id);
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to update a photo on behalf of the logged-in user. 
@@ -543,7 +543,7 @@ UnsplashApi.prototype.getPhotoLink = function (id) {
 UnsplashApi.prototype.updatePhoto = function (id, location, exif) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
-        throw new Error("Parameter : id is required!");
+        throw new Error('Parameter : id is required!');
     }
     location = Object.assign({}, location) || {};
     exif = Object.assign({}, exif) || {};
@@ -561,7 +561,7 @@ UnsplashApi.prototype.updatePhoto = function (id, location, exif) {
         (exif.focal_length ? '&exif[focal_length]=' + encodeURIComponent(exif.focal_length) : '') +
         (exif.iso_speed_ratings ? '&exif[iso_speed_ratings]=' + encodeURIComponent(exif.iso_speed_ratings) : '');
     return putUrl(self, url);
-}
+};
 
 /**
  * Promise factory to like a photo on behalf of the logged-in user. 
@@ -576,11 +576,11 @@ UnsplashApi.prototype.updatePhoto = function (id, location, exif) {
 UnsplashApi.prototype.likePhoto = function (id) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
-        throw new Error("Parameter : id is required!");
+        throw new Error('Parameter : id is required!');
     }
     let url = LOCATION + SCHEMA.LIKE_A_PHOTO.replace(/:id/gi, id);
     return postUrl(self, url);
-}
+};
 
 /**
  * Promise factory to remove a user’s like of a photo.
@@ -594,11 +594,11 @@ UnsplashApi.prototype.likePhoto = function (id) {
 UnsplashApi.prototype.unlikePhoto = function (id) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
-        throw new Error("Parameter : id is required!");
+        throw new Error('Parameter : id is required!');
     }
     let url = LOCATION + SCHEMA.UNLIKE_A_PHOTO.replace(/:id/gi, id);
     return deleteUrl(self, url);
-}
+};
 
 /**
  * Promise factory to access the Search Photos endpoint of the Unsplash API.
@@ -614,17 +614,17 @@ UnsplashApi.prototype.unlikePhoto = function (id) {
 UnsplashApi.prototype.search = function (query, page, per_page, collections, orientation) {
     let self = this;
     if (!availableOrientations.contains(orientation) && orientation !== undefined) {
-        throw new Error("Parameter : orientation has an unsupported value!")
+        throw new Error('Parameter : orientation has an unsupported value!');
     }
     if (query === undefined) {
-        throw new Error("Parameter : query is missing!");
+        throw new Error('Parameter : query is missing!');
     }
     let url = LOCATION + SCHEMA.SEARCH_PHOTOS +
-        "?query=" + (query ? encodeURIComponent(query) : '') +
-        "&page=" + (page && !isNaN(page) ? +page : 1) +
-        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10) +
-        "&collections=" + (collections && !isNaN(collections) ? +collections : '') +
-        "&orientation=" + (orientation ? encodeURIComponent(orientation) : '');
+        '?query=' + (query ? encodeURIComponent(query) : '') +
+        '&page=' + (page && !isNaN(page) ? +page : 1) +
+        '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10) +
+        '&collections=' + (collections && !isNaN(collections) ? +collections : '') +
+        '&orientation=' + (orientation ? encodeURIComponent(orientation) : '');
     return fetchUrl(self, url);
 };
 
@@ -640,14 +640,14 @@ UnsplashApi.prototype.search = function (query, page, per_page, collections, ori
 UnsplashApi.prototype.searchCollections = function (query, page, per_page) {
     let self = this;
     if (query === undefined) {
-        throw new Error("Parameter : query is missing!");
+        throw new Error('Parameter : query is missing!');
     }
     let url = LOCATION + SCHEMA.SEARCH_COLLECTIONS +
-        "?query=" + (query ? encodeURIComponent(query) : '') +
-        "&page=" + (page && !isNaN(page) ? +page : 1) +
-        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
+        '?query=' + (query ? encodeURIComponent(query) : '') +
+        '&page=' + (page && !isNaN(page) ? +page : 1) +
+        '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to get a single page of user results for a query.
@@ -661,14 +661,14 @@ UnsplashApi.prototype.searchCollections = function (query, page, per_page) {
 UnsplashApi.prototype.searchUsers = function (query, page, per_page) {
     let self = this;
     if (query === undefined) {
-        throw new Error("Parameter : query is missing!");
+        throw new Error('Parameter : query is missing!');
     }
     let url = LOCATION + SCHEMA.SEARCH_USERS +
-        "?query=" + (query ? encodeURIComponent(query) : '') +
-        "&page=" + (page && !isNaN(page) ? +page : 1) +
-        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
+        '?query=' + (query ? encodeURIComponent(query) : '') +
+        '&page=' + (page && !isNaN(page) ? +page : 1) +
+        '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to get a list of counts for all of Unsplash.
@@ -680,7 +680,7 @@ UnsplashApi.prototype.getStatsTotals = function () {
     let self = this;
     let url = LOCATION + SCHEMA.STATS_TOTALS;
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to get the overall Unsplash stats for the past 30 days.
@@ -692,7 +692,7 @@ UnsplashApi.prototype.getStatsMonth = function () {
     let self = this;
     let url = LOCATION + SCHEMA.STATS_MONTH;
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to get a single page from the list of all collections.
@@ -705,10 +705,10 @@ UnsplashApi.prototype.getStatsMonth = function () {
 UnsplashApi.prototype.listCollections = function (page, per_page) {
     let self = this;
     let url = LOCATION + SCHEMA.LIST_COLLECTIONS +
-        "?page=" + (page && !isNaN(page) ? +page : 1) +
-        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
+        '?page=' + (page && !isNaN(page) ? +page : 1) +
+        '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to get a single page from the list of featured collections.
@@ -721,10 +721,10 @@ UnsplashApi.prototype.listCollections = function (page, per_page) {
 UnsplashApi.prototype.listFeaturedCollections = function (page, per_page) {
     let self = this;
     let url = LOCATION + SCHEMA.LIST_FEATURED_COLLECTIONS +
-        "?page=" + (page && !isNaN(page) ? +page : 1) +
-        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
+        '?page=' + (page && !isNaN(page) ? +page : 1) +
+        '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to get a single page from the list of curated collections.
@@ -737,10 +737,10 @@ UnsplashApi.prototype.listFeaturedCollections = function (page, per_page) {
 UnsplashApi.prototype.listCuratedCollections = function (page, per_page) {
     let self = this;
     let url = LOCATION + SCHEMA.LIST_CURATED_COLLECTIONS +
-        "?page=" + (page && !isNaN(page) ? +page : 1) +
-        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
+        '?page=' + (page && !isNaN(page) ? +page : 1) +
+        '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to retrieve a single collection. 
@@ -753,11 +753,11 @@ UnsplashApi.prototype.listCuratedCollections = function (page, per_page) {
 UnsplashApi.prototype.getCollection = function (id) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
-        throw new Error("Parameter : id is required!");
+        throw new Error('Parameter : id is required!');
     }
     let url = LOCATION + SCHEMA.GET_COLLECTION.replace(/:id/gi, id);
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to retrieve a single curated collection. 
@@ -770,11 +770,11 @@ UnsplashApi.prototype.getCollection = function (id) {
 UnsplashApi.prototype.getCuratedCollection = function (id) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
-        throw new Error("Parameter : id is required!");
+        throw new Error('Parameter : id is required!');
     }
     let url = LOCATION + SCHEMA.GET_CURATED_COLLECTION.replace(/:id/gi, id);
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to retrieve a collection’s photos.
@@ -788,13 +788,13 @@ UnsplashApi.prototype.getCuratedCollection = function (id) {
 UnsplashApi.prototype.getCollectionPhotos = function (id, page, per_page) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
-        throw new Error("Parameter : id is required!");
+        throw new Error('Parameter : id is required!');
     }
     let url = LOCATION + SCHEMA.GET_COLLECTION_PHOTOS.replace(/:id/gi, id) +
-        "?page=" + (page && !isNaN(page) ? +page : 1) +
-        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
+        '?page=' + (page && !isNaN(page) ? +page : 1) +
+        '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to retrieve a curated collection’s photos.
@@ -808,13 +808,13 @@ UnsplashApi.prototype.getCollectionPhotos = function (id, page, per_page) {
 UnsplashApi.prototype.getCuratedCollectionPhotos = function (id, page, per_page) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
-        throw new Error("Parameter : id is required!");
+        throw new Error('Parameter : id is required!');
     }
     let url = LOCATION + SCHEMA.GET_CURATED_COLLECTION_PHOTOS.replace(/:id/gi, id) +
-        "?page=" + (page && !isNaN(page) ? +page : 1) +
-        "&per_page=" + (per_page && !isNaN(per_page) ? +per_page : 10);
+        '?page=' + (page && !isNaN(page) ? +page : 1) +
+        '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to retrieve a list of collections related to a particular one.
@@ -826,11 +826,11 @@ UnsplashApi.prototype.getCuratedCollectionPhotos = function (id, page, per_page)
 UnsplashApi.prototype.listRelatedCollections = function (id) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
-        throw new Error("Parameter : id is required!");
+        throw new Error('Parameter : id is required!');
     }
     let url = LOCATION + SCHEMA.LIST_RELATED_COLLECTION.replace(/:id/gi, id);
     return fetchUrl(self, url);
-}
+};
 
 /**
  * Promise factory to create a new collection. 
@@ -845,7 +845,7 @@ UnsplashApi.prototype.listRelatedCollections = function (id) {
 UnsplashApi.prototype.createNewColection = function (title, description, private) {
     let self = this;
     if (!title || title === undefined || title.length === 0) {
-        throw new Error("Parameter : title is required!");
+        throw new Error('Parameter : title is required!');
     }
     private = private || false;
     let url = LOCATION + SCHEMA.CREATE_NEW_COLLECTION +
@@ -853,7 +853,7 @@ UnsplashApi.prototype.createNewColection = function (title, description, private
         (description ? '&description=' + encodeURIComponent(description) : '') +
         '&private=' + private;
     return postUrl(self, url);
-}
+};
 
 /**
  * Promise factory to update an existing collection belonging to the logged-in user. 
@@ -869,10 +869,10 @@ UnsplashApi.prototype.createNewColection = function (title, description, private
 UnsplashApi.prototype.updateExistingCollection = function (id, title, description, private) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
-        throw new Error("Parameter : id is required!");
+        throw new Error('Parameter : id is required!');
     }
     if (!title || title === undefined || title.length === 0) {
-        throw new Error("Parameter : title is required!");
+        throw new Error('Parameter : title is required!');
     }
     private = private || false;
     let url = LOCATION + SCHEMA.UPDATE_EXISTING_COLLECTION.replace(/:id/gi, id) +
@@ -880,7 +880,7 @@ UnsplashApi.prototype.updateExistingCollection = function (id, title, descriptio
         (description ? '&description=' + encodeURIComponent(description) : '') +
         '&private=' + private;
     return putUrl(self, url);
-}
+};
 
 /**
  * Promise factory to delete a collection belonging to the logged-in user. 
@@ -893,11 +893,11 @@ UnsplashApi.prototype.updateExistingCollection = function (id, title, descriptio
 UnsplashApi.prototype.deleteCollection = function (id) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
-        throw new Error("Parameter : id is required!");
+        throw new Error('Parameter : id is required!');
     }
     let url = LOCATION + SCHEMA.DELETE_COLLECTION.replace(/:id/gi, id);
     return deleteUrl(self, url);
-}
+};
 
 /**
  * Promise factory to add a photo to one of the logged-in user’s collections. 
@@ -912,15 +912,15 @@ UnsplashApi.prototype.deleteCollection = function (id) {
 UnsplashApi.prototype.addPhotoToCollection = function (collection_id, photo_id) {
     let self = this;
     if (!collection_id || collection_id === undefined || collection_id.length === 0) {
-        throw new Error("Parameter : collection_id is required!");
+        throw new Error('Parameter : collection_id is required!');
     }
     if (!photo_id || photo_id === undefined || photo_id.length === 0) {
-        throw new Error("Parameter : photo_id is required!");
+        throw new Error('Parameter : photo_id is required!');
     }
     let url = LOCATION + SCHEMA.ADD_PHOTO_TO_COLLECTION.replace(/:collection_id/gi, collection_id) +
         '?photo_id=' + photo_id;
     return postUrl(self, url);
-}
+};
 
 /**
  * Promise factory to remove a photo from one of the logged-in user’s collections. 
@@ -934,14 +934,14 @@ UnsplashApi.prototype.addPhotoToCollection = function (collection_id, photo_id) 
 UnsplashApi.prototype.removePhotoFromCollection = function (collection_id, photo_id) {
     let self = this;
     if (!collection_id || collection_id === undefined || collection_id.length === 0) {
-        throw new Error("Parameter : collection_id is required!");
+        throw new Error('Parameter : collection_id is required!');
     }
     if (!photo_id || photo_id === undefined || photo_id.length === 0) {
-        throw new Error("Parameter : photo_id is required!");
+        throw new Error('Parameter : photo_id is required!');
     }
     let url = LOCATION + SCHEMA.REMOVE_PHOTO_FROM_COLLECTION.replace(/:collection_id/gi, collection_id) +
         '?photo_id=' + photo_id;
     return deleteUrl(self, url);
-}
+};
 
 module.exports = UnsplashApi;
