@@ -9,7 +9,9 @@ class Unsplash {
 
         if (options) {
             let self = this;
-            options = {...{}, ...options};
+            options = {...{},
+                ...options
+            };
             self.access_key = (options.access_key ? options.access_key : (function () {
                 throw new Error('Access Key missing!');
             }()));
