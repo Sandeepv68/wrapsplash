@@ -9,7 +9,10 @@
             "never"
         ],
         "parserOptions": {
-            "ecmaVersion": 6
+            "ecmaVersion": 6,
+            "ecmaFeatures": {
+                "experimentalObjectRestSpread": true
+              }
         },
         "no-var": 2,
         "block-scoped-var": 2,
