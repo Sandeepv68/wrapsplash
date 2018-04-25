@@ -1,0 +1,42 @@
+ {
+    "USERS_PUBLIC_PROFILE": "users/",
+    "USERS_PORTFOLIO": "users/:username/portfolio",
+    "USERS_PHOTOS": "users/:username/photos",
+    "USERS_LIKED_PHOTOS": "users/:username/likes",
+    "USERS_COLLECTIONS": "users/:username/collections",
+    "USERS_STATISTICS": "users/:username/statistics",
+
+    "LIST_PHOTOS": "photos",
+    "LIST_CURATED_PHOTOS": "photos/curated",
+    "GET_A_PHOTO": "photos/:id",
+    "GET_A_RANDOM_PHOTO": "photos/random",
+    "GET_A_PHOTO_STATISTICS": "photos/:id/statistics",
+    "GET_A_PHOTO_DOWNLOAD_LINK": "photos/:id/download",
+    "UPDATE_A_PHOTO": "photos/:id",
+    "LIKE_A_PHOTO": "photos/:id/like",
+    "UNLIKE_A_PHOTO": "photos/:id/like",
+
+    "SEARCH_PHOTOS": "search/photos",
+    "SEARCH_COLLECTIONS": "search/collections",
+    "SEARCH_USERS": "search/users",
+
+    "CURRENT_USER_PROFILE": "me",
+    "UPDATE_CURRENT_USER_PROFILE": "me",
+
+    "STATS_TOTALS": "stats/total",
+    "STATS_MONTH": "stats/month",
+
+    "LIST_COLLECTIONS": "collections",
+    "LIST_FEATURED_COLLECTIONS": "collections/featured",
+    "LIST_CURATED_COLLECTIONS": "collections/curated",
+    "GET_COLLECTION": "collections/:id",
+    "GET_CURATED_COLLECTION": "collections/curated/:id",
+    "GET_COLLECTION_PHOTOS": "collections/:id/photos",
+    "GET_CURATED_COLLECTION_PHOTOS": "collections/curated/:id/photos",
+    "LIST_RELATED_COLLECTION": "collections/:id/related",
+    "CREATE_NEW_COLLECTION": "collections",
+    "UPDATE_EXISTING_COLLECTION": "collections/:id",
+    "DELETE_COLLECTION": "collections/:id",
+    "ADD_PHOTO_TO_COLLECTION": "collections/:collection_id/add",
+    "REMOVE_PHOTO_FROM_COLLECTION": "collections/:collection_id/remove"
+}
