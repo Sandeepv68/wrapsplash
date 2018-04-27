@@ -1,4 +1,13 @@
 /**
+ * Wrapsplash API wrapper v2.0.1 for Unspalsh API
+ * written by: Sandeep Vattapparambil
+ * email: sandeepv68@gmail.com
+ * website: www.sandeepv.in
+ * github: github.com/SandeepVattapparambil
+ * license: MIT
+ */
+
+/**
  * WrapSplash Module
  * @module WrapSplash
  */
@@ -20,8 +29,9 @@ class WrapSplash {
      * @param  {Object} options - The Options object to initialize the class.
      */
     constructor(options) {
-
+        //The location of the Unsplash API
         this.API_LOCATION = 'https://api.unsplash.com/';
+        //The API to generate Unsplash API Bearer Token.
         this.BEARER_TOKEN_URL = 'https://unsplash.com/oauth/token';
 
         if (options) {
@@ -101,7 +111,7 @@ class WrapSplash {
      */
     getCurrentUserProfile() {
         let url = LOCATION + SCHEMA.CURRENT_USER_PROFILE;
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -129,7 +139,7 @@ class WrapSplash {
             (location ? '&location=' + location : '') +
             (bio ? '&bio=' + bio : '') +
             (instagram_username ? '&instagram_username=' + instagram_username : '');
-        return putUrl(self, _url);
+        return this.fetchUrl(_url, 'PUT');
     };
 
     /**
@@ -146,7 +156,7 @@ class WrapSplash {
         let url = LOCATION + SCHEMA.USERS_PUBLIC_PROFILE + username +
             '?w=' + (width && !isNaN(width) ? +width : '') +
             '&h=' + (height && !isNaN(height) ? +height : '');
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -161,7 +171,7 @@ class WrapSplash {
             throw new Error('Parameter : username is required and cannot be empty!');
         }
         let url = LOCATION + SCHEMA.USERS_PORTFOLIO.replace(/:username/gi, username);
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -194,7 +204,7 @@ class WrapSplash {
             '&stats=' + (stats ? stats : 'false') +
             '&resolution=' + (resolution ? encodeURIComponent(resolution) : 'days') +
             '&quantity=' + (quantity ? quantity : 30);
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -218,7 +228,7 @@ class WrapSplash {
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10) +
             '&order_by=' + (order_by ? order_by : 'latest');
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -237,7 +247,7 @@ class WrapSplash {
         let url = LOCATION + SCHEMA.USERS_COLLECTIONS.replace(/:username/gi, username) +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -257,7 +267,7 @@ class WrapSplash {
         let url = LOCATION + SCHEMA.USERS_STATISTICS.replace(/:username/gi, username) +
             '?resolution=' + (resolution ? encodeURIComponent(resolution) : 'days') +
             '&quantity=' + (quantity ? quantity : 30);
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -277,7 +287,7 @@ class WrapSplash {
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10) +
             '&order_by=' + (order_by ? order_by : 'latest');
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -297,7 +307,7 @@ class WrapSplash {
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10) +
             '&order_by=' + (order_by ? order_by : 'latest');
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -318,7 +328,7 @@ class WrapSplash {
             '?w=' + (width && !isNaN(width) ? +width : '') +
             '&h=' + (height && !isNaN(height) ? +height : '') +
             '&rect=' + (rect && rect.typeof === 'string' ? +encodeURIComponent(rect) : '');
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -353,7 +363,7 @@ class WrapSplash {
             '&height=' + (height ? height : '') +
             '&orientation=' + (orientation ? orientation : 'landscape') +
             '&count=' + (count ? count : 1);
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -373,7 +383,7 @@ class WrapSplash {
         let url = LOCATION + SCHEMA.GET_A_PHOTO_STATISTICS.replace(/:id/gi, id) +
             '?resolution=' + (resolution ? encodeURIComponent(resolution) : 'days') +
             '&quantity=' + (quantity ? quantity : 30);
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -391,7 +401,7 @@ class WrapSplash {
             throw new Error('Parameter : id is required!');
         }
         let url = LOCATION + SCHEMA.GET_A_PHOTO_DOWNLOAD_LINK.replace(/:id/gi, id);
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -423,7 +433,7 @@ class WrapSplash {
             (exif.aperture_value ? '&exif[aperture_value]=' + encodeURIComponent(exif.aperture_value) : '') +
             (exif.focal_length ? '&exif[focal_length]=' + encodeURIComponent(exif.focal_length) : '') +
             (exif.iso_speed_ratings ? '&exif[iso_speed_ratings]=' + encodeURIComponent(exif.iso_speed_ratings) : '');
-        return putUrl(self, url);
+        return this.fetchUrl(url, 'PUT');
     };
 
     /**
@@ -441,7 +451,7 @@ class WrapSplash {
             throw new Error('Parameter : id is required!');
         }
         let url = LOCATION + SCHEMA.LIKE_A_PHOTO.replace(/:id/gi, id);
-        return postUrl(self, url);
+        return this.fetchUrl(url, 'POST');
     };
 
     /**
@@ -458,7 +468,7 @@ class WrapSplash {
             throw new Error('Parameter : id is required!');
         }
         let url = LOCATION + SCHEMA.UNLIKE_A_PHOTO.replace(/:id/gi, id);
-        return deleteUrl(self, url);
+        return this.fetchUrl(url, 'DELETE');
     };
 
     /**
@@ -485,7 +495,7 @@ class WrapSplash {
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10) +
             '&collections=' + (collections && !isNaN(collections) ? +collections : '') +
             '&orientation=' + (orientation ? encodeURIComponent(orientation) : '');
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -505,7 +515,7 @@ class WrapSplash {
             '?query=' + (query ? encodeURIComponent(query) : '') +
             '&page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -525,7 +535,7 @@ class WrapSplash {
             '?query=' + (query ? encodeURIComponent(query) : '') +
             '&page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -536,7 +546,7 @@ class WrapSplash {
      */
     getStatsTotals() {
         let url = LOCATION + SCHEMA.STATS_TOTALS;
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -547,7 +557,7 @@ class WrapSplash {
      */
     getStatsMonth() {
         let url = LOCATION + SCHEMA.STATS_MONTH;
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -562,7 +572,7 @@ class WrapSplash {
         let url = LOCATION + SCHEMA.LIST_COLLECTIONS +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -577,7 +587,7 @@ class WrapSplash {
         let url = LOCATION + SCHEMA.LIST_FEATURED_COLLECTIONS +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -592,7 +602,7 @@ class WrapSplash {
         let url = LOCATION + SCHEMA.LIST_CURATED_COLLECTIONS +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -608,7 +618,7 @@ class WrapSplash {
             throw new Error('Parameter : id is required!');
         }
         let url = LOCATION + SCHEMA.GET_COLLECTION.replace(/:id/gi, id);
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -624,7 +634,7 @@ class WrapSplash {
             throw new Error('Parameter : id is required!');
         }
         let url = LOCATION + SCHEMA.GET_CURATED_COLLECTION.replace(/:id/gi, id);
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -643,7 +653,7 @@ class WrapSplash {
         let url = LOCATION + SCHEMA.GET_COLLECTION_PHOTOS.replace(/:id/gi, id) +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -662,7 +672,7 @@ class WrapSplash {
         let url = LOCATION + SCHEMA.GET_CURATED_COLLECTION_PHOTOS.replace(/:id/gi, id) +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -677,7 +687,7 @@ class WrapSplash {
             throw new Error('Parameter : id is required!');
         }
         let url = LOCATION + SCHEMA.LIST_RELATED_COLLECTION.replace(/:id/gi, id);
-        return fetchUrl(self, url);
+        return this.fetchUrl(url, 'GET');
     };
 
     /**
@@ -699,7 +709,7 @@ class WrapSplash {
             '?title=' + encodeURIComponent(title) +
             (description ? '&description=' + encodeURIComponent(description) : '') +
             '&private=' + private_collection;
-        return postUrl(self, url);
+        return this.fetchUrl(url, 'POST');
     };
 
     /**
@@ -725,7 +735,7 @@ class WrapSplash {
             '?title=' + encodeURIComponent(title) +
             (description ? '&description=' + encodeURIComponent(description) : '') +
             '&private=' + private_collection;
-        return putUrl(self, url);
+        return this.fetchUrl(url, 'PUT');
     };
 
     /**
@@ -741,7 +751,7 @@ class WrapSplash {
             throw new Error('Parameter : id is required!');
         }
         let url = LOCATION + SCHEMA.DELETE_COLLECTION.replace(/:id/gi, id);
-        return deleteUrl(self, url);
+        return this.fetchUrl(url, 'DELETE');
     };
 
     /**
@@ -763,7 +773,7 @@ class WrapSplash {
         }
         let url = LOCATION + SCHEMA.ADD_PHOTO_TO_COLLECTION.replace(/:collection_id/gi, collection_id) +
             '?photo_id=' + photo_id;
-        return postUrl(self, url);
+        return this.fetchUrl(url, 'POST');
     };
 
     /**
@@ -784,7 +794,7 @@ class WrapSplash {
         }
         let url = LOCATION + SCHEMA.REMOVE_PHOTO_FROM_COLLECTION.replace(/:collection_id/gi, collection_id) +
             '?photo_id=' + photo_id;
-        return deleteUrl(self, url);
+        return this.fetchUrl(url, 'DELETE');
     };
 }
 
@@ -799,9 +809,6 @@ Array.prototype.contains = function (item) {
 };
 
 module.exports = WrapSplash;
-
-
-
 
 
 
