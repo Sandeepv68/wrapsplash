@@ -4,15 +4,20 @@ module.exports = {
     entry: './es6-POC/index.js',
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: 'app.bundle.js'
+        filename: 'app.js'
     },
     module: {
         rules: [{
             test: /\.js$/,
             loader: 'babel-loader',
-            exclude: /node_modules/,
+            include: [
+                path.resolve(__dirname, "es6-POC/index.js"),
+            ],
+            exclude: [
+                path.resolve(__dirname, "node_modules"),
+            ],
             query: {
-                presets: ['es2015']
+                presets: ['es2015', 'stage-0'],
             }
         }]
     },

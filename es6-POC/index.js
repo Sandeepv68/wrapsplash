@@ -35,8 +35,7 @@ class WrapSplashApi {
         this.BEARER_TOKEN_URL = 'https://unsplash.com/oauth/token';
 
         if (options) {
-            // options = { ...{}, ...options};
-            options = Object.assign({}, options);
+            options = { ...{}, ...options};
             this.access_key = (options.access_key ? options.access_key : (function () {
                 throw new Error('Access Key missing!');
             }()));
