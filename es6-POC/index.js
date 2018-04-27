@@ -23,7 +23,7 @@ const urlConfig = require('./url_config.json');
  * The main WrapSplash Class.
  * @class WrapSplash
  */
-class WrapSplash {
+class WrapSplashApi {
     /**
      * The Options object constructor
      * @param  {Object} options - The Options object to initialize the class.
@@ -69,6 +69,14 @@ class WrapSplash {
         //Sset available orientation options
         let availableOrientations = ['landscape', 'portrait', 'squarish'];
     };
+
+    /**
+     * Heler function to fetch a given url
+     * @function fetchUrl
+     * @param {String} url - The url to be fetched (required).
+     * @param {String} method - The HTTP method to be used (required).
+     * @returns {Object} - The JSON data object.
+     */
     fetchUrl(url, method) {
         return fetch(url, {
             method: method,
@@ -191,7 +199,7 @@ class WrapSplash {
         if (!username || username === '' || username === undefined) {
             throw new Error('Parameter : username is required and cannot be empty!');
         }
-        if (order_by !== undefined && !availableOrders.contains(order_by)) {
+        if (order_by !== undefined && !availableOrders.includes(order_by)) {
             throw new Error('Parameter : order_by has an unsupported value!');
         }
         if (stats !== undefined && typeof (stats) !== 'boolean') {
@@ -221,7 +229,7 @@ class WrapSplash {
         if (!username || username === '' || username === undefined) {
             throw new Error('Parameter : username is required and cannot be empty!');
         }
-        if (order_by !== undefined && !availableOrders.contains(order_by)) {
+        if (order_by !== undefined && !availableOrders.includes(order_by)) {
             throw new Error('Parameter : order_by has an unsupported value!');
         }
         let url = LOCATION + SCHEMA.USERS_LIKED_PHOTOS.replace(/:username/gi, username) +
@@ -280,7 +288,7 @@ class WrapSplash {
      * @returns {Object} - The JSON data object. 
      */
     listPhotos(page, per_page, order_by) {
-        if (order_by !== undefined && !availableOrders.contains(order_by)) {
+        if (order_by !== undefined && !availableOrders.includes(order_by)) {
             throw new Error('Parameter : order_by has an unsupported value!');
         }
         let url = LOCATION + SCHEMA.LIST_PHOTOS +
@@ -300,7 +308,7 @@ class WrapSplash {
      * @returns {Object} - The JSON data object. 
      */
     listCuratedPhotos(page, per_page, order_by) {
-        if (order_by !== undefined && !availableOrders.contains(order_by)) {
+        if (order_by !== undefined && !availableOrders.includes(order_by)) {
             throw new Error('Parameter : order_by has an unsupported value!');
         }
         let url = LOCATION + SCHEMA.LIST_CURATED_PHOTOS +
@@ -351,7 +359,7 @@ class WrapSplash {
      * @returns {Object} - The JSON data object.
      */
     getARandomPhoto(collections, featured, username, query, width, height, orientation, count) {
-        if (!availableOrientations.contains(orientation) && orientation !== undefined) {
+        if (!availableOrientations.includes(orientation) && orientation !== undefined) {
             throw new Error('Parameter : orientation has an unsupported value!');
         }
         let url = LOCATION + SCHEMA.GET_A_RANDOM_PHOTO +
@@ -483,7 +491,7 @@ class WrapSplash {
      * @returns {Object} - The JSON data object.
      */
     search(query, page, per_page, collections, orientation) {
-        if (!availableOrientations.contains(orientation) && orientation !== undefined) {
+        if (!availableOrientations.includes(orientation) && orientation !== undefined) {
             throw new Error('Parameter : orientation has an unsupported value!');
         }
         if (query === undefined) {
@@ -798,16 +806,6 @@ class WrapSplash {
     };
 }
 
-/**
- * Helper function to check whether an item belongs to an Array.
- * @function contains
- * @param {*} item - The item to be checked (required).
- * @returns {Number} - An integer representing the presence or absence of an item.
- */
-Array.prototype.contains = function (item) {
-    return this.indexOf(item) > -1;
-};
-
 module.exports = WrapSplash;
 
 
@@ -820,7 +818,8 @@ module.exports = WrapSplash;
 
 
 
-let unsplash = new WrapSplash({
+
+let unsplash = new WrapSplashApi({
     access_key: '5a419933621f55950741e4c30182c1d5f99974112a96cf0c49d8d9091cc0ba7e',
     secret_key: '0464eb09a8590dfaaf11e562a8c7a361c15d25d7757f26e20e6b86d0fd6b9c5c',
     redirect_uri: 'urn:ietf:wg:oauth:2.0:oob',
