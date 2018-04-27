@@ -9,7 +9,7 @@
 
 /**
  * WrapSplash Module
- * @module WrapSplash
+ * @module WrapSplashApi
  */
 
 'use strict';
@@ -65,9 +65,9 @@ class WrapSplashApi {
             throw new Error('Initilisation parameters missing!');
         }
         //Set available order_by options
-        let availableOrders = ['latest', 'oldest', 'popular'];
+        this.availableOrders = ['latest', 'oldest', 'popular'];
         //Sset available orientation options
-        let availableOrientations = ['landscape', 'portrait', 'squarish'];
+        this.availableOrientations = ['landscape', 'portrait', 'squarish'];
     };
 
     /**
@@ -118,7 +118,7 @@ class WrapSplashApi {
      * @returns {Object} - The JSON data Object.
      */
     getCurrentUserProfile() {
-        let url = LOCATION + SCHEMA.CURRENT_USER_PROFILE;
+        let url = this.API_LOCATION + urlConfig.CURRENT_USER_PROFILE;
         return this.fetchUrl(url, 'GET');
     };
 
@@ -138,7 +138,7 @@ class WrapSplashApi {
      * @returns {Object} - The JSON data Object.
      */
     updateCurrentUserProfile(username, first_name, last_name, email, url, location, bio, instagram_username) {
-        let _url = LOCATION + SCHEMA.UPDATE_CURRENT_USER_PROFILE + '?' +
+        let _url = this.API_LOCATION + urlConfig.UPDATE_CURRENT_USER_PROFILE + '?' +
             (username ? '?username=' + username : '') +
             (first_name ? '&first_name=' + first_name : '') +
             (last_name ? '&last_name=' + last_name : '') +
@@ -161,7 +161,7 @@ class WrapSplashApi {
      * @returns {Object} - The JSON data object. 
      */
     getPublicProfile(username, width, height) {
-        let url = LOCATION + SCHEMA.USERS_PUBLIC_PROFILE + username +
+        let url = this.API_LOCATION + urlConfig.USERS_PUBLIC_PROFILE + username +
             '?w=' + (width && !isNaN(width) ? +width : '') +
             '&h=' + (height && !isNaN(height) ? +height : '');
         return this.fetchUrl(url, 'GET');
@@ -178,7 +178,7 @@ class WrapSplashApi {
         if (!username || username === '' || username === undefined) {
             throw new Error('Parameter : username is required and cannot be empty!');
         }
-        let url = LOCATION + SCHEMA.USERS_PORTFOLIO.replace(/:username/gi, username);
+        let url = this.API_LOCATION + urlConfig.USERS_PORTFOLIO.replace(/:username/gi, username);
         return this.fetchUrl(url, 'GET');
     };
 
@@ -199,13 +199,13 @@ class WrapSplashApi {
         if (!username || username === '' || username === undefined) {
             throw new Error('Parameter : username is required and cannot be empty!');
         }
-        if (order_by !== undefined && !availableOrders.includes(order_by)) {
+        if (order_by !== undefined && !this.availableOrders.includes(order_by)) {
             throw new Error('Parameter : order_by has an unsupported value!');
         }
         if (stats !== undefined && typeof (stats) !== 'boolean') {
             throw new Error('Parameter : stats is a boolean or optional!');
         }
-        let url = LOCATION + SCHEMA.USERS_PHOTOS.replace(/:username/gi, username) +
+        let url = this.API_LOCATION + urlConfig.USERS_PHOTOS.replace(/:username/gi, username) +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10) +
             '&order_by=' + (order_by ? order_by : 'latest') +
@@ -229,10 +229,10 @@ class WrapSplashApi {
         if (!username || username === '' || username === undefined) {
             throw new Error('Parameter : username is required and cannot be empty!');
         }
-        if (order_by !== undefined && !availableOrders.includes(order_by)) {
+        if (order_by !== undefined && !this.availableOrders.includes(order_by)) {
             throw new Error('Parameter : order_by has an unsupported value!');
         }
-        let url = LOCATION + SCHEMA.USERS_LIKED_PHOTOS.replace(/:username/gi, username) +
+        let url = this.API_LOCATION + urlConfig.USERS_LIKED_PHOTOS.replace(/:username/gi, username) +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10) +
             '&order_by=' + (order_by ? order_by : 'latest');
@@ -252,7 +252,7 @@ class WrapSplashApi {
         if (!username || username === '' || username === undefined) {
             throw new Error('Parameter : username is required and cannot be empty!');
         }
-        let url = LOCATION + SCHEMA.USERS_COLLECTIONS.replace(/:username/gi, username) +
+        let url = this.API_LOCATION + urlConfig.USERS_COLLECTIONS.replace(/:username/gi, username) +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
         return this.fetchUrl(url, 'GET');
@@ -272,7 +272,7 @@ class WrapSplashApi {
         if (!username || username === '' || username === undefined) {
             throw new Error('Parameter : username is required and cannot be empty!');
         }
-        let url = LOCATION + SCHEMA.USERS_STATISTICS.replace(/:username/gi, username) +
+        let url = this.API_LOCATION + urlConfig.USERS_STATISTICS.replace(/:username/gi, username) +
             '?resolution=' + (resolution ? encodeURIComponent(resolution) : 'days') +
             '&quantity=' + (quantity ? quantity : 30);
         return this.fetchUrl(url, 'GET');
@@ -288,10 +288,10 @@ class WrapSplashApi {
      * @returns {Object} - The JSON data object. 
      */
     listPhotos(page, per_page, order_by) {
-        if (order_by !== undefined && !availableOrders.includes(order_by)) {
+        if (order_by !== undefined && !this.availableOrders.includes(order_by)) {
             throw new Error('Parameter : order_by has an unsupported value!');
         }
-        let url = LOCATION + SCHEMA.LIST_PHOTOS +
+        let url = this.API_LOCATION + urlConfig.LIST_PHOTOS +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10) +
             '&order_by=' + (order_by ? order_by : 'latest');
@@ -308,10 +308,10 @@ class WrapSplashApi {
      * @returns {Object} - The JSON data object. 
      */
     listCuratedPhotos(page, per_page, order_by) {
-        if (order_by !== undefined && !availableOrders.includes(order_by)) {
+        if (order_by !== undefined && !this.availableOrders.includes(order_by)) {
             throw new Error('Parameter : order_by has an unsupported value!');
         }
-        let url = LOCATION + SCHEMA.LIST_CURATED_PHOTOS +
+        let url = this.API_LOCATION + urlConfig.LIST_CURATED_PHOTOS +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10) +
             '&order_by=' + (order_by ? order_by : 'latest');
@@ -332,7 +332,7 @@ class WrapSplashApi {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
-        let url = LOCATION + SCHEMA.GET_A_PHOTO.replace(/:id/gi, id) +
+        let url = this.API_LOCATION + urlConfig.GET_A_PHOTO.replace(/:id/gi, id) +
             '?w=' + (width && !isNaN(width) ? +width : '') +
             '&h=' + (height && !isNaN(height) ? +height : '') +
             '&rect=' + (rect && rect.typeof === 'string' ? +encodeURIComponent(rect) : '');
@@ -359,10 +359,10 @@ class WrapSplashApi {
      * @returns {Object} - The JSON data object.
      */
     getARandomPhoto(collections, featured, username, query, width, height, orientation, count) {
-        if (!availableOrientations.includes(orientation) && orientation !== undefined) {
+        if (!this.availableOrientations.includes(orientation) && orientation !== undefined) {
             throw new Error('Parameter : orientation has an unsupported value!');
         }
-        let url = LOCATION + SCHEMA.GET_A_RANDOM_PHOTO +
+        let url = this.API_LOCATION + urlConfig.GET_A_RANDOM_PHOTO +
             '?collections=' + (collections && !isNaN(collections) ? +encodeURIComponent(collections) : '') +
             '&featured=' + (featured ? featured : false) +
             '&username=' + (username ? username : '') +
@@ -388,7 +388,7 @@ class WrapSplashApi {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
-        let url = LOCATION + SCHEMA.GET_A_PHOTO_STATISTICS.replace(/:id/gi, id) +
+        let url = this.API_LOCATION + urlConfig.GET_A_PHOTO_STATISTICS.replace(/:id/gi, id) +
             '?resolution=' + (resolution ? encodeURIComponent(resolution) : 'days') +
             '&quantity=' + (quantity ? quantity : 30);
         return this.fetchUrl(url, 'GET');
@@ -408,7 +408,7 @@ class WrapSplashApi {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
-        let url = LOCATION + SCHEMA.GET_A_PHOTO_DOWNLOAD_LINK.replace(/:id/gi, id);
+        let url = this.API_LOCATION + urlConfig.GET_A_PHOTO_DOWNLOAD_LINK.replace(/:id/gi, id);
         return this.fetchUrl(url, 'GET');
     };
 
@@ -428,7 +428,7 @@ class WrapSplashApi {
         }
         location = Object.assign({}, location) || {};
         exif = Object.assign({}, exif) || {};
-        let url = LOCATION + SCHEMA.UPDATE_A_PHOTO.replace(/:id/, id) + '?' +
+        let url = this.API_LOCATION + urlConfig.UPDATE_A_PHOTO.replace(/:id/, id) + '?' +
             (location.latitude ? '&location[latitude]=' + encodeURIComponent(location.latitude) : '') +
             (location.longitude ? '&location[longitude]=' + encodeURIComponent(location.longitude) : '') +
             (location.name ? '&location[name]=' + encodeURIComponent(location.name) : '') +
@@ -458,7 +458,7 @@ class WrapSplashApi {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
-        let url = LOCATION + SCHEMA.LIKE_A_PHOTO.replace(/:id/gi, id);
+        let url = this.API_LOCATION + urlConfig.LIKE_A_PHOTO.replace(/:id/gi, id);
         return this.fetchUrl(url, 'POST');
     };
 
@@ -475,7 +475,7 @@ class WrapSplashApi {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
-        let url = LOCATION + SCHEMA.UNLIKE_A_PHOTO.replace(/:id/gi, id);
+        let url = this.API_LOCATION + urlConfig.UNLIKE_A_PHOTO.replace(/:id/gi, id);
         return this.fetchUrl(url, 'DELETE');
     };
 
@@ -491,13 +491,13 @@ class WrapSplashApi {
      * @returns {Object} - The JSON data object.
      */
     search(query, page, per_page, collections, orientation) {
-        if (!availableOrientations.includes(orientation) && orientation !== undefined) {
+        if (!this.availableOrientations.includes(orientation) && orientation !== undefined) {
             throw new Error('Parameter : orientation has an unsupported value!');
         }
         if (query === undefined) {
             throw new Error('Parameter : query is missing!');
         }
-        let url = LOCATION + SCHEMA.SEARCH_PHOTOS +
+        let url = this.API_LOCATION + urlConfig.SEARCH_PHOTOS +
             '?query=' + (query ? encodeURIComponent(query) : '') +
             '&page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10) +
@@ -519,7 +519,7 @@ class WrapSplashApi {
         if (query === undefined) {
             throw new Error('Parameter : query is missing!');
         }
-        let url = LOCATION + SCHEMA.SEARCH_COLLECTIONS +
+        let url = this.API_LOCATION + urlConfig.SEARCH_COLLECTIONS +
             '?query=' + (query ? encodeURIComponent(query) : '') +
             '&page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
@@ -539,7 +539,7 @@ class WrapSplashApi {
         if (query === undefined) {
             throw new Error('Parameter : query is missing!');
         }
-        let url = LOCATION + SCHEMA.SEARCH_USERS +
+        let url = this.API_LOCATION + urlConfig.SEARCH_USERS +
             '?query=' + (query ? encodeURIComponent(query) : '') +
             '&page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
@@ -553,7 +553,7 @@ class WrapSplashApi {
      * @returns {Object} - The JSON data object.
      */
     getStatsTotals() {
-        let url = LOCATION + SCHEMA.STATS_TOTALS;
+        let url = this.API_LOCATION + urlConfig.STATS_TOTALS;
         return this.fetchUrl(url, 'GET');
     };
 
@@ -564,7 +564,7 @@ class WrapSplashApi {
      * @returns {Object} - The JSON data object.
      */
     getStatsMonth() {
-        let url = LOCATION + SCHEMA.STATS_MONTH;
+        let url = this.API_LOCATION + urlConfig.STATS_MONTH;
         return this.fetchUrl(url, 'GET');
     };
 
@@ -577,7 +577,7 @@ class WrapSplashApi {
      * @returns {Object} - The JSON data object.
      */
     listCollections(page, per_page) {
-        let url = LOCATION + SCHEMA.LIST_COLLECTIONS +
+        let url = this.API_LOCATION + urlConfig.LIST_COLLECTIONS +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
         return this.fetchUrl(url, 'GET');
@@ -592,7 +592,7 @@ class WrapSplashApi {
      * @returns {Object} - The JSON data object.
      */
     listFeaturedCollections(page, per_page) {
-        let url = LOCATION + SCHEMA.LIST_FEATURED_COLLECTIONS +
+        let url = this.API_LOCATION + urlConfig.LIST_FEATURED_COLLECTIONS +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
         return this.fetchUrl(url, 'GET');
@@ -607,7 +607,7 @@ class WrapSplashApi {
      * @returns {Object} - The JSON data object.
      */
     listCuratedCollections(page, per_page) {
-        let url = LOCATION + SCHEMA.LIST_CURATED_COLLECTIONS +
+        let url = this.API_LOCATION + urlConfig.LIST_CURATED_COLLECTIONS +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
         return this.fetchUrl(url, 'GET');
@@ -625,7 +625,7 @@ class WrapSplashApi {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
-        let url = LOCATION + SCHEMA.GET_COLLECTION.replace(/:id/gi, id);
+        let url = this.API_LOCATION + urlConfig.GET_COLLECTION.replace(/:id/gi, id);
         return this.fetchUrl(url, 'GET');
     };
 
@@ -641,7 +641,7 @@ class WrapSplashApi {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
-        let url = LOCATION + SCHEMA.GET_CURATED_COLLECTION.replace(/:id/gi, id);
+        let url = this.API_LOCATION + urlConfig.GET_CURATED_COLLECTION.replace(/:id/gi, id);
         return this.fetchUrl(url, 'GET');
     };
 
@@ -658,7 +658,7 @@ class WrapSplashApi {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
-        let url = LOCATION + SCHEMA.GET_COLLECTION_PHOTOS.replace(/:id/gi, id) +
+        let url = this.API_LOCATION + urlConfig.GET_COLLECTION_PHOTOS.replace(/:id/gi, id) +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
         return this.fetchUrl(url, 'GET');
@@ -677,7 +677,7 @@ class WrapSplashApi {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
-        let url = LOCATION + SCHEMA.GET_CURATED_COLLECTION_PHOTOS.replace(/:id/gi, id) +
+        let url = this.API_LOCATION + urlConfig.GET_CURATED_COLLECTION_PHOTOS.replace(/:id/gi, id) +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
         return this.fetchUrl(url, 'GET');
@@ -694,7 +694,7 @@ class WrapSplashApi {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
-        let url = LOCATION + SCHEMA.LIST_RELATED_COLLECTION.replace(/:id/gi, id);
+        let url = this.API_LOCATION + urlConfig.LIST_RELATED_COLLECTION.replace(/:id/gi, id);
         return this.fetchUrl(url, 'GET');
     };
 
@@ -713,7 +713,7 @@ class WrapSplashApi {
             throw new Error('Parameter : title is required!');
         }
         private_collection = private_collection || false;
-        let url = LOCATION + SCHEMA.CREATE_NEW_COLLECTION +
+        let url = this.API_LOCATION + urlConfig.CREATE_NEW_COLLECTION +
             '?title=' + encodeURIComponent(title) +
             (description ? '&description=' + encodeURIComponent(description) : '') +
             '&private=' + private_collection;
@@ -739,7 +739,7 @@ class WrapSplashApi {
             throw new Error('Parameter : title is required!');
         }
         private_collection = private_collection || false;
-        let url = LOCATION + SCHEMA.UPDATE_EXISTING_COLLECTION.replace(/:id/gi, id) +
+        let url = this.API_LOCATION + urlConfig.UPDATE_EXISTING_COLLECTION.replace(/:id/gi, id) +
             '?title=' + encodeURIComponent(title) +
             (description ? '&description=' + encodeURIComponent(description) : '') +
             '&private=' + private_collection;
@@ -758,7 +758,7 @@ class WrapSplashApi {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
-        let url = LOCATION + SCHEMA.DELETE_COLLECTION.replace(/:id/gi, id);
+        let url = this.API_LOCATION + urlConfig.DELETE_COLLECTION.replace(/:id/gi, id);
         return this.fetchUrl(url, 'DELETE');
     };
 
@@ -779,7 +779,7 @@ class WrapSplashApi {
         if (!photo_id || photo_id === undefined || photo_id.length === 0) {
             throw new Error('Parameter : photo_id is required!');
         }
-        let url = LOCATION + SCHEMA.ADD_PHOTO_TO_COLLECTION.replace(/:collection_id/gi, collection_id) +
+        let url = this.API_LOCATION + urlConfig.ADD_PHOTO_TO_COLLECTION.replace(/:collection_id/gi, collection_id) +
             '?photo_id=' + photo_id;
         return this.fetchUrl(url, 'POST');
     };
@@ -800,13 +800,13 @@ class WrapSplashApi {
         if (!photo_id || photo_id === undefined || photo_id.length === 0) {
             throw new Error('Parameter : photo_id is required!');
         }
-        let url = LOCATION + SCHEMA.REMOVE_PHOTO_FROM_COLLECTION.replace(/:collection_id/gi, collection_id) +
+        let url = this.API_LOCATION + urlConfig.REMOVE_PHOTO_FROM_COLLECTION.replace(/:collection_id/gi, collection_id) +
             '?photo_id=' + photo_id;
         return this.fetchUrl(url, 'DELETE');
     };
 }
 
-module.exports = WrapSplash;
+module.exports = WrapSplashApi;
 
 
 
@@ -827,7 +827,7 @@ let unsplash = new WrapSplashApi({
     bearer_token: '2c15444720fd795bec49aa23fd3982722626377471ec29af581d5d0f07da565c'
 });
 
-unsplash.generateBeareToken().then(function (result) {
+unsplash.getARandomPhoto().then(function (result) {
     console.log(result);
 }).catch(function (e) {
     console.err(e);
