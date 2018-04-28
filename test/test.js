@@ -1,6 +1,6 @@
 const UnsplashApi = require('../dist/main');
 
-unsplash = new UnsplashApi.WrapSplashApi({
+unsplash = new UnsplashApi({
     access_key: '5a419933621f55950741e4c30182c1d5f99974112a96cf0c49d8d9091cc0ba7e',
     secret_key: '0464eb09a8590dfaaf11e562a8c7a361c15d25d7757f26e20e6b86d0fd6b9c5c',
     redirect_uri: 'urn:ietf:wg:oauth:2.0:oob',
