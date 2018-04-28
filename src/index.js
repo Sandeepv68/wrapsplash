@@ -805,6 +805,5 @@ class WrapSplashApi {
         return this.fetchUrl(url, 'DELETE');
     };
 }
-export {
-    WrapSplashApi
-};
+
+module.exports = WrapSplashApi;
