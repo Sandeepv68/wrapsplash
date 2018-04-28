@@ -1,24 +1,23 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+
 module.exports = {
+    mode: 'none',
+    optimization: {
+        minimize: false
+    },
     entry: './es6-POC/index.js',
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: 'app.js'
+        filename: '[name].js'
     },
     module: {
         rules: [{
             test: /\.js$/,
             loader: 'babel-loader',
-            include: [
-                path.resolve(__dirname, "es6-POC/index.js"),
-            ],
             exclude: [
-                path.resolve(__dirname, "node_modules"),
-            ],
-            query: {
-                presets: ['es2015', 'stage-0'],
-            }
+                path.resolve(__dirname, "./node_modules"),
+            ]
         }]
     },
     stats: {

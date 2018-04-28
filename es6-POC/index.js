@@ -14,10 +14,10 @@
 
 'use strict';
 //constants. 
-const fetch = require('node-fetch');
-const crypto = require('crypto');
+import fetch from 'node-fetch';
+import crypto from 'crypto';
 //API Schema definitions
-const urlConfig = require('./url_config.json');
+import urlConfig from './url_config.json';
 
 /**
  * The main WrapSplash Class.
