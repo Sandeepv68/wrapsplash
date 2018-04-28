@@ -1,8 +1,18 @@
 const path = require('path');
 const webpack = require('webpack');
+const fs = require('fs');
 
+let nodeModules = {};
+fs.readdirSync('node_modules')
+    .filter(function (x) {
+        return ['.bin'].indexOf(x) === -1;
+    })
+    .forEach(function (mod) {
+        nodeModules[mod] = 'commonjs ' + mod;
+    });
 module.exports = {
     mode: 'none',
+    target: 'node',
     optimization: {
         minimize: false
     },
@@ -15,9 +25,7 @@ module.exports = {
         rules: [{
             test: /\.js$/,
             loader: 'babel-loader',
-            exclude: [
-                path.resolve(__dirname, "./node_modules"),
-            ]
+            exclude: /node_modules/
         }]
     },
     stats: {
