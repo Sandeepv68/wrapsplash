@@ -1,4 +1,5 @@
 node_modules/*
 .vscode/*
 .backup/*
+.es6-POC/*
 test/test.js
