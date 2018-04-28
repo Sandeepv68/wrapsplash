@@ -2,7 +2,7 @@
   "name": "wrapsplash",
   "version": "v2.0.1",
   "description": "A simple npm wrapper module to use the popular Unsplash API.",
-  "main": "index.js",
+  "main": "dist/main.js",
   "scripts": {
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
