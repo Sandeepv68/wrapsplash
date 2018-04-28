@@ -17,7 +17,7 @@
 import fetch from 'node-fetch';
 import crypto from 'crypto';
 //API Schema definitions
-import urlConfig from './url_config.json';
+import urlConfig from '../config/url_config.json';
 
 /**
  * The main WrapSplash Class.
