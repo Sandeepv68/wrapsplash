@@ -1,3 +1,4 @@
+module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -96,6 +97,11 @@
 
 
 //constants. 
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.WrapSplashApi = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -933,7 +939,7 @@ var WrapSplashApi = function () {
     return WrapSplashApi;
 }();
 
-module.exports = WrapSplashApi;
+exports.WrapSplashApi = WrapSplashApi;
 
 /***/ }),
 /* 1 */

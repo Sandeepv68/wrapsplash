@@ -18,6 +18,7 @@ module.exports = {
     },
     entry: './es6-POC/index.js',
     output: {
+        libraryTarget: 'commonjs2',
         path: path.resolve(__dirname, 'build'),
         filename: '[name].js'
     },
