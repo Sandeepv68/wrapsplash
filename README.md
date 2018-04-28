@@ -4,6 +4,7 @@
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 ![Hackage-Deps](https://img.shields.io/hackage-deps/v/lens.svg)
 ![Status](https://img.shields.io/badge/status-stable-green.svg)
+![Travis](https://travis-ci.org/SandeepVattapparambil/wrapsplash.svg?branch=master)
 
 WrapSplashJS is a simple API wrapper for the most popular [Unsplash](https://unsplash.com/) platform. 
 Unsplash provides beautiful high quality free images and photos that you can download and use for any project  without any attribution.
