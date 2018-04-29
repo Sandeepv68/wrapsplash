@@ -15,11 +15,12 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 
 ## Table of Contents
 <!--ts-->
-* [About](#wrapsplashjs-v201)
+* [About](#wrapsplashjs-v300)
 * [Installation](#installation)
 * [Sample Usage](#sample-usage)
 * [Dependency](#dependency)
 * [Changelog](#changelog)
+    * [v3.0.0](#v300)
     * [v2.0.1](#v201)
     * [v2.0.0](#v200)
     * [v1.1.0](#v110)
@@ -94,6 +95,10 @@ npm install --save wrapsplash
 
 //Require npm module
 const WrapSplash = require('wrapsplash');
+
+//OR using ES6/7 Import statement
+import WrapSplash from 'wrapsplash';
+
 let UnsplashApi = new WrapSplash({
     access_key: '<api-key>',
     secret_key: '<secret-key>',
@@ -124,6 +129,18 @@ UnsplashApi.getPhotoLink('<photo-id>')
 This library depends on [fetch](https://github.com/github/fetch) to make requests to the [Unsplash API](https://unsplash.com/documentation). For environments that don't support fetch, you'll need to provide a **polyfill**.
 
 ### Changelog
+#### v3.0.0
+- Completely re-written in ```ES6``` & ```ES7``` specifications.
+- Minor bug fixes.
+- Major code optimizations.
+- Updated documentaions.
+- Major refactorings.
+- Now supports Yarn package manager
+- Now available at major CDNs:
+    - unpkg - ```https://unpkg.com/wrapsplash@2.0.1/```.
+    - bundle.run - ```https://bundle.run/wrapsplash@2.0.1```.
+    - jsDelivr - ```https://cdn.jsdelivr.net/npm/wrapsplash@2.0.1/```.
+
 #### v2.0.1
 - Minor bug fix.
 
