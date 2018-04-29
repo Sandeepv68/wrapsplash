@@ -1,5 +1,5 @@
 ![wrapsplash-logo](logo.png)
-# WrapSplashJS v2.0.1
+# WrapSplashJS v3.0.0
 ![license](https://img.shields.io/github/license/mashape/apistatus.svg)
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 ![Hackage-Deps](https://img.shields.io/hackage-deps/v/lens.svg)
@@ -15,11 +15,12 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 
 ## Table of Contents
 <!--ts-->
-* [About](#wrapsplashjs-v201)
+* [About](#wrapsplashjs-v300)
 * [Installation](#installation)
 * [Sample Usage](#sample-usage)
 * [Dependency](#dependency)
 * [Changelog](#changelog)
+    * [v3.0.0](#v300)
     * [v2.0.1](#v201)
     * [v2.0.0](#v200)
     * [v1.1.0](#v110)
@@ -94,6 +95,10 @@ npm install --save wrapsplash
 
 //Require npm module
 const WrapSplash = require('wrapsplash');
+
+//OR using ES6/7 Import statement
+import WrapSplash from 'wrapsplash';
+
 let UnsplashApi = new WrapSplash({
     access_key: '<api-key>',
     secret_key: '<secret-key>',
@@ -124,6 +129,20 @@ UnsplashApi.getPhotoLink('<photo-id>')
 This library depends on [fetch](https://github.com/github/fetch) to make requests to the [Unsplash API](https://unsplash.com/documentation). For environments that don't support fetch, you'll need to provide a **polyfill**.
 
 ### Changelog
+#### v3.0.0
+- Completely re-written in ```ES6``` & ```ES7``` specifications.
+- Continuous Integrations (CI) using Travis CI.
+- Minor bug fixes.
+- Major code optimizations.
+- Updated documentaions.
+- Major refactorings.
+- Now supports Yarn package manager
+    - ```https://yarnpkg.com/en/package/wrapsplash```.
+- Now available at major CDNs:
+    - unpkg - ```https://unpkg.com/wrapsplash@3.0.0/```.
+    - bundle.run - ```https://bundle.run/wrapsplash@3.0.0```.
+    - jsDelivr - ```https://cdn.jsdelivr.net/npm/wrapsplash@3.0.0/```.
+
 #### v2.0.1
 - Minor bug fix.
 

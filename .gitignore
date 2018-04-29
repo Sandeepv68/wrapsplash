@@ -1,5 +1,8 @@
 node_modules/*
 .vscode/*
 .backup/*
+<<<<<<< HEAD
 .es6-POC/*
+=======
+>>>>>>> feature-branch-es6-convert-25-04-2018
 test/test.js

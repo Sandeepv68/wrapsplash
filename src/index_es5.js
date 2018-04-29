@@ -842,16 +842,16 @@ UnsplashApi.prototype.listRelatedCollections = function (id) {
  * @param {Boolean} private - Whether to make this collection private (Optional; default false).
  * @returns {Object} - The updated photo data object.
  */
-UnsplashApi.prototype.createNewColection = function (title, description, private) {
+UnsplashApi.prototype.createNewColection = function (title, description, private_collection) {
     let self = this;
     if (!title || title === undefined || title.length === 0) {
         throw new Error('Parameter : title is required!');
     }
-    private = private || false;
+    private_collection = private_collection || false;
     let url = LOCATION + SCHEMA.CREATE_NEW_COLLECTION +
         '?title=' + encodeURIComponent(title) +
         (description ? '&description=' + encodeURIComponent(description) : '') +
-        '&private=' + private;
+        '&private=' + private_collection;
     return postUrl(self, url);
 };
 
@@ -866,7 +866,7 @@ UnsplashApi.prototype.createNewColection = function (title, description, private
  * @param {Boolean} private - Whether to make this collection private (Optional; default false).
  * @returns {Object} - The updated photo data object.
  */
-UnsplashApi.prototype.updateExistingCollection = function (id, title, description, private) {
+UnsplashApi.prototype.updateExistingCollection = function (id, title, description, private_collection) {
     let self = this;
     if (!id || id === undefined || id.length === 0) {
         throw new Error('Parameter : id is required!');
@@ -874,11 +874,11 @@ UnsplashApi.prototype.updateExistingCollection = function (id, title, descriptio
     if (!title || title === undefined || title.length === 0) {
         throw new Error('Parameter : title is required!');
     }
-    private = private || false;
+    private_collection = private_collection || false;
     let url = LOCATION + SCHEMA.UPDATE_EXISTING_COLLECTION.replace(/:id/gi, id) +
         '?title=' + encodeURIComponent(title) +
         (description ? '&description=' + encodeURIComponent(description) : '') +
-        '&private=' + private;
+        '&private=' + private_collection;
     return putUrl(self, url);
 };
 
