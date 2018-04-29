@@ -4,12 +4,8 @@
   "description": "A simple npm wrapper module to use the popular Unsplash API.",
   "main": "dist/main.js",
   "scripts": {
-<<<<<<< HEAD
-    "test": "echo \"Error: no test specified\""
-=======
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 0"
->>>>>>> feature-branch-es6-convert-25-04-2018
   },
   "repository": "git+https://github.com/SandeepVattapparambil/wrapsplash.git",
   "keywords": [
@@ -32,11 +28,6 @@
     "examples": "examples"
   },
   "devDependencies": {
-<<<<<<< HEAD
-    "eslint": "^4.19.1"
-  }
-}
-=======
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
@@ -46,6 +37,5 @@
     "webpack": "^4.6.0",
     "webpack-cli": "^2.0.15"
   },
-  "private": null
+  "private": false
 }
->>>>>>> feature-branch-es6-convert-25-04-2018
