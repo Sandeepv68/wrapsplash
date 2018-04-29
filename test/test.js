@@ -8,7 +8,7 @@ Unsplash = new UnsplashApi({
     bearer_token: '2c15444720fd795bec49aa23fd3982722626377471ec29af581d5d0f07da565c'
 });
 
-Unsplash.getUserStatistics('sandeepv')
+Unsplash.listCuratedPhotos()
     .then(function (result) {
         console.log(result);
     }).catch(function (e) {
