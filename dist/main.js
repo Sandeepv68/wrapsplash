@@ -161,7 +161,6 @@ var WrapSplashApi = function () {
                 'Authorization': this.bearer_token ? 'Bearer ' + this.bearer_token : 'Client-ID ' + this.access_key,
                 'X-WrapSplash-Header': hash
             };
-            console.log(this.headers);
         } else {
             throw new Error('Initilisation parameters missing!');
         }
