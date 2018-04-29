@@ -139,9 +139,9 @@ This library depends on [fetch](https://github.com/github/fetch) to make request
 - Now supports Yarn package manager
     - ```https://yarnpkg.com/en/package/wrapsplash```.
 - Now available at major CDNs:
-    - unpkg - ```https://unpkg.com/wrapsplash@2.0.1/```.
-    - bundle.run - ```https://bundle.run/wrapsplash@2.0.1```.
-    - jsDelivr - ```https://cdn.jsdelivr.net/npm/wrapsplash@2.0.1/```.
+    - unpkg - ```https://unpkg.com/wrapsplash@3.0.0/```.
+    - bundle.run - ```https://bundle.run/wrapsplash@3.0.0```.
+    - jsDelivr - ```https://cdn.jsdelivr.net/npm/wrapsplash@3.0.0/```.
 
 #### v2.0.1
 - Minor bug fix.
