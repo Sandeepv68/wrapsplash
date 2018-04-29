@@ -131,11 +131,13 @@ This library depends on [fetch](https://github.com/github/fetch) to make request
 ### Changelog
 #### v3.0.0
 - Completely re-written in ```ES6``` & ```ES7``` specifications.
+- Continuous Integrations (CI) using Travis CI.
 - Minor bug fixes.
 - Major code optimizations.
 - Updated documentaions.
 - Major refactorings.
 - Now supports Yarn package manager
+    - ```https://yarnpkg.com/en/package/wrapsplash```.
 - Now available at major CDNs:
     - unpkg - ```https://unpkg.com/wrapsplash@2.0.1/```.
     - bundle.run - ```https://bundle.run/wrapsplash@2.0.1```.
