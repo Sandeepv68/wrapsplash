@@ -11,5 +11,5 @@ unsplash.getAPhoto('<photo-id>', 500, 500, '300, 300, 300, 300')
     .then(function (result) {
         console.log(result);
     }).catch(function (e) {
-        console.err(e);
+       console.log(e);
     });

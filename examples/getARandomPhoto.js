@@ -11,5 +11,5 @@ unsplash.getARandomPhoto()
     .then(function (result) {
         console.log(result);
     }).catch(function (e) {
-        console.err(e);
+       console.log(e);
     });
