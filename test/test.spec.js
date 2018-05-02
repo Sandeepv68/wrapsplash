@@ -34,24 +34,32 @@ describe('Given an instance of WrapSplashJS', () => {
         it('It should return the Array of list of photos from Unsplash API', () => {
             UnsplashAPI.listPhotos().then((result) => {
                 expect(result).to.be.a('array');
+            }).catch((error) => {
+                expect(error).to.be.a('object');
             });
         });
         it('It should return the result array having length between 0 - 10', () => {
             UnsplashAPI.listPhotos().then((result) => {
                 expect(result).to.have.length.within(0, 10);
+            }).catch((error) => {
+                expect(error).to.be.a('object');
             });
         });
     });
 
     describe('When the function -> listPhotos() is called with parameters page = 1 & per_page = 20', () => {
         it('It should return the Array of list of photos from Unsplash API', () => {
-            UnsplashAPI.listPhotos(1, 20, 'latest').then((result) => {
+            UnsplashAPI.listPhotos(1, 20).then((result) => {
                 expect(result).to.be.a('array');
+            }).catch((error) => {
+                expect(error).to.be.a('object');
             });
         });
         it('It should return the result array having length between 0 - 20', () => {
-            UnsplashAPI.listPhotos(1, 20, 'latest').then((result) => {
+            UnsplashAPI.listPhotos(1, 20).then((result) => {
                 expect(result).to.have.length.within(0, 20);
+            }).catch((error) => {
+                expect(error).to.be.a('object');
             });
         });
     });

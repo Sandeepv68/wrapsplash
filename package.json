@@ -5,7 +5,7 @@
   "main": "dist/main.js",
   "scripts": {
     "build": "webpack",
-    "test": "mocha --compilers js:babel-core/register --colors ./test/*.spec.js"
+    "test": "mocha --require babel-core/register --colors ./test/*.spec.js"
   },
   "repository": "git+https://github.com/SandeepVattapparambil/wrapsplash.git",
   "keywords": [
