@@ -79,7 +79,7 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
         * [Delete a Collection](#delete-a-collection)
         * [Add a Photo to a Collection](#add-a-photo-to-a-collection)
         * [Remove a Photo from a Collection](#remove-a-photo-from-a-collection)
-* [LICENSE](#license)
+* [License](#license)
 * [Acknowledgements](#acknowledgements)
 
 
@@ -913,7 +913,7 @@ UnsplashApi.removePhotoFromCollection('<collection-id>', '<photo-id>');
 ```
 
 
-### LICENSE
+### License
 The MIT License
 
 Copyright (c) 2018- Sandeep  Vattapparambil, http://www.sandeepv.in
