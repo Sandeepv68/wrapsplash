@@ -81,6 +81,13 @@ class WrapSplashApi {
             method: method,
             headers: (this.headers ? this.headers : '')
         }).then(function (res) {
+            if (res.status === 204) {
+                let response = {
+                    status: res.status,
+                    statusText: res.statusText
+                };
+                return response;
+            }
             return res.json();
         }).catch(function (err) {
             return Promise.reject(err);
