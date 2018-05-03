@@ -5,7 +5,7 @@
   "main": "dist/main.js",
   "scripts": {
     "build": "webpack",
-    "test": "mocha --require babel-core/register --colors ./test/*.spec.js"
+    "test": "mocha --timeout 10000 --require babel-core/register --colors ./test/*.spec.js"
   },
   "repository": "git+https://github.com/SandeepVattapparambil/wrapsplash.git",
   "keywords": [
