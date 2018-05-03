@@ -1,7 +1,7 @@
-# WrapSplash Test Files
-This folder contains the test files for wrapsplash.
-To run the test manually:
+# WrapSplash - Example Files
+This folder contains the example test files for various features and API endpoints supported by WrapSplash.
+To run the example:
 ```sh
-cd test
+cd examples
 node <filename>
 ```
