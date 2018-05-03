@@ -1,5 +1,5 @@
 ![wrapsplash-logo](logo.png)
-# WrapSplashJS v3.0.0
+# WrapSplashJS v3.0.1
 ![license](https://img.shields.io/github/license/mashape/apistatus.svg)
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 ![Hackage-Deps](https://img.shields.io/hackage-deps/v/lens.svg)
@@ -15,11 +15,12 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 
 ## Table of Contents
 <!--ts-->
-* [About](#wrapsplashjs-v300)
+* [About](#wrapsplashjs-v301)
 * [Installation](#installation)
 * [Sample Usage](#sample-usage)
 * [Dependency](#dependency)
 * [Changelog](#changelog)
+    * [v3.0.1](#v301)
     * [v3.0.0](#v300)
     * [v2.0.1](#v201)
     * [v2.0.0](#v200)
@@ -79,7 +80,7 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
         * [Delete a Collection](#delete-a-collection)
         * [Add a Photo to a Collection](#add-a-photo-to-a-collection)
         * [Remove a Photo from a Collection](#remove-a-photo-from-a-collection)
-* [Continuous Integration (CI)](#continuous-integration-(ci))
+* [Continuous Integration (CI)](#continuous-integration-ci)
 * [Tests](#tests)
 * [License](#license)
 * [Acknowledgements](#acknowledgements)
@@ -133,6 +134,15 @@ UnsplashApi.getPhotoLink('<photo-id>')
 This library depends on [fetch](https://github.com/github/fetch) to make requests to the [Unsplash API](https://unsplash.com/documentation). For environments that don't support fetch, you'll need to provide a **polyfill**.
 
 ### Changelog
+#### v3.0.1
+- Minor security fixes.
+- Minor bug fixes.
+- Code cleanups.
+- Updated documentations.
+- Test environment setup using Mochajs.
+- Assertion test specs added using Chaijs.
+- Strict server response validations added.
+
 #### v3.0.0
 - Completely re-written in ```ES6``` & ```ES7``` specifications.
 - Continuous Integrations (CI) using Travis CI.
