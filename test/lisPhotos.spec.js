@@ -31,34 +31,34 @@ describe('Given an instance of WrapSplashJS', () => {
 
     //describe the unit test
     describe('When the function -> listPhotos() is called without parameters', () => {
-        it('It should return the Array of list of photos from Unsplash API', () => {
+        it('It should return the Array of list of photos from Unsplash API', (done) => {
             UnsplashAPI.listPhotos().then((result) => {
                 expect(result).to.be.a('array');
-            }).catch((error) => {
+            }).then(() => done(), done).catch((error) => {
                 expect(error).to.be.a('object');
             });
         });
-        it('It should return the result array having length between 0 - 10', () => {
+        it('It should return the result array having length between 0 - 10', (done) => {
             UnsplashAPI.listPhotos().then((result) => {
                 expect(result).to.have.length.within(0, 10);
-            }).catch((error) => {
+            }).then(() => done(), done).catch((error) => {
                 expect(error).to.be.a('object');
             });
         });
     });
 
     describe('When the function -> listPhotos() is called with parameters page = 1 & per_page = 20', () => {
-        it('It should return the Array of list of photos from Unsplash API', () => {
+        it('It should return the Array of list of photos from Unsplash API', (done) => {
             UnsplashAPI.listPhotos(1, 20).then((result) => {
                 expect(result).to.be.a('array');
-            }).catch((error) => {
+            }).then(() => done(), done).catch((error) => {
                 expect(error).to.be.a('object');
             });
         });
-        it('It should return the result array having length between 0 - 20', () => {
+        it('It should return the result array having length between 0 - 20', (done) => {
             UnsplashAPI.listPhotos(1, 20).then((result) => {
                 expect(result).to.have.length.within(0, 20);
-            }).catch((error) => {
+            }).then(() => done(), done).catch((error) => {
                 expect(error).to.be.a('object');
             });
         });
