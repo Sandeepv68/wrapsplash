@@ -84,7 +84,16 @@ class WrapSplashApi {
             if (res.status === 204) {
                 let response = {
                     status: res.status,
-                    statusText: res.statusText
+                    statusText: res.statusText,
+                    message: 'Content Deleted'
+                };
+                return response;
+            }
+            if(res.status === 403){
+                let response = {
+                    status: res.status,
+                    statusText: res.statusText,
+                    message: 'Rate Limit Exceeded'
                 };
                 return response;
             }
