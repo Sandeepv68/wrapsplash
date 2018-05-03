@@ -2,3 +2,4 @@ node_modules/*
 .vscode/*
 .backup/*
 test/test.js
+test/template.js
