@@ -25,7 +25,7 @@ module.exports = {
     target: 'node',
     //set minification flag
     optimization: {
-        minimize: true
+        minimize: false
     },
     //set webpack bundle entry point
     entry: './src/index.js',
