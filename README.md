@@ -915,6 +915,28 @@ UnsplashApi.removePhotoFromCollection('<collection-id>', '<photo-id>');
 ```
 
 
+### Continuous Integration (CI)
+Continuous Integration services monitor repositories for changes, then automatically run unit tests on your behalf, typically in a containerized environment. To test this setup works in a continuous integration environment, an integration was done with [Travis CI](https://travis-ci.org/). According to the [Travis Node.js Documentation](http://docs.travis-ci.com/user/languages/javascript-with-nodejs/), Travis automatically runs `npm install` and `npm test`. The only additional thing I had to add to the Travis configuration was to run `npm run build` before running the tests. The working Travis config looks like this:
+
+```yml
+language: node_js
+
+node_js:
+  - stable
+
+install:
+  - npm install
+
+script:
+  - npm run build
+  - npm test
+```
+Here's the [Travis build page for this project](https://travis-ci.org/SandeepVattapparambil/wrapsplash), which shows the tests passing.
+
+### Tests
+WrapSplashJS uses ```Mochajs``` as the testing environment and ```Chaijs``` as the assertion library.
+All the test spec files are available in the ```test``` folder. For more information read the README file from the test folder.
+
 ### License
 The MIT License
 
