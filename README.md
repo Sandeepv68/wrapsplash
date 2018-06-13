@@ -1,5 +1,5 @@
 ![wrapsplash-logo](logo.png)
-# WrapSplashJS v3.0.1
+# WrapSplashJS v3.0.2
 ![license](https://img.shields.io/github/license/mashape/apistatus.svg)
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 ![Hackage-Deps](https://img.shields.io/hackage-deps/v/lens.svg)
@@ -15,11 +15,12 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 
 ## Table of Contents
 <!--ts-->
-* [About](#wrapsplashjs-v301)
+* [About](#wrapsplashjs-v302)
 * [Installation](#installation)
 * [Sample Usage](#sample-usage)
 * [Dependency](#dependency)
 * [Changelog](#changelog)
+    * [v3.0.2](#v302)
     * [v3.0.1](#v301)
     * [v3.0.0](#v300)
     * [v2.0.1](#v201)
@@ -134,6 +135,9 @@ UnsplashApi.getPhotoLink('<photo-id>')
 This library depends on [fetch](https://github.com/github/fetch) to make requests to the [Unsplash API](https://unsplash.com/documentation). For environments that don't support fetch, you'll need to provide a **polyfill**.
 
 ### Changelog
+#### v3.0.2
+- Minor bug fix.
+
 #### v3.0.1
 - Minor security fixes.
 - Minor bug fixes.

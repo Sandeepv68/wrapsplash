@@ -1,6 +1,6 @@
 {
   "name": "wrapsplash",
-  "version": "v3.0.1",
+  "version": "v3.0.2",
   "description": "A simple npm wrapper module to use the popular Unsplash API.",
   "main": "dist/main.js",
   "scripts": {
@@ -22,7 +22,9 @@
   },
   "homepage": "https://github.com/SandeepVattapparambil/wrapsplash#readme",
   "dependencies": {
-    "node-fetch": "^2.1.2"
+    "node-fetch": "^2.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1"
   },
   "directories": {
     "examples": "examples"
