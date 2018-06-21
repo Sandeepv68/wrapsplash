@@ -1,10 +1,8 @@
 ![wrapsplash-logo](https://raw.githubusercontent.com/SandeepVattapparambil/wrapsplash/master/logo.png)
 # WrapSplashJS v3.0.3
-![license](https://img.shields.io/github/license/mashape/apistatus.svg)
-![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
-![Hackage-Deps](https://img.shields.io/hackage-deps/v/lens.svg)
-![Status](https://img.shields.io/badge/status-stable-green.svg)
-![Travis](https://travis-ci.org/SandeepVattapparambil/wrapsplash.svg?branch=master)
+![license](https://img.shields.io/github/license/SandeepVattapparambil/wrapsplash.svg) ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg) ![Dependecies](https://david-dm.org/SandeepVattapparambil/wrapsplash.svg) ![Status](https://img.shields.io/badge/status-stable-green.svg) ![npm version](https://badge.fury.io/js/wrapsplash.svg) ![Travis](https://travis-ci.org/SandeepVattapparambil/wrapsplash.svg?branch=master) ![GitHub issues](https://img.shields.io/github/issues/SandeepVattapparambil/wrapsplash.svg) ![GitHub forks](https://img.shields.io/github/forks/SandeepVattapparambil/wrapsplash.svg) ![GitHub stars](https://img.shields.io/github/stars/SandeepVattapparambil/wrapsplash.svg) ![Twitter](https://img.shields.io/twitter/url/https/github.com/SandeepVattapparambil/wrapsplash.svg?style=social)
+
+
 
 WrapSplashJS is a simple, promise-based API wrapper for the popular [Unsplash](https://unsplash.com/) platform. 
 Unsplash provides beautiful high quality free images and photos that you can download and use for any project  without any attribution.
