@@ -82,7 +82,7 @@ module.exports =
 
 "use strict";
 /**
- * Wrapsplash API wrapper v3.0.3 for Unspalsh API
+ * Wrapsplash API wrapper v3.0.4 for Unspalsh API
  * written by: Sandeep Vattapparambil
  * email: sandeepv68@gmail.com
  * website: www.sandeepv.in
