@@ -1,5 +1,5 @@
 /**
- * Wrapsplash API wrapper v3.0.2 for Unspalsh API
+ * Wrapsplash API wrapper v3.0.3 for Unspalsh API
  * written by: Sandeep Vattapparambil
  * email: sandeepv68@gmail.com
  * website: www.sandeepv.in
@@ -8,7 +8,7 @@
  */
 
 /**
- * WrapSplash Module
+ * WrapSplashApi Module
  * @module WrapSplashApi
  */
 
@@ -35,9 +35,7 @@ class WrapSplashApi {
         this.BEARER_TOKEN_URL = 'https://unsplash.com/oauth/token';
 
         if (options) {
-            options = { ...{},
-                ...options
-            };
+            options = { ...{}, ...options };
             this.access_key = (options.access_key ? options.access_key : (function () {
                 throw new Error('Access Key missing!');
             }()));
@@ -89,7 +87,7 @@ class WrapSplashApi {
                 };
                 return response;
             }
-            if(res.status === 403){
+            if (res.status === 403) {
                 let response = {
                     status: res.status,
                     statusText: res.statusText,

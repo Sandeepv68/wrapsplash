@@ -1,12 +1,12 @@
-![wrapsplash-logo](logo.png)
-# WrapSplashJS v3.0.2
+![wrapsplash-logo](https://raw.githubusercontent.com/SandeepVattapparambil/wrapsplash/master/logo.png)
+# WrapSplashJS v3.0.3
 ![license](https://img.shields.io/github/license/mashape/apistatus.svg)
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 ![Hackage-Deps](https://img.shields.io/hackage-deps/v/lens.svg)
 ![Status](https://img.shields.io/badge/status-stable-green.svg)
 ![Travis](https://travis-ci.org/SandeepVattapparambil/wrapsplash.svg?branch=master)
 
-WrapSplashJS is a simple API wrapper for the most popular [Unsplash](https://unsplash.com/) platform. 
+WrapSplashJS is a simple, promise-based API wrapper for the popular [Unsplash](https://unsplash.com/) platform. 
 Unsplash provides beautiful high quality free images and photos that you can download and use for any project  without any attribution.
 
 Before using the Unsplash API, you need to **register as a developer** and **read the API Guidelines.**
@@ -20,6 +20,7 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 * [Sample Usage](#sample-usage)
 * [Dependency](#dependency)
 * [Changelog](#changelog)
+    * [v3.0.3](#v303)
     * [v3.0.2](#v302)
     * [v3.0.1](#v301)
     * [v3.0.0](#v300)
@@ -135,6 +136,9 @@ UnsplashApi.getPhotoLink('<photo-id>')
 This library depends on [fetch](https://github.com/github/fetch) to make requests to the [Unsplash API](https://unsplash.com/documentation). For environments that don't support fetch, you'll need to provide a **polyfill**.
 
 ### Changelog
+#### v3.0.3
+- Updated dependecies
+
 #### v3.0.2
 - Minor bug fix.
 
