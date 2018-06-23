@@ -324,6 +324,7 @@ A Promise factory to retrieve public details on a given user.
 GET /users/:username
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **username** | *string* | The username of the particular user | no | 
@@ -341,6 +342,7 @@ A Promise factory to retrieve a single user’s portfolio link.
 GET /users/:username/portfolio
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **username** | *string* | The username of the particular user | no | 
@@ -355,6 +357,7 @@ A Promise factory to get a list of photos uploaded by a particular user.
 GET /users/:username/photos
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **username** | *string* | The username of the particular user | no | 
@@ -375,6 +378,7 @@ A Promise factory to get a list of photos liked by a user.
 GET /users/:username/likes
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **username** | *string* | The username of the particular user | no | 
@@ -392,6 +396,7 @@ A Promise factory to get a list of collections created by the user.
 GET /users/:username/collections
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **username** | *string* | The username of the particular user | no | 
@@ -409,6 +414,7 @@ GET /users/:username/statistics
 ```
 
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **username** | *string* | The username of the particular user | no | 
@@ -426,6 +432,7 @@ A Promise factory to get a single page from the list of all photos.
 GET /photos
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **page** | *number* | Page number to retrieve | yes | 1
@@ -442,6 +449,7 @@ A Promise factory to get a single page from the list of the curated photos.
 GET /photos/curated
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **page** | *number* | Page number to retrieve | yes | 1
@@ -458,6 +466,7 @@ A Promise factory to retrieve a single photo.
 GET /photos/:id
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **id** | *string* | The photo’s ID | no | 
@@ -503,6 +512,7 @@ A Promise factory to retrieve total number of downloads, views and likes of a si
 GET /photos/:id/statistics
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- | 
 | **id** | *string* | The photo’s ID | no | 
@@ -520,6 +530,7 @@ A Promise factory to retrieve a single photo’s download link. Preferably hit t
 GET /photos/:id/download
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- | 
 | **id** | *string* | The photo’s ID | no | 
@@ -535,6 +546,7 @@ A Promise factory to update a photo on behalf of the logged-in user. This requir
 PUT /photos/:id
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **id** | *string* | The photo’s ID | no | 
@@ -543,6 +555,7 @@ PUT /photos/:id
 > **Note:** **Exchangeable image file format** (officially Exif, according to JEIDA/JEITA/CIPA specifications) is a standard that specifies the formats for images, sound, and ancillary tags used by digital cameras (including smartphones), scanners and other systems handling image and sound files recorded by digital cameras. [Readmore](https://en.wikipedia.org/wiki/Exif)
 
 ##### location & exif objects
+
 | object[key] | Description |
 | ----- | ----------- |
 | location[latitude] | The photo location’s latitude (Optional) | 
@@ -568,6 +581,7 @@ A Promise factory to like a photo on behalf of the logged-in user. This requires
 POST /photos/:id/like
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **id** | *string* | The photo’s ID | no | 
@@ -583,6 +597,7 @@ A Promise factory to remove a user’s like of a photo.
 DELETE /photos/:id/like
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **id** | *string* | The photo’s ID | no | 
@@ -599,6 +614,7 @@ A Promise factory to get a single page of photo results for a particular query.
 GET /search/photos
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **query** | *string* | The search query | no | 
@@ -617,6 +633,7 @@ A Promise factory to get a single page of collection results for a query.
 GET /search/collections
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **query** | *string* | The search query | no | 
@@ -633,6 +650,7 @@ A Promise factory to get a single page of user results for a query.
 GET /search/users
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **query** | *string* | The search query | no | 
@@ -663,6 +681,7 @@ A Promise factory to update the current User's profile.
 PUT /me
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | username | *String* | The username of the current user | yes |
@@ -755,6 +774,7 @@ A Promise factory to get a single page from the list of all collections.
 GET /collections
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **page** | *number* | Page number to retrieve | yes | 1
@@ -769,6 +789,7 @@ A Promise factory to get a single page from the list of featured collections.
 GET /collections/featured
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **page** | *number* | Page number to retrieve | yes | 1
@@ -783,6 +804,7 @@ A Promise factory to get a single page from the list of curated collections.
 GET /collections/curated
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **page** | *number* | Page number to retrieve | yes | 1
@@ -797,6 +819,7 @@ A Promise factory to retrieve a single collection. To view a user’s private co
 GET /collections/:id
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **id** | *string* | The Collection ID  | no | 
@@ -810,6 +833,7 @@ A Promise factory to retrieve a single curated collection. To view a user’s pr
 GET /collections/curated/:id
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **id** | *string* | The Collection ID  | no | 
@@ -823,6 +847,7 @@ A Promise factory to retrieve a collection’s photos.
 GET /collections/:id/photos
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **id** | *string* | The Collection ID  | no | 
@@ -838,6 +863,7 @@ A Promise factory to retrieve a curated collection’s photos.
 GET /collections/curated/:id/photos
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **id** | *string* | The Collection ID  | no | 
@@ -853,6 +879,7 @@ A Promise factory to retrieve a list of collections related to this one.
 GET /collections/:id/related
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **id** | *string* | The Collection ID  | no | 
@@ -866,6 +893,7 @@ A Promise factory to create a new collection. This requires the ```write_collect
 POST /collections
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **title** | *string* | The title of the collection | no | 
@@ -881,6 +909,7 @@ A Promise factory to update an existing collection belonging to the logged-in us
 PUT /collections/:id
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **id** | *string* | The collection id | no |
@@ -897,6 +926,7 @@ A Promise factory to delete a collection belonging to the logged-in user. This r
 DELETE /collections/:id
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **id** | *string* | The Collection ID  | no | 
@@ -910,6 +940,7 @@ A Promise factory to add a photo to one of the logged-in user’s collections. R
 POST /collections/:collection_id/add
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **collection_id** | *string* | The Collection ID  | no | 
@@ -926,6 +957,7 @@ A Promise factory to remove a photo from one of the logged-in user’s collectio
 DELETE  /collections/:collection_id/remove
 ```
 ##### Parameters
+
 | Parameter | Type | Description | Optional | Default |
 | ----- | ---- | ----------- | -------- | ------- |
 | **collection_id** | *string* | The Collection ID  | no | 
