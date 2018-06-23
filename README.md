@@ -330,6 +330,7 @@ GET /users/:username
 | **username** | *string* | The username of the particular user | no | 
 | **width** | *number* | Width of the profile picture in pixels | yes | 
 | **height** | *number* | Height of the profile picture in pixels | yes | 
+
 > **Note:**  When optional **height** & **width** are specified the profile image will be included in the "profile_image" object as "custom".
 
 ```js
