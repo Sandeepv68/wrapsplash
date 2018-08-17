@@ -1,4 +1,4 @@
-![wrapsplash-logo](https://raw.githubusercontent.com/SandeepVattapparambil/wrapsplash/master/logo.png)
+![wrapsplash-logo](public/logo.png)
 # WrapSplashJS v3.0.6
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f5061e7366044dd3a250baba5a2e9f6b)](https://app.codacy.com/app/sandeepv68/wrapsplash?utm_source=github.com&utm_medium=referral&utm_content=SandeepVattapparambil/wrapsplash&utm_campaign=badger)
