@@ -86,10 +86,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /*!********************************!*\
   !*** ./config/url_config.json ***!
   \********************************/
-/*! exports provided: USERS_PUBLIC_PROFILE, USERS_PORTFOLIO, USERS_PHOTOS, USERS_LIKED_PHOTOS, USERS_COLLECTIONS, USERS_STATISTICS, LIST_PHOTOS, LIST_CURATED_PHOTOS, GET_A_PHOTO, GET_A_RANDOM_PHOTO, GET_A_PHOTO_STATISTICS, GET_A_PHOTO_DOWNLOAD_LINK, UPDATE_A_PHOTO, LIKE_A_PHOTO, UNLIKE_A_PHOTO, SEARCH_PHOTOS, SEARCH_COLLECTIONS, SEARCH_USERS, CURRENT_USER_PROFILE, UPDATE_CURRENT_USER_PROFILE, STATS_TOTALS, STATS_MONTH, LIST_COLLECTIONS, LIST_FEATURED_COLLECTIONS, LIST_CURATED_COLLECTIONS, GET_COLLECTION, GET_CURATED_COLLECTION, GET_COLLECTION_PHOTOS, GET_CURATED_COLLECTION_PHOTOS, LIST_RELATED_COLLECTION, CREATE_NEW_COLLECTION, UPDATE_EXISTING_COLLECTION, DELETE_COLLECTION, ADD_PHOTO_TO_COLLECTION, REMOVE_PHOTO_FROM_COLLECTION, default */
+/*! exports provided: API_LOCATION, BEARER_TOKEN_URL, USERS_PUBLIC_PROFILE, USERS_PORTFOLIO, USERS_PHOTOS, USERS_LIKED_PHOTOS, USERS_COLLECTIONS, USERS_STATISTICS, LIST_PHOTOS, LIST_CURATED_PHOTOS, GET_A_PHOTO, GET_A_RANDOM_PHOTO, GET_A_PHOTO_STATISTICS, GET_A_PHOTO_DOWNLOAD_LINK, UPDATE_A_PHOTO, LIKE_A_PHOTO, UNLIKE_A_PHOTO, SEARCH_PHOTOS, SEARCH_COLLECTIONS, SEARCH_USERS, CURRENT_USER_PROFILE, UPDATE_CURRENT_USER_PROFILE, STATS_TOTALS, STATS_MONTH, LIST_COLLECTIONS, LIST_FEATURED_COLLECTIONS, LIST_CURATED_COLLECTIONS, GET_COLLECTION, GET_CURATED_COLLECTION, GET_COLLECTION_PHOTOS, GET_CURATED_COLLECTION_PHOTOS, LIST_RELATED_COLLECTION, CREATE_NEW_COLLECTION, UPDATE_EXISTING_COLLECTION, DELETE_COLLECTION, ADD_PHOTO_TO_COLLECTION, REMOVE_PHOTO_FROM_COLLECTION, default */
 /***/ (function(module) {
 
-module.exports = {"USERS_PUBLIC_PROFILE":"users/","USERS_PORTFOLIO":"users/:username/portfolio","USERS_PHOTOS":"users/:username/photos","USERS_LIKED_PHOTOS":"users/:username/likes","USERS_COLLECTIONS":"users/:username/collections","USERS_STATISTICS":"users/:username/statistics","LIST_PHOTOS":"photos","LIST_CURATED_PHOTOS":"photos/curated","GET_A_PHOTO":"photos/:id","GET_A_RANDOM_PHOTO":"photos/random","GET_A_PHOTO_STATISTICS":"photos/:id/statistics","GET_A_PHOTO_DOWNLOAD_LINK":"photos/:id/download","UPDATE_A_PHOTO":"photos/:id","LIKE_A_PHOTO":"photos/:id/like","UNLIKE_A_PHOTO":"photos/:id/like","SEARCH_PHOTOS":"search/photos","SEARCH_COLLECTIONS":"search/collections","SEARCH_USERS":"search/users","CURRENT_USER_PROFILE":"me","UPDATE_CURRENT_USER_PROFILE":"me","STATS_TOTALS":"stats/total","STATS_MONTH":"stats/month","LIST_COLLECTIONS":"collections","LIST_FEATURED_COLLECTIONS":"collections/featured","LIST_CURATED_COLLECTIONS":"collections/curated","GET_COLLECTION":"collections/:id","GET_CURATED_COLLECTION":"collections/curated/:id","GET_COLLECTION_PHOTOS":"collections/:id/photos","GET_CURATED_COLLECTION_PHOTOS":"collections/curated/:id/photos","LIST_RELATED_COLLECTION":"collections/:id/related","CREATE_NEW_COLLECTION":"collections","UPDATE_EXISTING_COLLECTION":"collections/:id","DELETE_COLLECTION":"collections/:id","ADD_PHOTO_TO_COLLECTION":"collections/:collection_id/add","REMOVE_PHOTO_FROM_COLLECTION":"collections/:collection_id/remove"};
+module.exports = {"API_LOCATION":"https://api.unsplash.com/","BEARER_TOKEN_URL":"https://unsplash.com/oauth/token","USERS_PUBLIC_PROFILE":"users/","USERS_PORTFOLIO":"users/:username/portfolio","USERS_PHOTOS":"users/:username/photos","USERS_LIKED_PHOTOS":"users/:username/likes","USERS_COLLECTIONS":"users/:username/collections","USERS_STATISTICS":"users/:username/statistics","LIST_PHOTOS":"photos","LIST_CURATED_PHOTOS":"photos/curated","GET_A_PHOTO":"photos/:id","GET_A_RANDOM_PHOTO":"photos/random","GET_A_PHOTO_STATISTICS":"photos/:id/statistics","GET_A_PHOTO_DOWNLOAD_LINK":"photos/:id/download","UPDATE_A_PHOTO":"photos/:id","LIKE_A_PHOTO":"photos/:id/like","UNLIKE_A_PHOTO":"photos/:id/like","SEARCH_PHOTOS":"search/photos","SEARCH_COLLECTIONS":"search/collections","SEARCH_USERS":"search/users","CURRENT_USER_PROFILE":"me","UPDATE_CURRENT_USER_PROFILE":"me","STATS_TOTALS":"stats/total","STATS_MONTH":"stats/month","LIST_COLLECTIONS":"collections","LIST_FEATURED_COLLECTIONS":"collections/featured","LIST_CURATED_COLLECTIONS":"collections/curated","GET_COLLECTION":"collections/:id","GET_CURATED_COLLECTION":"collections/curated/:id","GET_COLLECTION_PHOTOS":"collections/:id/photos","GET_CURATED_COLLECTION_PHOTOS":"collections/curated/:id/photos","LIST_RELATED_COLLECTION":"collections/:id/related","CREATE_NEW_COLLECTION":"collections","UPDATE_EXISTING_COLLECTION":"collections/:id","DELETE_COLLECTION":"collections/:id","ADD_PHOTO_TO_COLLECTION":"collections/:collection_id/add","REMOVE_PHOTO_FROM_COLLECTION":"collections/:collection_id/remove"};
 
 /***/ }),
 
@@ -262,11 +262,12 @@ var WrapSplashApi = function () {
         _classCallCheck(this, WrapSplashApi);
 
         //The location of the Unsplash API
-        this.API_LOCATION = 'https://api.unsplash.com/';
+        this.API_LOCATION = _url_config2.default.API_LOCATION;
         //The API to generate Unsplash API Bearer Token.
-        this.BEARER_TOKEN_URL = 'https://unsplash.com/oauth/token';
+        this.BEARER_TOKEN_URL = _url_config2.default.BEARER_TOKEN_URL;
 
         if (options) {
+            //Object.assign
             options = _extends({}, options);
             this.access_key = options.access_key ? options.access_key : function () {
                 throw new Error('Access Key missing!');
