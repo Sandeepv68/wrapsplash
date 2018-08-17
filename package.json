@@ -2,9 +2,11 @@
   "name": "wrapsplash",
   "version": "v3.0.6",
   "description": "A simple npm wrapper module to use the popular Unsplash API.",
-  "main": "dist/main.js",
+  "private": false,
+  "main": "dist/wrapsplash.min.js",
   "scripts": {
-    "build": "webpack",
+    "build-prod": "webpack --config=./script/webpack.config.js --env.production",
+    "build-dev": "webpack --config=./script/webpack.config.js",
     "test": "mocha --timeout 10000 --require babel-core/register --colors ./test/*.spec.js"
   },
   "repository": "git+https://github.com/SandeepVattapparambil/wrapsplash.git",
@@ -37,6 +39,7 @@
     "eslint": "^5.0.1",
     "mocha": "^5.1.1",
     "webpack": "^4.6.0",
-    "webpack-cli": "^3.0.8"
+    "webpack-cli": "^3.0.8",
+    "webpack-node-externals": "^1.7.2"
   }
 }
