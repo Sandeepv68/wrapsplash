@@ -6,7 +6,7 @@
 //import chaijs
 import chai from 'chai';
 //import WrapSplashJS
-import WrapASplashAPI from '../dist/main';
+import WrapASplashAPI from '../dist/wrapsplash';
 
 //set the Expect Assertion
 const expect = chai.expect;

@@ -6,7 +6,7 @@
 //import chaijs
 import chai from 'chai';
 //import WrapSplashJS
-import WrapASplashAPI from '../dist/main';
+import WrapASplashAPI from '../dist/wrapsplash';
 
 //set the Expect Assertion
 const expect = chai.expect;
@@ -48,13 +48,6 @@ describe('Given an instance of WrapSplashJS', () => {
     });
 
     describe('When the function -> listPhotos() is called with parameters page = 1 & per_page = 20', () => {
-        it('It should return the Array of list of photos from Unsplash API', (done) => {
-            UnsplashAPI.listPhotos(1, 20).then((result) => {
-                expect(result).to.be.a('array');
-            }).then(() => done(), done).catch((error) => {
-                expect(error).to.be.a('object');
-            });
-        });
         it('It should return the result array having length between 0 - 20', (done) => {
             UnsplashAPI.listPhotos(1, 20).then((result) => {
                 expect(result).to.have.length.within(0, 20);
