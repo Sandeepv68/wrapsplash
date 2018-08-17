@@ -109,7 +109,7 @@ class WrapSplashApi {
      * @memberof UnsplashApi
      * @returns {Object} - The user's Access Token JSON data object.
      */
-    generateBeareToken() {
+    generateBearerToken() {
         let url = this.BEARER_TOKEN_URL +
             '?client_id=' + (this.access_key) +
             '&client_secret=' + (this.secret_key) +
