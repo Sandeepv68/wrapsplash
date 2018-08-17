@@ -138,6 +138,11 @@ UnsplashApi.getPhotoLink('<photo-id>')
 This library depends on [fetch](https://github.com/github/fetch) to make requests to the [Unsplash API](https://unsplash.com/documentation). For environments that don't support fetch, you'll need to provide a **polyfill**.
 
 ### Changelog
+#### v3.0.7
+- Library is now a UMD module, runs on client and server-side
+- Dependencies are now external
+- Compressed builds asset size reduced to 17KiB
+
 #### v3.0.6
 - Compressed builds available
     - Asset size reduced to 30.7KiB
