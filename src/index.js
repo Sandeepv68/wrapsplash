@@ -30,11 +30,12 @@ class WrapSplashApi {
      */
     constructor(options) {
         //The location of the Unsplash API
-        this.API_LOCATION = 'https://api.unsplash.com/';
+        this.API_LOCATION = urlConfig.API_LOCATION;
         //The API to generate Unsplash API Bearer Token.
-        this.BEARER_TOKEN_URL = 'https://unsplash.com/oauth/token';
+        this.BEARER_TOKEN_URL = urlConfig.BEARER_TOKEN_URL;
 
         if (options) {
+            //Object.assign
             options = { ...{}, ...options };
             this.access_key = (options.access_key ? options.access_key : (function () {
                 throw new Error('Access Key missing!');
