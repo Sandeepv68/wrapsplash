@@ -3,3 +3,4 @@ node_modules/*
 .backup/*
 test/test.js
 test/template.js
+coverage/
