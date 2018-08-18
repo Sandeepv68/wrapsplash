@@ -7,7 +7,13 @@
   "scripts": {
     "build-prod": "webpack --config=./script/webpack.config.js --env.production",
     "build-dev": "webpack --config=./script/webpack.config.js",
-    "test": "mocha --timeout 10000 --require babel-core/register --colors ./test/test.spec.js"
+    "testOld": "mocha --timeout 10000 --require babel-core/register --colors ./test/test.spec.js",
+    "test": "jest ./test/wrapsplash.spec.js --coverage"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   },
   "repository": "git+https://github.com/SandeepVattapparambil/wrapsplash.git",
   "keywords": [
