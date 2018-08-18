@@ -91,16 +91,16 @@ class WrapSplashApi {
                         message: 'Content Deleted'
                     };
                     return response;
-                }
-                if (res.status === 403) {
+                } else if (res.status === 403) {
                     let response = {
                         status: res.status,
                         statusText: res.statusText,
                         message: 'Rate Limit Exceeded'
                     };
                     return response;
-                }
-                return res.data;
+                } else {
+                    return res.data
+                };
             }).catch(function (err) {
                 return Promise.reject(err);
             });
