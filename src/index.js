@@ -1,5 +1,5 @@
 /**
- * Wrapsplash API wrapper v3.0.6 for Unspalsh API
+ * Wrapsplash API wrapper v3.0.7 for Unspalsh API
  * written by: Sandeep Vattapparambil
  * email: sandeepv68@gmail.com
  * website: www.sandeepv.in
@@ -14,7 +14,7 @@
 
 'use strict';
 //constants. 
-import fetch from 'node-fetch';
+import AxiosAjax from '../lib/axiosAjaxLib';
 import crypto from 'crypto';
 //API Schema definitions
 import urlConfig from '../config/url_config.json';
@@ -30,12 +30,15 @@ class WrapSplashApi {
      */
     constructor(options) {
         //The location of the Unsplash API
-        this.API_LOCATION = 'https://api.unsplash.com/';
+        this.API_LOCATION = urlConfig.API_LOCATION;
         //The API to generate Unsplash API Bearer Token.
-        this.BEARER_TOKEN_URL = 'https://unsplash.com/oauth/token';
+        this.BEARER_TOKEN_URL = urlConfig.BEARER_TOKEN_URL;
 
         if (options) {
-            options = { ...{}, ...options };
+            //Object.assign
+            options = { ...{},
+                ...options
+            };
             this.access_key = (options.access_key ? options.access_key : (function () {
                 throw new Error('Access Key missing!');
             }()));
@@ -56,6 +59,7 @@ class WrapSplashApi {
             this.headers = {
                 'Content-type': 'application/json',
                 'Authorization': (this.bearer_token ? 'Bearer ' + this.bearer_token : 'Client-ID ' + this.access_key),
+                'X-Requested-With': 'WrapSplash',
                 'X-WrapSplash-Header': hash
             };
         } else {
@@ -75,30 +79,31 @@ class WrapSplashApi {
      * @returns {Object} - The JSON data object.
      */
     fetchUrl(url, method) {
-        return fetch(url, {
-            method: method,
+        let ajax = new AxiosAjax({
             headers: (this.headers ? this.headers : '')
-        }).then(function (res) {
-            if (res.status === 204) {
-                let response = {
-                    status: res.status,
-                    statusText: res.statusText,
-                    message: 'Content Deleted'
-                };
-                return response;
-            }
-            if (res.status === 403) {
-                let response = {
-                    status: res.status,
-                    statusText: res.statusText,
-                    message: 'Rate Limit Exceeded'
-                };
-                return response;
-            }
-            return res.json();
-        }).catch(function (err) {
-            return Promise.reject(err);
         });
+        return ajax.makeRequest(url, method.toLowerCase())
+            .then(function (res) {
+                if (res.status === 204) {
+                    let response = {
+                        status: res.status,
+                        statusText: res.statusText,
+                        message: 'Content Deleted'
+                    };
+                    return response;
+                }
+                if (res.status === 403) {
+                    let response = {
+                        status: res.status,
+                        statusText: res.statusText,
+                        message: 'Rate Limit Exceeded'
+                    };
+                    return response;
+                }
+                return res.data;
+            }).catch(function (err) {
+                return Promise.reject(err);
+            });
     };
 
     /**
@@ -109,7 +114,7 @@ class WrapSplashApi {
      * @memberof UnsplashApi
      * @returns {Object} - The user's Access Token JSON data object.
      */
-    generateBeareToken() {
+    generateBearerToken() {
         let url = this.BEARER_TOKEN_URL +
             '?client_id=' + (this.access_key) +
             '&client_secret=' + (this.secret_key) +
