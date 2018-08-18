@@ -355,21 +355,21 @@ var AxiosAjax = function () {
   _createClass(AxiosAjax, [{
     key: 'makeRequest',
     value: function makeRequest(url, method, queryParameters, body) {
-      url = url ? url : function () {
+      this.url = url ? url : function () {
         throw new Error('URL required');
       }();
-      queryParameters = queryParameters || {};
-      body = body || {};
-      method = method || 'get';
+      this.queryParameters = queryParameters || {};
+      this.body = body || {};
+      this.method = method || 'get';
 
       /**
        * Make the request
        */
       var request = this.http({
-        method: method,
-        url: url,
-        params: queryParameters,
-        data: body
+        method: this.method,
+        url: this.url,
+        params: this.queryParameters,
+        data: this.body
       });
 
       return request;
@@ -606,7 +606,7 @@ var WrapSplashApi = function () {
             var ajax = new _axiosAjaxLib2.default({
                 headers: this.headers ? this.headers : ''
             });
-            return ajax.http(url, method.toLocaleLowerCase()).then(function (res) {
+            return ajax.makeRequest(url, method.toLowerCase()).then(function (res) {
                 if (res.status === 204) {
                     var response = {
                         status: res.status,
