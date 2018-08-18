@@ -143,6 +143,7 @@ This library depends on [fetch](https://github.com/github/fetch) to make request
 - Dependencies are now external
 - Compressed builds asset size reduced to 17KiB
 - AJAX migrated to Axios from fetch.
+- Tests migrated to Jest
 
 #### v3.0.6
 - Compressed builds available
