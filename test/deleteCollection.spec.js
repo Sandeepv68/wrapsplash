@@ -32,7 +32,7 @@ describe('Given an instance of WrapSplashJS', () => {
     //describe the unit test
     describe('When the function -> deleteCollection() is called with parameter -> collection_id', () => {
         it('It should return the status object with status and statusText', (done) => {
-            UnsplashAPI.deleteCollection(2526139).then((result) => {
+            UnsplashAPI.deleteCollection(2526220).then((result) => {
                 expect(result).to.be.a('object');
                 if(result.status){
                     expect(result.status).to.be.equal(204);
