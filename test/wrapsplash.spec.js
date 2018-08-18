@@ -33,29 +33,69 @@ describe('Given an instance of wrapsplash..', () => {
     /**
      * Current User
      */
-    describe('When getCurrentUserProfile() function is called..', () => {
-        test('Should return the User data object', async (done) => {
-            const response = await wrapsplash.getCurrentUserProfile();
-            expect(typeof response).toBe('object');
-            done();
+    describe('Current User tests ->', () => {
+        describe('When getCurrentUserProfile() function is called..', () => {
+            test('Should return the User data object', async (done) => {
+                const response = await wrapsplash.getCurrentUserProfile();
+                expect(typeof response).toBe('object');
+                done();
+            });
         });
-    });
-    describe('When updateCurrentUserProfile() function is called..', () => {
-        test('Should return the updated User data object', async (done) => {
-            const response = await wrapsplash.updateCurrentUserProfile();
-            expect(typeof response).toBe('object');
-            done();
+        describe('When updateCurrentUserProfile() function is called..', () => {
+            test('Should return the updated User data object', async (done) => {
+                const response = await wrapsplash.updateCurrentUserProfile();
+                expect(typeof response).toBe('object');
+                done();
+            });
         });
+
     });
 
     /**
      * Users
      */
-    describe('When getPublicProfile() function is called with parameter..', () => {
-        test('Should return the public profile data of user', async (done) => {
-            const response = await wrapsplash.getPublicProfile();
-            expect(typeof response).toBe('object');
-            done();
+    describe('Users tests ->', () => {
+        describe('When getPublicProfile() function is called with parameter..', () => {
+            test('Should return the public profile data of user', async (done) => {
+                const response = await wrapsplash.getPublicProfile('sandeepv');
+                expect(typeof response).toBe('object');
+                done();
+            });
+        });
+        describe('When getUserPortfolio() function is called with parameter..', () => {
+            test('Should return the portfolio of user', async (done) => {
+                const response = await wrapsplash.getUserPortfolio('sandeepv');
+                expect(typeof response).toBe('object');
+                done();
+            });
+        });
+        describe('When getUserPhotos() function is called with parameter..', () => {
+            test('Should return the Users photos', async (done) => {
+                const response = await wrapsplash.getUserPhotos('sandeepv');
+                expect(typeof response).toBe('object');
+                done();
+            });
+        });
+        describe('When getUserLikedPhotos() function is called with parameter..', () => {
+            test('Should return the User liked photos', async (done) => {
+                const response = await wrapsplash.getUserLikedPhotos('sandeepv');
+                expect(typeof response).toBe('object');
+                done();
+            });
+        });
+        describe('When getUserCollections() function is called with parameter..', () => {
+            test('Should return the User photo collections', async (done) => {
+                const response = await wrapsplash.getUserCollections('sandeepv');
+                expect(typeof response).toBe('object');
+                done();
+            });
+        });
+        describe('When getUserStatistics() function is called with parameter..', () => {
+            test('Should return the User statistics', async (done) => {
+                const response = await wrapsplash.getUserStatistics('sandeepv');
+                expect(typeof response).toBe('object');
+                done();
+            });
         });
     });
 
