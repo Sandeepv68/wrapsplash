@@ -501,7 +501,7 @@ exports.constants = {
 
 "use strict";
 /**
- * Wrapsplash API wrapper v3.0.6 for Unspalsh API
+ * Wrapsplash API wrapper v3.0.7 for Unspalsh API
  * written by: Sandeep Vattapparambil
  * email: sandeepv68@gmail.com
  * website: www.sandeepv.in
@@ -614,16 +614,16 @@ var WrapSplashApi = function () {
                         message: 'Content Deleted'
                     };
                     return response;
-                }
-                if (res.status === 403) {
+                } else if (res.status === 403) {
                     var _response = {
                         status: res.status,
                         statusText: res.statusText,
                         message: 'Rate Limit Exceeded'
                     };
                     return _response;
-                }
-                return res.data;
+                } else {
+                    return res.data;
+                };
             }).catch(function (err) {
                 return Promise.reject(err);
             });
