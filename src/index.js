@@ -82,7 +82,7 @@ class WrapSplashApi {
         let ajax = new AxiosAjax({
             headers: (this.headers ? this.headers : '')
         });
-        return ajax.http(url, method.toLocaleLowerCase())
+        return ajax.makeRequest(url, method.toLowerCase())
             .then(function (res) {
                 if (res.status === 204) {
                     let response = {
