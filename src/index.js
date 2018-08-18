@@ -14,7 +14,7 @@
 
 'use strict';
 //constants. 
-import fetch from 'node-fetch';
+import AxiosAjax from '../lib/axiosAjaxLib';
 import crypto from 'crypto';
 //API Schema definitions
 import urlConfig from '../config/url_config.json';
@@ -36,7 +36,9 @@ class WrapSplashApi {
 
         if (options) {
             //Object.assign
-            options = { ...{}, ...options };
+            options = { ...{},
+                ...options
+            };
             this.access_key = (options.access_key ? options.access_key : (function () {
                 throw new Error('Access Key missing!');
             }()));
@@ -57,6 +59,7 @@ class WrapSplashApi {
             this.headers = {
                 'Content-type': 'application/json',
                 'Authorization': (this.bearer_token ? 'Bearer ' + this.bearer_token : 'Client-ID ' + this.access_key),
+                'X-Requested-With': 'WrapSplash',
                 'X-WrapSplash-Header': hash
             };
         } else {
@@ -76,30 +79,31 @@ class WrapSplashApi {
      * @returns {Object} - The JSON data object.
      */
     fetchUrl(url, method) {
-        return fetch(url, {
-            method: method,
+        let ajax = new AxiosAjax({
             headers: (this.headers ? this.headers : '')
-        }).then(function (res) {
-            if (res.status === 204) {
-                let response = {
-                    status: res.status,
-                    statusText: res.statusText,
-                    message: 'Content Deleted'
-                };
-                return response;
-            }
-            if (res.status === 403) {
-                let response = {
-                    status: res.status,
-                    statusText: res.statusText,
-                    message: 'Rate Limit Exceeded'
-                };
-                return response;
-            }
-            return res.json();
-        }).catch(function (err) {
-            return Promise.reject(err);
         });
+        return ajax.http(url, method.toLocaleLowerCase())
+            .then(function (res) {
+                if (res.status === 204) {
+                    let response = {
+                        status: res.status,
+                        statusText: res.statusText,
+                        message: 'Content Deleted'
+                    };
+                    return response;
+                }
+                if (res.status === 403) {
+                    let response = {
+                        status: res.status,
+                        statusText: res.statusText,
+                        message: 'Rate Limit Exceeded'
+                    };
+                    return response;
+                }
+                return res.data;
+            }).catch(function (err) {
+                return Promise.reject(err);
+            });
     };
 
     /**

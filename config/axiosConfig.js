@@ -7,7 +7,7 @@ const axiosConfig = {
     url: '',
 
     // `method` is the request method to be used when making the request
-    method: 'get', // default
+    method: '', // default
 
     // `baseURL` will be prepended to `url` unless `url` is absolute.
     // It can be convenient to set `baseURL` for an instance of axios to pass relative URLs
@@ -34,9 +34,7 @@ const axiosConfig = {
     // }],
 
     // `headers` are custom headers to be sent
-    headers: {
-        'X-Requested-With': 'WrapSplash'
-    },
+    headers: {},
 
     // `params` are the URL parameters to be sent with the request
     // Must be a plain object or a URLSearchParams object
@@ -127,12 +125,12 @@ const axiosConfig = {
     // `httpAgent` and `httpsAgent` define a custom agent to be used when performing http
     // and https requests, respectively, in node.js. This allows options to be added like
     // `keepAlive` that are not enabled by default.
-    httpAgent: new http.Agent({
-        keepAlive: true
-    }),
-    httpsAgent: new https.Agent({
-        keepAlive: true
-    }),
+    // httpAgent: new http.Agent({
+    //     keepAlive: true
+    // }),
+    // httpsAgent: new https.Agent({
+    //     keepAlive: true
+    // }),
 
     // 'proxy' defines the hostname and port of the proxy server.
     // You can also define your proxy using the conventional `http_proxy` and
@@ -152,7 +150,7 @@ const axiosConfig = {
 
     // `cancelToken` specifies a cancel token that can be used to cancel the request
     // (see Cancellation section below for details)
-    cancelToken: new CancelToken(function (cancel) {})
+    //cancelToken: new CancelToken(function (cancel) {})
 };
 
 module.exports = axiosConfig;
