@@ -1,6 +1,6 @@
 {
   "name": "wrapsplash",
-  "version": "v3.0.7",
+  "version": "v3.0.8",
   "description": "A simple npm wrapper module to use the popular Unsplash API.",
   "private": false,
   "main": "dist/wrapsplash.min.js",

@@ -1,10 +1,10 @@
 ![wrapsplash-logo](public/logo.png)
-# WrapSplashJS v3.0.7
+# WrapSplashJS v3.0.8
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f5061e7366044dd3a250baba5a2e9f6b)](https://app.codacy.com/app/sandeepv68/wrapsplash?utm_source=github.com&utm_medium=referral&utm_content=SandeepVattapparambil/wrapsplash&utm_campaign=badger) ![license](https://img.shields.io/github/license/SandeepVattapparambil/wrapsplash.svg) ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg) ![Dependecies](https://david-dm.org/SandeepVattapparambil/wrapsplash.svg) ![Status](https://img.shields.io/badge/status-stable-green.svg) ![npm version](https://badge.fury.io/js/wrapsplash.svg) [![Known Vulnerabilities](https://snyk.io/test/github/SandeepVattapparambil/wrapsplash/badge.svg?targetFile=package.json)](https://snyk.io/test/github/SandeepVattapparambil/wrapsplash?targetFile=package.json) [![Greenkeeper badge](https://badges.greenkeeper.io/SandeepVattapparambil/wrapsplash.svg)](https://greenkeeper.io/) ![Travis](https://travis-ci.org/SandeepVattapparambil/wrapsplash.svg?branch=master) ![GitHub issues](https://img.shields.io/github/issues/SandeepVattapparambil/wrapsplash.svg) ![GitHub forks](https://img.shields.io/github/forks/SandeepVattapparambil/wrapsplash.svg) ![GitHub stars](https://img.shields.io/github/stars/SandeepVattapparambil/wrapsplash.svg) ![Twitter](https://img.shields.io/twitter/url/https/github.com/SandeepVattapparambil/wrapsplash.svg?style=social)
 
 
-WrapSplashJS is a simple, promise-based API wrapper for the popular [Unsplash](https://unsplash.com/) platform. 
+WrapSplashJS is a simple, promise-based API wrapper for the popular [Unsplash](https://unsplash.com/) platform. WrapSplashJS is a UMD module, so that it can be used across multiple javascript environments ranging from browsers to servers(nodejs).
 Unsplash provides beautiful high quality free images and photos that you can download and use for any project  without any attribution.
 
 Before using the Unsplash API, you need to **register as a developer** and **read the API Guidelines.**
@@ -13,11 +13,12 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 
 ## Table of Contents
 <!--ts-->
-* [About](#wrapsplashjs-v306)
+* [About](#wrapsplashjs-v308)
 * [Installation](#installation)
 * [Sample Usage](#sample-usage)
 * [Dependency](#dependency)
 * [Changelog](#changelog)
+    * [v3.0.8](#v308)
     * [v3.0.7](#v307)
     * [v3.0.6](#v306)
     * [v3.0.5](#v305)
@@ -135,9 +136,12 @@ UnsplashApi.getPhotoLink('<photo-id>')
 }
 ```
 ### Dependency
-This library depends on [fetch](https://github.com/github/fetch) to make requests to the [Unsplash API](https://unsplash.com/documentation). For environments that don't support fetch, you'll need to provide a **polyfill**.
+This library depends on [axios](https://www.npmjs.com/package/axios) to make requests to the [Unsplash API](https://unsplash.com/documentation). Install Axios as a dependency.
 
 ### Changelog
+#### v3.0.8
+- Dependency updates
+
 #### v3.0.7
 - Library is now a UMD module, runs on client and server-side
 - Dependencies are now external
