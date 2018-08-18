@@ -8,16 +8,6 @@ const webpack = require('webpack');
 const fs = require('fs');
 const nodeExternals = require('webpack-node-externals');
 
-//Include the node modules
-// let nodeModules = {};
-// fs.readdirSync('node_modules')
-//     .filter(function (x) {
-//         return ['.bin'].indexOf(x) === -1;
-//     })
-//     .forEach(function (mod) {
-//         nodeModules[mod] = 'commonjs ' + mod;
-//     });
-
 //Webpack config object
 module.exports = (env) => {
     return {

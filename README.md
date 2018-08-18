@@ -1,8 +1,7 @@
 ![wrapsplash-logo](public/logo.png)
-# WrapSplashJS v3.0.6
+# WrapSplashJS v3.0.7
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f5061e7366044dd3a250baba5a2e9f6b)](https://app.codacy.com/app/sandeepv68/wrapsplash?utm_source=github.com&utm_medium=referral&utm_content=SandeepVattapparambil/wrapsplash&utm_campaign=badger)
-![license](https://img.shields.io/github/license/SandeepVattapparambil/wrapsplash.svg) ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg) ![Dependecies](https://david-dm.org/SandeepVattapparambil/wrapsplash.svg) ![Status](https://img.shields.io/badge/status-stable-green.svg) ![npm version](https://badge.fury.io/js/wrapsplash.svg) [![Known Vulnerabilities](https://snyk.io/test/github/SandeepVattapparambil/wrapsplash/badge.svg?targetFile=package.json)](https://snyk.io/test/github/SandeepVattapparambil/wrapsplash?targetFile=package.json) [![Greenkeeper badge](https://badges.greenkeeper.io/SandeepVattapparambil/wrapsplash.svg)](https://greenkeeper.io/) ![Travis](https://travis-ci.org/SandeepVattapparambil/wrapsplash.svg?branch=master) ![GitHub issues](https://img.shields.io/github/issues/SandeepVattapparambil/wrapsplash.svg) ![GitHub forks](https://img.shields.io/github/forks/SandeepVattapparambil/wrapsplash.svg) ![GitHub stars](https://img.shields.io/github/stars/SandeepVattapparambil/wrapsplash.svg) ![Twitter](https://img.shields.io/twitter/url/https/github.com/SandeepVattapparambil/wrapsplash.svg?style=social)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f5061e7366044dd3a250baba5a2e9f6b)](https://app.codacy.com/app/sandeepv68/wrapsplash?utm_source=github.com&utm_medium=referral&utm_content=SandeepVattapparambil/wrapsplash&utm_campaign=badger) ![license](https://img.shields.io/github/license/SandeepVattapparambil/wrapsplash.svg) ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg) ![Dependecies](https://david-dm.org/SandeepVattapparambil/wrapsplash.svg) ![Status](https://img.shields.io/badge/status-stable-green.svg) ![npm version](https://badge.fury.io/js/wrapsplash.svg) [![Known Vulnerabilities](https://snyk.io/test/github/SandeepVattapparambil/wrapsplash/badge.svg?targetFile=package.json)](https://snyk.io/test/github/SandeepVattapparambil/wrapsplash?targetFile=package.json) [![Greenkeeper badge](https://badges.greenkeeper.io/SandeepVattapparambil/wrapsplash.svg)](https://greenkeeper.io/) ![Travis](https://travis-ci.org/SandeepVattapparambil/wrapsplash.svg?branch=master) ![GitHub issues](https://img.shields.io/github/issues/SandeepVattapparambil/wrapsplash.svg) ![GitHub forks](https://img.shields.io/github/forks/SandeepVattapparambil/wrapsplash.svg) ![GitHub stars](https://img.shields.io/github/stars/SandeepVattapparambil/wrapsplash.svg) ![Twitter](https://img.shields.io/twitter/url/https/github.com/SandeepVattapparambil/wrapsplash.svg?style=social)
 
 
 WrapSplashJS is a simple, promise-based API wrapper for the popular [Unsplash](https://unsplash.com/) platform. 
@@ -19,6 +18,7 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 * [Sample Usage](#sample-usage)
 * [Dependency](#dependency)
 * [Changelog](#changelog)
+    * [v3.0.7](#v307)
     * [v3.0.6](#v306)
     * [v3.0.5](#v305)
     * [v3.0.4](#v304)
@@ -142,6 +142,7 @@ This library depends on [fetch](https://github.com/github/fetch) to make request
 - Library is now a UMD module, runs on client and server-side
 - Dependencies are now external
 - Compressed builds asset size reduced to 17KiB
+- AJAX migrated to Axios from fetch.
 
 #### v3.0.6
 - Compressed builds available
