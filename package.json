@@ -7,7 +7,7 @@
   "scripts": {
     "build-prod": "webpack --config=./script/webpack.config.js --env.production",
     "build-dev": "webpack --config=./script/webpack.config.js",
-    "test": "mocha --timeout 10000 --require babel-core/register --colors ./test/*.spec.js"
+    "test": "mocha --timeout 10000 --require babel-core/register --colors ./test/test.spec.js"
   },
   "repository": "git+https://github.com/SandeepVattapparambil/wrapsplash.git",
   "keywords": [
@@ -24,8 +24,7 @@
   },
   "homepage": "https://github.com/SandeepVattapparambil/wrapsplash#readme",
   "dependencies": {
-    "axios": "^0.18.0",
-    "node-fetch": "^2.1.2"
+    "axios": "^0.18.0"
   },
   "directories": {
     "examples": "examples"
