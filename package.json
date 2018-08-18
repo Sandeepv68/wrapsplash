@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/SandeepVattapparambil/wrapsplash#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "node-fetch": "^2.1.2"
   },
   "directories": {
