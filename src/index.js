@@ -29,12 +29,36 @@ class WrapSplashApi {
      * The Options object constructor
      * @param  {Object} options - The Options object to initialize the class.
      */
-    constructor(options) {
+    constructor() {
         //The location of the Unsplash API
         this.API_LOCATION = urlConfig.API_LOCATION;
         //The API to generate Unsplash API Bearer Token.
         this.BEARER_TOKEN_URL = urlConfig.BEARER_TOKEN_URL;
+        //Defaults
+        this.access_key = '';
+        this.secret_key = '';
+        this.redirect_uri = '';
+        this.code = '';
+        this.grant_type = 'authorization_code';
+        this.bearer_token = '';
+        this.headers = {
+            'Content-type': 'application/json',
+            'X-Requested-With': 'WrapSplash',
+        };
+        //Set available order_by options
+        this.availableOrders = ['latest', 'oldest', 'popular'];
+        //Sset available orientation options
+        this.availableOrientations = ['landscape', 'portrait', 'squarish'];
+    };
 
+    /**
+     * @memberof WrapSplashApi
+     * @function init
+     * A helper function to initialize WrapSplashApi
+     * @param {Object} options - The options object
+     * @returns {*} - The class initialized with the passed in parameters
+     */
+    init(options = {}) {
         if (options) {
             //Object.assign
             options = { ...{},
@@ -66,11 +90,7 @@ class WrapSplashApi {
         } else {
             throw new Error('Initilisation parameters missing!');
         }
-        //Set available order_by options
-        this.availableOrders = ['latest', 'oldest', 'popular'];
-        //Sset available orientation options
-        this.availableOrientations = ['landscape', 'portrait', 'squarish'];
-    };
+    }
 
     /**
      * Heler function to fetch a given url
