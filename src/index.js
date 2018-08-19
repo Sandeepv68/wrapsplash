@@ -35,6 +35,7 @@ class WrapSplashApi {
         //The API to generate Unsplash API Bearer Token.
         this.BEARER_TOKEN_URL = urlConfig.BEARER_TOKEN_URL;
         //Defaults
+        this.options = {};
         this.access_key = '';
         this.secret_key = '';
         this.redirect_uri = '';
@@ -54,41 +55,38 @@ class WrapSplashApi {
     /**
      * @memberof WrapSplashApi
      * @function init
-     * A helper function to initialize WrapSplashApi
+     * A helper function to initialize WrapSplashApi and validate the options
      * @param {Object} options - The options object
      * @returns {*} - The class initialized with the passed in parameters
      */
     init(options = {}) {
-        if (options) {
+        if (options && typeof options === 'object' && options !== null) {
             //Object.assign
-            options = { ...{},
-                ...options
-            };
-            this.access_key = (options.access_key ? options.access_key : (function () {
+            this.options = {...options};
+            this.access_key = (this.options.access_key ? this.options.access_key : (function () {
                 throw new Error('Access Key missing!');
             }()));
-            this.secret_key = (options.secret_key ? options.secret_key : (function () {
+            this.secret_key = (this.options.secret_key ? this.options.secret_key : (function () {
                 throw new Error('Secret Key missing!');
             }()));
-            this.redirect_uri = (options.redirect_uri ? options.redirect_uri : (function () {
+            this.redirect_uri = (this.options.redirect_uri ? this.options.redirect_uri : (function () {
                 throw new Error('Redirect URI missing!');
             }()));
-            this.code = (options.code ? options.code : (function () {
+            this.code = (this.options.code ? this.options.code : (function () {
                 throw new Error('Authorization Code missing!');
             }()));
-            this.grant_type = 'authorization_code';
             let hash = crypto.createHmac('sha256', this.access_key).digest('hex');
-            if (options.bearer_token) {
-                this.bearer_token = options.bearer_token;
+            if (this.options.bearer_token) {
+                this.bearer_token = this.options.bearer_token;
             }
-            this.headers = {
-                'Content-type': 'application/json',
-                'Authorization': (this.bearer_token ? 'Bearer ' + this.bearer_token : 'Client-ID ' + this.access_key),
-                'X-Requested-With': 'WrapSplash',
-                'X-WrapSplash-Header': hash
+            this.headers = { ...this.headers,
+                ...{
+                    'Authorization': (this.bearer_token ? 'Bearer ' + this.bearer_token : 'Client-ID ' + this.access_key),
+                    'X-WrapSplash-Header': hash
+                }
             };
         } else {
-            throw new Error('Initilisation parameters missing!');
+            throw new Error('Initilisation parameters required!');
         }
     }
 
