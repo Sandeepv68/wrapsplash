@@ -11,13 +11,13 @@ import WrapsplashLib from '../dist/wrapsplash';
 /**
  * initialize variable
  */
-let wrapsplash;
+let wrapsplash = new WrapsplashLib();
 
 /**
  * Initialization
  */
 beforeAll(() => {
-    wrapsplash = new WrapsplashLib({
+    wrapsplash.init({
         access_key: '50f4e0688dedca12f966ea044221acf610e2ce4b47a24b4b34c0d34f8ac79cdb',
         secret_key: '6e4e5f1bb0b0d9987ff763907345b0b87281c1a2273daf4643f5f0a0c6c7b2da',
         redirect_uri: 'urn:ietf:wg:oauth:2.0:oob',
