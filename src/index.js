@@ -14,8 +14,9 @@
 
 'use strict';
 //constants. 
-import AxiosAjax from '../lib/axiosAjaxLib';
 import crypto from 'crypto';
+//Import library
+import AxiosAjax from '../lib/axiosAjaxLib';
 //API Schema definitions
 import urlConfig from '../config/url_config.json';
 
