@@ -594,26 +594,31 @@ var WrapSplashApi = function () {
             if (options && (typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object' && options !== null) {
                 //Object.assign
                 this.options = _extends({}, options);
-                this.access_key = this.options.access_key ? this.options.access_key : function () {
-                    throw new Error('Access Key missing!');
-                }();
-                this.secret_key = this.options.secret_key ? this.options.secret_key : function () {
-                    throw new Error('Secret Key missing!');
-                }();
-                this.redirect_uri = this.options.redirect_uri ? this.options.redirect_uri : function () {
-                    throw new Error('Redirect URI missing!');
-                }();
-                this.code = this.options.code ? this.options.code : function () {
-                    throw new Error('Authorization Code missing!');
-                }();
-                var hash = _crypto2.default.createHmac('sha256', this.access_key).digest('hex');
+                var hash = _crypto2.default.createHmac('sha256', this.options.access_key ? this.options.access_key : this.options.bearer_token).digest('hex');
                 if (this.options.bearer_token) {
-                    this.bearer_token = this.options.bearer_token;
+                    this.headers = _extends({}, this.headers, {
+                        'Authorization': 'Bearer ' + this.options.bearer_token,
+                        'X-WrapSplash-Header': hash
+                    });
+                } else {
+                    this.access_key = this.options.access_key ? this.options.access_key : function () {
+                        throw new Error('Access Key missing!');
+                    }();
+                    this.secret_key = this.options.secret_key ? this.options.secret_key : function () {
+                        throw new Error('Secret Key missing!');
+                    }();
+                    this.redirect_uri = this.options.redirect_uri ? this.options.redirect_uri : function () {
+                        throw new Error('Redirect URI missing!');
+                    }();
+                    this.code = this.options.code ? this.options.code : function () {
+                        throw new Error('Authorization Code missing!');
+                    }();
+
+                    this.headers = _extends({}, this.headers, {
+                        'Authorization': 'Client-ID ' + this.options.access_key,
+                        'X-WrapSplash-Header': hash
+                    });
                 }
-                this.headers = _extends({}, this.headers, {
-                    'Authorization': this.bearer_token ? 'Bearer ' + this.bearer_token : 'Client-ID ' + this.access_key,
-                    'X-WrapSplash-Header': hash
-                });
             } else {
                 throw new Error('Initilisation parameters required!');
             }
