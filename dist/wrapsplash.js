@@ -501,7 +501,7 @@ exports.constants = {
 
 "use strict";
 /**
- * Wrapsplash API wrapper v3.0.7 for Unspalsh API
+ * Wrapsplash API wrapper v3.0.8 for Unspalsh API
  * written by: Sandeep Vattapparambil
  * email: sandeepv68@gmail.com
  * website: www.sandeepv.in
@@ -519,17 +519,21 @@ exports.constants = {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+//Import library
+
 //API Schema definitions
 
-
-var _axiosAjaxLib = __webpack_require__(/*! ../lib/axiosAjaxLib */ "./lib/axiosAjaxLib.js");
-
-var _axiosAjaxLib2 = _interopRequireDefault(_axiosAjaxLib);
 
 var _crypto = __webpack_require__(/*! crypto */ "./node_modules/crypto-browserify/index.js");
 
 var _crypto2 = _interopRequireDefault(_crypto);
+
+var _axiosAjaxLib = __webpack_require__(/*! ../lib/axiosAjaxLib */ "./lib/axiosAjaxLib.js");
+
+var _axiosAjaxLib2 = _interopRequireDefault(_axiosAjaxLib);
 
 var _url_config = __webpack_require__(/*! ../config/url_config.json */ "./config/url_config.json");
 
@@ -548,43 +552,25 @@ var WrapSplashApi = function () {
      * The Options object constructor
      * @param  {Object} options - The Options object to initialize the class.
      */
-    function WrapSplashApi(options) {
+    function WrapSplashApi() {
         _classCallCheck(this, WrapSplashApi);
 
         //The location of the Unsplash API
         this.API_LOCATION = _url_config2.default.API_LOCATION;
         //The API to generate Unsplash API Bearer Token.
         this.BEARER_TOKEN_URL = _url_config2.default.BEARER_TOKEN_URL;
-
-        if (options) {
-            //Object.assign
-            options = _extends({}, options);
-            this.access_key = options.access_key ? options.access_key : function () {
-                throw new Error('Access Key missing!');
-            }();
-            this.secret_key = options.secret_key ? options.secret_key : function () {
-                throw new Error('Secret Key missing!');
-            }();
-            this.redirect_uri = options.redirect_uri ? options.redirect_uri : function () {
-                throw new Error('Redirect URI missing!');
-            }();
-            this.code = options.code ? options.code : function () {
-                throw new Error('Authorization Code missing!');
-            }();
-            this.grant_type = 'authorization_code';
-            var hash = _crypto2.default.createHmac('sha256', this.access_key).digest('hex');
-            if (options.bearer_token) {
-                this.bearer_token = options.bearer_token;
-            }
-            this.headers = {
-                'Content-type': 'application/json',
-                'Authorization': this.bearer_token ? 'Bearer ' + this.bearer_token : 'Client-ID ' + this.access_key,
-                'X-Requested-With': 'WrapSplash',
-                'X-WrapSplash-Header': hash
-            };
-        } else {
-            throw new Error('Initilisation parameters missing!');
-        }
+        //Defaults
+        this.options = {};
+        this.access_key = '';
+        this.secret_key = '';
+        this.redirect_uri = '';
+        this.code = '';
+        this.grant_type = 'authorization_code';
+        this.bearer_token = '';
+        this.headers = {
+            'Content-type': 'application/json',
+            'X-Requested-With': 'WrapSplash'
+        };
         //Set available order_by options
         this.availableOrders = ['latest', 'oldest', 'popular'];
         //Sset available orientation options
@@ -592,8 +578,46 @@ var WrapSplashApi = function () {
     }
 
     _createClass(WrapSplashApi, [{
-        key: 'fetchUrl',
+        key: 'init',
 
+
+        /**
+         * @memberof WrapSplashApi
+         * @function init
+         * A helper function to initialize WrapSplashApi and validate the options
+         * @param {Object} options - The options object
+         * @returns {*} - The class initialized with the passed in parameters
+         */
+        value: function init() {
+            var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+            if (options && (typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object' && options !== null) {
+                //Object.assign
+                this.options = _extends({}, options);
+                this.access_key = this.options.access_key ? this.options.access_key : function () {
+                    throw new Error('Access Key missing!');
+                }();
+                this.secret_key = this.options.secret_key ? this.options.secret_key : function () {
+                    throw new Error('Secret Key missing!');
+                }();
+                this.redirect_uri = this.options.redirect_uri ? this.options.redirect_uri : function () {
+                    throw new Error('Redirect URI missing!');
+                }();
+                this.code = this.options.code ? this.options.code : function () {
+                    throw new Error('Authorization Code missing!');
+                }();
+                var hash = _crypto2.default.createHmac('sha256', this.access_key).digest('hex');
+                if (this.options.bearer_token) {
+                    this.bearer_token = this.options.bearer_token;
+                }
+                this.headers = _extends({}, this.headers, {
+                    'Authorization': this.bearer_token ? 'Bearer ' + this.bearer_token : 'Client-ID ' + this.access_key,
+                    'X-WrapSplash-Header': hash
+                });
+            } else {
+                throw new Error('Initilisation parameters required!');
+            }
+        }
 
         /**
          * Heler function to fetch a given url
@@ -602,6 +626,9 @@ var WrapSplashApi = function () {
          * @param {String} method - The HTTP method to be used (required).
          * @returns {Object} - The JSON data object.
          */
+
+    }, {
+        key: 'fetchUrl',
         value: function fetchUrl(url, method) {
             var ajax = new _axiosAjaxLib2.default({
                 headers: this.headers ? this.headers : ''
