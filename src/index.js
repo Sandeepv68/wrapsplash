@@ -59,7 +59,7 @@ class WrapSplashApi {
      * @param {Object} options - The options object
      * @returns {*} - The class initialized with the passed in parameters
      */
-    init(options = {}) {
+    init = (options = {}) => {
         if (options && typeof options === 'object' && options !== null) {
             //Object.assign
             this.options = { ...options
@@ -72,6 +72,7 @@ class WrapSplashApi {
                         'X-WrapSplash-Header': hash
                     }
                 };
+                return;
             } else {
                 this.access_key = (this.options.access_key ? this.options.access_key : (function () {
                     throw new Error('Access Key missing!');
@@ -92,6 +93,7 @@ class WrapSplashApi {
                         'X-WrapSplash-Header': hash
                     }
                 };
+                return;
             }
         } else {
             throw new Error('Initilisation parameters required!');
@@ -105,7 +107,7 @@ class WrapSplashApi {
      * @param {String} method - The HTTP method to be used (required).
      * @returns {Object} - The JSON data object.
      */
-    fetchUrl(url, method) {
+    fetchUrl = (url, method) => {
         let ajax = new AxiosAjax({
             headers: (this.headers ? this.headers : '')
         });
@@ -141,7 +143,7 @@ class WrapSplashApi {
      * @memberof UnsplashApi
      * @returns {Object} - The user's Access Token JSON data object.
      */
-    generateBearerToken() {
+    generateBearerToken = () => {
         let url = this.BEARER_TOKEN_URL +
             '?client_id=' + (this.access_key) +
             '&client_secret=' + (this.secret_key) +
@@ -162,7 +164,7 @@ class WrapSplashApi {
      * @memberof UnsplashApi
      * @returns {Object} - The JSON data Object.
      */
-    getCurrentUserProfile() {
+    getCurrentUserProfile = () => {
         let url = this.API_LOCATION + urlConfig.CURRENT_USER_PROFILE;
         return this.fetchUrl(url, 'GET');
     };
@@ -182,7 +184,7 @@ class WrapSplashApi {
      * @param {String} instagram_username - The Instagram username of the current user (Optional).
      * @returns {Object} - The JSON data Object.
      */
-    updateCurrentUserProfile(username, first_name, last_name, email, url, location, bio, instagram_username) {
+    updateCurrentUserProfile = (username, first_name, last_name, email, url, location, bio, instagram_username) => {
         let _url = this.API_LOCATION + urlConfig.UPDATE_CURRENT_USER_PROFILE + '?' +
             (username ? '?username=' + username : '') +
             (first_name ? '&first_name=' + first_name : '') +
@@ -205,7 +207,7 @@ class WrapSplashApi {
      *                          Will be included in the 'profile_image' object as 'custom'. 
      * @returns {Object} - The JSON data object. 
      */
-    getPublicProfile(username, width, height) {
+    getPublicProfile = (username, width, height) => {
         let url = this.API_LOCATION + urlConfig.USERS_PUBLIC_PROFILE + username +
             '?w=' + (width && !isNaN(width) ? +width : '') +
             '&h=' + (height && !isNaN(height) ? +height : '');
@@ -219,7 +221,7 @@ class WrapSplashApi {
      * @param {*} username - The username of the user to fetch the portfolio (required).
      * @returns {Object} - The JSON data object. 
      */
-    getUserPortfolio(username) {
+    getUserPortfolio = (username) => {
         if (!username || username === '' || username === undefined) {
             throw new Error('Parameter : username is required and cannot be empty!');
         }
@@ -240,7 +242,7 @@ class WrapSplashApi {
      * @param {String} order_by - The sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest).
      * @returns {Object} - The JSON data object. 
      */
-    getUserPhotos(username, page, per_page, stats, resolution, quantity, order_by) {
+    getUserPhotos = (username, page, per_page, stats, resolution, quantity, order_by) => {
         if (!username || username === '' || username === undefined) {
             throw new Error('Parameter : username is required and cannot be empty!');
         }
@@ -270,7 +272,7 @@ class WrapSplashApi {
      * @param {String} order_by - The sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest).
      * @returns {Object} - The JSON data object. 
      */
-    getUserLikedPhotos(username, page, per_page, order_by) {
+    getUserLikedPhotos = (username, page, per_page, order_by) => {
         if (!username || username === '' || username === undefined) {
             throw new Error('Parameter : username is required and cannot be empty!');
         }
@@ -293,7 +295,7 @@ class WrapSplashApi {
      * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
      * @returns {Object} - The JSON data object. 
      */
-    getUserCollections(username, page, per_page) {
+    getUserCollections = (username, page, per_page) => {
         if (!username || username === '' || username === undefined) {
             throw new Error('Parameter : username is required and cannot be empty!');
         }
@@ -313,7 +315,7 @@ class WrapSplashApi {
      * @param {Number} quantity - The amount of for each stat (Optional; default: 30).
      * @returns {Object} - The JSON data object. 
      */
-    getUserStatistics(username, resolution, quantity) {
+    getUserStatistics = (username, resolution, quantity) => {
         if (!username || username === '' || username === undefined) {
             throw new Error('Parameter : username is required and cannot be empty!');
         }
@@ -332,7 +334,7 @@ class WrapSplashApi {
      * @param {String} order_by - The sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest).
      * @returns {Object} - The JSON data object. 
      */
-    listPhotos(page, per_page, order_by) {
+    listPhotos = (page, per_page, order_by) => {
         if (order_by !== undefined && !this.availableOrders.includes(order_by)) {
             throw new Error('Parameter : order_by has an unsupported value!');
         }
@@ -352,7 +354,7 @@ class WrapSplashApi {
      * @param {String} order_by - The sort method for results (Optional, Valid values: latest, oldest, popular; defaults to: latest).
      * @returns {Object} - The JSON data object. 
      */
-    listCuratedPhotos(page, per_page, order_by) {
+    listCuratedPhotos = (page, per_page, order_by) => {
         if (order_by !== undefined && !this.availableOrders.includes(order_by)) {
             throw new Error('Parameter : order_by has an unsupported value!');
         }
@@ -373,7 +375,7 @@ class WrapSplashApi {
      * @param {String} rect - 4 comma-separated integers representing x, y, width, height of the cropped rectangle (optional).
      * @returns {Object} - The JSON data object. 
      */
-    getAPhoto(id, width, height, rect) {
+    getAPhoto = (id, width, height, rect) => {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
@@ -403,7 +405,7 @@ class WrapSplashApi {
      * @param {Number} count - The number of photos to return. (Default: 1; max: 30).
      * @returns {Object} - The JSON data object.
      */
-    getARandomPhoto(collections, featured, username, query, width, height, orientation, count) {
+    getARandomPhoto = (collections, featured, username, query, width, height, orientation, count) => {
         if (!this.availableOrientations.includes(orientation) && orientation !== undefined) {
             throw new Error('Parameter : orientation has an unsupported value!');
         }
@@ -429,7 +431,7 @@ class WrapSplashApi {
      * @param {Number} quantity - The amount of for each stat (Optional; default: 30).
      * @returns {Object} - The JSON data object.
      */
-    getPhotoStatistics(id, resolution, quantity) {
+    getPhotoStatistics = (id, resolution, quantity) => {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
@@ -449,7 +451,7 @@ class WrapSplashApi {
      * @param {String} id - The photo’s ID (required).
      * @returns {Object} - The JSON data object.
      */
-    getPhotoLink(id) {
+    getPhotoLink = (id) => {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
@@ -467,7 +469,7 @@ class WrapSplashApi {
      * @param {Object} exif - The exif object holding exif data (Optional).
      * @returns {Object} - The updated photo data object.
      */
-    updatePhoto(id, location, exif) {
+    updatePhoto = (id, location, exif) => {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
@@ -499,7 +501,7 @@ class WrapSplashApi {
      * @param {String} id - The photo’s ID (required).
      * @returns {Object} - The updated photo data object.
      */
-    likePhoto(id) {
+    likePhoto = (id) => {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
@@ -516,7 +518,7 @@ class WrapSplashApi {
      * @param {String} id - The photo’s ID (required).
      * @returns {Object} - The updated photo data object.
      */
-    unlikePhoto(id) {
+    unlikePhoto = (id) => {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
@@ -535,7 +537,7 @@ class WrapSplashApi {
      * @param {String} orientation - Filter search results by photo orientation (Optional, Valid values are landscape, portrait, and squarish, defaults to: landscape).
      * @returns {Object} - The JSON data object.
      */
-    search(query, page, per_page, collections, orientation) {
+    search = (query, page, per_page, collections, orientation) => {
         if (!this.availableOrientations.includes(orientation) && orientation !== undefined) {
             throw new Error('Parameter : orientation has an unsupported value!');
         }
@@ -560,7 +562,7 @@ class WrapSplashApi {
      * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
      * @returns {Object} - The JSON data object.
      */
-    searchCollections(query, page, per_page) {
+    searchCollections = (query, page, per_page) => {
         if (query === undefined) {
             throw new Error('Parameter : query is missing!');
         }
@@ -580,7 +582,7 @@ class WrapSplashApi {
      * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
      * @returns {Object} - The JSON data object.
      */
-    searchUsers(query, page, per_page) {
+    searchUsers = (query, page, per_page) => {
         if (query === undefined) {
             throw new Error('Parameter : query is missing!');
         }
@@ -597,7 +599,7 @@ class WrapSplashApi {
      * @memberof UnsplashApi
      * @returns {Object} - The JSON data object.
      */
-    getStatsTotals() {
+    getStatsTotals = () => {
         let url = this.API_LOCATION + urlConfig.STATS_TOTALS;
         return this.fetchUrl(url, 'GET');
     };
@@ -608,7 +610,7 @@ class WrapSplashApi {
      * @memberof UnsplashApi
      * @returns {Object} - The JSON data object.
      */
-    getStatsMonth() {
+    getStatsMonth = () => {
         let url = this.API_LOCATION + urlConfig.STATS_MONTH;
         return this.fetchUrl(url, 'GET');
     };
@@ -621,7 +623,7 @@ class WrapSplashApi {
      * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
      * @returns {Object} - The JSON data object.
      */
-    listCollections(page, per_page) {
+    listCollections = (page, per_page) => {
         let url = this.API_LOCATION + urlConfig.LIST_COLLECTIONS +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
@@ -636,7 +638,7 @@ class WrapSplashApi {
      * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
      * @returns {Object} - The JSON data object.
      */
-    listFeaturedCollections(page, per_page) {
+    listFeaturedCollections = (page, per_page) => {
         let url = this.API_LOCATION + urlConfig.LIST_FEATURED_COLLECTIONS +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
@@ -651,7 +653,7 @@ class WrapSplashApi {
      * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
      * @returns {Object} - The JSON data object.
      */
-    listCuratedCollections(page, per_page) {
+    listCuratedCollections = (page, per_page) => {
         let url = this.API_LOCATION + urlConfig.LIST_CURATED_COLLECTIONS +
             '?page=' + (page && !isNaN(page) ? +page : 1) +
             '&per_page=' + (per_page && !isNaN(per_page) ? +per_page : 10);
@@ -666,7 +668,7 @@ class WrapSplashApi {
      * @param {String} id - The Collection ID (required).
      * @returns {Object} - The updated photo data object.
      */
-    getCollection(id) {
+    getCollection = (id) => {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
@@ -682,7 +684,7 @@ class WrapSplashApi {
      * @param {String} id - The Collection ID (required).
      * @returns {Object} - The updated photo data object.
      */
-    getCuratedCollection(id) {
+    getCuratedCollection = (id) => {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
@@ -699,7 +701,7 @@ class WrapSplashApi {
      * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
      * @returns {Object} - The updated photo data object.
      */
-    getCollectionPhotos(id, page, per_page) {
+    getCollectionPhotos = (id, page, per_page) => {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
@@ -718,7 +720,7 @@ class WrapSplashApi {
      * @param {Number} per_page - The number of items per page (Optional, defaults to 10).
      * @returns {Object} - The updated photo data object.
      */
-    getCuratedCollectionPhotos(id, page, per_page) {
+    getCuratedCollectionPhotos = (id, page, per_page) => {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
@@ -735,7 +737,7 @@ class WrapSplashApi {
      * @param {String} id - The Collection ID (required).
      * @returns {Object} - The updated photo data object.
      */
-    listRelatedCollections(id) {
+    listRelatedCollections = (id) => {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
@@ -753,7 +755,7 @@ class WrapSplashApi {
      * @param {Boolean} private - Whether to make this collection private (Optional; default false).
      * @returns {Object} - The updated photo data object.
      */
-    createNewColection(title, description, private_collection) {
+    createNewColection = (title, description, private_collection) => {
         if (!title || title === undefined || title.length === 0) {
             throw new Error('Parameter : title is required!');
         }
@@ -776,7 +778,7 @@ class WrapSplashApi {
      * @param {Boolean} private - Whether to make this collection private (Optional; default false).
      * @returns {Object} - The updated photo data object.
      */
-    updateExistingCollection(id, title, description, private_collection) {
+    updateExistingCollection = (id, title, description, private_collection) => {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
@@ -799,7 +801,7 @@ class WrapSplashApi {
      * @param {String} id - The Collection ID (Required).
      * @returns {Object} - The updated photo data object.
      */
-    deleteCollection(id) {
+    deleteCollection = (id) => {
         if (!id || id === undefined || id.length === 0) {
             throw new Error('Parameter : id is required!');
         }
@@ -817,7 +819,7 @@ class WrapSplashApi {
      * @param {String} photo_id - The photo’s ID (Required).
      * @returns {Object} - The updated photo data object.
      */
-    addPhotoToCollection(collection_id, photo_id) {
+    addPhotoToCollection = (collection_id, photo_id) => {
         if (!collection_id || collection_id === undefined || collection_id.length === 0) {
             throw new Error('Parameter : collection_id is required!');
         }
@@ -838,7 +840,7 @@ class WrapSplashApi {
      * @param {String} photo_id - The photo’s ID (Required).
      * @returns {Object} - The updated photo data object.
      */
-    removePhotoFromCollection(collection_id, photo_id) {
+    removePhotoFromCollection = (collection_id, photo_id) => {
         if (!collection_id || collection_id === undefined || collection_id.length === 0) {
             throw new Error('Parameter : collection_id is required!');
         }
