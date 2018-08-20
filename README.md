@@ -1044,4 +1044,4 @@ THE SOFTWARE.
 Thanks, and Kudos to team [Unsplash](https://unsplash.com/) for creating a wonderful platform for sharing 
 beautiful high quality free images and photos.
 
-Made with :heart: at [Nylnda](https://www.nylnda.com/) by [Sandeep Vattapparambil](https://github.com/SandeepVattapparambil).
+Made with :heart: by [Sandeep Vattapparambil](https://github.com/SandeepVattapparambil).
