@@ -1,10 +1,10 @@
 ![wrapsplash-logo](public/logo.png)
-# WrapSplashJS v3.0.8
+# WrapSplashJS v4.0.0
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f5061e7366044dd3a250baba5a2e9f6b)](https://app.codacy.com/app/sandeepv68/wrapsplash?utm_source=github.com&utm_medium=referral&utm_content=SandeepVattapparambil/wrapsplash&utm_campaign=badger) ![license](https://img.shields.io/github/license/SandeepVattapparambil/wrapsplash.svg) ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg) ![Dependecies](https://david-dm.org/SandeepVattapparambil/wrapsplash.svg) ![Status](https://img.shields.io/badge/status-stable-green.svg) ![npm version](https://badge.fury.io/js/wrapsplash.svg) [![Known Vulnerabilities](https://snyk.io/test/github/SandeepVattapparambil/wrapsplash/badge.svg?targetFile=package.json)](https://snyk.io/test/github/SandeepVattapparambil/wrapsplash?targetFile=package.json) [![Greenkeeper badge](https://badges.greenkeeper.io/SandeepVattapparambil/wrapsplash.svg)](https://greenkeeper.io/) ![Travis](https://travis-ci.org/SandeepVattapparambil/wrapsplash.svg?branch=master) ![GitHub issues](https://img.shields.io/github/issues/SandeepVattapparambil/wrapsplash.svg) ![GitHub forks](https://img.shields.io/github/forks/SandeepVattapparambil/wrapsplash.svg) ![GitHub stars](https://img.shields.io/github/stars/SandeepVattapparambil/wrapsplash.svg) ![Twitter](https://img.shields.io/twitter/url/https/github.com/SandeepVattapparambil/wrapsplash.svg?style=social)
 
 
-WrapSplashJS is a simple, promise-based API wrapper for the popular [Unsplash](https://unsplash.com/) platform. WrapSplashJS is a UMD module, so that it can be used across multiple javascript environments ranging from browsers to servers(nodejs).
+WrapSplashJS is a simple, promise-based API wrapper for the popular [Unsplash](https://unsplash.com/) platform. WrapSplashJS is a **UMD** module, so that it can be used across multiple javascript environments ranging from browsers to servers(nodejs).
 Unsplash provides beautiful high quality free images and photos that you can download and use for any project  without any attribution.
 
 Before using the Unsplash API, you need to **register as a developer** and **read the API Guidelines.**
@@ -13,11 +13,12 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 
 ## Table of Contents
 <!--ts-->
-* [About](#wrapsplashjs-v308)
+* [About](#wrapsplashjs-v400)
 * [Installation](#installation)
 * [Sample Usage](#sample-usage)
 * [Dependency](#dependency)
 * [Changelog](#changelog)
+    * [v4.0.0](#v400)
     * [v3.0.8](#v308)
     * [v3.0.7](#v307)
     * [v3.0.6](#v306)
@@ -89,9 +90,8 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 * [Tests](#tests)
 * [License](#license)
 * [Acknowledgements](#acknowledgements)
-
-
 <!--te-->
+
 ## Installation
 
 Install the package from NPM
@@ -109,11 +109,11 @@ const WrapSplash = require('wrapsplash');
 //OR using ES6/7 Import statement
 import WrapSplash from 'wrapsplash';
 
-let UnsplashApi = new WrapSplash({
-    access_key: '<api-key>',
-    secret_key: '<secret-key>',
-    redirect_uri: '<callback-url>',
-    code: '<authorization-code>',
+//Instantiate WrapSplash
+let UnsplashApi = new WrapSplash();
+
+//Initialize with parameters
+UnsplashApi.init({
     bearer_token: '<bearer-token>'
 });
 
@@ -132,20 +132,24 @@ UnsplashApi.getPhotoLink('<photo-id>')
 ```
 ```sh
 {
-  "url": "https://image.unsplash.com/example"
+  "url": "https://images.unsplash.com/photo-1532800621406-0280a106eaa6?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&s=70d0f9f241b88d82c7d0e52b93476e6a"
 }
 ```
 ### Dependency
 This library depends on [axios](https://www.npmjs.com/package/axios) to make requests to the [Unsplash API](https://unsplash.com/documentation). Install Axios as a dependency.
 
 ### Changelog
+#### v4.0.0
+- Major refactorings
+- Updated documentation
+
 #### v3.0.8
 - Dependency updates
 
 #### v3.0.7
 - Library is now a UMD module, runs on client and server-side
 - Dependencies are now external
-- Compressed builds asset size reduced to 17KiB
+- Compressed builds asset size reduced to 19KiB
 - AJAX migrated to Axios from fetch.
 - Tests migrated to Jest
 
@@ -303,18 +307,42 @@ Before using wrapsplash:
 - If you have a Bearer Token, then its super, or else you can generate it using **wrapsplash**.
 > **Note:** ```Authorization code``` can be obtained by clicking the ```Authorize``` link  next to ```Callback URLs```. Also ```Authorization code``` is a one-time use code, you have to generate it again, if the action fails!.
 
-#### Generate Bearer Token 
-A Promise factory to generate a Bearer Token for ```write_access``` to private data.
-> **Note:** No Parameters are required.
+#### Wrapsplash init()
+Wrapsplash instance has to be initialized with your credentials obtained from Unsplash developer account for programatic access.These credentials information are passed in to the `init()` function as options. The following example shows all the available options.
 
 ```js
-const WrapSplash = require('wrapsplash');
-let UnsplashApi = new WrapSplash({
+UnsplashApi.init({
     access_key: '<api-key>',
     secret_key: '<secret-key>',
     redirect_uri: '<callback-url>',
-    code: '<authorization-code>'
+    code: '<authorization-code>',
+    bearer_token: '<bearer-token>'
 });
+```
+If you have a `bearer_token`, then only bearer token has to be passed in.
+```js
+UnsplashApi.init({
+    bearer_token: '<bearer-token>'
+});
+```
+
+#### Generate Bearer Token 
+A Promise factory to generate a Bearer Token for ```write_access``` to private data.
+The ```init()``` method in this case requires `access_key`, `secret_key`, `redirect_uri`, and `code` to generate bearer token.
+> **Note:** No Parameters are required for this function.
+
+```js
+const WrapSplash = require('wrapsplash');
+
+let UnsplashApi = new WrapSplash();
+
+UnsplashApi.init({
+    access_key: '<api-key>',
+    secret_key: '<secret-key>',
+    redirect_uri: '<callback-url>',
+    code: '<authorization-code>',
+});
+
 UnsplashApi.generateBearerToken()
     .then(function (result) {
         console.log(result);
@@ -334,11 +362,7 @@ If successful, the response body will be a JSON representation of your user’s 
 ```
 and once you have your ```bearer_token``` you can use it in your app like this:
 ```js
-let UnsplashApi = new WrapSplash({
-    access_key: '<api-key>',
-    secret_key: '<secret-key>',
-    redirect_uri: '<callback-url>',
-    code: '<authorization-code>',
+UnsplashApi.init({
     bearer_token: '<bearer-token>'
 });
 ```
@@ -1043,4 +1067,4 @@ THE SOFTWARE.
 Thanks, and Kudos to team [Unsplash](https://unsplash.com/) for creating a wonderful platform for sharing 
 beautiful high quality free images and photos.
 
-Made with :heart: at [Nylnda](https://www.nylnda.com/) by [Sandeep Vattapparambil](https://github.com/SandeepVattapparambil).
+Made with :heart: by [Sandeep Vattapparambil](https://github.com/SandeepVattapparambil).
