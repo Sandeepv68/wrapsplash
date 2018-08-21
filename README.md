@@ -1037,8 +1037,7 @@ script:
 Here's the [Travis build page for this project](https://travis-ci.org/SandeepVattapparambil/wrapsplash), which shows the tests passing.
 
 ### Tests
-WrapSplashJS uses ```Mochajs``` as the testing environment and ```Chaijs``` as the assertion library.
-All the test spec files are available in the ```test``` folder. For more information read the README file from the test folder.
+WrapSplashJS uses ```Jest``` as the testing environment. All the test spec files are available in the ```test``` folder. For more information read the README file from the test folder.
 
 ### License
 The MIT License
