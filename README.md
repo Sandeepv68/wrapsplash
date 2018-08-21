@@ -43,6 +43,7 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
     * [Authorization](#authorization)
         * [Public Actions](#public-actions)
         * [User Authentication](#user-authentication)
+        * [Wrapsplash init()](#wrapsplash-init)
         * [Generate Bearer Token](#generate-bearer-token)
     * [Users APIs](#users-apis)
         * [Get User's Public Profile](#get-users-public-profile)
