@@ -302,6 +302,23 @@ Before using wrapsplash:
 - Get the ```Access Key```, ```Secret key```, ```Callback URLs```, and ```Authorization code```.
 - If you have a Bearer Token, then its super, or else you can generate it using **wrapsplash**.
 > **Note:** ```Authorization code``` can be obtained by clicking the ```Authorize``` link  next to ```Callback URLs```. Also ```Authorization code``` is a one-time use code, you have to generate it again, if the action fails!.
+#### Wrapsplash init()
+Wrapsplash instance has to be initialized with your credentials obtained from Unsplash developer account for programatic access.These credentials information are passed in to the `init()` function as options. The following example shows all the available options.
+```js
+UnsplashApi.init({
+    access_key: '<api-key>',
+    secret_key: '<secret-key>',
+    redirect_uri: '<callback-url>',
+    code: '<authorization-code>',
+    bearer_token: '<bearer-token>'
+});
+```
+If you have a `bearer_token`, then only bearer token has to be passed in.
+```js
+UnsplashApi.init({
+    bearer_token: '<bearer-token>'
+});
+```
 
 #### Generate Bearer Token 
 A Promise factory to generate a Bearer Token for ```write_access``` to private data.
@@ -317,7 +334,7 @@ UnsplashApi.init({
     access_key: '<api-key>',
     secret_key: '<secret-key>',
     redirect_uri: '<callback-url>',
-    code: '<authorization-code>'
+    code: '<authorization-code>',
 });
 
 UnsplashApi.generateBearerToken()
