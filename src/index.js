@@ -21,8 +21,8 @@ import AxiosAjax from '../lib/axiosAjaxLib';
 import urlConfig from '../config/url_config.json';
 
 /**
- * The main WrapSplash Class.
- * @class WrapSplash
+ * The main WrapSplashApi Class.
+ * @class WrapSplashApi
  */
 class WrapSplashApi {
     /**
@@ -101,7 +101,7 @@ class WrapSplashApi {
     }
 
     /**
-     * Heler function to fetch a given url
+     * Helper function to fetch a given url
      * @function fetchUrl
      * @param {String} url - The url to be fetched (required).
      * @param {String} method - The HTTP method to be used (required).
