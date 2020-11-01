@@ -104,7 +104,7 @@ describe('Given an instance of wrapsplash..', () => {
      */
     describe('When getAphoto() function is called with a photoId..', () => {
         test('Should return the Single photo data object', (done) => {
-            wrapsplash.getAPhoto('w8_IxV1G_EI').then(response => {
+            wrapsplash.getAPhoto('g3PyXO4A0yc').then(response => {
                 expect(typeof response).toBe('object');
                 done();
             });
