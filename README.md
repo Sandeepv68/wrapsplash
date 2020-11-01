@@ -1,5 +1,5 @@
 ![wrapsplash-logo](public/logo.png)
-# WrapSplashJS v4.0.1
+# WrapSplashJS v4.1.0
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f5061e7366044dd3a250baba5a2e9f6b)](https://app.codacy.com/app/sandeepv68/wrapsplash?utm_source=github.com&utm_medium=referral&utm_content=SandeepVattapparambil/wrapsplash&utm_campaign=badger) ![license](https://img.shields.io/github/license/SandeepVattapparambil/wrapsplash.svg) ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg) ![Dependecies](https://david-dm.org/SandeepVattapparambil/wrapsplash.svg) ![Status](https://img.shields.io/badge/status-stable-green.svg) ![npm version](https://badge.fury.io/js/wrapsplash.svg) [![Known Vulnerabilities](https://snyk.io/test/github/SandeepVattapparambil/wrapsplash/badge.svg?targetFile=package.json)](https://snyk.io/test/github/SandeepVattapparambil/wrapsplash?targetFile=package.json) [![Greenkeeper badge](https://badges.greenkeeper.io/SandeepVattapparambil/wrapsplash.svg)](https://greenkeeper.io/) ![Travis](https://travis-ci.org/SandeepVattapparambil/wrapsplash.svg?branch=master) ![GitHub issues](https://img.shields.io/github/issues/SandeepVattapparambil/wrapsplash.svg) ![GitHub forks](https://img.shields.io/github/forks/SandeepVattapparambil/wrapsplash.svg) ![GitHub stars](https://img.shields.io/github/stars/SandeepVattapparambil/wrapsplash.svg) ![Twitter](https://img.shields.io/twitter/url/https/github.com/SandeepVattapparambil/wrapsplash.svg?style=social)
 
@@ -18,8 +18,9 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 * [Sample Usage](#sample-usage)
 * [Dependency](#dependency)
 * [Changelog](#changelog)
+    * [v4.1.0](#v410)
     * [v4.0.1](#v401)
-    * [v4.0.1](#v400)
+    * [v4.0.0](#v400)
     * [v3.0.8](#v308)
     * [v3.0.7](#v307)
     * [v3.0.6](#v306)
@@ -141,6 +142,10 @@ UnsplashApi.getPhotoLink('<photo-id>')
 This library depends on [axios](https://www.npmjs.com/package/axios) to make requests to the [Unsplash API](https://unsplash.com/documentation). Install Axios as a dependency.
 
 ### Changelog
+#### v4.1.0
+- Dependency vulnerabilities audited and fixed
+- Test suite updated
+
 #### v4.0.1
 - Typos fixed
 - Dependency vulnerabilities audited and fixed
