@@ -1,870 +1,490 @@
-import x from "axios";
-var N = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
-function F(_) {
-  return _ && _.__esModule && Object.prototype.hasOwnProperty.call(_, "default") ? _.default : _;
-}
-function W(_) {
-  if (_.__esModule) return _;
-  var t = _.default;
-  if (typeof t == "function") {
-    var e = function r() {
-      return this instanceof r ? Reflect.construct(t, arguments, this.constructor) : t.apply(this, arguments);
-    };
-    e.prototype = t.prototype;
-  } else e = {};
-  return Object.defineProperty(e, "__esModule", { value: !0 }), Object.keys(_).forEach(function(r) {
-    var o = Object.getOwnPropertyDescriptor(_, r);
-    Object.defineProperty(e, r, o.get ? o : {
-      enumerable: !0,
-      get: function() {
-        return _[r];
-      }
-    });
-  }), e;
-}
-var D = { exports: {} };
-function j(_) {
-  throw new Error('Could not dynamically require "' + _ + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
-}
-var m = { exports: {} };
-const K = {}, z = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  default: K
-}, Symbol.toStringTag, { value: "Module" })), M = /* @__PURE__ */ W(z);
-var H;
-function V() {
-  return H || (H = 1, function(_, t) {
-    (function(e, r) {
-      _.exports = r();
-    })(N, function() {
-      var e = e || function(r, o) {
-        var l;
-        if (typeof window < "u" && window.crypto && (l = window.crypto), typeof self < "u" && self.crypto && (l = self.crypto), typeof globalThis < "u" && globalThis.crypto && (l = globalThis.crypto), !l && typeof window < "u" && window.msCrypto && (l = window.msCrypto), !l && typeof N < "u" && N.crypto && (l = N.crypto), !l && typeof j == "function")
-          try {
-            l = M;
-          } catch {
-          }
-        var d = function() {
-          if (l) {
-            if (typeof l.getRandomValues == "function")
-              try {
-                return l.getRandomValues(new Uint32Array(1))[0];
-              } catch {
-              }
-            if (typeof l.randomBytes == "function")
-              try {
-                return l.randomBytes(4).readInt32LE();
-              } catch {
-              }
-          }
-          throw new Error("Native crypto module could not be used to get secure random number.");
-        }, p = Object.create || /* @__PURE__ */ function() {
-          function i() {
-          }
-          return function(s) {
-            var n;
-            return i.prototype = s, n = new i(), i.prototype = null, n;
-          };
-        }(), I = {}, R = I.lib = {}, v = R.Base = /* @__PURE__ */ function() {
-          return {
-            /**
-             * Creates a new object that inherits from this object.
-             *
-             * @param {Object} overrides Properties to copy into the new object.
-             *
-             * @return {Object} The new object.
-             *
-             * @static
-             *
-             * @example
-             *
-             *     var MyType = CryptoJS.lib.Base.extend({
-             *         field: 'value',
-             *
-             *         method: function () {
-             *         }
-             *     });
-             */
-            extend: function(i) {
-              var s = p(this);
-              return i && s.mixIn(i), (!s.hasOwnProperty("init") || this.init === s.init) && (s.init = function() {
-                s.$super.init.apply(this, arguments);
-              }), s.init.prototype = s, s.$super = this, s;
-            },
-            /**
-             * Extends this object and runs the init method.
-             * Arguments to create() will be passed to init().
-             *
-             * @return {Object} The new object.
-             *
-             * @static
-             *
-             * @example
-             *
-             *     var instance = MyType.create();
-             */
-            create: function() {
-              var i = this.extend();
-              return i.init.apply(i, arguments), i;
-            },
-            /**
-             * Initializes a newly created object.
-             * Override this method to add some logic when your objects are created.
-             *
-             * @example
-             *
-             *     var MyType = CryptoJS.lib.Base.extend({
-             *         init: function () {
-             *             // ...
-             *         }
-             *     });
-             */
-            init: function() {
-            },
-            /**
-             * Copies properties into this object.
-             *
-             * @param {Object} properties The properties to mix in.
-             *
-             * @example
-             *
-             *     MyType.mixIn({
-             *         field: 'value'
-             *     });
-             */
-            mixIn: function(i) {
-              for (var s in i)
-                i.hasOwnProperty(s) && (this[s] = i[s]);
-              i.hasOwnProperty("toString") && (this.toString = i.toString);
-            },
-            /**
-             * Creates a copy of this object.
-             *
-             * @return {Object} The clone.
-             *
-             * @example
-             *
-             *     var clone = instance.clone();
-             */
-            clone: function() {
-              return this.init.prototype.extend(this);
-            }
-          };
-        }(), C = R.WordArray = v.extend({
-          /**
-           * Initializes a newly created word array.
-           *
-           * @param {Array} words (Optional) An array of 32-bit words.
-           * @param {number} sigBytes (Optional) The number of significant bytes in the words.
-           *
-           * @example
-           *
-           *     var wordArray = CryptoJS.lib.WordArray.create();
-           *     var wordArray = CryptoJS.lib.WordArray.create([0x00010203, 0x04050607]);
-           *     var wordArray = CryptoJS.lib.WordArray.create([0x00010203, 0x04050607], 6);
-           */
-          init: function(i, s) {
-            i = this.words = i || [], s != o ? this.sigBytes = s : this.sigBytes = i.length * 4;
-          },
-          /**
-           * Converts this word array to a string.
-           *
-           * @param {Encoder} encoder (Optional) The encoding strategy to use. Default: CryptoJS.enc.Hex
-           *
-           * @return {string} The stringified word array.
-           *
-           * @example
-           *
-           *     var string = wordArray + '';
-           *     var string = wordArray.toString();
-           *     var string = wordArray.toString(CryptoJS.enc.Utf8);
-           */
-          toString: function(i) {
-            return (i || S).stringify(this);
-          },
-          /**
-           * Concatenates a word array to this word array.
-           *
-           * @param {WordArray} wordArray The word array to append.
-           *
-           * @return {WordArray} This word array.
-           *
-           * @example
-           *
-           *     wordArray1.concat(wordArray2);
-           */
-          concat: function(i) {
-            var s = this.words, n = i.words, c = this.sigBytes, O = i.sigBytes;
-            if (this.clamp(), c % 4)
-              for (var T = 0; T < O; T++) {
-                var E = n[T >>> 2] >>> 24 - T % 4 * 8 & 255;
-                s[c + T >>> 2] |= E << 24 - (c + T) % 4 * 8;
-              }
-            else
-              for (var f = 0; f < O; f += 4)
-                s[c + f >>> 2] = n[f >>> 2];
-            return this.sigBytes += O, this;
-          },
-          /**
-           * Removes insignificant bits.
-           *
-           * @example
-           *
-           *     wordArray.clamp();
-           */
-          clamp: function() {
-            var i = this.words, s = this.sigBytes;
-            i[s >>> 2] &= 4294967295 << 32 - s % 4 * 8, i.length = r.ceil(s / 4);
-          },
-          /**
-           * Creates a copy of this word array.
-           *
-           * @return {WordArray} The clone.
-           *
-           * @example
-           *
-           *     var clone = wordArray.clone();
-           */
-          clone: function() {
-            var i = v.clone.call(this);
-            return i.words = this.words.slice(0), i;
-          },
-          /**
-           * Creates a word array filled with random bytes.
-           *
-           * @param {number} nBytes The number of random bytes to generate.
-           *
-           * @return {WordArray} The random word array.
-           *
-           * @static
-           *
-           * @example
-           *
-           *     var wordArray = CryptoJS.lib.WordArray.random(16);
-           */
-          random: function(i) {
-            for (var s = [], n = 0; n < i; n += 4)
-              s.push(d());
-            return new C.init(s, i);
-          }
-        }), g = I.enc = {}, S = g.Hex = {
-          /**
-           * Converts a word array to a hex string.
-           *
-           * @param {WordArray} wordArray The word array.
-           *
-           * @return {string} The hex string.
-           *
-           * @static
-           *
-           * @example
-           *
-           *     var hexString = CryptoJS.enc.Hex.stringify(wordArray);
-           */
-          stringify: function(i) {
-            for (var s = i.words, n = i.sigBytes, c = [], O = 0; O < n; O++) {
-              var T = s[O >>> 2] >>> 24 - O % 4 * 8 & 255;
-              c.push((T >>> 4).toString(16)), c.push((T & 15).toString(16));
-            }
-            return c.join("");
-          },
-          /**
-           * Converts a hex string to a word array.
-           *
-           * @param {string} hexStr The hex string.
-           *
-           * @return {WordArray} The word array.
-           *
-           * @static
-           *
-           * @example
-           *
-           *     var wordArray = CryptoJS.enc.Hex.parse(hexString);
-           */
-          parse: function(i) {
-            for (var s = i.length, n = [], c = 0; c < s; c += 2)
-              n[c >>> 3] |= parseInt(i.substr(c, 2), 16) << 24 - c % 8 * 4;
-            return new C.init(n, s / 2);
-          }
-        }, A = g.Latin1 = {
-          /**
-           * Converts a word array to a Latin1 string.
-           *
-           * @param {WordArray} wordArray The word array.
-           *
-           * @return {string} The Latin1 string.
-           *
-           * @static
-           *
-           * @example
-           *
-           *     var latin1String = CryptoJS.enc.Latin1.stringify(wordArray);
-           */
-          stringify: function(i) {
-            for (var s = i.words, n = i.sigBytes, c = [], O = 0; O < n; O++) {
-              var T = s[O >>> 2] >>> 24 - O % 4 * 8 & 255;
-              c.push(String.fromCharCode(T));
-            }
-            return c.join("");
-          },
-          /**
-           * Converts a Latin1 string to a word array.
-           *
-           * @param {string} latin1Str The Latin1 string.
-           *
-           * @return {WordArray} The word array.
-           *
-           * @static
-           *
-           * @example
-           *
-           *     var wordArray = CryptoJS.enc.Latin1.parse(latin1String);
-           */
-          parse: function(i) {
-            for (var s = i.length, n = [], c = 0; c < s; c++)
-              n[c >>> 2] |= (i.charCodeAt(c) & 255) << 24 - c % 4 * 8;
-            return new C.init(n, s);
-          }
-        }, h = g.Utf8 = {
-          /**
-           * Converts a word array to a UTF-8 string.
-           *
-           * @param {WordArray} wordArray The word array.
-           *
-           * @return {string} The UTF-8 string.
-           *
-           * @static
-           *
-           * @example
-           *
-           *     var utf8String = CryptoJS.enc.Utf8.stringify(wordArray);
-           */
-          stringify: function(i) {
-            try {
-              return decodeURIComponent(escape(A.stringify(i)));
-            } catch {
-              throw new Error("Malformed UTF-8 data");
-            }
-          },
-          /**
-           * Converts a UTF-8 string to a word array.
-           *
-           * @param {string} utf8Str The UTF-8 string.
-           *
-           * @return {WordArray} The word array.
-           *
-           * @static
-           *
-           * @example
-           *
-           *     var wordArray = CryptoJS.enc.Utf8.parse(utf8String);
-           */
-          parse: function(i) {
-            return A.parse(unescape(encodeURIComponent(i)));
-          }
-        }, u = R.BufferedBlockAlgorithm = v.extend({
-          /**
-           * Resets this block algorithm's data buffer to its initial state.
-           *
-           * @example
-           *
-           *     bufferedBlockAlgorithm.reset();
-           */
-          reset: function() {
-            this._data = new C.init(), this._nDataBytes = 0;
-          },
-          /**
-           * Adds new data to this block algorithm's buffer.
-           *
-           * @param {WordArray|string} data The data to append. Strings are converted to a WordArray using UTF-8.
-           *
-           * @example
-           *
-           *     bufferedBlockAlgorithm._append('data');
-           *     bufferedBlockAlgorithm._append(wordArray);
-           */
-          _append: function(i) {
-            typeof i == "string" && (i = h.parse(i)), this._data.concat(i), this._nDataBytes += i.sigBytes;
-          },
-          /**
-           * Processes available data blocks.
-           *
-           * This method invokes _doProcessBlock(offset), which must be implemented by a concrete subtype.
-           *
-           * @param {boolean} doFlush Whether all blocks and partial blocks should be processed.
-           *
-           * @return {WordArray} The processed data.
-           *
-           * @example
-           *
-           *     var processedData = bufferedBlockAlgorithm._process();
-           *     var processedData = bufferedBlockAlgorithm._process(!!'flush');
-           */
-          _process: function(i) {
-            var s, n = this._data, c = n.words, O = n.sigBytes, T = this.blockSize, E = T * 4, f = O / E;
-            i ? f = r.ceil(f) : f = r.max((f | 0) - this._minBufferSize, 0);
-            var y = f * T, P = r.min(y * 4, O);
-            if (y) {
-              for (var U = 0; U < y; U += T)
-                this._doProcessBlock(c, U);
-              s = c.splice(0, y), n.sigBytes -= P;
-            }
-            return new C.init(s, P);
-          },
-          /**
-           * Creates a copy of this object.
-           *
-           * @return {Object} The clone.
-           *
-           * @example
-           *
-           *     var clone = bufferedBlockAlgorithm.clone();
-           */
-          clone: function() {
-            var i = v.clone.call(this);
-            return i._data = this._data.clone(), i;
-          },
-          _minBufferSize: 0
-        });
-        R.Hasher = u.extend({
-          /**
-           * Configuration options.
-           */
-          cfg: v.extend(),
-          /**
-           * Initializes a newly created hasher.
-           *
-           * @param {Object} cfg (Optional) The configuration options to use for this hash computation.
-           *
-           * @example
-           *
-           *     var hasher = CryptoJS.algo.SHA256.create();
-           */
-          init: function(i) {
-            this.cfg = this.cfg.extend(i), this.reset();
-          },
-          /**
-           * Resets this hasher to its initial state.
-           *
-           * @example
-           *
-           *     hasher.reset();
-           */
-          reset: function() {
-            u.reset.call(this), this._doReset();
-          },
-          /**
-           * Updates this hasher with a message.
-           *
-           * @param {WordArray|string} messageUpdate The message to append.
-           *
-           * @return {Hasher} This hasher.
-           *
-           * @example
-           *
-           *     hasher.update('message');
-           *     hasher.update(wordArray);
-           */
-          update: function(i) {
-            return this._append(i), this._process(), this;
-          },
-          /**
-           * Finalizes the hash computation.
-           * Note that the finalize operation is effectively a destructive, read-once operation.
-           *
-           * @param {WordArray|string} messageUpdate (Optional) A final message update.
-           *
-           * @return {WordArray} The hash.
-           *
-           * @example
-           *
-           *     var hash = hasher.finalize();
-           *     var hash = hasher.finalize('message');
-           *     var hash = hasher.finalize(wordArray);
-           */
-          finalize: function(i) {
-            i && this._append(i);
-            var s = this._doFinalize();
-            return s;
-          },
-          blockSize: 16,
-          /**
-           * Creates a shortcut function to a hasher's object interface.
-           *
-           * @param {Hasher} hasher The hasher to create a helper for.
-           *
-           * @return {Function} The shortcut function.
-           *
-           * @static
-           *
-           * @example
-           *
-           *     var SHA256 = CryptoJS.lib.Hasher._createHelper(CryptoJS.algo.SHA256);
-           */
-          _createHelper: function(i) {
-            return function(s, n) {
-              return new i.init(n).finalize(s);
-            };
-          },
-          /**
-           * Creates a shortcut function to the HMAC's object interface.
-           *
-           * @param {Hasher} hasher The hasher to use in this HMAC helper.
-           *
-           * @return {Function} The shortcut function.
-           *
-           * @static
-           *
-           * @example
-           *
-           *     var HmacSHA256 = CryptoJS.lib.Hasher._createHmacHelper(CryptoJS.algo.SHA256);
-           */
-          _createHmacHelper: function(i) {
-            return function(s, n) {
-              return new L.HMAC.init(i, n).finalize(s);
-            };
-          }
-        });
-        var L = I.algo = {};
-        return I;
-      }(Math);
-      return e;
-    });
-  }(m)), m.exports;
-}
-(function(_, t) {
-  (function(e, r) {
-    _.exports = r(V());
-  })(N, function(e) {
-    return function(r) {
-      var o = e, l = o.lib, d = l.WordArray, p = l.Hasher, I = o.algo, R = [], v = [];
-      (function() {
-        function S(L) {
-          for (var i = r.sqrt(L), s = 2; s <= i; s++)
-            if (!(L % s))
-              return !1;
-          return !0;
-        }
-        function A(L) {
-          return (L - (L | 0)) * 4294967296 | 0;
-        }
-        for (var h = 2, u = 0; u < 64; )
-          S(h) && (u < 8 && (R[u] = A(r.pow(h, 1 / 2))), v[u] = A(r.pow(h, 1 / 3)), u++), h++;
-      })();
-      var C = [], g = I.SHA256 = p.extend({
-        _doReset: function() {
-          this._hash = new d.init(R.slice(0));
-        },
-        _doProcessBlock: function(S, A) {
-          for (var h = this._hash.words, u = h[0], L = h[1], i = h[2], s = h[3], n = h[4], c = h[5], O = h[6], T = h[7], E = 0; E < 64; E++) {
-            if (E < 16)
-              C[E] = S[A + E] | 0;
-            else {
-              var f = C[E - 15], y = (f << 25 | f >>> 7) ^ (f << 14 | f >>> 18) ^ f >>> 3, P = C[E - 2], U = (P << 15 | P >>> 17) ^ (P << 13 | P >>> 19) ^ P >>> 10;
-              C[E] = y + C[E - 7] + U + C[E - 16];
-            }
-            var q = n & c ^ ~n & O, b = u & L ^ u & i ^ L & i, G = (u << 30 | u >>> 2) ^ (u << 19 | u >>> 13) ^ (u << 10 | u >>> 22), B = (n << 26 | n >>> 6) ^ (n << 21 | n >>> 11) ^ (n << 7 | n >>> 25), w = T + B + q + v[E] + C[E], k = G + b;
-            T = O, O = c, c = n, n = s + w | 0, s = i, i = L, L = u, u = w + k | 0;
-          }
-          h[0] = h[0] + u | 0, h[1] = h[1] + L | 0, h[2] = h[2] + i | 0, h[3] = h[3] + s | 0, h[4] = h[4] + n | 0, h[5] = h[5] + c | 0, h[6] = h[6] + O | 0, h[7] = h[7] + T | 0;
-        },
-        _doFinalize: function() {
-          var S = this._data, A = S.words, h = this._nDataBytes * 8, u = S.sigBytes * 8;
-          return A[u >>> 5] |= 128 << 24 - u % 32, A[(u + 64 >>> 9 << 4) + 14] = r.floor(h / 4294967296), A[(u + 64 >>> 9 << 4) + 15] = h, S.sigBytes = A.length * 4, this._process(), this._hash;
-        },
-        clone: function() {
-          var S = p.clone.call(this);
-          return S._hash = this._hash.clone(), S;
-        }
-      });
-      o.SHA256 = p._createHelper(g), o.HmacSHA256 = p._createHmacHelper(g);
-    }(Math), e.SHA256;
-  });
-})(D);
-var $ = D.exports;
-const X = /* @__PURE__ */ F($), Q = {
-  url: "",
-  method: "",
-  baseURL: "",
-  headers: {},
-  data: {},
-  timeout: 1e3,
-  withCredentials: !1,
-  responseType: "json",
-  responseEncoding: "utf8",
-  validateStatus: function(_) {
-    return _ >= 200 && _ < 300;
-  },
-  maxRedirects: 5,
-  socketPath: null
+import e from "axios";
+//#region \0rolldown/runtime.js
+var t = Object.create, n = Object.defineProperty, r = Object.getOwnPropertyDescriptor, i = Object.getOwnPropertyNames, a = Object.getPrototypeOf, o = Object.prototype.hasOwnProperty, s = (e, t) => () => (t || (e((t = { exports: {} }).exports, t), e = null), t.exports), c = (e, t, a, s) => {
+	if (t && typeof t == "object" || typeof t == "function") for (var c = i(t), l = 0, u = c.length, d; l < u; l++) d = c[l], !o.call(e, d) && d !== a && n(e, d, {
+		get: ((e) => t[e]).bind(null, d),
+		enumerable: !(s = r(t, d)) || s.enumerable
+	});
+	return e;
+}, l = (e, r, i) => (i = e == null ? {} : t(a(e)), c(r || !e || !e.__esModule ? n(i, "default", {
+	value: e,
+	enumerable: !0
+}) : i, e)), u = /* @__PURE__ */ ((e) => typeof require < "u" ? require : typeof Proxy < "u" ? new Proxy(e, { get: (e, t) => (typeof require < "u" ? require : e)[t] }) : e)(function(e) {
+	if (typeof require < "u") return require.apply(this, arguments);
+	throw Error("Calling `require` for \"" + e + "\" in an environment that doesn't expose the `require` function. See https://rolldown.rs/in-depth/bundling-cjs#require-external-modules for more details.");
+}), d = /* @__PURE__ */ s(((e, t) => {
+	t.exports = {};
+})), f = /* @__PURE__ */ s(((e, t) => {
+	(function(n, r) {
+		typeof e == "object" ? t.exports = e = r() : typeof define == "function" && define.amd ? define([], r) : n.CryptoJS = r();
+	})(e, function() {
+		var e = e || function(e, t) {
+			var n;
+			if (typeof window < "u" && window.crypto && (n = window.crypto), typeof self < "u" && self.crypto && (n = self.crypto), typeof globalThis < "u" && globalThis.crypto && (n = globalThis.crypto), !n && typeof window < "u" && window.msCrypto && (n = window.msCrypto), !n && typeof global < "u" && global.crypto && (n = global.crypto), !n && typeof u == "function") try {
+				n = d();
+			} catch {}
+			var r = function() {
+				if (n) {
+					if (typeof n.getRandomValues == "function") try {
+						return n.getRandomValues(/* @__PURE__ */ new Uint32Array(1))[0];
+					} catch {}
+					if (typeof n.randomBytes == "function") try {
+						return n.randomBytes(4).readInt32LE();
+					} catch {}
+				}
+				throw Error("Native crypto module could not be used to get secure random number.");
+			}, i = Object.create || function() {
+				function e() {}
+				return function(t) {
+					var n;
+					return e.prototype = t, n = new e(), e.prototype = null, n;
+				};
+			}(), a = {}, o = a.lib = {}, s = o.Base = function() {
+				return {
+					extend: function(e) {
+						var t = i(this);
+						return e && t.mixIn(e), (!t.hasOwnProperty("init") || this.init === t.init) && (t.init = function() {
+							t.$super.init.apply(this, arguments);
+						}), t.init.prototype = t, t.$super = this, t;
+					},
+					create: function() {
+						var e = this.extend();
+						return e.init.apply(e, arguments), e;
+					},
+					init: function() {},
+					mixIn: function(e) {
+						for (var t in e) e.hasOwnProperty(t) && (this[t] = e[t]);
+						e.hasOwnProperty("toString") && (this.toString = e.toString);
+					},
+					clone: function() {
+						return this.init.prototype.extend(this);
+					}
+				};
+			}(), c = o.WordArray = s.extend({
+				init: function(e, n) {
+					e = this.words = e || [], n == t ? this.sigBytes = e.length * 4 : this.sigBytes = n;
+				},
+				toString: function(e) {
+					return (e || f).stringify(this);
+				},
+				concat: function(e) {
+					var t = this.words, n = e.words, r = this.sigBytes, i = e.sigBytes;
+					if (this.clamp(), r % 4) for (var a = 0; a < i; a++) {
+						var o = n[a >>> 2] >>> 24 - a % 4 * 8 & 255;
+						t[r + a >>> 2] |= o << 24 - (r + a) % 4 * 8;
+					}
+					else for (var s = 0; s < i; s += 4) t[r + s >>> 2] = n[s >>> 2];
+					return this.sigBytes += i, this;
+				},
+				clamp: function() {
+					var t = this.words, n = this.sigBytes;
+					t[n >>> 2] &= 4294967295 << 32 - n % 4 * 8, t.length = e.ceil(n / 4);
+				},
+				clone: function() {
+					var e = s.clone.call(this);
+					return e.words = this.words.slice(0), e;
+				},
+				random: function(e) {
+					for (var t = [], n = 0; n < e; n += 4) t.push(r());
+					return new c.init(t, e);
+				}
+			}), l = a.enc = {}, f = l.Hex = {
+				stringify: function(e) {
+					for (var t = e.words, n = e.sigBytes, r = [], i = 0; i < n; i++) {
+						var a = t[i >>> 2] >>> 24 - i % 4 * 8 & 255;
+						r.push((a >>> 4).toString(16)), r.push((a & 15).toString(16));
+					}
+					return r.join("");
+				},
+				parse: function(e) {
+					for (var t = e.length, n = [], r = 0; r < t; r += 2) n[r >>> 3] |= parseInt(e.substr(r, 2), 16) << 24 - r % 8 * 4;
+					return new c.init(n, t / 2);
+				}
+			}, p = l.Latin1 = {
+				stringify: function(e) {
+					for (var t = e.words, n = e.sigBytes, r = [], i = 0; i < n; i++) {
+						var a = t[i >>> 2] >>> 24 - i % 4 * 8 & 255;
+						r.push(String.fromCharCode(a));
+					}
+					return r.join("");
+				},
+				parse: function(e) {
+					for (var t = e.length, n = [], r = 0; r < t; r++) n[r >>> 2] |= (e.charCodeAt(r) & 255) << 24 - r % 4 * 8;
+					return new c.init(n, t);
+				}
+			}, m = l.Utf8 = {
+				stringify: function(e) {
+					try {
+						return decodeURIComponent(escape(p.stringify(e)));
+					} catch {
+						throw Error("Malformed UTF-8 data");
+					}
+				},
+				parse: function(e) {
+					return p.parse(unescape(encodeURIComponent(e)));
+				}
+			}, h = o.BufferedBlockAlgorithm = s.extend({
+				reset: function() {
+					this._data = new c.init(), this._nDataBytes = 0;
+				},
+				_append: function(e) {
+					typeof e == "string" && (e = m.parse(e)), this._data.concat(e), this._nDataBytes += e.sigBytes;
+				},
+				_process: function(t) {
+					var n, r = this._data, i = r.words, a = r.sigBytes, o = this.blockSize, s = a / (o * 4);
+					s = t ? e.ceil(s) : e.max((s | 0) - this._minBufferSize, 0);
+					var l = s * o, u = e.min(l * 4, a);
+					if (l) {
+						for (var d = 0; d < l; d += o) this._doProcessBlock(i, d);
+						n = i.splice(0, l), r.sigBytes -= u;
+					}
+					return new c.init(n, u);
+				},
+				clone: function() {
+					var e = s.clone.call(this);
+					return e._data = this._data.clone(), e;
+				},
+				_minBufferSize: 0
+			});
+			o.Hasher = h.extend({
+				cfg: s.extend(),
+				init: function(e) {
+					this.cfg = this.cfg.extend(e), this.reset();
+				},
+				reset: function() {
+					h.reset.call(this), this._doReset();
+				},
+				update: function(e) {
+					return this._append(e), this._process(), this;
+				},
+				finalize: function(e) {
+					return e && this._append(e), this._doFinalize();
+				},
+				blockSize: 512 / 32,
+				_createHelper: function(e) {
+					return function(t, n) {
+						return new e.init(n).finalize(t);
+					};
+				},
+				_createHmacHelper: function(e) {
+					return function(t, n) {
+						return new g.HMAC.init(e, n).finalize(t);
+					};
+				}
+			});
+			var g = a.algo = {};
+			return a;
+		}(Math);
+		return e;
+	});
+})), p = /* @__PURE__ */ l((/* @__PURE__ */ s(((e, t) => {
+	(function(n, r) {
+		typeof e == "object" ? t.exports = e = r(f()) : typeof define == "function" && define.amd ? define(["./core"], r) : r(n.CryptoJS);
+	})(e, function(e) {
+		return (function(t) {
+			var n = e, r = n.lib, i = r.WordArray, a = r.Hasher, o = n.algo, s = [], c = [];
+			(function() {
+				function e(e) {
+					for (var n = t.sqrt(e), r = 2; r <= n; r++) if (!(e % r)) return !1;
+					return !0;
+				}
+				function n(e) {
+					return (e - (e | 0)) * 4294967296 | 0;
+				}
+				for (var r = 2, i = 0; i < 64;) e(r) && (i < 8 && (s[i] = n(t.pow(r, 1 / 2))), c[i] = n(t.pow(r, 1 / 3)), i++), r++;
+			})();
+			var l = [], u = o.SHA256 = a.extend({
+				_doReset: function() {
+					this._hash = new i.init(s.slice(0));
+				},
+				_doProcessBlock: function(e, t) {
+					for (var n = this._hash.words, r = n[0], i = n[1], a = n[2], o = n[3], s = n[4], u = n[5], d = n[6], f = n[7], p = 0; p < 64; p++) {
+						if (p < 16) l[p] = e[t + p] | 0;
+						else {
+							var m = l[p - 15], h = (m << 25 | m >>> 7) ^ (m << 14 | m >>> 18) ^ m >>> 3, g = l[p - 2], _ = (g << 15 | g >>> 17) ^ (g << 13 | g >>> 19) ^ g >>> 10;
+							l[p] = h + l[p - 7] + _ + l[p - 16];
+						}
+						var v = s & u ^ ~s & d, y = r & i ^ r & a ^ i & a, b = (r << 30 | r >>> 2) ^ (r << 19 | r >>> 13) ^ (r << 10 | r >>> 22), x = (s << 26 | s >>> 6) ^ (s << 21 | s >>> 11) ^ (s << 7 | s >>> 25), S = f + x + v + c[p] + l[p], C = b + y;
+						f = d, d = u, u = s, s = o + S | 0, o = a, a = i, i = r, r = S + C | 0;
+					}
+					n[0] = n[0] + r | 0, n[1] = n[1] + i | 0, n[2] = n[2] + a | 0, n[3] = n[3] + o | 0, n[4] = n[4] + s | 0, n[5] = n[5] + u | 0, n[6] = n[6] + d | 0, n[7] = n[7] + f | 0;
+				},
+				_doFinalize: function() {
+					var e = this._data, n = e.words, r = this._nDataBytes * 8, i = e.sigBytes * 8;
+					return n[i >>> 5] |= 128 << 24 - i % 32, n[(i + 64 >>> 9 << 4) + 14] = t.floor(r / 4294967296), n[(i + 64 >>> 9 << 4) + 15] = r, e.sigBytes = n.length * 4, this._process(), this._hash;
+				},
+				clone: function() {
+					var e = a.clone.call(this);
+					return e._hash = this._hash.clone(), e;
+				}
+			});
+			n.SHA256 = a._createHelper(u), n.HmacSHA256 = a._createHmacHelper(u);
+		})(Math), e.SHA256;
+	});
+})))()), m = {
+	url: "",
+	method: "",
+	baseURL: "",
+	headers: {},
+	data: {},
+	timeout: 1e3,
+	withCredentials: !1,
+	responseType: "json",
+	responseEncoding: "utf8",
+	validateStatus: function(e) {
+		return e >= 200 && e < 300;
+	},
+	maxRedirects: 5,
+	socketPath: null
+}, h = class {
+	http;
+	constructor(t) {
+		this.http = e.create(t || m);
+	}
+	makeRequest(e, t, n, r) {
+		if (!e) throw Error("URL required");
+		return this.http({
+			method: t || "get",
+			url: e,
+			params: n,
+			data: r
+		});
+	}
+}, g = {
+	API_LOCATION: "https://api.unsplash.com/",
+	BEARER_TOKEN_URL: "https://unsplash.com/oauth/token",
+	USERS_PUBLIC_PROFILE: "users/",
+	USERS_PORTFOLIO: "users/:username/portfolio",
+	USERS_PHOTOS: "users/:username/photos",
+	USERS_LIKED_PHOTOS: "users/:username/likes",
+	USERS_COLLECTIONS: "users/:username/collections",
+	USERS_STATISTICS: "users/:username/statistics",
+	LIST_PHOTOS: "photos",
+	LIST_CURATED_PHOTOS: "photos/curated",
+	GET_A_PHOTO: "photos/:id",
+	GET_A_RANDOM_PHOTO: "photos/random",
+	GET_A_PHOTO_STATISTICS: "photos/:id/statistics",
+	GET_A_PHOTO_DOWNLOAD_LINK: "photos/:id/download",
+	UPDATE_A_PHOTO: "photos/:id",
+	LIKE_A_PHOTO: "photos/:id/like",
+	UNLIKE_A_PHOTO: "photos/:id/like",
+	SEARCH_PHOTOS: "search/photos",
+	SEARCH_COLLECTIONS: "search/collections",
+	SEARCH_USERS: "search/users",
+	CURRENT_USER_PROFILE: "me",
+	UPDATE_CURRENT_USER_PROFILE: "me",
+	STATS_TOTALS: "stats/total",
+	STATS_MONTH: "stats/month",
+	LIST_COLLECTIONS: "collections",
+	LIST_FEATURED_COLLECTIONS: "collections/featured",
+	LIST_CURATED_COLLECTIONS: "collections/curated",
+	GET_COLLECTION: "collections/:id",
+	GET_CURATED_COLLECTION: "collections/curated/:id",
+	GET_COLLECTION_PHOTOS: "collections/:id/photos",
+	GET_CURATED_COLLECTION_PHOTOS: "collections/curated/:id/photos",
+	LIST_RELATED_COLLECTION: "collections/:id/related",
+	CREATE_NEW_COLLECTION: "collections",
+	UPDATE_EXISTING_COLLECTION: "collections/:id",
+	DELETE_COLLECTION: "collections/:id",
+	ADD_PHOTO_TO_COLLECTION: "collections/:collection_id/add",
+	REMOVE_PHOTO_FROM_COLLECTION: "collections/:collection_id/remove"
+}, _ = class extends Error {
+	constructor(e, t = 0, n = "", r) {
+		super(e), this.name = "WrapSplashError", this.statusCode = t, this.statusText = n, this.cause = r, Object.setPrototypeOf(this, new.target.prototype);
+	}
+}, v = class {
+	constructor() {
+		this.API_LOCATION = g.API_LOCATION, this.BEARER_TOKEN_URL = g.BEARER_TOKEN_URL, this.options = {}, this.access_key = "", this.secret_key = "", this.redirect_uri = "", this.code = "", this.grant_type = "authorization_code", this.bearer_token = "", this.timeout = 1e4, this.headers = {
+			"Content-type": "application/json",
+			"X-Requested-With": "WrapSplash"
+		}, this.availableOrders = [
+			"latest",
+			"oldest",
+			"popular"
+		], this.availableOrientations = [
+			"landscape",
+			"portrait",
+			"squarish"
+		], this.init = (e = {}) => {
+			if (!e || typeof e != "object" || Array.isArray(e)) throw Error("Initialisation parameters required!");
+			if (this.options = { ...e }, this.timeout = typeof this.options.timeout == "number" && this.options.timeout > 0 ? this.options.timeout : 1e4, this.bearer_token = this.options.bearer_token ?? "", this.headers = {
+				"Content-type": "application/json",
+				"X-Requested-With": "WrapSplash"
+			}, this.options.bearer_token) {
+				this.headers = {
+					...this.headers,
+					Authorization: `Bearer ${this.options.bearer_token}`,
+					"X-WrapSplash-Header": this.computeHash(this.options.bearer_token)
+				};
+				return;
+			}
+			this.access_key = this.options.access_key ? this.options.access_key : (() => {
+				throw Error("Access Key missing!");
+			})(), this.secret_key = this.options.secret_key ? this.options.secret_key : (() => {
+				throw Error("Secret Key missing!");
+			})(), this.redirect_uri = this.options.redirect_uri ? this.options.redirect_uri : (() => {
+				throw Error("Redirect URI missing!");
+			})(), this.code = this.options.code ? this.options.code : (() => {
+				throw Error("Authorization Code missing!");
+			})(), this.headers = {
+				...this.headers,
+				Authorization: `Client-ID ${this.options.access_key}`,
+				"X-WrapSplash-Header": this.computeHash(this.options.access_key)
+			};
+		}, this.generateBearerToken = () => (this.validateRequired(this.access_key, "access_key"), this.validateRequired(this.secret_key, "secret_key"), this.validateRequired(this.redirect_uri, "redirect_uri"), this.validateRequired(this.code, "code"), this.fetchUrl(this.BEARER_TOKEN_URL, "POST", {
+			client_id: this.access_key,
+			client_secret: this.secret_key,
+			redirect_uri: this.redirect_uri,
+			code: this.code,
+			grant_type: this.grant_type
+		})), this.getCurrentUserProfile = () => this.fetchUrl(this.API_LOCATION + g.CURRENT_USER_PROFILE, "GET"), this.updateCurrentUserProfile = (e, t, n, r, i, a, o, s) => this.fetchUrl(this.API_LOCATION + g.UPDATE_CURRENT_USER_PROFILE, "PUT", {
+			username: e,
+			first_name: t,
+			last_name: n,
+			email: r,
+			url: i,
+			location: a,
+			bio: o,
+			instagram_username: s
+		}), this.getPublicProfile = (e, t, n) => (this.validateRequired(e, "username"), this.fetchUrl(this.API_LOCATION + g.USERS_PUBLIC_PROFILE + e, "GET", {
+			w: t,
+			h: n
+		})), this.getUserPortfolio = (e) => (this.validateRequired(e, "username"), this.fetchUrl(this.API_LOCATION + g.USERS_PORTFOLIO.replace(/:username/gi, e), "GET")), this.getUserPhotos = (e, t, n, r, i, a, o) => {
+			if (this.validateRequired(e, "username"), this.validateSupportedValue(o, this.availableOrders, "order_by"), r !== void 0 && typeof r != "boolean") throw new _("Parameter : stats is a boolean or optional!");
+			return this.fetchUrl(this.API_LOCATION + g.USERS_PHOTOS.replace(/:username/gi, e), "GET", {
+				page: t ?? 1,
+				per_page: n ?? 10,
+				order_by: o ?? "latest",
+				stats: r ?? !1,
+				resolution: i ?? "days",
+				quantity: a ?? 30
+			});
+		}, this.getUserLikedPhotos = (e, t, n, r) => (this.validateRequired(e, "username"), this.validateSupportedValue(r, this.availableOrders, "order_by"), this.fetchUrl(this.API_LOCATION + g.USERS_LIKED_PHOTOS.replace(/:username/gi, e), "GET", {
+			page: t ?? 1,
+			per_page: n ?? 10,
+			order_by: r ?? "latest"
+		})), this.getUserCollections = (e, t, n) => (this.validateRequired(e, "username"), this.fetchUrl(this.API_LOCATION + g.USERS_COLLECTIONS.replace(/:username/gi, e), "GET", {
+			page: t ?? 1,
+			per_page: n ?? 10
+		})), this.getUserStatistics = (e, t, n) => (this.validateRequired(e, "username"), this.fetchUrl(this.API_LOCATION + g.USERS_STATISTICS.replace(/:username/gi, e), "GET", {
+			resolution: t ?? "days",
+			quantity: n ?? 30
+		})), this.listPhotos = (e, t, n) => {
+			if (n !== void 0 && !this.availableOrders.includes(n)) throw new _("Parameter : order_by has an unsupported value!");
+			return this.fetchUrl(this.API_LOCATION + g.LIST_PHOTOS, "GET", {
+				page: e ?? 1,
+				per_page: t ?? 10,
+				order_by: n ?? "latest"
+			});
+		}, this.listCuratedPhotos = (e, t, n) => {
+			if (n !== void 0 && !this.availableOrders.includes(n)) throw new _("Parameter : order_by has an unsupported value!");
+			return this.fetchUrl(this.API_LOCATION + g.LIST_CURATED_PHOTOS, "GET", {
+				page: e ?? 1,
+				per_page: t ?? 10,
+				order_by: n ?? "latest"
+			});
+		}, this.getAPhoto = (e, t, n, r) => (this.validateRequired(e, "id"), this.fetchUrl(this.API_LOCATION + g.GET_A_PHOTO.replace(/:id/gi, e), "GET", {
+			w: t,
+			h: n,
+			rect: typeof r == "string" ? r : void 0
+		})), this.getARandomPhoto = (e, t, n, r, i, a, o, s) => (this.validateSupportedValue(o, this.availableOrientations, "orientation"), this.fetchUrl(this.API_LOCATION + g.GET_A_RANDOM_PHOTO, "GET", {
+			collections: e === void 0 ? void 0 : String(e),
+			featured: t ?? !1,
+			username: n,
+			query: r,
+			width: i,
+			height: a,
+			orientation: o ?? "landscape",
+			count: s ?? 1
+		})), this.getPhotoStatistics = (e, t, n) => (this.validateRequired(e, "id"), this.fetchUrl(this.API_LOCATION + g.GET_A_PHOTO_STATISTICS.replace(/:id/gi, e), "GET", {
+			resolution: t ?? "days",
+			quantity: n ?? 30
+		})), this.getPhotoLink = (e) => (this.validateRequired(e, "id"), this.fetchUrl(this.API_LOCATION + g.GET_A_PHOTO_DOWNLOAD_LINK.replace(/:id/gi, e), "GET")), this.updatePhoto = (e, t = {}, n = {}) => (this.validateRequired(e, "id"), this.fetchUrl(this.API_LOCATION + g.UPDATE_A_PHOTO.replace(/:id/gi, e), "PUT", {
+			...t.latitude ? { "location[latitude]": t.latitude } : {},
+			...t.longitude ? { "location[longitude]": t.longitude } : {},
+			...t.name ? { "location[name]": t.name } : {},
+			...t.city ? { "location[city]": t.city } : {},
+			...t.country ? { "location[country]": t.country } : {},
+			...t.confidential ? { "location[confidential]": t.confidential } : {},
+			...n.make ? { "exif[make]": n.make } : {},
+			...n.model ? { "exif[model]": n.model } : {},
+			...n.exposure_time ? { "exif[exposure_time]": n.exposure_time } : {},
+			...n.aperture_value ? { "exif[aperture_value]": n.aperture_value } : {},
+			...n.focal_length ? { "exif[focal_length]": n.focal_length } : {},
+			...n.iso_speed_ratings ? { "exif[iso_speed_ratings]": n.iso_speed_ratings } : {}
+		})), this.likePhoto = (e) => (this.validateRequired(e, "id"), this.fetchUrl(this.API_LOCATION + g.LIKE_A_PHOTO.replace(/:id/gi, e), "POST")), this.unlikePhoto = (e) => (this.validateRequired(e, "id"), this.fetchUrl(this.API_LOCATION + g.UNLIKE_A_PHOTO.replace(/:id/gi, e), "DELETE")), this.search = (e, t, n, r, i) => (this.validateRequired(e, "query"), this.validateSupportedValue(i, this.availableOrientations, "orientation"), this.fetchUrl(this.API_LOCATION + g.SEARCH_PHOTOS, "GET", {
+			query: e,
+			page: t ?? 1,
+			per_page: n ?? 10,
+			collections: r === void 0 ? void 0 : String(r),
+			orientation: i
+		})), this.searchCollections = (e, t, n) => (this.validateRequired(e, "query"), this.fetchUrl(this.API_LOCATION + g.SEARCH_COLLECTIONS, "GET", {
+			query: e,
+			page: t ?? 1,
+			per_page: n ?? 10
+		})), this.searchUsers = (e, t, n) => (this.validateRequired(e, "query"), this.fetchUrl(this.API_LOCATION + g.SEARCH_USERS, "GET", {
+			query: e,
+			page: t ?? 1,
+			per_page: n ?? 10
+		})), this.getStatsTotals = () => this.fetchUrl(this.API_LOCATION + g.STATS_TOTALS, "GET"), this.getStatsMonth = () => this.fetchUrl(this.API_LOCATION + g.STATS_MONTH, "GET"), this.listCollections = (e, t) => this.fetchUrl(this.API_LOCATION + g.LIST_COLLECTIONS, "GET", {
+			page: e ?? 1,
+			per_page: t ?? 10
+		}), this.listFeaturedCollections = (e, t) => this.fetchUrl(this.API_LOCATION + g.LIST_FEATURED_COLLECTIONS, "GET", {
+			page: e ?? 1,
+			per_page: t ?? 10
+		}), this.listCuratedCollections = (e, t) => this.fetchUrl(this.API_LOCATION + g.LIST_CURATED_COLLECTIONS, "GET", {
+			page: e ?? 1,
+			per_page: t ?? 10
+		}), this.getCollection = (e) => (this.validateRequired(e, "id"), this.fetchUrl(this.API_LOCATION + g.GET_COLLECTION.replace(/:id/gi, e), "GET")), this.getCuratedCollection = (e) => (this.validateRequired(e, "id"), this.fetchUrl(this.API_LOCATION + g.GET_CURATED_COLLECTION.replace(/:id/gi, e), "GET")), this.getCollectionPhotos = (e, t, n) => (this.validateRequired(e, "id"), this.fetchUrl(this.API_LOCATION + g.GET_COLLECTION_PHOTOS.replace(/:id/gi, e), "GET", {
+			page: t ?? 1,
+			per_page: n ?? 10
+		})), this.getCuratedCollectionPhotos = (e, t, n) => (this.validateRequired(e, "id"), this.fetchUrl(this.API_LOCATION + g.GET_CURATED_COLLECTION_PHOTOS.replace(/:id/gi, e), "GET", {
+			page: t ?? 1,
+			per_page: n ?? 10
+		})), this.listRelatedCollections = (e) => (this.validateRequired(e, "id"), this.fetchUrl(this.API_LOCATION + g.LIST_RELATED_COLLECTION.replace(/:id/gi, e), "GET")), this.getPhoto = (e, t, n, r) => this.getAPhoto(e, t, n, r), this.getRandomPhoto = (e, t, n, r, i, a, o, s) => this.getARandomPhoto(e, t, n, r, i, a, o, s), this.createNewCollection = (e, t, n = !1) => (this.validateRequired(e, "title"), this.fetchUrl(this.API_LOCATION + g.CREATE_NEW_COLLECTION, "POST", {
+			title: e,
+			description: t,
+			private: n
+		})), this.createCollection = (e, t, n = !1) => this.createNewCollection(e, t, n), this.createNewColection = (e, t, n = !1) => this.createNewCollection(e, t, n), this.updateExistingCollection = (e, t, n, r = !1) => (this.validateRequired(e, "id"), this.validateRequired(t, "title"), this.fetchUrl(this.API_LOCATION + g.UPDATE_EXISTING_COLLECTION.replace(/:id/gi, e), "PUT", {
+			title: t,
+			description: n,
+			private: r
+		})), this.updateCollection = (e, t, n, r = !1) => this.updateExistingCollection(e, t, n, r), this.deleteCollection = (e) => (this.validateRequired(e, "id"), this.fetchUrl(this.API_LOCATION + g.DELETE_COLLECTION.replace(/:id/gi, e), "DELETE")), this.addPhotoToCollection = (e, t) => (this.validateRequired(e, "collection_id"), this.validateRequired(t, "photo_id"), this.fetchUrl(this.API_LOCATION + g.ADD_PHOTO_TO_COLLECTION.replace(/:collection_id/gi, e), "POST", { photo_id: t })), this.removePhotoFromCollection = (e, t) => (this.validateRequired(e, "collection_id"), this.validateRequired(t, "photo_id"), this.fetchUrl(this.API_LOCATION + g.REMOVE_PHOTO_FROM_COLLECTION.replace(/:collection_id/gi, e), "DELETE", { photo_id: t }));
+	}
+	computeHash(e) {
+		return (0, p.default)(e).toString();
+	}
+	validateRequired(e, t) {
+		if (e == null || e === "") {
+			let e = t === "id" ? "Parameter : id is required!" : t === "query" ? "Parameter : query is missing!" : `Parameter : ${t} is required and cannot be empty!`;
+			throw Error(e);
+		}
+	}
+	validateSupportedValue(e, t, n) {
+		if (e !== void 0 && !t.includes(e)) throw Error(`Parameter : ${n} has an unsupported value!`);
+	}
+	buildQueryParameters(e) {
+		let t = {};
+		return Object.entries(e).forEach(([e, n]) => {
+			n != null && n !== "" && (t[e] = n);
+		}), t;
+	}
+	fetchUrl(e, t, n = {}, r = void 0) {
+		return new h({
+			headers: this.headers,
+			timeout: this.timeout
+		}).makeRequest(e, t.toLowerCase(), this.buildQueryParameters(n), r).then((e) => e.status === 204 ? {
+			status: e.status,
+			statusText: e.statusText,
+			message: "Content Deleted"
+		} : e.status === 403 ? {
+			status: e.status,
+			statusText: e.statusText,
+			message: "Rate Limit Exceeded"
+		} : e.data).catch((e) => Promise.reject(e));
+	}
 };
-class J {
-  constructor(t) {
-    this.http = x.create(t || Q);
-  }
-  makeRequest(t, e, r, o) {
-    if (!t)
-      throw new Error("URL required");
-    return this.http({
-      method: e || "get",
-      url: t,
-      params: r,
-      data: o
-    });
-  }
-}
-const Y = "https://api.unsplash.com/", Z = "https://unsplash.com/oauth/token", tt = "users/", et = "users/:username/portfolio", rt = "users/:username/photos", it = "users/:username/likes", st = "users/:username/collections", ot = "users/:username/statistics", nt = "photos", at = "photos/curated", ht = "photos/:id", ct = "photos/random", lt = "photos/:id/statistics", ut = "photos/:id/download", _t = "photos/:id", dt = "photos/:id/like", Ot = "photos/:id/like", Tt = "search/photos", pt = "search/collections", Et = "search/users", ft = "me", Ct = "me", Lt = "stats/total", It = "stats/month", St = "collections", At = "collections/featured", vt = "collections/curated", Pt = "collections/:id", Rt = "collections/curated/:id", gt = "collections/:id/photos", yt = "collections/curated/:id/photos", Ut = "collections/:id/related", Nt = "collections", mt = "collections/:id", wt = "collections/:id", Ht = "collections/:collection_id/add", Dt = "collections/:collection_id/remove", a = {
-  API_LOCATION: Y,
-  BEARER_TOKEN_URL: Z,
-  USERS_PUBLIC_PROFILE: tt,
-  USERS_PORTFOLIO: et,
-  USERS_PHOTOS: rt,
-  USERS_LIKED_PHOTOS: it,
-  USERS_COLLECTIONS: st,
-  USERS_STATISTICS: ot,
-  LIST_PHOTOS: nt,
-  LIST_CURATED_PHOTOS: at,
-  GET_A_PHOTO: ht,
-  GET_A_RANDOM_PHOTO: ct,
-  GET_A_PHOTO_STATISTICS: lt,
-  GET_A_PHOTO_DOWNLOAD_LINK: ut,
-  UPDATE_A_PHOTO: _t,
-  LIKE_A_PHOTO: dt,
-  UNLIKE_A_PHOTO: Ot,
-  SEARCH_PHOTOS: Tt,
-  SEARCH_COLLECTIONS: pt,
-  SEARCH_USERS: Et,
-  CURRENT_USER_PROFILE: ft,
-  UPDATE_CURRENT_USER_PROFILE: Ct,
-  STATS_TOTALS: Lt,
-  STATS_MONTH: It,
-  LIST_COLLECTIONS: St,
-  LIST_FEATURED_COLLECTIONS: At,
-  LIST_CURATED_COLLECTIONS: vt,
-  GET_COLLECTION: Pt,
-  GET_CURATED_COLLECTION: Rt,
-  GET_COLLECTION_PHOTOS: gt,
-  GET_CURATED_COLLECTION_PHOTOS: yt,
-  LIST_RELATED_COLLECTION: Ut,
-  CREATE_NEW_COLLECTION: Nt,
-  UPDATE_EXISTING_COLLECTION: mt,
-  DELETE_COLLECTION: wt,
-  ADD_PHOTO_TO_COLLECTION: Ht,
-  REMOVE_PHOTO_FROM_COLLECTION: Dt
-};
-class bt {
-  constructor() {
-    this.API_LOCATION = a.API_LOCATION, this.BEARER_TOKEN_URL = a.BEARER_TOKEN_URL, this.options = {}, this.access_key = "", this.secret_key = "", this.redirect_uri = "", this.code = "", this.grant_type = "authorization_code", this.bearer_token = "", this.timeout = 1e4, this.headers = {
-      "Content-type": "application/json",
-      "X-Requested-With": "WrapSplash"
-    }, this.availableOrders = ["latest", "oldest", "popular"], this.availableOrientations = ["landscape", "portrait", "squarish"], this.init = (t = {}) => {
-      if (!t || typeof t != "object" || Array.isArray(t))
-        throw new Error("Initialisation parameters required!");
-      if (this.options = { ...t }, this.timeout = typeof this.options.timeout == "number" && this.options.timeout > 0 ? this.options.timeout : 1e4, this.headers = {
-        "Content-type": "application/json",
-        "X-Requested-With": "WrapSplash"
-      }, this.options.bearer_token) {
-        this.headers = {
-          ...this.headers,
-          Authorization: `Bearer ${this.options.bearer_token}`,
-          "X-WrapSplash-Header": this.computeHash(this.options.bearer_token)
-        };
-        return;
-      }
-      this.access_key = this.options.access_key ? this.options.access_key : (() => {
-        throw new Error("Access Key missing!");
-      })(), this.secret_key = this.options.secret_key ? this.options.secret_key : (() => {
-        throw new Error("Secret Key missing!");
-      })(), this.redirect_uri = this.options.redirect_uri ? this.options.redirect_uri : (() => {
-        throw new Error("Redirect URI missing!");
-      })(), this.code = this.options.code ? this.options.code : (() => {
-        throw new Error("Authorization Code missing!");
-      })(), this.headers = {
-        ...this.headers,
-        Authorization: `Client-ID ${this.options.access_key}`,
-        "X-WrapSplash-Header": this.computeHash(this.options.access_key)
-      };
-    }, this.generateBearerToken = () => (this.validateRequired(this.access_key, "access_key"), this.validateRequired(this.secret_key, "secret_key"), this.validateRequired(this.redirect_uri, "redirect_uri"), this.validateRequired(this.code, "code"), this.fetchUrl(this.BEARER_TOKEN_URL, "POST", {
-      client_id: this.access_key,
-      client_secret: this.secret_key,
-      redirect_uri: this.redirect_uri,
-      code: this.code,
-      grant_type: this.grant_type
-    })), this.getCurrentUserProfile = () => this.fetchUrl(this.API_LOCATION + a.CURRENT_USER_PROFILE, "GET"), this.updateCurrentUserProfile = (t, e, r, o, l, d, p, I) => this.fetchUrl(this.API_LOCATION + a.UPDATE_CURRENT_USER_PROFILE, "PUT", {
-      username: t,
-      first_name: e,
-      last_name: r,
-      email: o,
-      url: l,
-      location: d,
-      bio: p,
-      instagram_username: I
-    }), this.getPublicProfile = (t, e, r) => (this.validateRequired(t, "username"), this.fetchUrl(this.API_LOCATION + a.USERS_PUBLIC_PROFILE + t, "GET", {
-      w: e,
-      h: r
-    })), this.getUserPortfolio = (t) => (this.validateRequired(t, "username"), this.fetchUrl(
-      this.API_LOCATION + a.USERS_PORTFOLIO.replace(/:username/gi, t),
-      "GET"
-    )), this.getUserPhotos = (t, e, r, o, l, d, p) => {
-      if (this.validateRequired(t, "username"), this.validateSupportedValue(p, this.availableOrders, "order_by"), o !== void 0 && typeof o != "boolean")
-        throw new Error("Parameter : stats is a boolean or optional!");
-      return this.fetchUrl(
-        this.API_LOCATION + a.USERS_PHOTOS.replace(/:username/gi, t),
-        "GET",
-        {
-          page: e ?? 1,
-          per_page: r ?? 10,
-          order_by: p ?? "latest",
-          stats: o ?? !1,
-          resolution: l ?? "days",
-          quantity: d ?? 30
-        }
-      );
-    }, this.getUserLikedPhotos = (t, e, r, o) => (this.validateRequired(t, "username"), this.validateSupportedValue(o, this.availableOrders, "order_by"), this.fetchUrl(
-      this.API_LOCATION + a.USERS_LIKED_PHOTOS.replace(/:username/gi, t),
-      "GET",
-      {
-        page: e ?? 1,
-        per_page: r ?? 10,
-        order_by: o ?? "latest"
-      }
-    )), this.getUserCollections = (t, e, r) => (this.validateRequired(t, "username"), this.fetchUrl(
-      this.API_LOCATION + a.USERS_COLLECTIONS.replace(/:username/gi, t),
-      "GET",
-      {
-        page: e ?? 1,
-        per_page: r ?? 10
-      }
-    )), this.getUserStatistics = (t, e, r) => (this.validateRequired(t, "username"), this.fetchUrl(
-      this.API_LOCATION + a.USERS_STATISTICS.replace(/:username/gi, t),
-      "GET",
-      {
-        resolution: e ?? "days",
-        quantity: r ?? 30
-      }
-    )), this.listPhotos = (t, e, r) => {
-      if (r !== void 0 && !this.availableOrders.includes(r))
-        throw new Error("Parameter : order_by has an unsupported value!");
-      return this.fetchUrl(this.API_LOCATION + a.LIST_PHOTOS, "GET", {
-        page: t ?? 1,
-        per_page: e ?? 10,
-        order_by: r ?? "latest"
-      });
-    }, this.listCuratedPhotos = (t, e, r) => {
-      if (r !== void 0 && !this.availableOrders.includes(r))
-        throw new Error("Parameter : order_by has an unsupported value!");
-      return this.fetchUrl(this.API_LOCATION + a.LIST_CURATED_PHOTOS, "GET", {
-        page: t ?? 1,
-        per_page: e ?? 10,
-        order_by: r ?? "latest"
-      });
-    }, this.getAPhoto = (t, e, r, o) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.GET_A_PHOTO.replace(/:id/gi, t), "GET", {
-      w: e,
-      h: r,
-      rect: typeof o == "string" ? o : void 0
-    })), this.getARandomPhoto = (t, e, r, o, l, d, p, I) => (this.validateSupportedValue(p, this.availableOrientations, "orientation"), this.fetchUrl(this.API_LOCATION + a.GET_A_RANDOM_PHOTO, "GET", {
-      collections: t !== void 0 ? String(t) : void 0,
-      featured: e ?? !1,
-      username: r,
-      query: o,
-      width: l,
-      height: d,
-      orientation: p ?? "landscape",
-      count: I ?? 1
-    })), this.getPhotoStatistics = (t, e, r) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.GET_A_PHOTO_STATISTICS.replace(/:id/gi, t), "GET", {
-      resolution: e ?? "days",
-      quantity: r ?? 30
-    })), this.getPhotoLink = (t) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.GET_A_PHOTO_DOWNLOAD_LINK.replace(/:id/gi, t), "GET")), this.updatePhoto = (t, e = {}, r = {}) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.UPDATE_A_PHOTO.replace(/:id/gi, t), "PUT", {
-      ...e.latitude ? { "location[latitude]": e.latitude } : {},
-      ...e.longitude ? { "location[longitude]": e.longitude } : {},
-      ...e.name ? { "location[name]": e.name } : {},
-      ...e.city ? { "location[city]": e.city } : {},
-      ...e.country ? { "location[country]": e.country } : {},
-      ...e.confidential ? { "location[confidential]": e.confidential } : {},
-      ...r.make ? { "exif[make]": r.make } : {},
-      ...r.model ? { "exif[model]": r.model } : {},
-      ...r.exposure_time ? { "exif[exposure_time]": r.exposure_time } : {},
-      ...r.aperture_value ? { "exif[aperture_value]": r.aperture_value } : {},
-      ...r.focal_length ? { "exif[focal_length]": r.focal_length } : {},
-      ...r.iso_speed_ratings ? { "exif[iso_speed_ratings]": r.iso_speed_ratings } : {}
-    })), this.likePhoto = (t) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.LIKE_A_PHOTO.replace(/:id/gi, t), "POST")), this.unlikePhoto = (t) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.UNLIKE_A_PHOTO.replace(/:id/gi, t), "DELETE")), this.search = (t, e, r, o, l) => (this.validateRequired(t, "query"), this.validateSupportedValue(l, this.availableOrientations, "orientation"), this.fetchUrl(this.API_LOCATION + a.SEARCH_PHOTOS, "GET", {
-      query: t,
-      page: e ?? 1,
-      per_page: r ?? 10,
-      collections: o !== void 0 ? String(o) : void 0,
-      orientation: l
-    })), this.searchCollections = (t, e, r) => (this.validateRequired(t, "query"), this.fetchUrl(this.API_LOCATION + a.SEARCH_COLLECTIONS, "GET", {
-      query: t,
-      page: e ?? 1,
-      per_page: r ?? 10
-    })), this.searchUsers = (t, e, r) => (this.validateRequired(t, "query"), this.fetchUrl(this.API_LOCATION + a.SEARCH_USERS, "GET", {
-      query: t,
-      page: e ?? 1,
-      per_page: r ?? 10
-    })), this.getStatsTotals = () => this.fetchUrl(this.API_LOCATION + a.STATS_TOTALS, "GET"), this.getStatsMonth = () => this.fetchUrl(this.API_LOCATION + a.STATS_MONTH, "GET"), this.listCollections = (t, e) => this.fetchUrl(this.API_LOCATION + a.LIST_COLLECTIONS, "GET", {
-      page: t ?? 1,
-      per_page: e ?? 10
-    }), this.listFeaturedCollections = (t, e) => this.fetchUrl(this.API_LOCATION + a.LIST_FEATURED_COLLECTIONS, "GET", {
-      page: t ?? 1,
-      per_page: e ?? 10
-    }), this.listCuratedCollections = (t, e) => this.fetchUrl(this.API_LOCATION + a.LIST_CURATED_COLLECTIONS, "GET", {
-      page: t ?? 1,
-      per_page: e ?? 10
-    }), this.getCollection = (t) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.GET_COLLECTION.replace(/:id/gi, t), "GET")), this.getCuratedCollection = (t) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.GET_CURATED_COLLECTION.replace(/:id/gi, t), "GET")), this.getCollectionPhotos = (t, e, r) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.GET_COLLECTION_PHOTOS.replace(/:id/gi, t), "GET", {
-      page: e ?? 1,
-      per_page: r ?? 10
-    })), this.getCuratedCollectionPhotos = (t, e, r) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.GET_CURATED_COLLECTION_PHOTOS.replace(/:id/gi, t), "GET", {
-      page: e ?? 1,
-      per_page: r ?? 10
-    })), this.listRelatedCollections = (t) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.LIST_RELATED_COLLECTION.replace(/:id/gi, t), "GET")), this.getPhoto = (t, e, r, o) => this.getAPhoto(t, e, r, o), this.getRandomPhoto = (t, e, r, o, l, d, p, I) => this.getARandomPhoto(t, e, r, o, l, d, p, I), this.createNewCollection = (t, e, r = !1) => (this.validateRequired(t, "title"), this.fetchUrl(this.API_LOCATION + a.CREATE_NEW_COLLECTION, "POST", {
-      title: t,
-      description: e,
-      private: r
-    })), this.createCollection = (t, e, r = !1) => this.createNewCollection(t, e, r), this.createNewColection = (t, e, r = !1) => this.createNewCollection(t, e, r), this.updateExistingCollection = (t, e, r, o = !1) => (this.validateRequired(t, "id"), this.validateRequired(e, "title"), this.fetchUrl(this.API_LOCATION + a.UPDATE_EXISTING_COLLECTION.replace(/:id/gi, t), "PUT", {
-      title: e,
-      description: r,
-      private: o
-    })), this.updateCollection = (t, e, r, o = !1) => this.updateExistingCollection(t, e, r, o), this.deleteCollection = (t) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.DELETE_COLLECTION.replace(/:id/gi, t), "DELETE")), this.addPhotoToCollection = (t, e) => (this.validateRequired(t, "collection_id"), this.validateRequired(e, "photo_id"), this.fetchUrl(this.API_LOCATION + a.ADD_PHOTO_TO_COLLECTION.replace(/:collection_id/gi, t), "POST", {
-      photo_id: e
-    })), this.removePhotoFromCollection = (t, e) => (this.validateRequired(t, "collection_id"), this.validateRequired(e, "photo_id"), this.fetchUrl(this.API_LOCATION + a.REMOVE_PHOTO_FROM_COLLECTION.replace(/:collection_id/gi, t), "DELETE", {
-      photo_id: e
-    }));
-  }
-  computeHash(t) {
-    return X(t).toString();
-  }
-  validateRequired(t, e) {
-    if (t == null || t === "") {
-      const r = e === "id" ? "Parameter : id is required!" : e === "query" ? "Parameter : query is missing!" : `Parameter : ${e} is required and cannot be empty!`;
-      throw new Error(r);
-    }
-  }
-  validateSupportedValue(t, e, r) {
-    if (t !== void 0 && !e.includes(t))
-      throw new Error(`Parameter : ${r} has an unsupported value!`);
-  }
-  buildQueryParameters(t) {
-    const e = {};
-    return Object.entries(t).forEach(([r, o]) => {
-      o != null && o !== "" && (e[r] = o);
-    }), e;
-  }
-  fetchUrl(t, e, r = {}, o = void 0) {
-    return new J({
-      headers: this.headers,
-      timeout: this.timeout
-    }).makeRequest(t, e.toLowerCase(), this.buildQueryParameters(r), o).then((d) => d.status === 204 ? {
-      status: d.status,
-      statusText: d.statusText,
-      message: "Content Deleted"
-    } : d.status === 403 ? {
-      status: d.status,
-      statusText: d.statusText,
-      message: "Rate Limit Exceeded"
-    } : d.data).catch((d) => Promise.reject(d));
-  }
-}
-export {
-  bt as default
-};
+//#endregion
+export { v as default };
+
 //# sourceMappingURL=wrapsplash.es.js.map

@@ -7,7 +7,7 @@
     "declarationDir": "dist/types",
     "emitDeclarationOnly": true,
     "strict": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,

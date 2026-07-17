@@ -15,6 +15,23 @@ type QueryParams = Record<string, string | number | boolean | undefined>;
 
 type Headers = Record<string, string>;
 
+type WrapSplashResponse = Record<string, unknown>;
+
+class WrapSplashError extends Error {
+  public statusCode: number;
+  public statusText: string;
+  public cause?: unknown;
+
+  constructor(message: string, statusCode: number = 0, statusText: string = "", cause?: unknown) {
+    super(message);
+    this.name = "WrapSplashError";
+    this.statusCode = statusCode;
+    this.statusText = statusText;
+    this.cause = cause;
+    Object.setPrototypeOf(this, new.target.prototype);
+  }
+}
+
 class WrapSplashApi {
   private API_LOCATION: string = urlConfig.API_LOCATION;
   private BEARER_TOKEN_URL: string = urlConfig.BEARER_TOKEN_URL;
@@ -146,7 +163,8 @@ class WrapSplashApi {
       .catch((err) => Promise.reject(err));
   }
 
-  generateBearerToken = (): Promise<any> => {
+  /** Exchange the authorization code for a bearer token. */
+  generateBearerToken = (): Promise<WrapSplashResponse> => {
     this.validateRequired(this.access_key, "access_key");
     this.validateRequired(this.secret_key, "secret_key");
     this.validateRequired(this.redirect_uri, "redirect_uri");
@@ -161,7 +179,7 @@ class WrapSplashApi {
     });
   };
 
-  getCurrentUserProfile = (): Promise<any> => {
+  getCurrentUserProfile = (): Promise<WrapSplashResponse> => {
     return this.fetchUrl(this.API_LOCATION + urlConfig.CURRENT_USER_PROFILE, "GET");
   };
 
@@ -174,7 +192,7 @@ class WrapSplashApi {
     location?: string,
     bio?: string,
     instagram_username?: string
-  ): Promise<any> => {
+  ): Promise<WrapSplashResponse> => {
     return this.fetchUrl(this.API_LOCATION + urlConfig.UPDATE_CURRENT_USER_PROFILE, "PUT", {
       username,
       first_name,
@@ -187,7 +205,7 @@ class WrapSplashApi {
     });
   };
 
-  getPublicProfile = (username: string, width?: number, height?: number): Promise<any> => {
+  getPublicProfile = (username: string, width?: number, height?: number): Promise<WrapSplashResponse> => {
     this.validateRequired(username, "username");
     return this.fetchUrl(this.API_LOCATION + urlConfig.USERS_PUBLIC_PROFILE + username, "GET", {
       w: width,
@@ -195,7 +213,7 @@ class WrapSplashApi {
     });
   };
 
-  getUserPortfolio = (username: string): Promise<any> => {
+  getUserPortfolio = (username: string): Promise<WrapSplashResponse> => {
     this.validateRequired(username, "username");
     return this.fetchUrl(
       this.API_LOCATION + urlConfig.USERS_PORTFOLIO.replace(/:username/gi, username),
@@ -211,11 +229,11 @@ class WrapSplashApi {
     resolution?: string,
     quantity?: number,
     order_by?: string
-  ): Promise<any> => {
+  ): Promise<WrapSplashResponse> => {
     this.validateRequired(username, "username");
     this.validateSupportedValue(order_by, this.availableOrders, "order_by");
     if (stats !== undefined && typeof stats !== "boolean") {
-      throw new Error("Parameter : stats is a boolean or optional!");
+      throw new WrapSplashError("Parameter : stats is a boolean or optional!");
     }
     return this.fetchUrl(
       this.API_LOCATION + urlConfig.USERS_PHOTOS.replace(/:username/gi, username),
@@ -236,7 +254,7 @@ class WrapSplashApi {
     page?: number,
     per_page?: number,
     order_by?: string
-  ): Promise<any> => {
+  ): Promise<WrapSplashResponse> => {
     this.validateRequired(username, "username");
     this.validateSupportedValue(order_by, this.availableOrders, "order_by");
     return this.fetchUrl(
@@ -250,7 +268,7 @@ class WrapSplashApi {
     );
   };
 
-  getUserCollections = (username: string, page?: number, per_page?: number): Promise<any> => {
+  getUserCollections = (username: string, page?: number, per_page?: number): Promise<WrapSplashResponse> => {
     this.validateRequired(username, "username");
     return this.fetchUrl(
       this.API_LOCATION + urlConfig.USERS_COLLECTIONS.replace(/:username/gi, username),
@@ -262,7 +280,7 @@ class WrapSplashApi {
     );
   };
 
-  getUserStatistics = (username: string, resolution?: string, quantity?: number): Promise<any> => {
+  getUserStatistics = (username: string, resolution?: string, quantity?: number): Promise<WrapSplashResponse> => {
     this.validateRequired(username, "username");
     return this.fetchUrl(
       this.API_LOCATION + urlConfig.USERS_STATISTICS.replace(/:username/gi, username),
@@ -274,9 +292,9 @@ class WrapSplashApi {
     );
   };
 
-  listPhotos = (page?: number, per_page?: number, order_by?: string): Promise<any> => {
+  listPhotos = (page?: number, per_page?: number, order_by?: string): Promise<WrapSplashResponse> => {
     if (order_by !== undefined && !this.availableOrders.includes(order_by)) {
-      throw new Error("Parameter : order_by has an unsupported value!");
+      throw new WrapSplashError("Parameter : order_by has an unsupported value!");
     }
     return this.fetchUrl(this.API_LOCATION + urlConfig.LIST_PHOTOS, "GET", {
       page: page ?? 1,
@@ -285,9 +303,9 @@ class WrapSplashApi {
     });
   };
 
-  listCuratedPhotos = (page?: number, per_page?: number, order_by?: string): Promise<any> => {
+  listCuratedPhotos = (page?: number, per_page?: number, order_by?: string): Promise<WrapSplashResponse> => {
     if (order_by !== undefined && !this.availableOrders.includes(order_by)) {
-      throw new Error("Parameter : order_by has an unsupported value!");
+      throw new WrapSplashError("Parameter : order_by has an unsupported value!");
     }
     return this.fetchUrl(this.API_LOCATION + urlConfig.LIST_CURATED_PHOTOS, "GET", {
       page: page ?? 1,
@@ -296,7 +314,7 @@ class WrapSplashApi {
     });
   };
 
-  getAPhoto = (id: string, width?: number, height?: number, rect?: string): Promise<any> => {
+  getAPhoto = (id: string, width?: number, height?: number, rect?: string): Promise<WrapSplashResponse> => {
     this.validateRequired(id, "id");
     return this.fetchUrl(this.API_LOCATION + urlConfig.GET_A_PHOTO.replace(/:id/gi, id), "GET", {
       w: width,
@@ -314,7 +332,7 @@ class WrapSplashApi {
     height?: number,
     orientation?: string,
     count?: number
-  ): Promise<any> => {
+  ): Promise<WrapSplashResponse> => {
     this.validateSupportedValue(orientation, this.availableOrientations, "orientation");
     return this.fetchUrl(this.API_LOCATION + urlConfig.GET_A_RANDOM_PHOTO, "GET", {
       collections: collections !== undefined ? String(collections) : undefined,
@@ -328,7 +346,7 @@ class WrapSplashApi {
     });
   };
 
-  getPhotoStatistics = (id: string, resolution?: string, quantity?: number): Promise<any> => {
+  getPhotoStatistics = (id: string, resolution?: string, quantity?: number): Promise<WrapSplashResponse> => {
     this.validateRequired(id, "id");
     return this.fetchUrl(this.API_LOCATION + urlConfig.GET_A_PHOTO_STATISTICS.replace(/:id/gi, id), "GET", {
       resolution: resolution ?? "days",
@@ -336,7 +354,7 @@ class WrapSplashApi {
     });
   };
 
-  getPhotoLink = (id: string): Promise<any> => {
+  getPhotoLink = (id: string): Promise<WrapSplashResponse> => {
     this.validateRequired(id, "id");
     return this.fetchUrl(this.API_LOCATION + urlConfig.GET_A_PHOTO_DOWNLOAD_LINK.replace(/:id/gi, id), "GET");
   };
@@ -345,7 +363,7 @@ class WrapSplashApi {
     id: string,
     location: Record<string, string | number | boolean | undefined> = {},
     exif: Record<string, string | number | boolean | undefined> = {}
-  ): Promise<any> => {
+  ): Promise<WrapSplashResponse> => {
     this.validateRequired(id, "id");
     return this.fetchUrl(this.API_LOCATION + urlConfig.UPDATE_A_PHOTO.replace(/:id/gi, id), "PUT", {
       ...(location.latitude ? { "location[latitude]": location.latitude } : {}),
@@ -363,17 +381,17 @@ class WrapSplashApi {
     });
   };
 
-  likePhoto = (id: string): Promise<any> => {
+  likePhoto = (id: string): Promise<WrapSplashResponse> => {
     this.validateRequired(id, "id");
     return this.fetchUrl(this.API_LOCATION + urlConfig.LIKE_A_PHOTO.replace(/:id/gi, id), "POST");
   };
 
-  unlikePhoto = (id: string): Promise<any> => {
+  unlikePhoto = (id: string): Promise<WrapSplashResponse> => {
     this.validateRequired(id, "id");
     return this.fetchUrl(this.API_LOCATION + urlConfig.UNLIKE_A_PHOTO.replace(/:id/gi, id), "DELETE");
   };
 
-  search = (query: string, page?: number, per_page?: number, collections?: string | number, orientation?: string): Promise<any> => {
+  search = (query: string, page?: number, per_page?: number, collections?: string | number, orientation?: string): Promise<WrapSplashResponse> => {
     this.validateRequired(query, "query");
     this.validateSupportedValue(orientation, this.availableOrientations, "orientation");
     return this.fetchUrl(this.API_LOCATION + urlConfig.SEARCH_PHOTOS, "GET", {
@@ -385,7 +403,7 @@ class WrapSplashApi {
     });
   };
 
-  searchCollections = (query: string, page?: number, per_page?: number): Promise<any> => {
+  searchCollections = (query: string, page?: number, per_page?: number): Promise<WrapSplashResponse> => {
     this.validateRequired(query, "query");
     return this.fetchUrl(this.API_LOCATION + urlConfig.SEARCH_COLLECTIONS, "GET", {
       query,
@@ -394,7 +412,7 @@ class WrapSplashApi {
     });
   };
 
-  searchUsers = (query: string, page?: number, per_page?: number): Promise<any> => {
+  searchUsers = (query: string, page?: number, per_page?: number): Promise<WrapSplashResponse> => {
     this.validateRequired(query, "query");
     return this.fetchUrl(this.API_LOCATION + urlConfig.SEARCH_USERS, "GET", {
       query,
@@ -403,46 +421,46 @@ class WrapSplashApi {
     });
   };
 
-  getStatsTotals = (): Promise<any> => {
+  getStatsTotals = (): Promise<WrapSplashResponse> => {
     return this.fetchUrl(this.API_LOCATION + urlConfig.STATS_TOTALS, "GET");
   };
 
-  getStatsMonth = (): Promise<any> => {
+  getStatsMonth = (): Promise<WrapSplashResponse> => {
     return this.fetchUrl(this.API_LOCATION + urlConfig.STATS_MONTH, "GET");
   };
 
-  listCollections = (page?: number, per_page?: number): Promise<any> => {
+  listCollections = (page?: number, per_page?: number): Promise<WrapSplashResponse> => {
     return this.fetchUrl(this.API_LOCATION + urlConfig.LIST_COLLECTIONS, "GET", {
       page: page ?? 1,
       per_page: per_page ?? 10,
     });
   };
 
-  listFeaturedCollections = (page?: number, per_page?: number): Promise<any> => {
+  listFeaturedCollections = (page?: number, per_page?: number): Promise<WrapSplashResponse> => {
     return this.fetchUrl(this.API_LOCATION + urlConfig.LIST_FEATURED_COLLECTIONS, "GET", {
       page: page ?? 1,
       per_page: per_page ?? 10,
     });
   };
 
-  listCuratedCollections = (page?: number, per_page?: number): Promise<any> => {
+  listCuratedCollections = (page?: number, per_page?: number): Promise<WrapSplashResponse> => {
     return this.fetchUrl(this.API_LOCATION + urlConfig.LIST_CURATED_COLLECTIONS, "GET", {
       page: page ?? 1,
       per_page: per_page ?? 10,
     });
   };
 
-  getCollection = (id: string): Promise<any> => {
+  getCollection = (id: string): Promise<WrapSplashResponse> => {
     this.validateRequired(id, "id");
     return this.fetchUrl(this.API_LOCATION + urlConfig.GET_COLLECTION.replace(/:id/gi, id), "GET");
   };
 
-  getCuratedCollection = (id: string): Promise<any> => {
+  getCuratedCollection = (id: string): Promise<WrapSplashResponse> => {
     this.validateRequired(id, "id");
     return this.fetchUrl(this.API_LOCATION + urlConfig.GET_CURATED_COLLECTION.replace(/:id/gi, id), "GET");
   };
 
-  getCollectionPhotos = (id: string, page?: number, per_page?: number): Promise<any> => {
+  getCollectionPhotos = (id: string, page?: number, per_page?: number): Promise<WrapSplashResponse> => {
     this.validateRequired(id, "id");
     return this.fetchUrl(this.API_LOCATION + urlConfig.GET_COLLECTION_PHOTOS.replace(/:id/gi, id), "GET", {
       page: page ?? 1,
@@ -450,7 +468,7 @@ class WrapSplashApi {
     });
   };
 
-  getCuratedCollectionPhotos = (id: string, page?: number, per_page?: number): Promise<any> => {
+  getCuratedCollectionPhotos = (id: string, page?: number, per_page?: number): Promise<WrapSplashResponse> => {
     this.validateRequired(id, "id");
     return this.fetchUrl(this.API_LOCATION + urlConfig.GET_CURATED_COLLECTION_PHOTOS.replace(/:id/gi, id), "GET", {
       page: page ?? 1,
@@ -458,12 +476,13 @@ class WrapSplashApi {
     });
   };
 
-  listRelatedCollections = (id: string): Promise<any> => {
+  listRelatedCollections = (id: string): Promise<WrapSplashResponse> => {
     this.validateRequired(id, "id");
     return this.fetchUrl(this.API_LOCATION + urlConfig.LIST_RELATED_COLLECTION.replace(/:id/gi, id), "GET");
   };
 
-  getPhoto = (id: string, width?: number, height?: number, rect?: string): Promise<any> => {
+  /** Fetch a photo using the newer alias. */
+  getPhoto = (id: string, width?: number, height?: number, rect?: string): Promise<WrapSplashResponse> => {
     return this.getAPhoto(id, width, height, rect);
   };
 
@@ -476,11 +495,11 @@ class WrapSplashApi {
     height?: number,
     orientation?: string,
     count?: number
-  ): Promise<any> => {
+  ): Promise<WrapSplashResponse> => {
     return this.getARandomPhoto(collections, featured, username, query, width, height, orientation, count);
   };
 
-  createNewCollection = (title: string, description?: string, private_collection: boolean = false): Promise<any> => {
+  createNewCollection = (title: string, description?: string, private_collection: boolean = false): Promise<WrapSplashResponse> => {
     this.validateRequired(title, "title");
     return this.fetchUrl(this.API_LOCATION + urlConfig.CREATE_NEW_COLLECTION, "POST", {
       title,
@@ -489,15 +508,20 @@ class WrapSplashApi {
     });
   };
 
-  createCollection = (title: string, description?: string, private_collection: boolean = false): Promise<any> => {
+  /** Create a collection using the newer alias. */
+  createCollection = (title: string, description?: string, private_collection: boolean = false): Promise<WrapSplashResponse> => {
     return this.createNewCollection(title, description, private_collection);
   };
 
-  createNewColection = (title: string, description?: string, private_collection: boolean = false): Promise<any> => {
+  /**
+   * Backward-compatible alias for createNewCollection.
+   * @deprecated Use createNewCollection instead.
+   */
+  createNewColection = (title: string, description?: string, private_collection: boolean = false): Promise<WrapSplashResponse> => {
     return this.createNewCollection(title, description, private_collection);
   };
 
-  updateExistingCollection = (id: string, title: string, description?: string, private_collection: boolean = false): Promise<any> => {
+  updateExistingCollection = (id: string, title: string, description?: string, private_collection: boolean = false): Promise<WrapSplashResponse> => {
     this.validateRequired(id, "id");
     this.validateRequired(title, "title");
     return this.fetchUrl(this.API_LOCATION + urlConfig.UPDATE_EXISTING_COLLECTION.replace(/:id/gi, id), "PUT", {
@@ -507,16 +531,17 @@ class WrapSplashApi {
     });
   };
 
-  updateCollection = (id: string, title: string, description?: string, private_collection: boolean = false): Promise<any> => {
+  /** Update an existing collection using the newer alias. */
+  updateCollection = (id: string, title: string, description?: string, private_collection: boolean = false): Promise<WrapSplashResponse> => {
     return this.updateExistingCollection(id, title, description, private_collection);
   };
 
-  deleteCollection = (id: string): Promise<any> => {
+  deleteCollection = (id: string): Promise<WrapSplashResponse> => {
     this.validateRequired(id, "id");
     return this.fetchUrl(this.API_LOCATION + urlConfig.DELETE_COLLECTION.replace(/:id/gi, id), "DELETE");
   };
 
-  addPhotoToCollection = (collection_id: string, photo_id: string): Promise<any> => {
+  addPhotoToCollection = (collection_id: string, photo_id: string): Promise<WrapSplashResponse> => {
     this.validateRequired(collection_id, "collection_id");
     this.validateRequired(photo_id, "photo_id");
     return this.fetchUrl(this.API_LOCATION + urlConfig.ADD_PHOTO_TO_COLLECTION.replace(/:collection_id/gi, collection_id), "POST", {
@@ -524,7 +549,7 @@ class WrapSplashApi {
     });
   };
 
-  removePhotoFromCollection = (collection_id: string, photo_id: string): Promise<any> => {
+  removePhotoFromCollection = (collection_id: string, photo_id: string): Promise<WrapSplashResponse> => {
     this.validateRequired(collection_id, "collection_id");
     this.validateRequired(photo_id, "photo_id");
     return this.fetchUrl(this.API_LOCATION + urlConfig.REMOVE_PHOTO_FROM_COLLECTION.replace(/:collection_id/gi, collection_id), "DELETE", {

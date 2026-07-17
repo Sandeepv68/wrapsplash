@@ -1,10 +1,10 @@
 ![wrapsplash-logo](public/logo.png)
-# WrapSplashJS v4.2.0
+# WrapSplashTS v5.0.0
 
-[![license](https://img.shields.io/github/license/SandeepVattapparambil/wrapsplash.svg)](https://github.com/SandeepVattapparambil/wrapsplash/blob/master/LICENSE) ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg) ![npm version](https://badge.fury.io/js/wrapsplash.svg) ![GitHub issues](https://img.shields.io/github/issues/SandeepVattapparambil/wrapsplash.svg) ![GitHub forks](https://img.shields.io/github/forks/SandeepVattapparambil/wrapsplash.svg) ![GitHub stars](https://img.shields.io/github/stars/SandeepVattapparambil/wrapsplash.svg)
+[![license](https://img.shields.io/github/license/SandeepVattapparambil/wrapsplash.svg)](https://github.com/SandeepVattapparambil/wrapsplash/blob/master/LICENSE) ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg) ![npm version](https://badge.fury.io/js/wrapsplash.svg) [![CI](https://github.com/SandeepVattapparambil/wrapsplash/workflows/CI/badge.svg)](https://github.com/SandeepVattapparambil/wrapsplash/actions?query=workflow%3ACI) [![codecov](https://codecov.io/gh/SandeepVattapparambil/wrapsplash/branch/main/graph/badge.svg)](https://codecov.io/gh/SandeepVattapparambil/wrapsplash) ![GitHub issues](https://img.shields.io/github/issues/SandeepVattapparambil/wrapsplash.svg) ![GitHub forks](https://img.shields.io/github/forks/SandeepVattapparambil/wrapsplash.svg) ![GitHub stars](https://img.shields.io/github/stars/SandeepVattapparambil/wrapsplash.svg)
 
 
-WrapSplashJS is a simple, promise-based API wrapper for the popular [Unsplash](https://unsplash.com/) platform. The library is now written in **TypeScript**, bundled with **Vite**, and can be used in both Node.js and browser-based projects.
+WrapSplashTS is a simple, promise-based API wrapper for the popular [Unsplash](https://unsplash.com/) platform. The library is now written in **TypeScript**, bundled with **Vite**, and can be used in both Node.js and browser-based projects.
 Unsplash provides beautiful high quality free images and photos that you can download and use for any project without any attribution.
 
 Before using the Unsplash API, you need to **register as a developer** and **read the API Guidelines.**
@@ -13,13 +13,14 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 
 ## Table of Contents
 <!--ts-->
-* [About](#wrapsplashjs-v420)
+* [About](#wrapsplashts-v500)
 * [Installation](#installation)
 * [Sample Usage](#sample-usage)
 * [Development](#development)
 * [New API aliases](#new-api-aliases)
 * [Dependency](#dependency)
 * [Changelog](#changelog)
+    * [v5.0.0](#v500)
     * [v4.2.0](#v420)
     * [v4.1.1](#v411)
     * [v4.1.0](#v410)
@@ -134,11 +135,42 @@ unsplash.getPhotoLink('<photo-id>')
 npm install
 npm run build
 npm test
+npm run test:coverage  # Generate coverage report
 npm run lint
 ```
 
+The package also includes a prepublish validation step that runs the build and tests before release.
+
+### Code Coverage
+This project uses [Vitest](https://vitest.dev/) with [V8](https://v8.dev/) coverage provider to track test coverage. Coverage reports are automatically generated and uploaded to [Codecov](https://codecov.io/) on every push to `main` or `master` branches via GitHub Actions CI.
+
+View the latest coverage report: [![codecov](https://codecov.io/gh/SandeepVattapparambil/wrapsplash/branch/main/graph/badge.svg)](https://codecov.io/gh/SandeepVattapparambil/wrapsplash)
+
+To generate a local coverage report:
+```sh
+npm run test:coverage
+# Coverage report will be generated in ./coverage directory
+```
+
+Coverage thresholds (enforced):
+- **Lines:** 80%
+- **Functions:** 80%
+- **Branches:** 55%
+- **Statements:** 80%
+
 ### New API aliases
 The library now includes more descriptive convenience methods such as `getPhoto`, `getRandomPhoto`, `createCollection`, and `updateCollection`. The original method names remain available for backward compatibility.
+
+#### Migration note: `createNewColection` → `createNewCollection`
+The legacy method `createNewColection` (with misspelled "Colection") has been superseded by the correctly-spelled `createNewCollection`. The old method remains available as a deprecated alias for backward compatibility, but new code should use `createNewCollection`.
+
+```js
+// Legacy (deprecated, but still works)
+unsplash.createNewColection('My Collection');
+
+// Recommended (new, correct spelling)
+unsplash.createNewCollection('My Collection');
+```
 
 #### Response
 ```sh
@@ -153,6 +185,19 @@ The library now includes more descriptive convenience methods such as `getPhoto`
 This library depends on [axios](https://www.npmjs.com/package/axios) and [crypto-js](https://www.npmjs.com/package/crypto-js) to make requests and generate required request headers for the [Unsplash API](https://unsplash.com/documentation).
 
 ### Changelog
+#### v5.0.0
+- Rebranded project name from WrapSplashJS to WrapSplashTS to reflect TypeScript-first development
+- Fixed missing type definitions for `WrapSplashResponse` and `WrapSplashError` class
+- Updated Vite from 6.4.2 to 8.1.5 resolving security vulnerabilities in esbuild dependency
+- Updated TypeScript configuration: changed `moduleResolution` from deprecated "node" to "bundler" standard
+- Enhanced type safety with explicit `WrapSplashResponse` type for all API methods
+- Improved error handling with `WrapSplashError` class providing `statusCode`, `statusText`, and `cause` properties
+- Integrated Codecov for automated code coverage tracking via GitHub Actions
+- Added V8 coverage provider with multiple output formats (text, LCOV, JSON, HTML)
+- Enforced coverage thresholds: 80% lines/functions/statements, 55% branches
+- All 30 tests passing with verified production-ready code quality
+- **Security:** Resolved all npm audit vulnerabilities (0 vulnerabilities)
+
 #### v4.2.0
 - Added clearer convenience methods such as `getPhoto`, `getRandomPhoto`, `createCollection`, and `updateCollection`
 - Preserved backward compatibility for the existing method names while introducing the newer API surface
@@ -160,6 +205,7 @@ This library depends on [axios](https://www.npmjs.com/package/axios) and [crypto
 - Added configurable request timeout support for network requests
 - Added ESLint configuration and a GitHub Actions CI workflow for automated build and test checks
 - Expanded regression coverage for the new aliases and validation behavior
+- **Deprecation:** The legacy method `createNewColection` (misspelled) is now deprecated; use `createNewCollection` instead (both methods remain functional for backward compatibility)
 
 #### v4.1.1
 - Bumped package version for npm release
@@ -987,10 +1033,10 @@ POST /collections
 | **description** | *string* | The collection’s description | yes |
 | **private** | *boolean* | Whether to make this collection private | yes | false
 ```js
-UnsplashApi.createNewColection('<collection-name>', '<description>', false);
+UnsplashApi.createNewCollection('<collection-name>', '<description>', false);
 ```
 
-#### Update an Existing Ccollection
+#### Update an Existing Collection
 A Promise factory to update an existing collection belonging to the logged-in user. This requires the ```write_collections``` scope.
 ```
 PUT /collections/:id
@@ -1066,7 +1112,7 @@ npm test
 A minimal GitHub Actions workflow can use the same commands in a standard Node.js environment.
 
 ### Tests
-WrapSplashJS uses `Vitest` as the testing environment. Test files are available in the `test/` folder.
+WrapSplashTS uses `Vitest` as the testing environment. Test files are available in the `test/` folder.
 
 ### License
 The MIT License

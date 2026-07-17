@@ -7,7 +7,7 @@ let unsplash = new UnsplashApi({
     code: '<authorization-code>'
 });
 
-unsplash.createNewColection('My Collection')
+unsplash.createNewCollection('My Collection')
     .then(function (result) {
         console.log(result);
     }).catch(function (err) {
