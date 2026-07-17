@@ -37,7 +37,7 @@
     "@types/crypto-js": "^4.2.2",
     "@types/node": "^20.11.0",
     "typescript": "^5.5.4",
-    "vite": "^5.4.1",
+    "vite": "^6.4.3",
     "vitest": "^4.1.10"
   }
 }
