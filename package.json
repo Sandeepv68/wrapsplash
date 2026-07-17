@@ -6,13 +6,23 @@
   "main": "dist/wrapsplash.umd.js",
   "module": "dist/wrapsplash.es.js",
   "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/wrapsplash.es.js",
+      "require": "./dist/wrapsplash.umd.js",
+      "default": "./dist/wrapsplash.umd.js"
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "build": "vite build && tsc -p tsconfig.json --emitDeclarationOnly",
     "dev": "vite",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint src test lib --ext .ts",
-    "release": "npm run build && npm publish"
+    "release": "npm run build && npm publish",
+    "prepublishOnly": "npm run build && npm test"
   },
   "repository": {
     "type": "git",

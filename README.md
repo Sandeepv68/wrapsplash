@@ -4,8 +4,8 @@
 [![license](https://img.shields.io/github/license/SandeepVattapparambil/wrapsplash.svg)](https://github.com/SandeepVattapparambil/wrapsplash/blob/master/LICENSE) ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg) ![npm version](https://badge.fury.io/js/wrapsplash.svg) ![GitHub issues](https://img.shields.io/github/issues/SandeepVattapparambil/wrapsplash.svg) ![GitHub forks](https://img.shields.io/github/forks/SandeepVattapparambil/wrapsplash.svg) ![GitHub stars](https://img.shields.io/github/stars/SandeepVattapparambil/wrapsplash.svg)
 
 
-WrapSplashJS is a simple, promise-based API wrapper for the popular [Unsplash](https://unsplash.com/) platform. The library is now written in **TypeScript**, bundled with **Vite**, and can be used in both Node.js and browser-based projects.
-Unsplash provides beautiful high quality free images and photos that you can download and use for any project without any attribution.
+WrapSplashJS is a simple, promise-based API wrapper for the popular [Unsplash](https://unsplash.com/) platform. The library is written in **TypeScript**, bundled with **Vite**, and can be used in both Node.js and browser-based projects.
+Unsplash provides beautiful high quality free images and photos that you can download and use for any project without attribution.
 
 Before using the Unsplash API, you need to **register as a developer** and **read the API Guidelines.**
 
@@ -110,9 +110,11 @@ The package exposes the main class through the CommonJS entry point in [index.js
 
 ### Sample usage
 ```js
-// In your Node.js app
+// CommonJS
 const WrapSplash = require('wrapsplash');
-// or: import WrapSplash from 'wrapsplash';
+
+// ES modules
+// import WrapSplash from 'wrapsplash';
 
 const unsplash = new WrapSplash();
 
@@ -120,7 +122,7 @@ unsplash.init({
   bearer_token: '<bearer-token>',
 });
 
-unsplash.getPhotoLink('<photo-id>')
+unsplash.getPhoto('<photo-id>')
   .then((result) => {
     console.log(result);
   })
@@ -136,6 +138,8 @@ npm run build
 npm test
 npm run lint
 ```
+
+The package also includes a prepublish validation step that runs the build and tests before release.
 
 ### New API aliases
 The library now includes more descriptive convenience methods such as `getPhoto`, `getRandomPhoto`, `createCollection`, and `updateCollection`. The original method names remain available for backward compatibility.

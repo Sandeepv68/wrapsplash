@@ -1,11 +1,31 @@
-type WrapSplashOptions = {
+export type JsonPrimitive = string | number | boolean | null;
+export type JsonValue = JsonPrimitive | JsonValue[] | {
+    [key: string]: JsonValue;
+};
+export type WrapSplashResponse = JsonValue;
+export interface WrapSplashOptions {
     access_key?: string;
     secret_key?: string;
     redirect_uri?: string;
     code?: string;
     bearer_token?: string;
     timeout?: number;
-};
+    retries?: number;
+    retryDelayMs?: number;
+}
+export interface WrapSplashErrorOptions {
+    cause?: unknown;
+    statusCode?: number;
+    statusText?: string;
+}
+export type QueryParams = Record<string, string | number | boolean | undefined>;
+export type Headers = Record<string, string>;
+export declare class WrapSplashError extends Error {
+    readonly cause?: unknown;
+    readonly statusCode?: number;
+    readonly statusText?: string;
+    constructor(message: string, options?: WrapSplashErrorOptions);
+}
 declare class WrapSplashApi {
     private API_LOCATION;
     private BEARER_TOKEN_URL;
@@ -17,15 +37,21 @@ declare class WrapSplashApi {
     private grant_type;
     private bearer_token;
     private timeout;
+    private retries;
+    private retryDelayMs;
     private headers;
     private computeHash;
     private validateRequired;
     private validateSupportedValue;
     private availableOrders;
     private availableOrientations;
+    /** Initialize the client with API credentials or a bearer token. */
     init: (options?: WrapSplashOptions) => void;
     private buildQueryParameters;
+    private getErrorMessage;
+    private createWrapSplashError;
     private fetchUrl;
+    /** Exchange the authorization code for a bearer token. */
     generateBearerToken: () => Promise<any>;
     getCurrentUserProfile: () => Promise<any>;
     updateCurrentUserProfile: (username?: string, first_name?: string, last_name?: string, email?: string, url?: string, location?: string, bio?: string, instagram_username?: string) => Promise<any>;
@@ -57,12 +83,15 @@ declare class WrapSplashApi {
     getCollectionPhotos: (id: string, page?: number, per_page?: number) => Promise<any>;
     getCuratedCollectionPhotos: (id: string, page?: number, per_page?: number) => Promise<any>;
     listRelatedCollections: (id: string) => Promise<any>;
+    /** Fetch a photo using the newer alias. */
     getPhoto: (id: string, width?: number, height?: number, rect?: string) => Promise<any>;
     getRandomPhoto: (collections?: string | number, featured?: boolean, username?: string, query?: string, width?: number, height?: number, orientation?: string, count?: number) => Promise<any>;
     createNewCollection: (title: string, description?: string, private_collection?: boolean) => Promise<any>;
+    /** Create a collection using the newer alias. */
     createCollection: (title: string, description?: string, private_collection?: boolean) => Promise<any>;
     createNewColection: (title: string, description?: string, private_collection?: boolean) => Promise<any>;
     updateExistingCollection: (id: string, title: string, description?: string, private_collection?: boolean) => Promise<any>;
+    /** Update an existing collection using the newer alias. */
     updateCollection: (id: string, title: string, description?: string, private_collection?: boolean) => Promise<any>;
     deleteCollection: (id: string) => Promise<any>;
     addPhotoToCollection: (collection_id: string, photo_id: string) => Promise<any>;
