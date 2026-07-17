@@ -1,71 +1,71 @@
 import x from "axios";
-var m = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
+var N = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
 function F(_) {
   return _ && _.__esModule && Object.prototype.hasOwnProperty.call(_, "default") ? _.default : _;
 }
 function W(_) {
   if (_.__esModule) return _;
-  var e = _.default;
-  if (typeof e == "function") {
-    var r = function i() {
-      return this instanceof i ? Reflect.construct(e, arguments, this.constructor) : e.apply(this, arguments);
+  var t = _.default;
+  if (typeof t == "function") {
+    var e = function r() {
+      return this instanceof r ? Reflect.construct(t, arguments, this.constructor) : t.apply(this, arguments);
     };
-    r.prototype = e.prototype;
-  } else r = {};
-  return Object.defineProperty(r, "__esModule", { value: !0 }), Object.keys(_).forEach(function(i) {
-    var o = Object.getOwnPropertyDescriptor(_, i);
-    Object.defineProperty(r, i, o.get ? o : {
+    e.prototype = t.prototype;
+  } else e = {};
+  return Object.defineProperty(e, "__esModule", { value: !0 }), Object.keys(_).forEach(function(r) {
+    var o = Object.getOwnPropertyDescriptor(_, r);
+    Object.defineProperty(e, r, o.get ? o : {
       enumerable: !0,
       get: function() {
-        return _[i];
+        return _[r];
       }
     });
-  }), r;
+  }), e;
 }
 var D = { exports: {} };
-function K(_) {
+function j(_) {
   throw new Error('Could not dynamically require "' + _ + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
 }
-var U = { exports: {} };
-const j = {}, z = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+var m = { exports: {} };
+const K = {}, z = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: j
+  default: K
 }, Symbol.toStringTag, { value: "Module" })), M = /* @__PURE__ */ W(z);
 var H;
-function $() {
-  return H || (H = 1, function(_, e) {
-    (function(r, i) {
-      _.exports = i();
-    })(m, function() {
-      var r = r || function(i, o) {
-        var u;
-        if (typeof window < "u" && window.crypto && (u = window.crypto), typeof self < "u" && self.crypto && (u = self.crypto), typeof globalThis < "u" && globalThis.crypto && (u = globalThis.crypto), !u && typeof window < "u" && window.msCrypto && (u = window.msCrypto), !u && typeof m < "u" && m.crypto && (u = m.crypto), !u && typeof K == "function")
+function V() {
+  return H || (H = 1, function(_, t) {
+    (function(e, r) {
+      _.exports = r();
+    })(N, function() {
+      var e = e || function(r, o) {
+        var l;
+        if (typeof window < "u" && window.crypto && (l = window.crypto), typeof self < "u" && self.crypto && (l = self.crypto), typeof globalThis < "u" && globalThis.crypto && (l = globalThis.crypto), !l && typeof window < "u" && window.msCrypto && (l = window.msCrypto), !l && typeof N < "u" && N.crypto && (l = N.crypto), !l && typeof j == "function")
           try {
-            u = M;
+            l = M;
           } catch {
           }
-        var T = function() {
-          if (u) {
-            if (typeof u.getRandomValues == "function")
+        var d = function() {
+          if (l) {
+            if (typeof l.getRandomValues == "function")
               try {
-                return u.getRandomValues(new Uint32Array(1))[0];
+                return l.getRandomValues(new Uint32Array(1))[0];
               } catch {
               }
-            if (typeof u.randomBytes == "function")
+            if (typeof l.randomBytes == "function")
               try {
-                return u.randomBytes(4).readInt32LE();
+                return l.randomBytes(4).readInt32LE();
               } catch {
               }
           }
           throw new Error("Native crypto module could not be used to get secure random number.");
-        }, E = Object.create || /* @__PURE__ */ function() {
-          function t() {
+        }, p = Object.create || /* @__PURE__ */ function() {
+          function i() {
           }
           return function(s) {
             var n;
-            return t.prototype = s, n = new t(), t.prototype = null, n;
+            return i.prototype = s, n = new i(), i.prototype = null, n;
           };
-        }(), A = {}, v = A.lib = {}, S = v.Base = /* @__PURE__ */ function() {
+        }(), I = {}, R = I.lib = {}, v = R.Base = /* @__PURE__ */ function() {
           return {
             /**
              * Creates a new object that inherits from this object.
@@ -85,9 +85,9 @@ function $() {
              *         }
              *     });
              */
-            extend: function(t) {
-              var s = E(this);
-              return t && s.mixIn(t), (!s.hasOwnProperty("init") || this.init === s.init) && (s.init = function() {
+            extend: function(i) {
+              var s = p(this);
+              return i && s.mixIn(i), (!s.hasOwnProperty("init") || this.init === s.init) && (s.init = function() {
                 s.$super.init.apply(this, arguments);
               }), s.init.prototype = s, s.$super = this, s;
             },
@@ -104,8 +104,8 @@ function $() {
              *     var instance = MyType.create();
              */
             create: function() {
-              var t = this.extend();
-              return t.init.apply(t, arguments), t;
+              var i = this.extend();
+              return i.init.apply(i, arguments), i;
             },
             /**
              * Initializes a newly created object.
@@ -132,10 +132,10 @@ function $() {
              *         field: 'value'
              *     });
              */
-            mixIn: function(t) {
-              for (var s in t)
-                t.hasOwnProperty(s) && (this[s] = t[s]);
-              t.hasOwnProperty("toString") && (this.toString = t.toString);
+            mixIn: function(i) {
+              for (var s in i)
+                i.hasOwnProperty(s) && (this[s] = i[s]);
+              i.hasOwnProperty("toString") && (this.toString = i.toString);
             },
             /**
              * Creates a copy of this object.
@@ -150,7 +150,7 @@ function $() {
               return this.init.prototype.extend(this);
             }
           };
-        }(), C = v.WordArray = S.extend({
+        }(), C = R.WordArray = v.extend({
           /**
            * Initializes a newly created word array.
            *
@@ -163,8 +163,8 @@ function $() {
            *     var wordArray = CryptoJS.lib.WordArray.create([0x00010203, 0x04050607]);
            *     var wordArray = CryptoJS.lib.WordArray.create([0x00010203, 0x04050607], 6);
            */
-          init: function(t, s) {
-            t = this.words = t || [], s != o ? this.sigBytes = s : this.sigBytes = t.length * 4;
+          init: function(i, s) {
+            i = this.words = i || [], s != o ? this.sigBytes = s : this.sigBytes = i.length * 4;
           },
           /**
            * Converts this word array to a string.
@@ -179,8 +179,8 @@ function $() {
            *     var string = wordArray.toString();
            *     var string = wordArray.toString(CryptoJS.enc.Utf8);
            */
-          toString: function(t) {
-            return (t || I).stringify(this);
+          toString: function(i) {
+            return (i || S).stringify(this);
           },
           /**
            * Concatenates a word array to this word array.
@@ -193,16 +193,16 @@ function $() {
            *
            *     wordArray1.concat(wordArray2);
            */
-          concat: function(t) {
-            var s = this.words, n = t.words, c = this.sigBytes, O = t.sigBytes;
+          concat: function(i) {
+            var s = this.words, n = i.words, c = this.sigBytes, O = i.sigBytes;
             if (this.clamp(), c % 4)
-              for (var d = 0; d < O; d++) {
-                var f = n[d >>> 2] >>> 24 - d % 4 * 8 & 255;
-                s[c + d >>> 2] |= f << 24 - (c + d) % 4 * 8;
+              for (var T = 0; T < O; T++) {
+                var E = n[T >>> 2] >>> 24 - T % 4 * 8 & 255;
+                s[c + T >>> 2] |= E << 24 - (c + T) % 4 * 8;
               }
             else
-              for (var p = 0; p < O; p += 4)
-                s[c + p >>> 2] = n[p >>> 2];
+              for (var f = 0; f < O; f += 4)
+                s[c + f >>> 2] = n[f >>> 2];
             return this.sigBytes += O, this;
           },
           /**
@@ -213,8 +213,8 @@ function $() {
            *     wordArray.clamp();
            */
           clamp: function() {
-            var t = this.words, s = this.sigBytes;
-            t[s >>> 2] &= 4294967295 << 32 - s % 4 * 8, t.length = i.ceil(s / 4);
+            var i = this.words, s = this.sigBytes;
+            i[s >>> 2] &= 4294967295 << 32 - s % 4 * 8, i.length = r.ceil(s / 4);
           },
           /**
            * Creates a copy of this word array.
@@ -226,8 +226,8 @@ function $() {
            *     var clone = wordArray.clone();
            */
           clone: function() {
-            var t = S.clone.call(this);
-            return t.words = this.words.slice(0), t;
+            var i = v.clone.call(this);
+            return i.words = this.words.slice(0), i;
           },
           /**
            * Creates a word array filled with random bytes.
@@ -242,12 +242,12 @@ function $() {
            *
            *     var wordArray = CryptoJS.lib.WordArray.random(16);
            */
-          random: function(t) {
-            for (var s = [], n = 0; n < t; n += 4)
-              s.push(T());
-            return new C.init(s, t);
+          random: function(i) {
+            for (var s = [], n = 0; n < i; n += 4)
+              s.push(d());
+            return new C.init(s, i);
           }
-        }), w = A.enc = {}, I = w.Hex = {
+        }), g = I.enc = {}, S = g.Hex = {
           /**
            * Converts a word array to a hex string.
            *
@@ -261,10 +261,10 @@ function $() {
            *
            *     var hexString = CryptoJS.enc.Hex.stringify(wordArray);
            */
-          stringify: function(t) {
-            for (var s = t.words, n = t.sigBytes, c = [], O = 0; O < n; O++) {
-              var d = s[O >>> 2] >>> 24 - O % 4 * 8 & 255;
-              c.push((d >>> 4).toString(16)), c.push((d & 15).toString(16));
+          stringify: function(i) {
+            for (var s = i.words, n = i.sigBytes, c = [], O = 0; O < n; O++) {
+              var T = s[O >>> 2] >>> 24 - O % 4 * 8 & 255;
+              c.push((T >>> 4).toString(16)), c.push((T & 15).toString(16));
             }
             return c.join("");
           },
@@ -281,12 +281,12 @@ function $() {
            *
            *     var wordArray = CryptoJS.enc.Hex.parse(hexString);
            */
-          parse: function(t) {
-            for (var s = t.length, n = [], c = 0; c < s; c += 2)
-              n[c >>> 3] |= parseInt(t.substr(c, 2), 16) << 24 - c % 8 * 4;
+          parse: function(i) {
+            for (var s = i.length, n = [], c = 0; c < s; c += 2)
+              n[c >>> 3] |= parseInt(i.substr(c, 2), 16) << 24 - c % 8 * 4;
             return new C.init(n, s / 2);
           }
-        }, P = w.Latin1 = {
+        }, A = g.Latin1 = {
           /**
            * Converts a word array to a Latin1 string.
            *
@@ -300,10 +300,10 @@ function $() {
            *
            *     var latin1String = CryptoJS.enc.Latin1.stringify(wordArray);
            */
-          stringify: function(t) {
-            for (var s = t.words, n = t.sigBytes, c = [], O = 0; O < n; O++) {
-              var d = s[O >>> 2] >>> 24 - O % 4 * 8 & 255;
-              c.push(String.fromCharCode(d));
+          stringify: function(i) {
+            for (var s = i.words, n = i.sigBytes, c = [], O = 0; O < n; O++) {
+              var T = s[O >>> 2] >>> 24 - O % 4 * 8 & 255;
+              c.push(String.fromCharCode(T));
             }
             return c.join("");
           },
@@ -320,12 +320,12 @@ function $() {
            *
            *     var wordArray = CryptoJS.enc.Latin1.parse(latin1String);
            */
-          parse: function(t) {
-            for (var s = t.length, n = [], c = 0; c < s; c++)
-              n[c >>> 2] |= (t.charCodeAt(c) & 255) << 24 - c % 4 * 8;
+          parse: function(i) {
+            for (var s = i.length, n = [], c = 0; c < s; c++)
+              n[c >>> 2] |= (i.charCodeAt(c) & 255) << 24 - c % 4 * 8;
             return new C.init(n, s);
           }
-        }, h = w.Utf8 = {
+        }, h = g.Utf8 = {
           /**
            * Converts a word array to a UTF-8 string.
            *
@@ -339,9 +339,9 @@ function $() {
            *
            *     var utf8String = CryptoJS.enc.Utf8.stringify(wordArray);
            */
-          stringify: function(t) {
+          stringify: function(i) {
             try {
-              return decodeURIComponent(escape(P.stringify(t)));
+              return decodeURIComponent(escape(A.stringify(i)));
             } catch {
               throw new Error("Malformed UTF-8 data");
             }
@@ -359,10 +359,10 @@ function $() {
            *
            *     var wordArray = CryptoJS.enc.Utf8.parse(utf8String);
            */
-          parse: function(t) {
-            return P.parse(unescape(encodeURIComponent(t)));
+          parse: function(i) {
+            return A.parse(unescape(encodeURIComponent(i)));
           }
-        }, l = v.BufferedBlockAlgorithm = S.extend({
+        }, u = R.BufferedBlockAlgorithm = v.extend({
           /**
            * Resets this block algorithm's data buffer to its initial state.
            *
@@ -383,8 +383,8 @@ function $() {
            *     bufferedBlockAlgorithm._append('data');
            *     bufferedBlockAlgorithm._append(wordArray);
            */
-          _append: function(t) {
-            typeof t == "string" && (t = h.parse(t)), this._data.concat(t), this._nDataBytes += t.sigBytes;
+          _append: function(i) {
+            typeof i == "string" && (i = h.parse(i)), this._data.concat(i), this._nDataBytes += i.sigBytes;
           },
           /**
            * Processes available data blocks.
@@ -400,16 +400,16 @@ function $() {
            *     var processedData = bufferedBlockAlgorithm._process();
            *     var processedData = bufferedBlockAlgorithm._process(!!'flush');
            */
-          _process: function(t) {
-            var s, n = this._data, c = n.words, O = n.sigBytes, d = this.blockSize, f = d * 4, p = O / f;
-            t ? p = i.ceil(p) : p = i.max((p | 0) - this._minBufferSize, 0);
-            var y = p * d, g = i.min(y * 4, O);
+          _process: function(i) {
+            var s, n = this._data, c = n.words, O = n.sigBytes, T = this.blockSize, E = T * 4, f = O / E;
+            i ? f = r.ceil(f) : f = r.max((f | 0) - this._minBufferSize, 0);
+            var y = f * T, P = r.min(y * 4, O);
             if (y) {
-              for (var R = 0; R < y; R += d)
-                this._doProcessBlock(c, R);
-              s = c.splice(0, y), n.sigBytes -= g;
+              for (var U = 0; U < y; U += T)
+                this._doProcessBlock(c, U);
+              s = c.splice(0, y), n.sigBytes -= P;
             }
-            return new C.init(s, g);
+            return new C.init(s, P);
           },
           /**
            * Creates a copy of this object.
@@ -421,16 +421,16 @@ function $() {
            *     var clone = bufferedBlockAlgorithm.clone();
            */
           clone: function() {
-            var t = S.clone.call(this);
-            return t._data = this._data.clone(), t;
+            var i = v.clone.call(this);
+            return i._data = this._data.clone(), i;
           },
           _minBufferSize: 0
         });
-        v.Hasher = l.extend({
+        R.Hasher = u.extend({
           /**
            * Configuration options.
            */
-          cfg: S.extend(),
+          cfg: v.extend(),
           /**
            * Initializes a newly created hasher.
            *
@@ -440,8 +440,8 @@ function $() {
            *
            *     var hasher = CryptoJS.algo.SHA256.create();
            */
-          init: function(t) {
-            this.cfg = this.cfg.extend(t), this.reset();
+          init: function(i) {
+            this.cfg = this.cfg.extend(i), this.reset();
           },
           /**
            * Resets this hasher to its initial state.
@@ -451,7 +451,7 @@ function $() {
            *     hasher.reset();
            */
           reset: function() {
-            l.reset.call(this), this._doReset();
+            u.reset.call(this), this._doReset();
           },
           /**
            * Updates this hasher with a message.
@@ -465,8 +465,8 @@ function $() {
            *     hasher.update('message');
            *     hasher.update(wordArray);
            */
-          update: function(t) {
-            return this._append(t), this._process(), this;
+          update: function(i) {
+            return this._append(i), this._process(), this;
           },
           /**
            * Finalizes the hash computation.
@@ -482,8 +482,8 @@ function $() {
            *     var hash = hasher.finalize('message');
            *     var hash = hasher.finalize(wordArray);
            */
-          finalize: function(t) {
-            t && this._append(t);
+          finalize: function(i) {
+            i && this._append(i);
             var s = this._doFinalize();
             return s;
           },
@@ -501,9 +501,9 @@ function $() {
            *
            *     var SHA256 = CryptoJS.lib.Hasher._createHelper(CryptoJS.algo.SHA256);
            */
-          _createHelper: function(t) {
+          _createHelper: function(i) {
             return function(s, n) {
-              return new t.init(n).finalize(s);
+              return new i.init(n).finalize(s);
             };
           },
           /**
@@ -519,70 +519,70 @@ function $() {
            *
            *     var HmacSHA256 = CryptoJS.lib.Hasher._createHmacHelper(CryptoJS.algo.SHA256);
            */
-          _createHmacHelper: function(t) {
+          _createHmacHelper: function(i) {
             return function(s, n) {
-              return new L.HMAC.init(t, n).finalize(s);
+              return new L.HMAC.init(i, n).finalize(s);
             };
           }
         });
-        var L = A.algo = {};
-        return A;
+        var L = I.algo = {};
+        return I;
       }(Math);
-      return r;
+      return e;
     });
-  }(U)), U.exports;
+  }(m)), m.exports;
 }
-(function(_, e) {
-  (function(r, i) {
-    _.exports = i($());
-  })(m, function(r) {
-    return function(i) {
-      var o = r, u = o.lib, T = u.WordArray, E = u.Hasher, A = o.algo, v = [], S = [];
+(function(_, t) {
+  (function(e, r) {
+    _.exports = r(V());
+  })(N, function(e) {
+    return function(r) {
+      var o = e, l = o.lib, d = l.WordArray, p = l.Hasher, I = o.algo, R = [], v = [];
       (function() {
-        function I(L) {
-          for (var t = i.sqrt(L), s = 2; s <= t; s++)
+        function S(L) {
+          for (var i = r.sqrt(L), s = 2; s <= i; s++)
             if (!(L % s))
               return !1;
           return !0;
         }
-        function P(L) {
+        function A(L) {
           return (L - (L | 0)) * 4294967296 | 0;
         }
-        for (var h = 2, l = 0; l < 64; )
-          I(h) && (l < 8 && (v[l] = P(i.pow(h, 1 / 2))), S[l] = P(i.pow(h, 1 / 3)), l++), h++;
+        for (var h = 2, u = 0; u < 64; )
+          S(h) && (u < 8 && (R[u] = A(r.pow(h, 1 / 2))), v[u] = A(r.pow(h, 1 / 3)), u++), h++;
       })();
-      var C = [], w = A.SHA256 = E.extend({
+      var C = [], g = I.SHA256 = p.extend({
         _doReset: function() {
-          this._hash = new T.init(v.slice(0));
+          this._hash = new d.init(R.slice(0));
         },
-        _doProcessBlock: function(I, P) {
-          for (var h = this._hash.words, l = h[0], L = h[1], t = h[2], s = h[3], n = h[4], c = h[5], O = h[6], d = h[7], f = 0; f < 64; f++) {
-            if (f < 16)
-              C[f] = I[P + f] | 0;
+        _doProcessBlock: function(S, A) {
+          for (var h = this._hash.words, u = h[0], L = h[1], i = h[2], s = h[3], n = h[4], c = h[5], O = h[6], T = h[7], E = 0; E < 64; E++) {
+            if (E < 16)
+              C[E] = S[A + E] | 0;
             else {
-              var p = C[f - 15], y = (p << 25 | p >>> 7) ^ (p << 14 | p >>> 18) ^ p >>> 3, g = C[f - 2], R = (g << 15 | g >>> 17) ^ (g << 13 | g >>> 19) ^ g >>> 10;
-              C[f] = y + C[f - 7] + R + C[f - 16];
+              var f = C[E - 15], y = (f << 25 | f >>> 7) ^ (f << 14 | f >>> 18) ^ f >>> 3, P = C[E - 2], U = (P << 15 | P >>> 17) ^ (P << 13 | P >>> 19) ^ P >>> 10;
+              C[E] = y + C[E - 7] + U + C[E - 16];
             }
-            var b = n & c ^ ~n & O, G = l & L ^ l & t ^ L & t, B = (l << 30 | l >>> 2) ^ (l << 19 | l >>> 13) ^ (l << 10 | l >>> 22), q = (n << 26 | n >>> 6) ^ (n << 21 | n >>> 11) ^ (n << 7 | n >>> 25), N = d + q + b + S[f] + C[f], k = B + G;
-            d = O, O = c, c = n, n = s + N | 0, s = t, t = L, L = l, l = N + k | 0;
+            var q = n & c ^ ~n & O, b = u & L ^ u & i ^ L & i, G = (u << 30 | u >>> 2) ^ (u << 19 | u >>> 13) ^ (u << 10 | u >>> 22), B = (n << 26 | n >>> 6) ^ (n << 21 | n >>> 11) ^ (n << 7 | n >>> 25), w = T + B + q + v[E] + C[E], k = G + b;
+            T = O, O = c, c = n, n = s + w | 0, s = i, i = L, L = u, u = w + k | 0;
           }
-          h[0] = h[0] + l | 0, h[1] = h[1] + L | 0, h[2] = h[2] + t | 0, h[3] = h[3] + s | 0, h[4] = h[4] + n | 0, h[5] = h[5] + c | 0, h[6] = h[6] + O | 0, h[7] = h[7] + d | 0;
+          h[0] = h[0] + u | 0, h[1] = h[1] + L | 0, h[2] = h[2] + i | 0, h[3] = h[3] + s | 0, h[4] = h[4] + n | 0, h[5] = h[5] + c | 0, h[6] = h[6] + O | 0, h[7] = h[7] + T | 0;
         },
         _doFinalize: function() {
-          var I = this._data, P = I.words, h = this._nDataBytes * 8, l = I.sigBytes * 8;
-          return P[l >>> 5] |= 128 << 24 - l % 32, P[(l + 64 >>> 9 << 4) + 14] = i.floor(h / 4294967296), P[(l + 64 >>> 9 << 4) + 15] = h, I.sigBytes = P.length * 4, this._process(), this._hash;
+          var S = this._data, A = S.words, h = this._nDataBytes * 8, u = S.sigBytes * 8;
+          return A[u >>> 5] |= 128 << 24 - u % 32, A[(u + 64 >>> 9 << 4) + 14] = r.floor(h / 4294967296), A[(u + 64 >>> 9 << 4) + 15] = h, S.sigBytes = A.length * 4, this._process(), this._hash;
         },
         clone: function() {
-          var I = E.clone.call(this);
-          return I._hash = this._hash.clone(), I;
+          var S = p.clone.call(this);
+          return S._hash = this._hash.clone(), S;
         }
       });
-      o.SHA256 = E._createHelper(w), o.HmacSHA256 = E._createHmacHelper(w);
-    }(Math), r.SHA256;
+      o.SHA256 = p._createHelper(g), o.HmacSHA256 = p._createHmacHelper(g);
+    }(Math), e.SHA256;
   });
 })(D);
-var X = D.exports;
-const V = /* @__PURE__ */ F(X), Q = {
+var $ = D.exports;
+const X = /* @__PURE__ */ F($), Q = {
   url: "",
   method: "",
   baseURL: "",
@@ -599,68 +599,71 @@ const V = /* @__PURE__ */ F(X), Q = {
   socketPath: null
 };
 class J {
-  constructor(e) {
-    this.http = x.create(e || Q);
+  constructor(t) {
+    this.http = x.create(t || Q);
   }
-  makeRequest(e, r, i, o) {
-    if (!e)
+  makeRequest(t, e, r, o) {
+    if (!t)
       throw new Error("URL required");
     return this.http({
-      method: r || "get",
-      url: e,
-      params: i,
+      method: e || "get",
+      url: t,
+      params: r,
       data: o
     });
   }
 }
-const Y = "https://api.unsplash.com/", Z = "https://unsplash.com/oauth/token", ee = "users/", te = "users/:username/portfolio", re = "users/:username/photos", ie = "users/:username/likes", se = "users/:username/collections", oe = "users/:username/statistics", ne = "photos", ae = "photos/curated", he = "photos/:id", ce = "photos/random", ue = "photos/:id/statistics", le = "photos/:id/download", _e = "photos/:id", Oe = "photos/:id/like", Te = "photos/:id/like", de = "search/photos", Ee = "search/collections", fe = "search/users", pe = "me", Ce = "me", Le = "stats/total", Ie = "stats/month", Pe = "collections", Ae = "collections/featured", Se = "collections/curated", ge = "collections/:id", ve = "collections/curated/:id", we = "collections/:id/photos", ye = "collections/curated/:id/photos", Re = "collections/:id/related", me = "collections", Ue = "collections/:id", Ne = "collections/:id", He = "collections/:collection_id/add", De = "collections/:collection_id/remove", a = {
+const Y = "https://api.unsplash.com/", Z = "https://unsplash.com/oauth/token", tt = "users/", et = "users/:username/portfolio", rt = "users/:username/photos", it = "users/:username/likes", st = "users/:username/collections", ot = "users/:username/statistics", nt = "photos", at = "photos/curated", ht = "photos/:id", ct = "photos/random", lt = "photos/:id/statistics", ut = "photos/:id/download", _t = "photos/:id", dt = "photos/:id/like", Ot = "photos/:id/like", Tt = "search/photos", pt = "search/collections", Et = "search/users", ft = "me", Ct = "me", Lt = "stats/total", It = "stats/month", St = "collections", At = "collections/featured", vt = "collections/curated", Pt = "collections/:id", Rt = "collections/curated/:id", gt = "collections/:id/photos", yt = "collections/curated/:id/photos", Ut = "collections/:id/related", Nt = "collections", mt = "collections/:id", wt = "collections/:id", Ht = "collections/:collection_id/add", Dt = "collections/:collection_id/remove", a = {
   API_LOCATION: Y,
   BEARER_TOKEN_URL: Z,
-  USERS_PUBLIC_PROFILE: ee,
-  USERS_PORTFOLIO: te,
-  USERS_PHOTOS: re,
-  USERS_LIKED_PHOTOS: ie,
-  USERS_COLLECTIONS: se,
-  USERS_STATISTICS: oe,
-  LIST_PHOTOS: ne,
-  LIST_CURATED_PHOTOS: ae,
-  GET_A_PHOTO: he,
-  GET_A_RANDOM_PHOTO: ce,
-  GET_A_PHOTO_STATISTICS: ue,
-  GET_A_PHOTO_DOWNLOAD_LINK: le,
-  UPDATE_A_PHOTO: _e,
-  LIKE_A_PHOTO: Oe,
-  UNLIKE_A_PHOTO: Te,
-  SEARCH_PHOTOS: de,
-  SEARCH_COLLECTIONS: Ee,
-  SEARCH_USERS: fe,
-  CURRENT_USER_PROFILE: pe,
-  UPDATE_CURRENT_USER_PROFILE: Ce,
-  STATS_TOTALS: Le,
-  STATS_MONTH: Ie,
-  LIST_COLLECTIONS: Pe,
-  LIST_FEATURED_COLLECTIONS: Ae,
-  LIST_CURATED_COLLECTIONS: Se,
-  GET_COLLECTION: ge,
-  GET_CURATED_COLLECTION: ve,
-  GET_COLLECTION_PHOTOS: we,
-  GET_CURATED_COLLECTION_PHOTOS: ye,
-  LIST_RELATED_COLLECTION: Re,
-  CREATE_NEW_COLLECTION: me,
-  UPDATE_EXISTING_COLLECTION: Ue,
-  DELETE_COLLECTION: Ne,
-  ADD_PHOTO_TO_COLLECTION: He,
-  REMOVE_PHOTO_FROM_COLLECTION: De
+  USERS_PUBLIC_PROFILE: tt,
+  USERS_PORTFOLIO: et,
+  USERS_PHOTOS: rt,
+  USERS_LIKED_PHOTOS: it,
+  USERS_COLLECTIONS: st,
+  USERS_STATISTICS: ot,
+  LIST_PHOTOS: nt,
+  LIST_CURATED_PHOTOS: at,
+  GET_A_PHOTO: ht,
+  GET_A_RANDOM_PHOTO: ct,
+  GET_A_PHOTO_STATISTICS: lt,
+  GET_A_PHOTO_DOWNLOAD_LINK: ut,
+  UPDATE_A_PHOTO: _t,
+  LIKE_A_PHOTO: dt,
+  UNLIKE_A_PHOTO: Ot,
+  SEARCH_PHOTOS: Tt,
+  SEARCH_COLLECTIONS: pt,
+  SEARCH_USERS: Et,
+  CURRENT_USER_PROFILE: ft,
+  UPDATE_CURRENT_USER_PROFILE: Ct,
+  STATS_TOTALS: Lt,
+  STATS_MONTH: It,
+  LIST_COLLECTIONS: St,
+  LIST_FEATURED_COLLECTIONS: At,
+  LIST_CURATED_COLLECTIONS: vt,
+  GET_COLLECTION: Pt,
+  GET_CURATED_COLLECTION: Rt,
+  GET_COLLECTION_PHOTOS: gt,
+  GET_CURATED_COLLECTION_PHOTOS: yt,
+  LIST_RELATED_COLLECTION: Ut,
+  CREATE_NEW_COLLECTION: Nt,
+  UPDATE_EXISTING_COLLECTION: mt,
+  DELETE_COLLECTION: wt,
+  ADD_PHOTO_TO_COLLECTION: Ht,
+  REMOVE_PHOTO_FROM_COLLECTION: Dt
 };
-class Ge {
+class bt {
   constructor() {
-    this.API_LOCATION = a.API_LOCATION, this.BEARER_TOKEN_URL = a.BEARER_TOKEN_URL, this.options = {}, this.access_key = "", this.secret_key = "", this.redirect_uri = "", this.code = "", this.grant_type = "authorization_code", this.bearer_token = "", this.headers = {
+    this.API_LOCATION = a.API_LOCATION, this.BEARER_TOKEN_URL = a.BEARER_TOKEN_URL, this.options = {}, this.access_key = "", this.secret_key = "", this.redirect_uri = "", this.code = "", this.grant_type = "authorization_code", this.bearer_token = "", this.timeout = 1e4, this.headers = {
       "Content-type": "application/json",
       "X-Requested-With": "WrapSplash"
-    }, this.availableOrders = ["latest", "oldest", "popular"], this.availableOrientations = ["landscape", "portrait", "squarish"], this.init = (e = {}) => {
-      if (!e || typeof e != "object")
+    }, this.availableOrders = ["latest", "oldest", "popular"], this.availableOrientations = ["landscape", "portrait", "squarish"], this.init = (t = {}) => {
+      if (!t || typeof t != "object" || Array.isArray(t))
         throw new Error("Initialisation parameters required!");
-      if (this.options = { ...e }, this.options.bearer_token) {
+      if (this.options = { ...t }, this.timeout = typeof this.options.timeout == "number" && this.options.timeout > 0 ? this.options.timeout : 1e4, this.headers = {
+        "Content-type": "application/json",
+        "X-Requested-With": "WrapSplash"
+      }, this.options.bearer_token) {
         this.headers = {
           ...this.headers,
           Authorization: `Bearer ${this.options.bearer_token}`,
@@ -681,290 +684,187 @@ class Ge {
         Authorization: `Client-ID ${this.options.access_key}`,
         "X-WrapSplash-Header": this.computeHash(this.options.access_key)
       };
-    }, this.generateBearerToken = () => this.fetchUrl(this.BEARER_TOKEN_URL, "POST", {
+    }, this.generateBearerToken = () => (this.validateRequired(this.access_key, "access_key"), this.validateRequired(this.secret_key, "secret_key"), this.validateRequired(this.redirect_uri, "redirect_uri"), this.validateRequired(this.code, "code"), this.fetchUrl(this.BEARER_TOKEN_URL, "POST", {
       client_id: this.access_key,
       client_secret: this.secret_key,
       redirect_uri: this.redirect_uri,
       code: this.code,
       grant_type: this.grant_type
-    }), this.getCurrentUserProfile = () => this.fetchUrl(this.API_LOCATION + a.CURRENT_USER_PROFILE, "GET"), this.updateCurrentUserProfile = (e, r, i, o, u, T, E, A) => this.fetchUrl(this.API_LOCATION + a.UPDATE_CURRENT_USER_PROFILE, "PUT", {
-      username: e,
-      first_name: r,
-      last_name: i,
+    })), this.getCurrentUserProfile = () => this.fetchUrl(this.API_LOCATION + a.CURRENT_USER_PROFILE, "GET"), this.updateCurrentUserProfile = (t, e, r, o, l, d, p, I) => this.fetchUrl(this.API_LOCATION + a.UPDATE_CURRENT_USER_PROFILE, "PUT", {
+      username: t,
+      first_name: e,
+      last_name: r,
       email: o,
-      url: u,
-      location: T,
-      bio: E,
-      instagram_username: A
-    }), this.getPublicProfile = (e, r, i) => {
-      if (!e)
-        throw new Error("Parameter : username is required and cannot be empty!");
-      return this.fetchUrl(this.API_LOCATION + a.USERS_PUBLIC_PROFILE + e, "GET", {
-        w: r,
-        h: i
-      });
-    }, this.getUserPortfolio = (e) => {
-      if (!e)
-        throw new Error("Parameter : username is required and cannot be empty!");
-      return this.fetchUrl(
-        this.API_LOCATION + a.USERS_PORTFOLIO.replace(/:username/gi, e),
-        "GET"
-      );
-    }, this.getUserPhotos = (e, r, i, o, u, T, E) => {
-      if (!e)
-        throw new Error("Parameter : username is required and cannot be empty!");
-      if (E !== void 0 && !this.availableOrders.includes(E))
-        throw new Error("Parameter : order_by has an unsupported value!");
-      if (o !== void 0 && typeof o != "boolean")
+      url: l,
+      location: d,
+      bio: p,
+      instagram_username: I
+    }), this.getPublicProfile = (t, e, r) => (this.validateRequired(t, "username"), this.fetchUrl(this.API_LOCATION + a.USERS_PUBLIC_PROFILE + t, "GET", {
+      w: e,
+      h: r
+    })), this.getUserPortfolio = (t) => (this.validateRequired(t, "username"), this.fetchUrl(
+      this.API_LOCATION + a.USERS_PORTFOLIO.replace(/:username/gi, t),
+      "GET"
+    )), this.getUserPhotos = (t, e, r, o, l, d, p) => {
+      if (this.validateRequired(t, "username"), this.validateSupportedValue(p, this.availableOrders, "order_by"), o !== void 0 && typeof o != "boolean")
         throw new Error("Parameter : stats is a boolean or optional!");
       return this.fetchUrl(
-        this.API_LOCATION + a.USERS_PHOTOS.replace(/:username/gi, e),
+        this.API_LOCATION + a.USERS_PHOTOS.replace(/:username/gi, t),
         "GET",
         {
-          page: r ?? 1,
-          per_page: i ?? 10,
-          order_by: E ?? "latest",
+          page: e ?? 1,
+          per_page: r ?? 10,
+          order_by: p ?? "latest",
           stats: o ?? !1,
-          resolution: u ?? "days",
-          quantity: T ?? 30
+          resolution: l ?? "days",
+          quantity: d ?? 30
         }
       );
-    }, this.getUserLikedPhotos = (e, r, i, o) => {
-      if (!e)
-        throw new Error("Parameter : username is required and cannot be empty!");
-      if (o !== void 0 && !this.availableOrders.includes(o))
-        throw new Error("Parameter : order_by has an unsupported value!");
-      return this.fetchUrl(
-        this.API_LOCATION + a.USERS_LIKED_PHOTOS.replace(/:username/gi, e),
-        "GET",
-        {
-          page: r ?? 1,
-          per_page: i ?? 10,
-          order_by: o ?? "latest"
-        }
-      );
-    }, this.getUserCollections = (e, r, i) => {
-      if (!e)
-        throw new Error("Parameter : username is required and cannot be empty!");
-      return this.fetchUrl(
-        this.API_LOCATION + a.USERS_COLLECTIONS.replace(/:username/gi, e),
-        "GET",
-        {
-          page: r ?? 1,
-          per_page: i ?? 10
-        }
-      );
-    }, this.getUserStatistics = (e, r, i) => {
-      if (!e)
-        throw new Error("Parameter : username is required and cannot be empty!");
-      return this.fetchUrl(
-        this.API_LOCATION + a.USERS_STATISTICS.replace(/:username/gi, e),
-        "GET",
-        {
-          resolution: r ?? "days",
-          quantity: i ?? 30
-        }
-      );
-    }, this.listPhotos = (e, r, i) => {
-      if (i !== void 0 && !this.availableOrders.includes(i))
+    }, this.getUserLikedPhotos = (t, e, r, o) => (this.validateRequired(t, "username"), this.validateSupportedValue(o, this.availableOrders, "order_by"), this.fetchUrl(
+      this.API_LOCATION + a.USERS_LIKED_PHOTOS.replace(/:username/gi, t),
+      "GET",
+      {
+        page: e ?? 1,
+        per_page: r ?? 10,
+        order_by: o ?? "latest"
+      }
+    )), this.getUserCollections = (t, e, r) => (this.validateRequired(t, "username"), this.fetchUrl(
+      this.API_LOCATION + a.USERS_COLLECTIONS.replace(/:username/gi, t),
+      "GET",
+      {
+        page: e ?? 1,
+        per_page: r ?? 10
+      }
+    )), this.getUserStatistics = (t, e, r) => (this.validateRequired(t, "username"), this.fetchUrl(
+      this.API_LOCATION + a.USERS_STATISTICS.replace(/:username/gi, t),
+      "GET",
+      {
+        resolution: e ?? "days",
+        quantity: r ?? 30
+      }
+    )), this.listPhotos = (t, e, r) => {
+      if (r !== void 0 && !this.availableOrders.includes(r))
         throw new Error("Parameter : order_by has an unsupported value!");
       return this.fetchUrl(this.API_LOCATION + a.LIST_PHOTOS, "GET", {
-        page: e ?? 1,
-        per_page: r ?? 10,
-        order_by: i ?? "latest"
+        page: t ?? 1,
+        per_page: e ?? 10,
+        order_by: r ?? "latest"
       });
-    }, this.listCuratedPhotos = (e, r, i) => {
-      if (i !== void 0 && !this.availableOrders.includes(i))
+    }, this.listCuratedPhotos = (t, e, r) => {
+      if (r !== void 0 && !this.availableOrders.includes(r))
         throw new Error("Parameter : order_by has an unsupported value!");
       return this.fetchUrl(this.API_LOCATION + a.LIST_CURATED_PHOTOS, "GET", {
-        page: e ?? 1,
-        per_page: r ?? 10,
-        order_by: i ?? "latest"
+        page: t ?? 1,
+        per_page: e ?? 10,
+        order_by: r ?? "latest"
       });
-    }, this.getAPhoto = (e, r, i, o) => {
-      if (!e)
-        throw new Error("Parameter : id is required!");
-      return this.fetchUrl(this.API_LOCATION + a.GET_A_PHOTO.replace(/:id/gi, e), "GET", {
-        w: r,
-        h: i,
-        rect: typeof o == "string" ? o : void 0
-      });
-    }, this.getARandomPhoto = (e, r, i, o, u, T, E, A) => {
-      if (E !== void 0 && !this.availableOrientations.includes(E))
-        throw new Error("Parameter : orientation has an unsupported value!");
-      return this.fetchUrl(this.API_LOCATION + a.GET_A_RANDOM_PHOTO, "GET", {
-        collections: e !== void 0 ? String(e) : void 0,
-        featured: r ?? !1,
-        username: i,
-        query: o,
-        width: u,
-        height: T,
-        orientation: E ?? "landscape",
-        count: A ?? 1
-      });
-    }, this.getPhotoStatistics = (e, r, i) => {
-      if (!e)
-        throw new Error("Parameter : id is required!");
-      return this.fetchUrl(this.API_LOCATION + a.GET_A_PHOTO_STATISTICS.replace(/:id/gi, e), "GET", {
-        resolution: r ?? "days",
-        quantity: i ?? 30
-      });
-    }, this.getPhotoLink = (e) => {
-      if (!e)
-        throw new Error("Parameter : id is required!");
-      return this.fetchUrl(this.API_LOCATION + a.GET_A_PHOTO_DOWNLOAD_LINK.replace(/:id/gi, e), "GET");
-    }, this.updatePhoto = (e, r = {}, i = {}) => {
-      if (!e)
-        throw new Error("Parameter : id is required!");
-      return this.fetchUrl(this.API_LOCATION + a.UPDATE_A_PHOTO.replace(/:id/gi, e), "PUT", {
-        ...r.latitude ? { "location[latitude]": r.latitude } : {},
-        ...r.longitude ? { "location[longitude]": r.longitude } : {},
-        ...r.name ? { "location[name]": r.name } : {},
-        ...r.city ? { "location[city]": r.city } : {},
-        ...r.country ? { "location[country]": r.country } : {},
-        ...r.confidential ? { "location[confidential]": r.confidential } : {},
-        ...i.make ? { "exif[make]": i.make } : {},
-        ...i.model ? { "exif[model]": i.model } : {},
-        ...i.exposure_time ? { "exif[exposure_time]": i.exposure_time } : {},
-        ...i.aperture_value ? { "exif[aperture_value]": i.aperture_value } : {},
-        ...i.focal_length ? { "exif[focal_length]": i.focal_length } : {},
-        ...i.iso_speed_ratings ? { "exif[iso_speed_ratings]": i.iso_speed_ratings } : {}
-      });
-    }, this.likePhoto = (e) => {
-      if (!e)
-        throw new Error("Parameter : id is required!");
-      return this.fetchUrl(this.API_LOCATION + a.LIKE_A_PHOTO.replace(/:id/gi, e), "POST");
-    }, this.unlikePhoto = (e) => {
-      if (!e)
-        throw new Error("Parameter : id is required!");
-      return this.fetchUrl(this.API_LOCATION + a.UNLIKE_A_PHOTO.replace(/:id/gi, e), "DELETE");
-    }, this.search = (e, r, i, o, u) => {
-      if (e === void 0)
-        throw new Error("Parameter : query is missing!");
-      if (u !== void 0 && !this.availableOrientations.includes(u))
-        throw new Error("Parameter : orientation has an unsupported value!");
-      return this.fetchUrl(this.API_LOCATION + a.SEARCH_PHOTOS, "GET", {
-        query: e,
-        page: r ?? 1,
-        per_page: i ?? 10,
-        collections: o !== void 0 ? String(o) : void 0,
-        orientation: u
-      });
-    }, this.searchCollections = (e, r, i) => {
-      if (e === void 0)
-        throw new Error("Parameter : query is missing!");
-      return this.fetchUrl(this.API_LOCATION + a.SEARCH_COLLECTIONS, "GET", {
-        query: e,
-        page: r ?? 1,
-        per_page: i ?? 10
-      });
-    }, this.searchUsers = (e, r, i) => {
-      if (e === void 0)
-        throw new Error("Parameter : query is missing!");
-      return this.fetchUrl(this.API_LOCATION + a.SEARCH_USERS, "GET", {
-        query: e,
-        page: r ?? 1,
-        per_page: i ?? 10
-      });
-    }, this.getStatsTotals = () => this.fetchUrl(this.API_LOCATION + a.STATS_TOTALS, "GET"), this.getStatsMonth = () => this.fetchUrl(this.API_LOCATION + a.STATS_MONTH, "GET"), this.listCollections = (e, r) => this.fetchUrl(this.API_LOCATION + a.LIST_COLLECTIONS, "GET", {
+    }, this.getAPhoto = (t, e, r, o) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.GET_A_PHOTO.replace(/:id/gi, t), "GET", {
+      w: e,
+      h: r,
+      rect: typeof o == "string" ? o : void 0
+    })), this.getARandomPhoto = (t, e, r, o, l, d, p, I) => (this.validateSupportedValue(p, this.availableOrientations, "orientation"), this.fetchUrl(this.API_LOCATION + a.GET_A_RANDOM_PHOTO, "GET", {
+      collections: t !== void 0 ? String(t) : void 0,
+      featured: e ?? !1,
+      username: r,
+      query: o,
+      width: l,
+      height: d,
+      orientation: p ?? "landscape",
+      count: I ?? 1
+    })), this.getPhotoStatistics = (t, e, r) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.GET_A_PHOTO_STATISTICS.replace(/:id/gi, t), "GET", {
+      resolution: e ?? "days",
+      quantity: r ?? 30
+    })), this.getPhotoLink = (t) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.GET_A_PHOTO_DOWNLOAD_LINK.replace(/:id/gi, t), "GET")), this.updatePhoto = (t, e = {}, r = {}) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.UPDATE_A_PHOTO.replace(/:id/gi, t), "PUT", {
+      ...e.latitude ? { "location[latitude]": e.latitude } : {},
+      ...e.longitude ? { "location[longitude]": e.longitude } : {},
+      ...e.name ? { "location[name]": e.name } : {},
+      ...e.city ? { "location[city]": e.city } : {},
+      ...e.country ? { "location[country]": e.country } : {},
+      ...e.confidential ? { "location[confidential]": e.confidential } : {},
+      ...r.make ? { "exif[make]": r.make } : {},
+      ...r.model ? { "exif[model]": r.model } : {},
+      ...r.exposure_time ? { "exif[exposure_time]": r.exposure_time } : {},
+      ...r.aperture_value ? { "exif[aperture_value]": r.aperture_value } : {},
+      ...r.focal_length ? { "exif[focal_length]": r.focal_length } : {},
+      ...r.iso_speed_ratings ? { "exif[iso_speed_ratings]": r.iso_speed_ratings } : {}
+    })), this.likePhoto = (t) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.LIKE_A_PHOTO.replace(/:id/gi, t), "POST")), this.unlikePhoto = (t) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.UNLIKE_A_PHOTO.replace(/:id/gi, t), "DELETE")), this.search = (t, e, r, o, l) => (this.validateRequired(t, "query"), this.validateSupportedValue(l, this.availableOrientations, "orientation"), this.fetchUrl(this.API_LOCATION + a.SEARCH_PHOTOS, "GET", {
+      query: t,
+      page: e ?? 1,
+      per_page: r ?? 10,
+      collections: o !== void 0 ? String(o) : void 0,
+      orientation: l
+    })), this.searchCollections = (t, e, r) => (this.validateRequired(t, "query"), this.fetchUrl(this.API_LOCATION + a.SEARCH_COLLECTIONS, "GET", {
+      query: t,
       page: e ?? 1,
       per_page: r ?? 10
-    }), this.listFeaturedCollections = (e, r) => this.fetchUrl(this.API_LOCATION + a.LIST_FEATURED_COLLECTIONS, "GET", {
+    })), this.searchUsers = (t, e, r) => (this.validateRequired(t, "query"), this.fetchUrl(this.API_LOCATION + a.SEARCH_USERS, "GET", {
+      query: t,
       page: e ?? 1,
       per_page: r ?? 10
-    }), this.listCuratedCollections = (e, r) => this.fetchUrl(this.API_LOCATION + a.LIST_CURATED_COLLECTIONS, "GET", {
+    })), this.getStatsTotals = () => this.fetchUrl(this.API_LOCATION + a.STATS_TOTALS, "GET"), this.getStatsMonth = () => this.fetchUrl(this.API_LOCATION + a.STATS_MONTH, "GET"), this.listCollections = (t, e) => this.fetchUrl(this.API_LOCATION + a.LIST_COLLECTIONS, "GET", {
+      page: t ?? 1,
+      per_page: e ?? 10
+    }), this.listFeaturedCollections = (t, e) => this.fetchUrl(this.API_LOCATION + a.LIST_FEATURED_COLLECTIONS, "GET", {
+      page: t ?? 1,
+      per_page: e ?? 10
+    }), this.listCuratedCollections = (t, e) => this.fetchUrl(this.API_LOCATION + a.LIST_CURATED_COLLECTIONS, "GET", {
+      page: t ?? 1,
+      per_page: e ?? 10
+    }), this.getCollection = (t) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.GET_COLLECTION.replace(/:id/gi, t), "GET")), this.getCuratedCollection = (t) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.GET_CURATED_COLLECTION.replace(/:id/gi, t), "GET")), this.getCollectionPhotos = (t, e, r) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.GET_COLLECTION_PHOTOS.replace(/:id/gi, t), "GET", {
       page: e ?? 1,
       per_page: r ?? 10
-    }), this.getCollection = (e) => {
-      if (!e)
-        throw new Error("Parameter : id is required!");
-      return this.fetchUrl(this.API_LOCATION + a.GET_COLLECTION.replace(/:id/gi, e), "GET");
-    }, this.getCuratedCollection = (e) => {
-      if (!e)
-        throw new Error("Parameter : id is required!");
-      return this.fetchUrl(this.API_LOCATION + a.GET_CURATED_COLLECTION.replace(/:id/gi, e), "GET");
-    }, this.getCollectionPhotos = (e, r, i) => {
-      if (!e)
-        throw new Error("Parameter : id is required!");
-      return this.fetchUrl(this.API_LOCATION + a.GET_COLLECTION_PHOTOS.replace(/:id/gi, e), "GET", {
-        page: r ?? 1,
-        per_page: i ?? 10
-      });
-    }, this.getCuratedCollectionPhotos = (e, r, i) => {
-      if (!e)
-        throw new Error("Parameter : id is required!");
-      return this.fetchUrl(this.API_LOCATION + a.GET_CURATED_COLLECTION_PHOTOS.replace(/:id/gi, e), "GET", {
-        page: r ?? 1,
-        per_page: i ?? 10
-      });
-    }, this.listRelatedCollections = (e) => {
-      if (!e)
-        throw new Error("Parameter : id is required!");
-      return this.fetchUrl(this.API_LOCATION + a.LIST_RELATED_COLLECTION.replace(/:id/gi, e), "GET");
-    }, this.createNewColection = (e, r, i = !1) => {
-      if (!e)
-        throw new Error("Parameter : title is required!");
-      return this.fetchUrl(this.API_LOCATION + a.CREATE_NEW_COLLECTION, "POST", {
-        title: e,
-        description: r,
-        private: i
-      });
-    }, this.updateExistingCollection = (e, r, i, o = !1) => {
-      if (!e)
-        throw new Error("Parameter : id is required!");
-      if (!r)
-        throw new Error("Parameter : title is required!");
-      return this.fetchUrl(this.API_LOCATION + a.UPDATE_EXISTING_COLLECTION.replace(/:id/gi, e), "PUT", {
-        title: r,
-        description: i,
-        private: o
-      });
-    }, this.deleteCollection = (e) => {
-      if (!e)
-        throw new Error("Parameter : id is required!");
-      return this.fetchUrl(this.API_LOCATION + a.DELETE_COLLECTION.replace(/:id/gi, e), "DELETE");
-    }, this.addPhotoToCollection = (e, r) => {
-      if (!e)
-        throw new Error("Parameter : collection_id is required!");
-      if (!r)
-        throw new Error("Parameter : photo_id is required!");
-      return this.fetchUrl(this.API_LOCATION + a.ADD_PHOTO_TO_COLLECTION.replace(/:collection_id/gi, e), "POST", {
-        photo_id: r
-      });
-    }, this.removePhotoFromCollection = (e, r) => {
-      if (!e)
-        throw new Error("Parameter : collection_id is required!");
-      if (!r)
-        throw new Error("Parameter : photo_id is required!");
-      return this.fetchUrl(this.API_LOCATION + a.REMOVE_PHOTO_FROM_COLLECTION.replace(/:collection_id/gi, e), "DELETE", {
-        photo_id: r
-      });
-    };
+    })), this.getCuratedCollectionPhotos = (t, e, r) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.GET_CURATED_COLLECTION_PHOTOS.replace(/:id/gi, t), "GET", {
+      page: e ?? 1,
+      per_page: r ?? 10
+    })), this.listRelatedCollections = (t) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.LIST_RELATED_COLLECTION.replace(/:id/gi, t), "GET")), this.getPhoto = (t, e, r, o) => this.getAPhoto(t, e, r, o), this.getRandomPhoto = (t, e, r, o, l, d, p, I) => this.getARandomPhoto(t, e, r, o, l, d, p, I), this.createNewCollection = (t, e, r = !1) => (this.validateRequired(t, "title"), this.fetchUrl(this.API_LOCATION + a.CREATE_NEW_COLLECTION, "POST", {
+      title: t,
+      description: e,
+      private: r
+    })), this.createCollection = (t, e, r = !1) => this.createNewCollection(t, e, r), this.createNewColection = (t, e, r = !1) => this.createNewCollection(t, e, r), this.updateExistingCollection = (t, e, r, o = !1) => (this.validateRequired(t, "id"), this.validateRequired(e, "title"), this.fetchUrl(this.API_LOCATION + a.UPDATE_EXISTING_COLLECTION.replace(/:id/gi, t), "PUT", {
+      title: e,
+      description: r,
+      private: o
+    })), this.updateCollection = (t, e, r, o = !1) => this.updateExistingCollection(t, e, r, o), this.deleteCollection = (t) => (this.validateRequired(t, "id"), this.fetchUrl(this.API_LOCATION + a.DELETE_COLLECTION.replace(/:id/gi, t), "DELETE")), this.addPhotoToCollection = (t, e) => (this.validateRequired(t, "collection_id"), this.validateRequired(e, "photo_id"), this.fetchUrl(this.API_LOCATION + a.ADD_PHOTO_TO_COLLECTION.replace(/:collection_id/gi, t), "POST", {
+      photo_id: e
+    })), this.removePhotoFromCollection = (t, e) => (this.validateRequired(t, "collection_id"), this.validateRequired(e, "photo_id"), this.fetchUrl(this.API_LOCATION + a.REMOVE_PHOTO_FROM_COLLECTION.replace(/:collection_id/gi, t), "DELETE", {
+      photo_id: e
+    }));
   }
-  computeHash(e) {
-    return V(e).toString();
+  computeHash(t) {
+    return X(t).toString();
   }
-  buildQueryParameters(e) {
-    const r = {};
-    return Object.entries(e).forEach(([i, o]) => {
-      o != null && o !== "" && (r[i] = o);
-    }), r;
+  validateRequired(t, e) {
+    if (t == null || t === "") {
+      const r = e === "id" ? "Parameter : id is required!" : e === "query" ? "Parameter : query is missing!" : `Parameter : ${e} is required and cannot be empty!`;
+      throw new Error(r);
+    }
   }
-  fetchUrl(e, r, i = {}, o = void 0) {
+  validateSupportedValue(t, e, r) {
+    if (t !== void 0 && !e.includes(t))
+      throw new Error(`Parameter : ${r} has an unsupported value!`);
+  }
+  buildQueryParameters(t) {
+    const e = {};
+    return Object.entries(t).forEach(([r, o]) => {
+      o != null && o !== "" && (e[r] = o);
+    }), e;
+  }
+  fetchUrl(t, e, r = {}, o = void 0) {
     return new J({
-      headers: this.headers
-    }).makeRequest(e, r.toLowerCase(), this.buildQueryParameters(i), o).then((T) => T.status === 204 ? {
-      status: T.status,
-      statusText: T.statusText,
+      headers: this.headers,
+      timeout: this.timeout
+    }).makeRequest(t, e.toLowerCase(), this.buildQueryParameters(r), o).then((d) => d.status === 204 ? {
+      status: d.status,
+      statusText: d.statusText,
       message: "Content Deleted"
-    } : T.status === 403 ? {
-      status: T.status,
-      statusText: T.statusText,
+    } : d.status === 403 ? {
+      status: d.status,
+      statusText: d.statusText,
       message: "Rate Limit Exceeded"
-    } : T.data).catch((T) => Promise.reject(T));
+    } : d.data).catch((d) => Promise.reject(d));
   }
 }
 export {
-  Ge as default
+  bt as default
 };
 //# sourceMappingURL=wrapsplash.es.js.map
