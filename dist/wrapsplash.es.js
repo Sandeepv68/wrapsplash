@@ -563,7 +563,7 @@ function V() {
               var f = C[E - 15], y = (f << 25 | f >>> 7) ^ (f << 14 | f >>> 18) ^ f >>> 3, P = C[E - 2], U = (P << 15 | P >>> 17) ^ (P << 13 | P >>> 19) ^ P >>> 10;
               C[E] = y + C[E - 7] + U + C[E - 16];
             }
-            var q = n & c ^ ~n & O, b = u & L ^ u & i ^ L & i, G = (u << 30 | u >>> 2) ^ (u << 19 | u >>> 13) ^ (u << 10 | u >>> 22), B = (n << 26 | n >>> 6) ^ (n << 21 | n >>> 11) ^ (n << 7 | n >>> 25), w = T + B + q + v[E] + C[E], k = G + b;
+            var b = n & c ^ ~n & O, q = u & L ^ u & i ^ L & i, G = (u << 30 | u >>> 2) ^ (u << 19 | u >>> 13) ^ (u << 10 | u >>> 22), B = (n << 26 | n >>> 6) ^ (n << 21 | n >>> 11) ^ (n << 7 | n >>> 25), w = T + B + b + v[E] + C[E], k = G + q;
             T = O, O = c, c = n, n = s + w | 0, s = i, i = L, L = u, u = w + k | 0;
           }
           h[0] = h[0] + u | 0, h[1] = h[1] + L | 0, h[2] = h[2] + i | 0, h[3] = h[3] + s | 0, h[4] = h[4] + n | 0, h[5] = h[5] + c | 0, h[6] = h[6] + O | 0, h[7] = h[7] + T | 0;
@@ -652,7 +652,7 @@ const Y = "https://api.unsplash.com/", Z = "https://unsplash.com/oauth/token", t
   ADD_PHOTO_TO_COLLECTION: Ht,
   REMOVE_PHOTO_FROM_COLLECTION: Dt
 };
-class bt {
+class qt {
   constructor() {
     this.API_LOCATION = a.API_LOCATION, this.BEARER_TOKEN_URL = a.BEARER_TOKEN_URL, this.options = {}, this.access_key = "", this.secret_key = "", this.redirect_uri = "", this.code = "", this.grant_type = "authorization_code", this.bearer_token = "", this.timeout = 1e4, this.headers = {
       "Content-type": "application/json",
@@ -660,7 +660,7 @@ class bt {
     }, this.availableOrders = ["latest", "oldest", "popular"], this.availableOrientations = ["landscape", "portrait", "squarish"], this.init = (t = {}) => {
       if (!t || typeof t != "object" || Array.isArray(t))
         throw new Error("Initialisation parameters required!");
-      if (this.options = { ...t }, this.timeout = typeof this.options.timeout == "number" && this.options.timeout > 0 ? this.options.timeout : 1e4, this.headers = {
+      if (this.options = { ...t }, this.timeout = typeof this.options.timeout == "number" && this.options.timeout > 0 ? this.options.timeout : 1e4, this.bearer_token = this.options.bearer_token ?? "", this.headers = {
         "Content-type": "application/json",
         "X-Requested-With": "WrapSplash"
       }, this.options.bearer_token) {
@@ -865,6 +865,6 @@ class bt {
   }
 }
 export {
-  bt as default
+  qt as default
 };
 //# sourceMappingURL=wrapsplash.es.js.map
