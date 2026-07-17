@@ -2,18 +2,44 @@ import sha256 from "crypto-js/sha256";
 import AxiosAjax from "../lib/axiosAjaxLib";
 import urlConfig from "../config/url_config.json";
 
-type WrapSplashOptions = {
+export type JsonPrimitive = string | number | boolean | null;
+export type JsonValue = JsonPrimitive | JsonValue[] | { [key: string]: JsonValue };
+export type WrapSplashResponse = JsonValue;
+
+export interface WrapSplashOptions {
   access_key?: string;
   secret_key?: string;
   redirect_uri?: string;
   code?: string;
   bearer_token?: string;
   timeout?: number;
-};
+  retries?: number;
+  retryDelayMs?: number;
+}
 
-type QueryParams = Record<string, string | number | boolean | undefined>;
+export interface WrapSplashErrorOptions {
+  cause?: unknown;
+  statusCode?: number;
+  statusText?: string;
+}
 
-type Headers = Record<string, string>;
+export type QueryParams = Record<string, string | number | boolean | undefined>;
+export type Headers = Record<string, string>;
+
+export class WrapSplashError extends Error {
+  public readonly cause?: unknown;
+  public readonly statusCode?: number;
+  public readonly statusText?: string;
+
+  constructor(message: string, options: WrapSplashErrorOptions = {}) {
+    super(message);
+    this.name = "WrapSplashError";
+    this.cause = options.cause;
+    this.statusCode = options.statusCode;
+    this.statusText = options.statusText;
+    Object.setPrototypeOf(this, new.target.prototype);
+  }
+}
 
 type WrapSplashResponse = Record<string, unknown>;
 
@@ -43,6 +69,8 @@ class WrapSplashApi {
   private grant_type = "authorization_code";
   private bearer_token = "";
   private timeout = 10000;
+  private retries = 2;
+  private retryDelayMs = 100;
   private headers: Headers = {
     "Content-type": "application/json",
     "X-Requested-With": "WrapSplash",
@@ -55,26 +83,29 @@ class WrapSplashApi {
   private validateRequired(value: unknown, fieldName: string): void {
     if (value === undefined || value === null || value === "") {
       const message = fieldName === "id" ? "Parameter : id is required!" : fieldName === "query" ? "Parameter : query is missing!" : `Parameter : ${fieldName} is required and cannot be empty!`;
-      throw new Error(message);
+      throw new WrapSplashError(message);
     }
   }
 
   private validateSupportedValue(value: string | undefined, allowedValues: readonly string[], fieldName: string): void {
     if (value !== undefined && !allowedValues.includes(value)) {
-      throw new Error(`Parameter : ${fieldName} has an unsupported value!`);
+      throw new WrapSplashError(`Parameter : ${fieldName} has an unsupported value!`);
     }
   }
 
   private availableOrders = ["latest", "oldest", "popular"];
   private availableOrientations = ["landscape", "portrait", "squarish"];
 
+  /** Initialize the client with API credentials or a bearer token. */
   init = (options: WrapSplashOptions = {}): void => {
     if (!options || typeof options !== "object" || Array.isArray(options)) {
-      throw new Error("Initialisation parameters required!");
+      throw new WrapSplashError("Initialisation parameters required!");
     }
 
     this.options = { ...options };
     this.timeout = typeof this.options.timeout === "number" && this.options.timeout > 0 ? this.options.timeout : 10000;
+    this.retries = typeof this.options.retries === "number" && this.options.retries >= 0 ? this.options.retries : 2;
+    this.retryDelayMs = typeof this.options.retryDelayMs === "number" && this.options.retryDelayMs >= 0 ? this.options.retryDelayMs : 100;
     this.bearer_token = this.options.bearer_token ?? "";
 
     this.headers = {
@@ -94,22 +125,22 @@ class WrapSplashApi {
     this.access_key = this.options.access_key
       ? this.options.access_key
       : (() => {
-          throw new Error("Access Key missing!");
+          throw new WrapSplashError("Access Key missing!");
         })();
     this.secret_key = this.options.secret_key
       ? this.options.secret_key
       : (() => {
-          throw new Error("Secret Key missing!");
+          throw new WrapSplashError("Secret Key missing!");
         })();
     this.redirect_uri = this.options.redirect_uri
       ? this.options.redirect_uri
       : (() => {
-          throw new Error("Redirect URI missing!");
+          throw new WrapSplashError("Redirect URI missing!");
         })();
     this.code = this.options.code
       ? this.options.code
       : (() => {
-          throw new Error("Authorization Code missing!");
+          throw new WrapSplashError("Authorization Code missing!");
         })();
 
     this.headers = {
@@ -129,7 +160,34 @@ class WrapSplashApi {
     return cleanParams;
   }
 
-  private fetchUrl<T = unknown>(
+  private getErrorMessage(error: unknown): string {
+    if (error instanceof Error) {
+      return error.message;
+    }
+
+    if (typeof error === "string") {
+      return error;
+    }
+
+    return "Request failed";
+  }
+
+  private createWrapSplashError(error: unknown): WrapSplashError {
+    if (error instanceof WrapSplashError) {
+      return error;
+    }
+
+    const statusCode = typeof error === "object" && error !== null && "response" in error && error.response && typeof error.response === "object" && "status" in error.response ? (error.response as { status?: number }).status : undefined;
+    const statusText = typeof error === "object" && error !== null && "response" in error && error.response && typeof error.response === "object" && "statusText" in error.response ? (error.response as { statusText?: string }).statusText : undefined;
+
+    return new WrapSplashError(this.getErrorMessage(error), {
+      cause: error,
+      statusCode,
+      statusText,
+    });
+  }
+
+  private fetchUrl<T = WrapSplashResponse>(
     url: string,
     method: string,
     queryParameters: QueryParams = {},
@@ -138,29 +196,34 @@ class WrapSplashApi {
     const ajax = new AxiosAjax({
       headers: this.headers,
       timeout: this.timeout,
+      retries: this.retries,
+      retryDelayMs: this.retryDelayMs,
     });
+
     return ajax
       .makeRequest(url, method.toLowerCase(), this.buildQueryParameters(queryParameters), body)
       .then((res) => {
-        if (res.status === 204) {
+        const response = res as { status?: number; statusText?: string; data?: T };
+
+        if (response.status === 204) {
           return {
-            status: res.status,
-            statusText: res.statusText,
+            status: response.status,
+            statusText: response.statusText,
             message: "Content Deleted",
-          };
+          } as T;
         }
 
-        if (res.status === 403) {
+        if (response.status === 403) {
           return {
-            status: res.status,
-            statusText: res.statusText,
+            status: response.status,
+            statusText: response.statusText,
             message: "Rate Limit Exceeded",
-          };
+          } as T;
         }
 
-        return res.data;
+        return response.data as T;
       })
-      .catch((err) => Promise.reject(err));
+      .catch((err: unknown) => Promise.reject(this.createWrapSplashError(err)));
   }
 
   /** Exchange the authorization code for a bearer token. */

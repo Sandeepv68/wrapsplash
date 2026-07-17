@@ -111,9 +111,11 @@ The package exposes the main class through the CommonJS entry point in [index.js
 
 ### Sample usage
 ```js
-// In your Node.js app
+// CommonJS
 const WrapSplash = require('wrapsplash');
-// or: import WrapSplash from 'wrapsplash';
+
+// ES modules
+// import WrapSplash from 'wrapsplash';
 
 const unsplash = new WrapSplash();
 
@@ -121,7 +123,7 @@ unsplash.init({
   bearer_token: '<bearer-token>',
 });
 
-unsplash.getPhotoLink('<photo-id>')
+unsplash.getPhoto('<photo-id>')
   .then((result) => {
     console.log(result);
   })

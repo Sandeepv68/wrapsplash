@@ -1,4 +1,9 @@
-type WrapSplashOptions = {
+export type JsonPrimitive = string | number | boolean | null;
+export type JsonValue = JsonPrimitive | JsonValue[] | {
+    [key: string]: JsonValue;
+};
+export type WrapSplashResponse = JsonValue;
+export interface WrapSplashOptions {
     access_key?: string;
     secret_key?: string;
     redirect_uri?: string;
@@ -18,14 +23,19 @@ declare class WrapSplashApi {
     private grant_type;
     private bearer_token;
     private timeout;
+    private retries;
+    private retryDelayMs;
     private headers;
     private computeHash;
     private validateRequired;
     private validateSupportedValue;
     private availableOrders;
     private availableOrientations;
+    /** Initialize the client with API credentials or a bearer token. */
     init: (options?: WrapSplashOptions) => void;
     private buildQueryParameters;
+    private getErrorMessage;
+    private createWrapSplashError;
     private fetchUrl;
     /** Exchange the authorization code for a bearer token. */
     generateBearerToken: () => Promise<WrapSplashResponse>;

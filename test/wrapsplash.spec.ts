@@ -27,7 +27,7 @@ vi.mock("../lib/axiosAjaxLib", () => {
   };
 });
 
-import WrapsplashLib from "../src/index";
+import WrapsplashLib, { WrapSplashError } from "../src/index";
 
 let wrapsplash: InstanceType<typeof WrapsplashLib>;
 
@@ -48,7 +48,22 @@ describe("Wrapsplash API wrapper", () => {
         "X-WrapSplash-Header": expect.any(String),
       }),
       timeout: 10000,
+      retries: 2,
+      retryDelayMs: 100,
     });
+  });
+
+  test("throws a WrapSplashError for missing initialization values", () => {
+    const invalidClient = new WrapsplashLib();
+
+    expect(() => invalidClient.init({ access_key: "abc", secret_key: "def" } as any)).toThrow(WrapSplashError);
+    expect(() => invalidClient.init({ access_key: "abc", secret_key: "def" } as any)).toThrow("Redirect URI missing!");
+  });
+
+  test("wraps request failures in a WrapSplashError", async () => {
+    makeRequestMock.mockRejectedValueOnce(new Error("boom"));
+
+    await expect(wrapsplash.getCurrentUserProfile()).rejects.toBeInstanceOf(WrapSplashError);
   });
 
   test("getCurrentUserProfile requests the me endpoint", async () => {
