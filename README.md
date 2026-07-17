@@ -1,5 +1,5 @@
 ![wrapsplash-logo](public/logo.png)
-# WrapSplashJS v4.1.0
+# WrapSplashJS v4.1.1
 
 [![license](https://img.shields.io/github/license/SandeepVattapparambil/wrapsplash.svg)](https://github.com/SandeepVattapparambil/wrapsplash/blob/master/LICENSE) ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg) ![npm version](https://badge.fury.io/js/wrapsplash.svg) ![GitHub issues](https://img.shields.io/github/issues/SandeepVattapparambil/wrapsplash.svg) ![GitHub forks](https://img.shields.io/github/forks/SandeepVattapparambil/wrapsplash.svg) ![GitHub stars](https://img.shields.io/github/stars/SandeepVattapparambil/wrapsplash.svg)
 
@@ -142,6 +142,11 @@ UnsplashApi.getPhotoLink('<photo-id>')
 This library depends on [axios](https://www.npmjs.com/package/axios) and [crypto-js](https://www.npmjs.com/package/crypto-js) to make requests and generate required request headers for the [Unsplash API](https://unsplash.com/documentation).
 
 ### Changelog
+#### v4.1.1
+- Bumped package version for npm release
+- Updated README version and changelog entries
+- Fixed example entrypoint and constructor usage
+
 #### v4.1.0
 - Migrated source to TypeScript
 - Switched bundler from Webpack to Vite
