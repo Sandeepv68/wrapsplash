@@ -132,6 +132,18 @@ describe("Wrapsplash API wrapper", () => {
     expect(response.queryParameters.private).toBe(true);
   });
 
+  test("createNewCollection sends the correct collection payload", async () => {
+    const response = await wrapsplash.createNewCollection("My Collection", "desc", true);
+
+    expect(makeRequestMock).toHaveBeenCalledWith(
+      "https://api.unsplash.com/collections",
+      "post",
+      { title: "My Collection", description: "desc", private: true },
+      undefined
+    );
+    expect(response.queryParameters.private).toBe(true);
+  });
+
   test("updateCurrentUserProfile sends the correct PUT payload", async () => {
     const payload = {
       username: "mock-user",

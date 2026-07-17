@@ -25,7 +25,17 @@ export default defineConfig({
     include: ["test/**/*.spec.ts"],
     coverage: {
       provider: "v8",
-      reporter: ["text", "lcov"],
+      reporter: ["text", "lcov", "json", "html"],
+      reportsDirectory: "./coverage",
+      exclude: [
+        "node_modules/",
+        "dist/",
+        "test/",
+      ],
+      lines: 80,
+      functions: 80,
+      branches: 55,
+      statements: 80,
     },
   },
 });
