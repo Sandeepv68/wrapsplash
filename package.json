@@ -1,6 +1,6 @@
 {
   "name": "wrapsplash",
-  "version": "4.1.1",
+  "version": "4.2.0",
   "description": "A simple npm wrapper module to use the popular Unsplash API.",
   "private": false,
   "main": "dist/wrapsplash.umd.js",
@@ -11,6 +11,7 @@
     "dev": "vite",
     "test": "vitest run",
     "test:watch": "vitest",
+    "lint": "eslint src test lib --ext .ts",
     "release": "npm run build && npm publish"
   },
   "repository": {
@@ -40,6 +41,9 @@
   "devDependencies": {
     "@types/crypto-js": "^4.2.2",
     "@types/node": "^20.11.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.0.0",
     "typescript": "^5.5.4",
     "vite": "^5.4.1",
     "vitest": "^4.1.10"

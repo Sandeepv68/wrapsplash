@@ -47,6 +47,7 @@ describe("Wrapsplash API wrapper", () => {
         Authorization: `Bearer ${bearerToken}`,
         "X-WrapSplash-Header": expect.any(String),
       }),
+      timeout: 10000,
     });
   });
 
@@ -65,6 +66,55 @@ describe("Wrapsplash API wrapper", () => {
       queryParameters: {},
       body: undefined,
     });
+  });
+
+  test("getPhoto aliases the photo lookup endpoint", async () => {
+    const response = await wrapsplash.getPhoto("g3PyXO4A0yc", 120, 180, "0,0,100,200");
+
+    expect(makeRequestMock).toHaveBeenCalledWith(
+      "https://api.unsplash.com/photos/g3PyXO4A0yc",
+      "get",
+      { w: 120, h: 180, rect: "0,0,100,200" },
+      undefined
+    );
+    expect(response.queryParameters.rect).toBe("0,0,100,200");
+  });
+
+  test("getRandomPhoto aliases the random photo endpoint", async () => {
+    const response = await wrapsplash.getRandomPhoto("123", true, "sandeepv", "nature", 400, 300, "portrait", 2);
+
+    expect(makeRequestMock).toHaveBeenCalledWith(
+      "https://api.unsplash.com/photos/random",
+      "get",
+      {
+        collections: "123",
+        featured: true,
+        username: "sandeepv",
+        query: "nature",
+        width: 400,
+        height: 300,
+        orientation: "portrait",
+        count: 2,
+      },
+      undefined
+    );
+    expect(response.queryParameters.orientation).toBe("portrait");
+  });
+
+  test("createCollection sends the correct collection payload", async () => {
+    const response = await wrapsplash.createCollection("Test collection", "A test collection", true);
+
+    expect(makeRequestMock).toHaveBeenCalledWith(
+      "https://api.unsplash.com/collections",
+      "post",
+      {
+        title: "Test collection",
+        description: "A test collection",
+        private: true,
+      },
+      undefined
+    );
+    expect(response.queryParameters.private).toBe(true);
   });
 
   test("updateCurrentUserProfile sends the correct PUT payload", async () => {

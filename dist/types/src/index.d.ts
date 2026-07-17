@@ -4,6 +4,7 @@ type WrapSplashOptions = {
     redirect_uri?: string;
     code?: string;
     bearer_token?: string;
+    timeout?: number;
 };
 declare class WrapSplashApi {
     private API_LOCATION;
@@ -15,8 +16,11 @@ declare class WrapSplashApi {
     private code;
     private grant_type;
     private bearer_token;
+    private timeout;
     private headers;
     private computeHash;
+    private validateRequired;
+    private validateSupportedValue;
     private availableOrders;
     private availableOrientations;
     init: (options?: WrapSplashOptions) => void;
@@ -53,8 +57,13 @@ declare class WrapSplashApi {
     getCollectionPhotos: (id: string, page?: number, per_page?: number) => Promise<any>;
     getCuratedCollectionPhotos: (id: string, page?: number, per_page?: number) => Promise<any>;
     listRelatedCollections: (id: string) => Promise<any>;
+    getPhoto: (id: string, width?: number, height?: number, rect?: string) => Promise<any>;
+    getRandomPhoto: (collections?: string | number, featured?: boolean, username?: string, query?: string, width?: number, height?: number, orientation?: string, count?: number) => Promise<any>;
+    createNewCollection: (title: string, description?: string, private_collection?: boolean) => Promise<any>;
+    createCollection: (title: string, description?: string, private_collection?: boolean) => Promise<any>;
     createNewColection: (title: string, description?: string, private_collection?: boolean) => Promise<any>;
     updateExistingCollection: (id: string, title: string, description?: string, private_collection?: boolean) => Promise<any>;
+    updateCollection: (id: string, title: string, description?: string, private_collection?: boolean) => Promise<any>;
     deleteCollection: (id: string) => Promise<any>;
     addPhotoToCollection: (collection_id: string, photo_id: string) => Promise<any>;
     removePhotoFromCollection: (collection_id: string, photo_id: string) => Promise<any>;

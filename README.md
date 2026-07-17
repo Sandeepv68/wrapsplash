@@ -1,10 +1,10 @@
 ![wrapsplash-logo](public/logo.png)
-# WrapSplashJS v4.1.1
+# WrapSplashJS v4.2.0
 
 [![license](https://img.shields.io/github/license/SandeepVattapparambil/wrapsplash.svg)](https://github.com/SandeepVattapparambil/wrapsplash/blob/master/LICENSE) ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg) ![npm version](https://badge.fury.io/js/wrapsplash.svg) ![GitHub issues](https://img.shields.io/github/issues/SandeepVattapparambil/wrapsplash.svg) ![GitHub forks](https://img.shields.io/github/forks/SandeepVattapparambil/wrapsplash.svg) ![GitHub stars](https://img.shields.io/github/stars/SandeepVattapparambil/wrapsplash.svg)
 
 
-WrapSplashJS is a simple, promise-based API wrapper for the popular [Unsplash](https://unsplash.com/) platform. WrapSplashJS has been migrated to **TypeScript** and uses **Vite** as its bundler, while still supporting browser and Node.js usage.
+WrapSplashJS is a simple, promise-based API wrapper for the popular [Unsplash](https://unsplash.com/) platform. The library is now written in **TypeScript**, bundled with **Vite**, and can be used in both Node.js and browser-based projects.
 Unsplash provides beautiful high quality free images and photos that you can download and use for any project without any attribution.
 
 Before using the Unsplash API, you need to **register as a developer** and **read the API Guidelines.**
@@ -13,11 +13,15 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 
 ## Table of Contents
 <!--ts-->
-* [About](#wrapsplashjs-v400)
+* [About](#wrapsplashjs-v420)
 * [Installation](#installation)
 * [Sample Usage](#sample-usage)
+* [Development](#development)
+* [New API aliases](#new-api-aliases)
 * [Dependency](#dependency)
 * [Changelog](#changelog)
+    * [v4.2.0](#v420)
+    * [v4.1.1](#v411)
     * [v4.1.0](#v410)
     * [v4.0.1](#v401)
     * [v4.0.0](#v400)
@@ -102,33 +106,40 @@ Install the package from NPM
 npm install --save wrapsplash
 ```
 
+The package exposes the main class through the CommonJS entry point in [index.js](index.js), which loads the built distribution bundle.
+
 ### Sample usage
 ```js
-//In your NodeJS app
-
-//Require npm module
+// In your Node.js app
 const WrapSplash = require('wrapsplash');
+// or: import WrapSplash from 'wrapsplash';
 
-//OR using ES6/7 Import statement
-import WrapSplash from 'wrapsplash';
+const unsplash = new WrapSplash();
 
-//Instantiate WrapSplash
-let UnsplashApi = new WrapSplash();
-
-//Initialize with parameters
-UnsplashApi.init({
-    bearer_token: '<bearer-token>'
+unsplash.init({
+  bearer_token: '<bearer-token>',
 });
 
-//List photos - Get a single page from the list of all photos.
-UnsplashApi.getPhotoLink('<photo-id>')
-    .then(function (result) {
-        //do something with the data
-        console.log(result);
-    }).catch(function (e) {
-        console.err(e);
-    });
+unsplash.getPhotoLink('<photo-id>')
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 ```
+
+### Development
+```sh
+npm install
+npm run build
+npm test
+npm run lint
+```
+
+### New API aliases
+The library now includes more descriptive convenience methods such as `getPhoto`, `getRandomPhoto`, `createCollection`, and `updateCollection`. The original method names remain available for backward compatibility.
+
 #### Response
 ```sh
 200 OK
@@ -142,6 +153,14 @@ UnsplashApi.getPhotoLink('<photo-id>')
 This library depends on [axios](https://www.npmjs.com/package/axios) and [crypto-js](https://www.npmjs.com/package/crypto-js) to make requests and generate required request headers for the [Unsplash API](https://unsplash.com/documentation).
 
 ### Changelog
+#### v4.2.0
+- Added clearer convenience methods such as `getPhoto`, `getRandomPhoto`, `createCollection`, and `updateCollection`
+- Preserved backward compatibility for the existing method names while introducing the newer API surface
+- Improved input validation for required parameters and unsupported option values
+- Added configurable request timeout support for network requests
+- Added ESLint configuration and a GitHub Actions CI workflow for automated build and test checks
+- Expanded regression coverage for the new aliases and validation behavior
+
 #### v4.1.1
 - Bumped package version for npm release
 - Updated README version and changelog entries
