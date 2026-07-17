@@ -1,11 +1,11 @@
 ![wrapsplash-logo](public/logo.png)
 # WrapSplashJS v4.1.0
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f5061e7366044dd3a250baba5a2e9f6b)](https://app.codacy.com/app/sandeepv68/wrapsplash?utm_source=github.com&utm_medium=referral&utm_content=SandeepVattapparambil/wrapsplash&utm_campaign=badger) ![license](https://img.shields.io/github/license/SandeepVattapparambil/wrapsplash.svg) ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg) ![Dependecies](https://david-dm.org/SandeepVattapparambil/wrapsplash.svg) ![Status](https://img.shields.io/badge/status-stable-green.svg) ![npm version](https://badge.fury.io/js/wrapsplash.svg) [![Known Vulnerabilities](https://snyk.io/test/github/SandeepVattapparambil/wrapsplash/badge.svg?targetFile=package.json)](https://snyk.io/test/github/SandeepVattapparambil/wrapsplash?targetFile=package.json) [![Greenkeeper badge](https://badges.greenkeeper.io/SandeepVattapparambil/wrapsplash.svg)](https://greenkeeper.io/) ![Travis](https://travis-ci.org/SandeepVattapparambil/wrapsplash.svg?branch=master) ![GitHub issues](https://img.shields.io/github/issues/SandeepVattapparambil/wrapsplash.svg) ![GitHub forks](https://img.shields.io/github/forks/SandeepVattapparambil/wrapsplash.svg) ![GitHub stars](https://img.shields.io/github/stars/SandeepVattapparambil/wrapsplash.svg) ![Twitter](https://img.shields.io/twitter/url/https/github.com/SandeepVattapparambil/wrapsplash.svg?style=social)
+[![license](https://img.shields.io/github/license/SandeepVattapparambil/wrapsplash.svg)](https://github.com/SandeepVattapparambil/wrapsplash/blob/master/LICENSE) ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg) ![npm version](https://badge.fury.io/js/wrapsplash.svg) ![GitHub issues](https://img.shields.io/github/issues/SandeepVattapparambil/wrapsplash.svg) ![GitHub forks](https://img.shields.io/github/forks/SandeepVattapparambil/wrapsplash.svg) ![GitHub stars](https://img.shields.io/github/stars/SandeepVattapparambil/wrapsplash.svg)
 
 
-WrapSplashJS is a simple, promise-based API wrapper for the popular [Unsplash](https://unsplash.com/) platform. WrapSplashJS is a **UMD** module, so that it can be used across multiple javascript environments ranging from browsers to servers(nodejs).
-Unsplash provides beautiful high quality free images and photos that you can download and use for any project  without any attribution.
+WrapSplashJS is a simple, promise-based API wrapper for the popular [Unsplash](https://unsplash.com/) platform. WrapSplashJS has been migrated to **TypeScript** and uses **Vite** as its bundler, while still supporting browser and Node.js usage.
+Unsplash provides beautiful high quality free images and photos that you can download and use for any project without any attribution.
 
 Before using the Unsplash API, you need to **register as a developer** and **read the API Guidelines.**
 
@@ -139,12 +139,14 @@ UnsplashApi.getPhotoLink('<photo-id>')
 }
 ```
 ### Dependency
-This library depends on [axios](https://www.npmjs.com/package/axios) to make requests to the [Unsplash API](https://unsplash.com/documentation). Install Axios as a dependency.
+This library depends on [axios](https://www.npmjs.com/package/axios) and [crypto-js](https://www.npmjs.com/package/crypto-js) to make requests and generate required request headers for the [Unsplash API](https://unsplash.com/documentation).
 
 ### Changelog
 #### v4.1.0
+- Migrated source to TypeScript
+- Switched bundler from Webpack to Vite
+- Updated tests to Vitest-compatible configuration
 - Dependency vulnerabilities audited and fixed
-- Test suite updated
 
 #### v4.0.1
 - Typos fixed
@@ -195,7 +197,7 @@ This library depends on [axios](https://www.npmjs.com/package/axios) to make req
 
 #### v3.0.0
 - Completely re-written in ```ES6``` & ```ES7``` specifications.
-- Continuous Integrations (CI) using Travis CI.
+- Continuous Integrations (CI) using modern Node.js workflows.
 - Minor bug fixes.
 - Major code optimizations.
 - Updated documentaions.
@@ -1029,25 +1031,18 @@ UnsplashApi.removePhotoFromCollection('<collection-id>', '<photo-id>');
 
 
 ### Continuous Integration (CI)
-Continuous Integration services monitor repositories for changes, then automatically run unit tests on your behalf, typically in a containerized environment. To test this setup works in a continuous integration environment, an integration was done with [Travis CI](https://travis-ci.org/). According to the [Travis Node.js Documentation](http://docs.travis-ci.com/user/languages/javascript-with-nodejs/), Travis automatically runs `npm install` and `npm test`. The only additional thing I had to add to the Travis configuration was to run `npm run build` before running the tests. The working Travis config looks like this:
+This project uses Vite for bundling and Vitest for testing. In CI, run:
 
-```yml
-language: node_js
-
-node_js:
-  - stable
-
-install:
-  - npm install
-
-script:
-  - npm run build
-  - npm test
+```sh
+npm install
+npm run build
+npm test
 ```
-Here's the [Travis build page for this project](https://travis-ci.org/SandeepVattapparambil/wrapsplash), which shows the tests passing.
+
+A minimal GitHub Actions workflow can use the same commands in a standard Node.js environment.
 
 ### Tests
-WrapSplashJS uses ```Jest``` as the testing environment. All the test spec files are available in the ```test``` folder. For more information read the README file from the test folder.
+WrapSplashJS uses `Vitest` as the testing environment. Test files are available in the `test/` folder.
 
 ### License
 The MIT License
