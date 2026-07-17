@@ -1,2 +1,2 @@
-# WrapSplash Module Distribution Files
-This folder contains the distributable files for WrapSplash and the source mappings.
+# Public
+This folder contains the images, logo and other blobs.
