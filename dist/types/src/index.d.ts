@@ -1,17 +1,25 @@
-export type JsonPrimitive = string | number | boolean | null;
-export type JsonValue = JsonPrimitive | JsonValue[] | {
-    [key: string]: JsonValue;
-};
-export type WrapSplashResponse = JsonValue;
-export interface WrapSplashOptions {
+type WrapSplashOptions = {
     access_key?: string;
     secret_key?: string;
     redirect_uri?: string;
     code?: string;
     bearer_token?: string;
     timeout?: number;
+    retries?: number;
+    retryDelayMs?: number;
 };
 type WrapSplashResponse = Record<string, unknown>;
+interface ErrorOptions {
+    cause?: unknown;
+    statusCode?: number;
+    statusText?: string;
+}
+declare class WrapSplashError extends Error {
+    statusCode?: number;
+    statusText?: string;
+    cause?: unknown;
+    constructor(message: string, options?: ErrorOptions | number, statusText?: string, cause?: unknown);
+}
 declare class WrapSplashApi {
     private API_LOCATION;
     private BEARER_TOKEN_URL;
@@ -87,4 +95,5 @@ declare class WrapSplashApi {
     addPhotoToCollection: (collection_id: string, photo_id: string) => Promise<WrapSplashResponse>;
     removePhotoFromCollection: (collection_id: string, photo_id: string) => Promise<WrapSplashResponse>;
 }
+export { WrapSplashError };
 export default WrapSplashApi;

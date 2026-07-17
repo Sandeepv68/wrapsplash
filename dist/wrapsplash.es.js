@@ -238,17 +238,29 @@ var t = Object.create, n = Object.defineProperty, r = Object.getOwnPropertyDescr
 	socketPath: null
 }, h = class {
 	http;
+	retries;
+	retryDelayMs;
 	constructor(t) {
-		this.http = e.create(t || m);
+		this.http = e.create(t || m), this.retries = t?.retries ?? 2, this.retryDelayMs = t?.retryDelayMs ?? 100;
 	}
-	makeRequest(e, t, n, r) {
+	async sleep(e) {
+		await new Promise((t) => setTimeout(t, e));
+	}
+	async makeRequest(e, t, n, r) {
 		if (!e) throw Error("URL required");
-		return this.http({
-			method: t || "get",
-			url: e,
-			params: n,
-			data: r
-		});
+		let i;
+		for (let a = 0; a <= this.retries; a += 1) try {
+			return await this.http({
+				method: t || "get",
+				url: e,
+				params: n,
+				data: r
+			});
+		} catch (e) {
+			if (i = e, a >= this.retries) throw e;
+			this.retryDelayMs > 0 && await this.sleep(this.retryDelayMs);
+		}
+		throw i;
 	}
 }, g = {
 	API_LOCATION: "https://api.unsplash.com/",
@@ -289,12 +301,12 @@ var t = Object.create, n = Object.defineProperty, r = Object.getOwnPropertyDescr
 	ADD_PHOTO_TO_COLLECTION: "collections/:collection_id/add",
 	REMOVE_PHOTO_FROM_COLLECTION: "collections/:collection_id/remove"
 }, _ = class extends Error {
-	constructor(e, t = 0, n = "", r) {
-		super(e), this.name = "WrapSplashError", this.statusCode = t, this.statusText = n, this.cause = r, Object.setPrototypeOf(this, new.target.prototype);
+	constructor(e, t, n, r) {
+		super(e), this.name = "WrapSplashError", typeof t == "object" && t && !Array.isArray(t) ? (this.cause = t.cause, this.statusCode = t.statusCode, this.statusText = t.statusText) : typeof t == "number" && (this.statusCode = t, this.statusText = n, this.cause = r), Object.setPrototypeOf(this, new.target.prototype);
 	}
 }, v = class {
 	constructor() {
-		this.API_LOCATION = g.API_LOCATION, this.BEARER_TOKEN_URL = g.BEARER_TOKEN_URL, this.options = {}, this.access_key = "", this.secret_key = "", this.redirect_uri = "", this.code = "", this.grant_type = "authorization_code", this.bearer_token = "", this.timeout = 1e4, this.headers = {
+		this.API_LOCATION = g.API_LOCATION, this.BEARER_TOKEN_URL = g.BEARER_TOKEN_URL, this.options = {}, this.access_key = "", this.secret_key = "", this.redirect_uri = "", this.code = "", this.grant_type = "authorization_code", this.bearer_token = "", this.timeout = 1e4, this.retries = 2, this.retryDelayMs = 100, this.headers = {
 			"Content-type": "application/json",
 			"X-Requested-With": "WrapSplash"
 		}, this.availableOrders = [
@@ -306,8 +318,8 @@ var t = Object.create, n = Object.defineProperty, r = Object.getOwnPropertyDescr
 			"portrait",
 			"squarish"
 		], this.init = (e = {}) => {
-			if (!e || typeof e != "object" || Array.isArray(e)) throw Error("Initialisation parameters required!");
-			if (this.options = { ...e }, this.timeout = typeof this.options.timeout == "number" && this.options.timeout > 0 ? this.options.timeout : 1e4, this.bearer_token = this.options.bearer_token ?? "", this.headers = {
+			if (!e || typeof e != "object" || Array.isArray(e)) throw new _("Initialisation parameters required!");
+			if (this.options = { ...e }, this.timeout = typeof this.options.timeout == "number" && this.options.timeout > 0 ? this.options.timeout : 1e4, this.retries = typeof this.options.retries == "number" && this.options.retries >= 0 ? this.options.retries : 2, this.retryDelayMs = typeof this.options.retryDelayMs == "number" && this.options.retryDelayMs >= 0 ? this.options.retryDelayMs : 100, this.bearer_token = this.options.bearer_token ?? "", this.headers = {
 				"Content-type": "application/json",
 				"X-Requested-With": "WrapSplash"
 			}, this.options.bearer_token) {
@@ -319,13 +331,13 @@ var t = Object.create, n = Object.defineProperty, r = Object.getOwnPropertyDescr
 				return;
 			}
 			this.access_key = this.options.access_key ? this.options.access_key : (() => {
-				throw Error("Access Key missing!");
+				throw new _("Access Key missing!");
 			})(), this.secret_key = this.options.secret_key ? this.options.secret_key : (() => {
-				throw Error("Secret Key missing!");
+				throw new _("Secret Key missing!");
 			})(), this.redirect_uri = this.options.redirect_uri ? this.options.redirect_uri : (() => {
-				throw Error("Redirect URI missing!");
+				throw new _("Redirect URI missing!");
 			})(), this.code = this.options.code ? this.options.code : (() => {
-				throw Error("Authorization Code missing!");
+				throw new _("Authorization Code missing!");
 			})(), this.headers = {
 				...this.headers,
 				Authorization: `Client-ID ${this.options.access_key}`,
@@ -455,13 +467,10 @@ var t = Object.create, n = Object.defineProperty, r = Object.getOwnPropertyDescr
 		return (0, p.default)(e).toString();
 	}
 	validateRequired(e, t) {
-		if (e == null || e === "") {
-			let e = t === "id" ? "Parameter : id is required!" : t === "query" ? "Parameter : query is missing!" : `Parameter : ${t} is required and cannot be empty!`;
-			throw Error(e);
-		}
+		if (e == null || e === "") throw new _(t === "id" ? "Parameter : id is required!" : t === "query" ? "Parameter : query is missing!" : `Parameter : ${t} is required and cannot be empty!`);
 	}
 	validateSupportedValue(e, t, n) {
-		if (e !== void 0 && !t.includes(e)) throw Error(`Parameter : ${n} has an unsupported value!`);
+		if (e !== void 0 && !t.includes(e)) throw new _(`Parameter : ${n} has an unsupported value!`);
 	}
 	buildQueryParameters(e) {
 		let t = {};
@@ -469,22 +478,39 @@ var t = Object.create, n = Object.defineProperty, r = Object.getOwnPropertyDescr
 			n != null && n !== "" && (t[e] = n);
 		}), t;
 	}
+	getErrorMessage(e) {
+		return e instanceof Error ? e.message : typeof e == "string" ? e : "Request failed";
+	}
+	createWrapSplashError(e) {
+		if (e instanceof _) return e;
+		let t = typeof e == "object" && e && "response" in e && e.response && typeof e.response == "object" && "status" in e.response ? e.response.status : void 0, n = typeof e == "object" && e && "response" in e && e.response && typeof e.response == "object" && "statusText" in e.response ? e.response.statusText : void 0;
+		return new _(this.getErrorMessage(e), {
+			cause: e,
+			statusCode: t,
+			statusText: n
+		});
+	}
 	fetchUrl(e, t, n = {}, r = void 0) {
 		return new h({
 			headers: this.headers,
-			timeout: this.timeout
-		}).makeRequest(e, t.toLowerCase(), this.buildQueryParameters(n), r).then((e) => e.status === 204 ? {
-			status: e.status,
-			statusText: e.statusText,
-			message: "Content Deleted"
-		} : e.status === 403 ? {
-			status: e.status,
-			statusText: e.statusText,
-			message: "Rate Limit Exceeded"
-		} : e.data).catch((e) => Promise.reject(e));
+			timeout: this.timeout,
+			retries: this.retries,
+			retryDelayMs: this.retryDelayMs
+		}).makeRequest(e, t.toLowerCase(), this.buildQueryParameters(n), r).then((e) => {
+			let t = e;
+			return t.status === 204 ? {
+				status: t.status,
+				statusText: t.statusText,
+				message: "Content Deleted"
+			} : t.status === 403 ? {
+				status: t.status,
+				statusText: t.statusText,
+				message: "Rate Limit Exceeded"
+			} : t.data;
+		}).catch((e) => Promise.reject(this.createWrapSplashError(e)));
 	}
 };
 //#endregion
-export { v as default };
+export { _ as WrapSplashError, v as default };
 
 //# sourceMappingURL=wrapsplash.es.js.map

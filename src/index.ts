@@ -2,11 +2,7 @@ import sha256 from "crypto-js/sha256";
 import AxiosAjax from "../lib/axiosAjaxLib";
 import urlConfig from "../config/url_config.json";
 
-export type JsonPrimitive = string | number | boolean | null;
-export type JsonValue = JsonPrimitive | JsonValue[] | { [key: string]: JsonValue };
-export type WrapSplashResponse = JsonValue;
-
-export interface WrapSplashOptions {
+type WrapSplashOptions = {
   access_key?: string;
   secret_key?: string;
   redirect_uri?: string;
@@ -15,45 +11,42 @@ export interface WrapSplashOptions {
   timeout?: number;
   retries?: number;
   retryDelayMs?: number;
-}
+};
 
-export interface WrapSplashErrorOptions {
+type QueryParams = Record<string, string | number | boolean | undefined>;
+
+type Headers = Record<string, string>;
+
+type WrapSplashResponse = Record<string, unknown>;
+
+interface ErrorOptions {
   cause?: unknown;
   statusCode?: number;
   statusText?: string;
 }
 
-export type QueryParams = Record<string, string | number | boolean | undefined>;
-export type Headers = Record<string, string>;
-
-export class WrapSplashError extends Error {
-  public readonly cause?: unknown;
-  public readonly statusCode?: number;
-  public readonly statusText?: string;
-
-  constructor(message: string, options: WrapSplashErrorOptions = {}) {
-    super(message);
-    this.name = "WrapSplashError";
-    this.cause = options.cause;
-    this.statusCode = options.statusCode;
-    this.statusText = options.statusText;
-    Object.setPrototypeOf(this, new.target.prototype);
-  }
-}
-
-type WrapSplashResponse = Record<string, unknown>;
-
 class WrapSplashError extends Error {
-  public statusCode: number;
-  public statusText: string;
+  public statusCode?: number;
+  public statusText?: string;
   public cause?: unknown;
 
-  constructor(message: string, statusCode: number = 0, statusText: string = "", cause?: unknown) {
+  constructor(message: string, options?: ErrorOptions | number, statusText?: string, cause?: unknown) {
     super(message);
     this.name = "WrapSplashError";
-    this.statusCode = statusCode;
-    this.statusText = statusText;
-    this.cause = cause;
+
+    // Handle both old and new signatures for backward compatibility
+    if (typeof options === "object" && options !== null && !Array.isArray(options)) {
+      // New signature: (message, options)
+      this.cause = options.cause;
+      this.statusCode = options.statusCode;
+      this.statusText = options.statusText;
+    } else if (typeof options === "number") {
+      // Old signature: (message, statusCode, statusText, cause)
+      this.statusCode = options;
+      this.statusText = statusText;
+      this.cause = cause;
+    }
+
     Object.setPrototypeOf(this, new.target.prototype);
   }
 }
@@ -621,4 +614,5 @@ class WrapSplashApi {
   };
 }
 
+export { WrapSplashError };
 export default WrapSplashApi;
