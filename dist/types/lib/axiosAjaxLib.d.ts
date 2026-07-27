@@ -9,6 +9,8 @@ declare class AxiosAjax {
     private retryDelayMs;
     constructor(options?: AxiosAjaxOptions);
     private sleep;
+    private isRetryableError;
+    private getRetryDelay;
     makeRequest(url: string, method: string, queryParameters?: Record<string, unknown>, body?: unknown): Promise<import("axios").AxiosResponse<any, any, {}>>;
 }
 export default AxiosAjax;

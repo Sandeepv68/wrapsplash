@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import axiosConfig from "../config/axiosConfig";
 
 interface AxiosAjaxOptions extends AxiosRequestConfig {
@@ -17,8 +17,39 @@ class AxiosAjax {
     this.retryDelayMs = options?.retryDelayMs ?? 100;
   }
 
-  private async sleep(ms: number): Promise<void> {
-    await new Promise((resolve) => setTimeout(resolve, ms));
+  private sleep(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  private isRetryableError(error: unknown): boolean {
+    if (axios.isCancel(error)) {
+      return false;
+    }
+
+    const axiosError = error as AxiosError;
+
+    if (!axiosError.response) {
+      return true;
+    }
+
+    const status = axiosError.response.status;
+    return status === 429 || status >= 500;
+  }
+
+  private getRetryDelay(error: unknown, attempt: number): number {
+    const axiosError = error as AxiosError;
+
+    if (axiosError.response) {
+      const retryAfterHeader = axiosError.response.headers?.["retry-after"];
+      if (retryAfterHeader) {
+        const seconds = Number(retryAfterHeader);
+        if (!Number.isNaN(seconds) && seconds > 0) {
+          return seconds * 1000;
+        }
+      }
+    }
+
+    return this.retryDelayMs * Math.pow(2, attempt);
   }
 
   async makeRequest(
@@ -44,12 +75,13 @@ class AxiosAjax {
       } catch (error) {
         lastError = error;
 
-        if (attempt >= this.retries) {
+        if (attempt >= this.retries || !this.isRetryableError(error)) {
           throw error;
         }
 
-        if (this.retryDelayMs > 0) {
-          await this.sleep(this.retryDelayMs);
+        const delay = this.getRetryDelay(error, attempt);
+        if (delay > 0) {
+          await this.sleep(delay);
         }
       }
     }

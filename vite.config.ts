@@ -9,11 +9,12 @@ export default defineConfig({
       fileName: (format) => `wrapsplash.${format}.js`,
     },
     rollupOptions: {
-      external: ["axios"],
+      external: ["axios", "crypto"],
       output: {
         exports: "named",
         globals: {
           axios: "axios",
+          crypto: "crypto",
         },
       },
     },

@@ -14,11 +14,11 @@ Explain the **details** for making this change. What existing problem does the p
 
 Demonstrate the code is solid. Example: The exact commands you ran and their output, screenshots / videos if the pull request changes UI.
 
-<!-- Make sure tests pass on both Travis and Circle CI. -->
+<!-- Make sure `npm test`, `npm run lint`, and `npm run build` pass before submitting. -->
 
 **Code formatting**
 
-<!-- See the simple style guide. -->
+Ensure your code follows the existing style. Run `npm run lint` before submitting.
 
 **Closing issues**
 

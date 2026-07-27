@@ -1,4 +1,4 @@
-import sha256 from "crypto-js/sha256";
+import { createHash } from "crypto";
 import AxiosAjax from "../lib/axiosAjaxLib";
 import urlConfig from "../config/url_config.json";
 
@@ -70,7 +70,7 @@ class WrapSplashApi {
   };
 
   private computeHash(value: string): string {
-    return sha256(value).toString();
+    return createHash("sha256").update(value).digest("hex");
   }
 
   private validateRequired(value: unknown, fieldName: string): void {
