@@ -1,5 +1,5 @@
 <div align="center">
-<img src="public/logo.png" alt="wrapsplash-logo" width="600">
+<img src="public/logo.png" alt="wrapsplash-logo" width="700">
 
 # WrapSplashTS v5.1.0
 
