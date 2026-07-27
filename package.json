@@ -1,8 +1,14 @@
 {
   "name": "wrapsplash",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "A simple npm wrapper module to use the popular Unsplash API.",
   "private": false,
+  "files": [
+    "dist",
+    "lib",
+    "config",
+    "src"
+  ],
   "main": "dist/wrapsplash.umd.js",
   "module": "dist/wrapsplash.es.js",
   "types": "dist/types/index.d.ts",
@@ -43,14 +49,12 @@
   },
   "homepage": "https://github.com/SandeepVattapparambil/wrapsplash#readme",
   "dependencies": {
-    "axios": "^1.6.1",
-    "crypto-js": "^4.1.1"
+    "axios": "^1.6.1"
   },
   "directories": {
     "examples": "examples"
   },
   "devDependencies": {
-    "@types/crypto-js": "^4.2.2",
     "@types/node": "^20.11.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",

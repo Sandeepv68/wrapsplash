@@ -1,8 +1,13 @@
-![wrapsplash-logo](public/logo.png)
-# WrapSplashTS v5.0.0
+<div align="center">
+<img src="public/logo.png" alt="wrapsplash-logo" width="600">
 
-[![license](https://img.shields.io/github/license/SandeepVattapparambil/wrapsplash.svg)](https://github.com/SandeepVattapparambil/wrapsplash/blob/master/LICENSE) ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg) ![npm version](https://badge.fury.io/js/wrapsplash.svg) [![CI](https://github.com/SandeepVattapparambil/wrapsplash/workflows/CI/badge.svg)](https://github.com/SandeepVattapparambil/wrapsplash/actions?query=workflow%3ACI) [![codecov](https://codecov.io/gh/SandeepVattapparambil/wrapsplash/branch/main/graph/badge.svg)](https://codecov.io/gh/SandeepVattapparambil/wrapsplash) ![GitHub issues](https://img.shields.io/github/issues/SandeepVattapparambil/wrapsplash.svg) ![GitHub forks](https://img.shields.io/github/forks/SandeepVattapparambil/wrapsplash.svg) ![GitHub stars](https://img.shields.io/github/stars/SandeepVattapparambil/wrapsplash.svg)
+# WrapSplashTS v5.1.0
 
+[![license](https://img.shields.io/github/license/SandeepVattapparambil/wrapsplash.svg)](https://github.com/SandeepVattapparambil/wrapsplash/blob/master/LICENSE) ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg) ![npm version](https://badge.fury.io/js/wrapsplash.svg) [![CI](https://github.com/SandeepVattapparambil/wrapsplash/workflows/CI/badge.svg)](https://github.com/SandeepVattapparambil/wrapsplash/actions?query=workflow%3ACI) [![codecov](https://codecov.io/gh/SandeepVattapparambil/wrapsplash/branch/main/graph/badge.svg)](https://codecov.io/gh/SandeepVattapparambil/wrapsplash) ![coverage](https://img.shields.io/badge/coverage-97.8%25-brightgreen) ![GitHub issues](https://img.shields.io/github/issues/SandeepVattapparambil/wrapsplash.svg) ![GitHub forks](https://img.shields.io/github/forks/SandeepVattapparambil/wrapsplash.svg) ![GitHub stars](https://img.shields.io/github/stars/SandeepVattapparambil/wrapsplash.svg)
+
+<img src="public/badge.png" alt="wrapsplash-badge" width="200">
+
+</div>
 
 WrapSplashTS is a simple, promise-based API wrapper for the popular [Unsplash](https://unsplash.com/) platform. The library is now written in **TypeScript**, bundled with **Vite**, and can be used in both Node.js and browser-based projects.
 Unsplash provides beautiful high quality free images and photos that you can download and use for any project without any attribution.
@@ -13,13 +18,14 @@ Before using the Unsplash API, you need to **register as a developer** and **rea
 
 ## Table of Contents
 <!--ts-->
-* [About](#wrapsplashts-v500)
+* [About](#wrapsplashts-v510)
 * [Installation](#installation)
 * [Sample Usage](#sample-usage)
 * [Development](#development)
 * [New API aliases](#new-api-aliases)
 * [Dependency](#dependency)
 * [Changelog](#changelog)
+    * [v5.1.0](#v510)
     * [v5.0.0](#v500)
     * [v4.2.0](#v420)
     * [v4.1.1](#v411)
@@ -107,7 +113,7 @@ Install the package from NPM
 npm install --save wrapsplash
 ```
 
-The package exposes the main class through the CommonJS entry point in [index.js](index.js), which loads the built distribution bundle.
+The package exposes the main class through ES module and CommonJS entry points configured via the `exports` field in `package.json`.
 
 ### Sample usage
 ```js
@@ -115,7 +121,7 @@ The package exposes the main class through the CommonJS entry point in [index.js
 const WrapSplash = require('wrapsplash');
 
 // ES modules
-// import WrapSplash from 'wrapsplash';
+import WrapSplash from 'wrapsplash';
 
 const unsplash = new WrapSplash();
 
@@ -154,6 +160,15 @@ npm run test:coverage
 # Coverage report will be generated in ./coverage directory
 ```
 
+#### Current Coverage (v5.1.0)
+
+| Metric | Coverage | Threshold |
+| --- | --- | --- |
+| Statements | 97.8% | 80% |
+| Branches | 79.5% | 55% |
+| Functions | 98.4% | 80% |
+| Lines | 97.8% | 80% |
+
 Coverage thresholds (enforced):
 - **Lines:** 80%
 - **Functions:** 80%
@@ -184,9 +199,20 @@ unsplash.createNewCollection('My Collection');
 }
 ```
 ### Dependency
-This library depends on [axios](https://www.npmjs.com/package/axios) and [crypto-js](https://www.npmjs.com/package/crypto-js) to make requests and generate required request headers for the [Unsplash API](https://unsplash.com/documentation).
+This library depends on [axios](https://www.npmjs.com/package/axios) to make requests and generates required request headers for the [Unsplash API](https://unsplash.com/documentation).
 
 ### Changelog
+#### v5.1.0
+- **Security:** Removed `crypto-js` dependency (CVE-2023-46233), replaced with Node.js built-in `crypto` module
+- Added `files` field to `package.json` to prevent publishing unnecessary files to npm
+- Added smart retry logic with exponential backoff and `Retry-After` header support
+- Added retryable error filtering: only network errors, timeouts, 429, and 5xx responses are retried
+- Removed stale root `index.js` entry point in favor of `package.json` exports configuration
+- Removed `crypto-js` and `@types/crypto-js` from dependencies
+- Updated Security Policy: 5.0.x is now a supported version
+- Updated PR template to reference GitHub Actions instead of Travis/Circle CI
+- Expanded test suite from 32 to 109 tests with 97.8% statement coverage
+
 #### v5.0.0
 - Rebranded project name from WrapSplashJS to WrapSplashTS to reflect TypeScript-first development
 - Fixed missing type definitions for `WrapSplashResponse` and `WrapSplashError` class
@@ -197,8 +223,6 @@ This library depends on [axios](https://www.npmjs.com/package/axios) and [crypto
 - Integrated Codecov for automated code coverage tracking via GitHub Actions
 - Added V8 coverage provider with multiple output formats (text, LCOV, JSON, HTML)
 - Enforced coverage thresholds: 80% lines/functions/statements, 55% branches
-- All 30 tests passing with verified production-ready code quality
-- **Security:** Resolved all npm audit vulnerabilities (0 vulnerabilities)
 
 #### v4.2.0
 - Added clearer convenience methods such as `getPhoto`, `getRandomPhoto`, `createCollection`, and `updateCollection`
